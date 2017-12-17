@@ -40,8 +40,6 @@ NeoBundle 'junegunn/goyo.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'mbbill/undotree'
-NeoBundle 'dylanaraps/wal'
-
 
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
@@ -96,7 +94,7 @@ syntax enable
 set background=dark
 
 
-colorscheme wal
+"colorscheme solarized 
 
 
 let g:airline#extensions#tabline#enabled = 1
@@ -462,4 +460,4 @@ map <leader>nn :NERDTreeToggle<cr>
 map <leader>nb :NERDTreeFromBookmark
 map <leader>nf :NERDTreeFind<cr>
 
-
+map <F7> mzgg=G`z

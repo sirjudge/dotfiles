@@ -14,9 +14,9 @@ red = #c795ae
 blue = #95aec7
 yellow = #c7ae95
 green = #aec795
-fg = ${xrdb:color7:#f0f0f0}
-modfg = ${xrdb:color1:#f0f0f0}
-bg = ${xrdb:color0:#f0f0f0}
+fg = $white
+bg = $gray
+modfg = $white
 
 
 
@@ -26,13 +26,13 @@ wm-restack = i3
 
 border-size = 0
 border-color = $00000000
-width = 90%
-height = 25 
+width = 100%
+height = 25
 
 fixed-center = true
 
-offset-x = 5%
-offset-y = 1%
+offset-x = 0%
+offset-y = 0%
 radius = 0.0
 
 enable-ipc = true
@@ -45,24 +45,22 @@ module-margin-left = 3
 ; -filesystem
 ; -
 
-
 modules-right = battery date wlan volume backlight 
 modules-center = i3
-modules-left = menu0 pkg cpu vpncheck
+modules-left = menu0 pkg cpu vpncheck filesystem
 
-background = ${xrdb:color7} 
-foreground = ${xrdb:color2}
+background = ${colors.white} 
+foreground = ${colors.gray}
 
 overline-size = 2
 overline-color = ${colors.white}
 
-
 underline-size = 0
-underline-color = ${xrdb:color1}
+underline-color = ${colors.blue}
 
 tray-detached = false
 tray-position = center 
-tray-offset-x = 30
+tray-offset-x = 0
 tray-maxsize =
 tray-padding =2
 
@@ -70,12 +68,6 @@ font-0 = terminus:size=8;0
 font-1 = FontAwesome:size=10;0
 font-2 = TakaoGothic:weight=bold:size=10;0
 font-3 = FontAwesome:pixelsize=14;0
-
-[module/xwindow]
-type = internal/xwindow
-label = %title%
-label-maxlen = 30
-
 
 [module/filesystem]
 type = internal/fs

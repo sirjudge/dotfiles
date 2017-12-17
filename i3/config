@@ -11,35 +11,34 @@
 
 set $mod Mod4
 
-bindsym $mod+y fullscreen disable, floating enable, resize set 600 400, sticky enable, move window to position 1515 20          
+bindsym $mod+y fullscreen disable, floating enable, resize set 600 400, sticky enable, move window to position 1515 20
 
 #Turns off autoscreen shutoff
 exec xset s off
 exec xset -dpms
 exec xsete s noblank
 
-exec --no-startup-id nm-applet
-
 # fotn
 font pango: System San Francisco Display 10
 
 # thin borders
-#hide_edge_borders both
+hide_edge_borders both
 
 #turns annoying system sounds off
 exec  xset s off
 exec  xset b off
 
+#starts up comtpositor compton
+exec  compton
 #sets the wallpaper on startup
-#exec --no-startup-id nitrogen --restore
-exec "wal -i $HOME/Pictures/wallpapers -o wal-set -t -q;pkill polybar;polybar Bar &"
+exec --no-startup-id nitrogen --restore
+#exec "wal -i $HOME/Pictures/wallpapers -o wal-set -t -q;pkill polybar;polybar Bar &"
 exec "pkill polybar;polybar Bar &"
 
 
 #exec "wal -i $HOME/Pictures/wallpapers"
 bindsym $mod+Shift+w exec "wal -i $HOME/Pictures/wallpapers -a 30 -o wal-set;pkill polybar;polybar Bar &"
 bindsym $mod+Shift+p exec "pkill polybar;polybar Bar &"
-
 
 # Make the currently focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -50,10 +49,10 @@ bindsym $mod+minus scratchpad show
 #installs stuff for VMware Workstation
 exec  sudo vmware-modconfig --console --install-all
 
-#do gtk theme stuff
-#exec gnome-settings-daemon
+# do gtk theme stuff
+# exec gnome-settings-daemon
 # Fix a bug in gnome-settings-daemon: http://feeding.cloud.geek.nz/posts/creating-a-modern-tiling-desktop-environment-using-i3/
-#exec --no-startup-id dconf write /org/gnome/settings-daemon/plugins/cursor/active false
+# exec --no-startup-id dconf write /org/gnome/settings-daemon/plugins/cursor/active false
 
 
 # switch to workspace
@@ -81,13 +80,9 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 
-
 #Workspace 1
 assign [class="(?i)terminator"] → 1
 exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/terminator'
-#exec tmux &
-
-
 
 #Workspace 2
 assign [class="(?i)google-chrome-stable"] → 2
@@ -259,7 +254,7 @@ bindsym XF86AudioMute exec amixer -q set Master mute
 bindsym XF86MonBrightnessUp exec xbacklight -inc 1 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 1 # decrease screen brightness
 
-bindsym $mod+p exec scrot -e 'mv $f ~/Pictures/screenshots'
+bindsym $mod+p exec scrot -e 'mv $f ~/Pictures/screenshots/pic'
 
 #stuff to make gaps place nice 
 new_window none
@@ -432,7 +427,20 @@ client.placeholder      $bg     $bg     $fg  $bg       $bg
 
 #sets lock screen
 #bindsym $mod+l+p exec i3lock -i ~/Pictures/wallpapers/whale_jumping.jpg -R 1500 -F 100 -X 400 -Y 200
-set $Locker i3lock
+#set $Locker i3lock
+
+
+# custom keybinding to lockscreen, use --lock dim or --lock blur below for different backgrounds
+bindsym $mod+shift+x exec lock.sh --lock
+#bindsym $mod+shift+x exec lock.sh --lock dim
+# bindsym $mod+shift+x exec lock.sh --lock blur
+
+# Update image cache
+exec --no-startup-id lock.sh -U ~/pictures/wallpapers/foggy\ treeline.jpg
+
+# Set last used image as desktop background, comment out below line if you use different desktop background utility
+exec --no-startup-id lock.sh -w
+
 
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
