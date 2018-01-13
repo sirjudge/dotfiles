@@ -1,4 +1,5 @@
 ;:set syn=dosini
+font-4=  lucy tewii:pixelsize=14;0
 font-3 = FontAwesome:pixelsize=14;0
 
 [global/wm]
@@ -19,19 +20,18 @@ bg = $gray
 modfg = $white
 
 
-
 [bar/Bar]
 bottom = false
 wm-restack = i3
 
 border-size = 0
 border-color = $00000000
-width = 100%
+width = 80%
 height = 25
 
 fixed-center = true
 
-offset-x = 0%
+offset-x = 8%
 offset-y = 0%
 radius = 0.0
 
@@ -40,14 +40,13 @@ override-redirect = true
 module-margin-right = 3  
 module-margin-left = 3
 
-
 ;unused Modules
 ; -filesystem
-; -
+; -menu0
 
-modules-right = battery date wlan volume backlight 
+modules-right = date wlan volume backlight 
 modules-center = i3
-modules-left = menu0 pkg cpu vpncheck filesystem
+modules-left =  pkg cpu vpncheck
 
 background = ${colors.white} 
 foreground = ${colors.gray}
@@ -64,7 +63,8 @@ tray-offset-x = 0
 tray-maxsize =
 tray-padding =2
 
-font-0 = terminus:size=8;0
+font-0=  lucy tewii:size=14;0
+#font-0 = terminus:size=8;0
 font-1 = FontAwesome:size=10;0
 font-2 = TakaoGothic:weight=bold:size=10;0
 font-3 = FontAwesome:pixelsize=14;0

@@ -136,3 +136,4 @@ alias mountStable='sshfs stable42@phoenix.goucher.edu:/home/stable42/ ~/Document
 alias unmountStable='sudo umount /home/nico/Documents/CompSci/stable42 '
 
 alias runBot='python test.py; rm /tmp/bot-log*; java -jar match-wrapper-1.3.2.jar "$(cat wrapper-commands.json)"'
+
