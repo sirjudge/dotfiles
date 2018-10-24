@@ -116,24 +116,5 @@ alias yaorph='yaourt -Qtd'  # Remove orphans using yaourt
 alias multiMonitor='xrandr --output HDMI2 --auto --left-of LVDS1;'
 alias displayPort='xrandr --output DP1 --auto --left-of LVDS1;'
 
-alias fuckoff='sudo vmware-modconfig --console --install-all'
-
-alias phoenix='ssh -X -C njudge@phoenix.goucher.edu'
-alias stable='ssh -X -C stable42@phoenix.goucher.edu'
-alias UseTheForce='ssh nico@138.197.100.100'
-
-alias mountTheForce='sshfs nico@138.197.100.100:/home/ /home/nico/Documents/website'
-
-#mount and unmount phoenix to /home/documents/comp sci/phoenix directory
-alias mountPhoenix='sshfs njudge@phoenix.goucher.edu:/home/njudge/ ~/Documents/CompSci/phoenix'
-alias unmountPhoenix='sudo umount /home/nico/Documents/CompSci/phoenix'
-
-#alias mountShakey='sshfs njudge@phoenix.goucher.edu:/home/njudge/Documents/shakey ~/Documents/CompSci/phoenix/shakey'
-alias mountShakey='sshfs shakey:/home ~/Documents/CompSci/shakey'
-alias unmountShakey='fusermount -u ~/Documents/CompSci/shakey'
-
-alias mountStable='sshfs stable42@phoenix.goucher.edu:/home/stable42/ ~/Documents/CompSci/stable42'
-alias unmountStable='sudo umount /home/nico/Documents/CompSci/stable42 '
-
 alias runBot='python test.py; rm /tmp/bot-log*; java -jar match-wrapper-1.3.2.jar "$(cat wrapper-commands.json)"'
 
