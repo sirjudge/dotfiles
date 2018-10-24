@@ -1,9 +1,14 @@
 [global_config]
+  focus = system
+  title_font = lucy tewii 9
+  title_transmit_bg_color = "#d30102"
+  title_use_system_font = False
 [keybindings]
 [layouts]
   [[default]]
     [[[child1]]]
       parent = window0
+      profile = solarized-dark
       type = Terminal
     [[[window0]]]
       parent = ""
@@ -11,13 +16,31 @@
 [plugins]
 [profiles]
   [[default]]
-    background_color = "#300a24"
-    background_darkness = 0.6
+    background_darkness = 0.81
     background_type = transparent
+    cursor_blink = False
     cursor_color = "#aaaaaa"
-    font = lucy tewii 14
-    foreground_color = "#ffffff"
+    cursor_shape = underline
+    font = lucy tewi 10
     icon_bell = False
+    use_system_font = False
+  [[solarized-dark]]
+    background_color = "#002b36"
+    background_darkness = 0.71
+    background_type = transparent
+    cursor_color = "#eee8d5"
+    font = lucy tewii 10
+    foreground_color = "#eee8d5"
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#586e75:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+    show_titlebar = False
+    use_system_font = False
+  [[solarized-light]]
+    background_color = "#eee8d5"
+    background_darkness = 0.7
+    background_type = transparent
+    cursor_color = "#002b36"
+    font = lucy tewii 10
+    foreground_color = "#002b36"
     palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
     show_titlebar = False
     use_system_font = False

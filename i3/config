@@ -21,10 +21,7 @@ exec xsete s noblank
 # start up notification manager
 exec --no-startup-id dunst
 
-#set lock screen background
-exec --not-startup-id lock.sh -w Pictures/wallpapers/fa83bcctimky.jp
-
-# fotn
+# font
 font pango: System San Francisco Display 10
 
 # thin borders
@@ -38,26 +35,21 @@ exec  xset b off
 exec  compton
 #sets the wallpaper on startup
 exec --no-startup-id nitrogen --restore
-#exec "wal -i $HOME/Pictures/wallpapers -o wal-set -t -q;pkill polybar;polybar Bar &"
-exec "pkill polybar;polybar Bar &"
 
+# Makes the yad pop up calendar work in polybar
+for_window [class="Yad"] floating enable
 
-# Uncomment the following two lines to use wal script to change theme
-#exec "wal -i $HOME/Pictures/wallpapers"
-#bindsym $mod+Shift+w exec "wal -i $HOME/Pictures/wallpapers -a 30 -o wal-set;pkill polybar;polybar Bar &"
-bindsym $mod+Shift+p exec "pkill polybar;polybar Bar &"
+# network manager dmenu and also starts network manager applet
+bindsym $mod+Shift+d exec networkmanager_dmenu
+#exec --no-startup-id nm-applet
 
+# Makes sure polybar starts with no errors
+exec pkill polybar;polybar Bar
 # Make the currently focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
 
 # Show the first scratchpad window
 bindsym $mod+minus scratchpad show
-
-
-# if you need to do this in the future use this but I think future me can figure it out
-# installs stuff for VMware Workstation
-#exec  sudo vmware-modconfig --console --install-all
-
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -83,22 +75,15 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
-
 #Workspace 1
 assign [class="(?i)terminator"] → 1
 exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/terminator'
 
 #Workspace 2
 assign [class="(?i)google-chrome-stable"] → 2
-exec --no-startup-id i3-msg 'workspace 2; exec /usr/bin/google-chrome-stable'
-
-#Workspace 3
-assign [class="(?i)eclipse"] → 3
-#exec --no-startup-id i3-msg 'workspace 3:; exec /usr/bin/eclipse'
+#exec --no-startup-id i3-msg 'workspace 2; exec /usr/bin/google-chrome-stable'
 
 #Workspace 4
-assign [class="(?i)messengerfordesktop"] → 4
-exec --no-startup-id i3-msg 'workspace 4; exec messengerfordesktop'
 
 #Workspace 5
 assign [class="(?i)spotify"] → 5
@@ -107,18 +92,7 @@ exec --no-startup-id i3-msg 'workspace 5; exec /usr/bin/spotify'
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font Gohufont 8
-
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
-
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
+font lucy tewii 14
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -128,10 +102,6 @@ bindsym $mod+Return exec terminator
 
 # kill focused window
 bindsym $mod+Shift+q kill
-
-
-bindsym $mod+Shift+d exec networkmanager_dmenu
-
 
 # colors
 set $black             #272822
@@ -147,12 +117,12 @@ for_window [class="^.*"] border pixel 2
 
 set $bg-color            #2f343f
 set $inactive-bg-color   #2f343f
-set $text-color          #f3f4f5
+set $text-color          #AE81FF 
 set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
 
 #rofi app launcher 
-bindsym $mod+d exec rofi -modi combi -opacity 40 -show #rofi -show run -width 600 -color-enabled -color-window  "#373854"  -location 0 -lines 8 -bw 0 -font "MonacoB 16" -padding 10 -separator-style none -opacity "10"
+bindsym $mod+d exec rofi -modi combi -font "lucy tewii 14" -opacity 80  -show combi -fake-transparency
 
 bindsym $mod+g exec rofi -show ssh -opacity 10
 
@@ -171,7 +141,7 @@ bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
+#bindsym $mod+Shift+k move down
 bindsym $mod+Shift+l move up
 bindsym $mod+Shift+semicolon move right
 
@@ -201,12 +171,6 @@ bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# focus the parent container
-bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
-
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -217,17 +181,6 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        #bindsym j resize shrink width 10 px or 10 ppt
-        #bindsym k resize grow height 10 px or 10 ppt
-        #bindsym l resize shrink height 10 px or 10 ppt
-        #bindsym semicolon resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
@@ -252,11 +205,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 1 # decrease screen brightnes
 
 bindsym $mod+p exec scrot -e 'mv $f ~/Pictures/screenshots/pic'
 
-#stuff to make gaps place nice 
-#new_window pixel normal
-#new_float pixel normal
-#smart_gaps on
-#nsmart_borders on
+#stuff to make gaps place nice
 gaps inner 15
 gaps outer 15
 
@@ -271,6 +220,7 @@ mode "$mode_gaps" {
   bindsym Return mode "default"
   bindsym Escape mode "default"
 }
+
 
 mode "$mode_gaps_inner" {
   bindsym plus  gaps inner current plus 5
@@ -294,8 +244,6 @@ mode "$mode_gaps_outer" {
    bindsym Escape mode "default"
 }
 
-
-
 # colors
 set $black             #272822
 set $white             #FFFFFF
@@ -308,40 +256,33 @@ set $purple            #AE81FF
 
 
 # Set colors from Xresources
-# Change 'color7' and 'color2' to whatever colors you want i3 to use
-# from the generated scheme.
 # NOTE: The '#f0f0f0' in the lines below is the color i3 will use if
 # it fails to get colors from Xresources for some reason.
 set_from_resource $fg i3wm.color7 #f0f0f0
 set_from_resource $bg i3wm.color2 #f0f0f0
 
 # class                 border  backgr. text indicator child_border
-client.focused         	$color00_i3wmthemer	$color00_i3wmthemer	$color00_i3wmthemer	$color00_i3wmthemer	$color00_i3wmthemer
-client.focused_inactive	$color00_i3wmthemer	$color00_i3wmthemer	$color00_i3wmthemer	$color00_i3wmthemer	$color00_i3wmthemer
-client.unfocused       	$color00_i3wmthemer	$color00_i3wmthemer	$color00_i3wmthemer	$color00_i3wmthemer	$color00_i3wmthemer
-client.urgent		        $color00_i3wmthemer	$color00_i3wmthemer	$color00_i3wmthemer	$color00_i3wmthemer	$color00_i3wmthemer
-client.placeholder	    $color00_i3wmthemer	$color00_i3wmthemer	$color00_i3wmthemer	$color00_i3wmthemer	$color00_i3wmthemer
-
-#client.background   
+client.focused          #f0f0f0	#f0f0f0 #f0f0f0 #f0f0f0 #f0f0f0
+client.focused_inactive #f0f0f0	#f0f0f0 #f0f0f0 #f0f0f0 #f0f0f0
+client.unfocused       	#f0f0f0	#f0f0f0 #f0f0f0 #f0f0f0 #f0f0f0
+client.urgent		        #f0f0f0	#f0f0f0 #f0f0f0 #f0f0f0 #f0f0f0
+client.placeholder	    #f0f0f0	#f0f0f0 #f0f0f0 #f0f0f0 #f0f0f0
 
 #sets lock screen
-#bindsym $mod+l+p exec i3lock -i ~/Pictures/wallpapers/whale_jumping.jpg -R 1500 -F 100 -X 400 -Y 200
-#set $Locker i3lock
+bindsym $mod+l+p exec i3lock -i ~/Pictures/wallpapers/whale_jumping.jpg -R 1500 -F 100 -X 400 -Y 200
+set $Locker i3lock
 
 
 # custom keybinding to lockscreen, use --lock dim or --lock blur below for different backgrounds
+
 bindsym $mod+shift+x exec lock.sh --lock
 #bindsym $mod+shift+x exec lock.sh --lock dim
-# bindsym $mod+shift+x exec lock.sh --lock blur
-
-# Update image cache
-exec --no-startup-id lock.sh -U ~/pictures/wallpapers/foggy\ treeline.jpg
+#bindsym $mod+shift+x exec lock.sh --lock blur
 
 # Set last used image as desktop background, comment out below line if you use different desktop background utility
-exec --no-startup-id lock.sh -w
+exec lock.sh -u Pictures/wallpapers/fa83bcctimky.jpg
 
-
-
+# keyboard shortcuts for quickly doing stuff
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
@@ -349,7 +290,7 @@ mode "$mode_system" {
     bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
     bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -357,11 +298,7 @@ mode "$mode_system" {
 
 #disables the touchpad while typing
 exec syndaemon -i 0.5 -t -K -R &
-
-
 bindsym Escape mode "default"
-#bindsym $mod+p exec /home/nico/.i3/spotifyPlay.sh
-bindsym $mod+o exec /home/nico/.i3/spotifyPause.sh 
-#bindsym $mod+r exec /home/nico/.i3/openReddit.sh 
+
 bindsym $mod+Pause mode "$mode_system
 

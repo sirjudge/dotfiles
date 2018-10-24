@@ -15,9 +15,6 @@ red = #c795ae
 blue = #95aec7
 yellow = #c7ae95
 green = #aec795
-fg = $white
-bg = $gray
-modfg = $white
 
 
 [bar/Bar]
@@ -26,48 +23,73 @@ wm-restack = i3
 
 border-size = 0
 border-color = $00000000
-width = 80%
+width = 100%
 height = 25
 
 fixed-center = true
 
-offset-x = 8%
+offset-x = 0%
 offset-y = 0%
 radius = 0.0
 
 enable-ipc = true
 override-redirect = true
-module-margin-right = 3  
+module-margin-right = 3
 module-margin-left = 3
 
-;unused Modules
-; -filesystem
-; -menu0
-
-modules-right = date wlan volume backlight 
+modules-right = popup-calendar wlan battery backlight filesystem
 modules-center = i3
-modules-left =  pkg cpu vpncheck
+modules-left =  spotify sp spp  sn cpu vpncheck
 
-background = ${colors.white} 
-foreground = ${colors.gray}
+background = #ccFFFFFF
+foreground = #707172
 
 overline-size = 2
 overline-color = ${colors.white}
 
 underline-size = 0
-underline-color = ${colors.blue}
+underline-color = #ff9898
 
-tray-detached = false
-tray-position = center 
+tray-detached = true
+tray-position = right
 tray-offset-x = 0
-tray-maxsize =
-tray-padding =2
+tray-padding = 1
 
 font-0=  lucy tewii:size=14;0
 #font-0 = terminus:size=8;0
 font-1 = FontAwesome:size=10;0
 font-2 = TakaoGothic:weight=bold:size=10;0
 font-3 = FontAwesome:pixelsize=14;0
+
+[module/spotify]
+type = custom/script
+interval = 1
+format-prefix = "  "
+format = <label>
+exec = python ~/.config/polybar/polybar-scripts/spotify_nowPlaying/spotify_nowPlaying.py
+format-underline = #1db954
+
+[module/sn]
+type = custom/text
+content = "  "
+tail = true
+format = <label>
+click-left = spotifycli --next
+
+[module/sp]
+type = custom/text
+content = "  "
+click-left = spotifycli --prev
+
+[module/spp]
+type = custom/text
+content = ""
+click-left = spotifycli --playpause
+
+[module/sps]
+type = custom/text
+content = "  "
+format = <label>
 
 [module/filesystem]
 type = internal/fs
@@ -79,11 +101,22 @@ mount-0 = /
 label-mounted =  %free%
 ;label-mounted-underline = ${colors.white}
 label-mounted-padding = 1
+label-mounted-foreground = #707172
 ;label-mounted-background = ${colors.red}
 ;label-unmounted-background = ${colors.red}
 label-unmounted-foreground = ${colors.black}
 fmt-background = ${colors.black}
 
+[module/popup-calendar]
+type = custom/script
+exec = ~/.config/polybar/polybar-scripts/popup-calendar/popup-calendar.sh
+interval = 5
+click-left = ~/.config/polybar/polybar-scripts/popup-calendar/popup-calendar.sh --popup
+
+[module/updates-arch]
+type = custom/script
+exec = ~/.config/polybar/polybar-scripts/updates-arch-combined/updates-arch-combined.sh
+interval = 1200
 
 [module/pkg]
 type = custom/script
@@ -92,7 +125,7 @@ format = <label>
 format-underline = #dc322f
 label = "%output:0:30%"
 exec = ~/.config/polybar/pkg.sh
-exec-if = "ping -q -w 2 -c 1 176.34.135.167 > /dev/null"
+;exec-if = "ping -q -w 2 -c 1 176.34.135.167 > /dev/null"
 
 
 [module/i3]
@@ -100,31 +133,13 @@ type = internal/i3
 format = <label-mode> <label-state>
 index-sort = true
 
-label-focused-font = 4
-label-unfocused-font = 4
-label-urgent-font = 4
-label-visible-font = 4 
+label-focused-font = 4 
+label-unfocused-font = 1 
+label-urgent-font = 2
+label-visible-font = 2 
 
 fuzzy-mode = true
 
-; ws-icon-[0-9]+ = label;icon
-; NOTE: The label needs to match the name of the i3 workspace
-;ws-icon-0 = 1;; ws-icon-[0-9]+ = label;icon
-; NOTE: The label needs to match the name of the i3 workspace
-;ws-icon-0 = 1;♚; ws-icon-[0-9]+ = label;icon
-; NOTE: The label needs to match the name of the i3 workspace
-ws-icon-0 = 1
-ws-icon-1 = 2
-ws-icon-2 = 3
-ws-icon-3 = 4
-ws-icon-4 = 5
-ws-icon-5 = 6
-ws-icon-default = 
-
-; Available tags:
-;   <label-state> (default) - gets replaced with <label-(focused|unfocused|visible|urgent)>
-;   <label-mode> (default)
-;format = <label-state> <label-mode>
 
 ; Available tokens:
 ;   %mode%
@@ -139,19 +154,20 @@ label-mode-background = #e60053
 ;   %index%
 ;   %output%
 ; Default: %icon%  %name%
-label-focused = %index%
-label-focused-foreground = #ffffff
+label-focused = 
+label-focused-foreground = #ff9898
 label-focused-background = #3f3f3f
 label-focused-underline = #fba922
-label-focused-padding = 4
+label-focused-padding =1 
 
 ; Available tokens:
 ;   %name%
 ;   %icon%
 ;   %index%
 ; Default: %icon%  %name%
-label-unfocused = %index%
-label-unfocused-padding = 4
+; below label is actually a heart
+label-unfocused = 
+label-unfocused-padding = 1
 
 ; Available tokens:
 ;   %name%
@@ -172,31 +188,6 @@ label-urgent-foreground = #000000
 label-urgent-background = #bd2c40
 label-urgent-padding = 4
 
-;label-focused = 
-;label-focused-padding = 1
-
-;label-unfocused = 
-;label-unfocused-padding = 1
-;label-unfocused-underlinde = ${colors.white}
-
-;label-urgent = 
-;label-urgent-padding = 1
-;label-urgent-foreground = ${colors.red}
-
-;label-visible = 
-;label-visible-foreground = ${colors.white}
-;label-visible-padding = 1
-
-
-[module/pacman]
-type = custom/script
-exec = ~/.config/polybar/getpacmanupdates
-;format-background = #783e57
-;format-underline = ${colors.white}
-format-padding = 2
-interval = 30
-;;format-background = ${colors.red}
-
 [module/backlight]
 type = internal/xbacklight
 
@@ -205,7 +196,7 @@ label = BL
 
 bar-width = 10
 bar-indicator = │
-bar-indicator-foreground = #ff
+bar-indicator-foreground =#ff9898 
 bar-indicator-font = 2
 bar-fill = ─
 bar-fill-font = 2
@@ -230,7 +221,7 @@ ramp-coreload-5 = ▆
 ramp-coreload-6 = ▇
 ramp-coreload-7 = █
 ;ramp-coreload-underline = ${colors.white}
-;format-background = ${colors.red}
+;format-background = #ff9898
 
 type = internal/cpu
 interval = 2
@@ -401,11 +392,6 @@ menu-0-2 =   cancel
 
 label-open =   
 label-close =
-
-[module/updates]
-type = custom/script
-
-exec = echo 
 
 
 [module/powermenu]
