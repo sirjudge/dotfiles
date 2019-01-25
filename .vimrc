@@ -40,6 +40,7 @@ NeoBundle 'junegunn/goyo.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'mbbill/undotree'
+NeoBundle 'bradford-smith94/vim-autolist'
 
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
@@ -55,20 +56,18 @@ filetype plugin indent on
 NeoBundleCheck
 "End NeoBundle Scripts-------------------------
 
-
-
 if has('vim_starting')
   " Required:
   set runtimepath+=/home/nico/.config/nvim/bundle/neobundle.vim/
 endif
 
-
-" Required:
-call neobundle#begin(expand('/home/nico/.config/nvim/bundle'))
-
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
 NeoBundleCheck
+
+" ======================"
+"   Above is neobundle
+" ======================"
 
 set showcmd             " Show (partial) command in status line.
 set showmatch           " Show matching brackets.
@@ -93,8 +92,15 @@ set splitright          " Vertical split to right of current.
 syntax enable
 set background=dark
 
+"AutoList
+let g:autolist_numbered_markers = ['#.', '#)', '#-']
+"let g:autolist_unordered_markers = ['-', '*', '+']
+"autocmd Filetype markdown imap <buffer> <CR> <Esc><Plug>AutolistReturn
 
-"colorscheme solarized 
+"these are mapped for all filetypes all the time
+imap <CR> <Esc><Plug>AutolistReturn
+nmap o <Plug>AutolistNewLineBelow
+nmap O <Plug>AutolistNewLineAbove
 
 
 let g:airline#extensions#tabline#enabled = 1
@@ -408,12 +414,12 @@ catch
 endtry
 
 " Return to last edit position when opening files (You want this!)
-" autocmd BufReadPost *
-"      \ if line("'\"") > 0 && line("'\"") <= line("$") |
-"      \   exe "normal! g`\"" |
-"      \ endif
+ autocmd BufReadPost *
+      \ if line("'\"") > 0 && line("'\"") <= line("$") |
+      \   exe "normal! g`\"" |
+      \ endif
 " Remember info about open buffers on close
-" set viminfo^=%
+ set viminfo^=%
 
 nmap <M-j> mz:m+<cr>`z
 nmap <M-k> mz:m-2<cr>`z
