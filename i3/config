@@ -34,6 +34,16 @@ exec xsete s noblank
 # start up notification manager
 exec --no-startup-id dunst
 
+# Set Screenshot bindings
+bindsym Print   exec scrot '%Y-%m-%d_$wx$h_scrot.png' -f -s -e 'mv $f ~/Pictures/Screenshots'
+bindsym Print+d exec scrot '%Y-%m-%d_$wx$h_scrot.png' -f -s -e 'mv $f ~/Pictures/Screenshots' -d 5
+
+#get battery notification
+exec --no-startup-id ~/Documents/scripts/i3-battery-popup/i3-battery-popup -n -D -L 20 -l 10
+
+#Showing the message everywhere
+for_window [title="Battery Warning"] sticky enable
+
 # Makes sure polybar starts with no errors
 #bind keys to kill and start polybar as needed
 bindsym $mod+Shift+P exec pkill -9 polybar

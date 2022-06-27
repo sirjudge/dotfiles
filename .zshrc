@@ -102,9 +102,14 @@ alias checkaptcache="sudo du -sh /var/cache/apt/archives"
 alias clearaptcache="sudo apt-get clean"
 alias search="apt search --names-only"
 alias install="sudo apt-get install"
+alias autoremove="sudo apt autoremove"
 
 # Nvidia Stuff
 alias launchWithGpu="__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia"
+
+#LaunchMusic
+alias quboz="flatpak run eu.tiliado.NuvolaAppQobuz"
+alias youtubeMusic="flatpak run eu.tiliado.NuvolaAppYoutubeMusic"
 
 # Fixing existing commands to throw good flags
 alias mv="mv -v"
