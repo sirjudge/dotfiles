@@ -1,17 +1,21 @@
 #!/bin/bash
 echo "clearing dotfile repo directory"
-rm -r ~/Documents/repos/dotfiles/i3/
-rm ~/Documents/repos/dotfiles/.vimrc
-rm  ~/Documents/repos/dotfiles/.zshrc
+if [ -d "/nvim" ]; then
+    rm -r nvim
+fi
 
-echo "starting to copy dotfiles\ncopying i3"
-cp -r ~/.config/i3 ~/Documents/repos/dotfiles/
-echo "copying polybar"
-cp -r ~/.config/polybar ~/Documents/repos/dotfiles/
-echo "copying termminator"
-cp -r ~/.config/terminator ~/Documents/repos/dotfiles/
-echo "copying .zshrc"
-cp ~/.zshrc ~/Documents/repos/dotfiles/
-echo "copying vimrc"
-cp ~/.vimrc ~/Documents/repos/cdotfiles/
-echo "files have all been copied"
+
+echo "copying nvim files in to repo"
+cp -r ~/.config/nvim .
+
+
+echo "push to git"
+git pull
+git add .
+
+#bring these back in later
+#echo "copying .zshrc"
+#cp ~/.zshrc ~/Documents/repos/dotfiles/
+#echo "copying vimrc"
+#cp ~/.vimrc ~/Documents/repos/cdotfiles/
+#echo "files have all been copied"
