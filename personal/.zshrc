@@ -42,9 +42,6 @@ alias buildFramework="msbuild -r -nologo -p:Configuration=Release -t:Clean,Build
 alias buildCore="dotnet build"
 alias testCore="dotnet test"
 
-# terraform
-alias terraform="~/tools/terraform"
-
 # yum shortcuts
 alias install="sudo yum install"
 alias upg="sudo yum update; sudo yum upgrade;"
@@ -54,9 +51,12 @@ alias searchInstalledPackage="sudo yum list installed | grep"
 alias packageCount="sudo yum list installed | wc -l"
 alias backUpInstalledPackages="sudo yum list installed > ~/Archives/packageBackup_$(date +%Y-%m-%d_%H:%M).txt"
 
+# apt shortcuts
+alias upg="sudo apt-get update; sudo apt-get upgrade"
+alias search="apt search"
+alias install="sudo apt install"
 # ZSH fun
 alias zshrc="nvim ~/.zshrc"
-alias update="sudo yum update; sudo yum upgrade;"
 alias reloadZsh="source ~/.zshrc"
 alias listAliases="cat ~/.zshrc | grep 'alias'"
 
