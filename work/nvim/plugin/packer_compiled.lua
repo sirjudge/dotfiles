@@ -149,6 +149,11 @@ _G.packer_plugins = {
     path = "/home/nicholas.judge/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
+  tokyonight = {
+    loaded = true,
+    path = "/home/nicholas.judge/.local/share/nvim/site/pack/packer/start/tokyonight",
+    url = "https://github.com/folke/tokyonight.nvim"
+  },
   ["vim-fugitive"] = {
     loaded = true,
     path = "/home/nicholas.judge/.local/share/nvim/site/pack/packer/start/vim-fugitive",

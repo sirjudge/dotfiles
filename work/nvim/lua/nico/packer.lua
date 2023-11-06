@@ -4,17 +4,18 @@ return require('packer').startup(function(use)
   -- initialize packer plugin
   use 'wbthomason/packer.nvim'
 
-  -- set up telescope + plenary
+   -- set up telescope + plenary
   use {
 	  'nvim-telescope/telescope.nvim', tag = '0.1.2',
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
 
-  -- Colorscheme
+  
+  --color schemes
+  use({'folke/tokyonight.nvim',as = 'tokyonight'})
   use({ 'rose-pine/neovim', as = 'rose-pine' })
-  vim.cmd('colorscheme rose-pine')
+ -- vim.cmd.colorscheme('tokyonight')
 
-  -- Good plugins for ez dev  
   use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate'})
   use('nvim-treesitter/playground', {})
   use('nvim-lua/plenary.nvim')
@@ -38,21 +39,5 @@ return require('packer').startup(function(use)
 		  {'L3MON4D3/LuaSnip'},     -- Required
 	  }
   }
-
-  -- unit test plugin configuration
-  --use ('vim-test/vim-test')
-  --use ('nvim-neotest/neotest-vim-test')
-
- -- use {
- --     "nvim-neotest/neotest",
- --     requires = {
- --         "nvim-lua/plenary.nvim",
- --         "nvim-treesitter/nvim-treesitter",
- --         "antoinemadec/fixcursorhold.nvim",
- --     },
- -- }
-
-
-
 
 end)

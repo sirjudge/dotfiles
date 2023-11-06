@@ -9,10 +9,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
-
-
-
-
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -31,7 +27,6 @@ export GO111MODULE=on
 export GOROOT=/usr/lib/golang
 export GOPATH=/home/nicholas.judge/goPackages
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-
 
 # Configure Rust
 #Cargo's bin directory ($HOME/.cargo/bin)
@@ -61,11 +56,13 @@ _dotnet_zsh_complete()
 }
 
 
-# set custom .NET PATH
-#export DOTNET_ROOT=/usr/bin/dotNet8
-#export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
-
 compdef _dotnet_zsh_complete dotnet
+
+#remap neovim to the appimage
+alias nvim="~/tools/nvim.appimage"
+
+#remap to jetbrains toolbox
+alias jetbrains="~/tools/jetbrains-toolbox/jetbrains-toolbox"
 
 # docker 
 alias startDocker="sudo systemctl start docker;sudo service docker start"
@@ -77,7 +74,7 @@ alias gpull="git pull"
 alias gadd="git add ."
 alias gcommit="git commit -m "
 
-# Build + restore
+# Build + restore .net commands
 alias dotnetRestore="dotnet restore --configfile ~/.config/NuGet/nuget.config"
 alias nugetRestore="nuget restore -ConfigFile ~/.config/NuGet/nuget.config"
 alias FrameworkBuild="msbuild -r -nologo -p:Configuration=Release -t:Clean,Build "
@@ -86,12 +83,10 @@ alias coreRestore="dotnet restore --configfile ~/.config/NuGet/nuget.config"
 alias coreTest="dotnet test --no-build"
 alias coreFullSuite="coreRestore ;coreBuild; coreTest"
 alias frameworkTest="msbuild -r -nologo -p:Configuration=Release -t:Test"
-
 alias core8="/usr/share/dotnet8/dotnet"
 alias core8Build="/usr/share/dotnet8/dotnet build --configfile ~/.config/NuGet/nuget.config"
 alias core8Restore="/usr/share/dotnet8/dotnet restore --configfile ~/.config/NuGet/nuget.config"
 alias core8Test="/usr/share/dotnet8/dotnet test --no-build"
-
 
 # Specific testing commands
 alias loggerDDTests="dotnet test --no-build --filter DataDogTests"
@@ -105,15 +100,12 @@ alias goTest="go test -v"
 alias monoTest="mono ~/tools/NuGet/NUnit.ConsoleRunner.3.12.0/tools/nunit3-console.exe"
 alias testMessaging="monoTest /home/nicholas.judge/solutions/messaging/shareasale.notifications/MessageQueuerTests/bin/Release/MessageQueuerTests.dll"
 
-# remap vim because sometimes I revert to my roots and mistype 
-alias vim="nvim"
-
 # terraform wasn't available in yum, installed it to tools/
 alias terraform="~/tools/terraform"
 
 # yum shortcuts
 alias install="sudo yum install"
-alias upg="sudo yum update --skip-broken;"
+alias upg="sudo apt-get update; sudo apt-get upgrade"
 alias remove="sudo yum remove"
 alias listPkg="sudo yum list installed"
 alias searchInstalledPackage="sudo yum list installed | grep"
@@ -140,9 +132,6 @@ alias pgrep="pgrep -l"
 alias grep="grep -i --color=auto"
 alias egrep="egrep --color=auto"
 alias ip="ip addr"
-
-# remap nvim to latest version of app image
-alias nvim="~/tools/nvim.appimage"
 
 # directory shortcuts
 alias solutions="cd ~/solutions"
