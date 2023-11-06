@@ -4,13 +4,25 @@ if [ -d "/nvim" ]; then
     rm -r nvim
 fi
 
-if [ -d "/i3"]; then
+if [ -d "/i3" ]; then
     rm -r i3
 fi
 
-if [ -d "/rofi"]; then
+if [ -d "/rofi" ]; then
     rm -r rofi
 fi
+
+if [ -d "/.icons" ]; then
+    rm -r .icons
+fi
+
+if [ -d "/.themes" ]; then
+    rm -r .themes
+fi
+
+echo copying gtk files
+cp -r ~/.icons .
+cp -r ~/.themes .
 
 echo "copying rofi"
 cp -r ~/.config/rofi .
