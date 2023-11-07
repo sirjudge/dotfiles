@@ -1,9 +1,6 @@
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
-
-
-
 -- neo-test suite
 vim.keymap.set("n", "<leader>t", ":TestNearest<CR>")
 vim.keymap.set("n", "<leader>T", ":TestFile<CR>")

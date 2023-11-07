@@ -1,6 +1,3 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -13,7 +10,8 @@ export NVM_DIR="$HOME/.nvm"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="darkblood"
+#ZSH_THEME="darkblood"
+ZSH_THEME="sonicradish"
 
 # Uncomment one of the following lines to change the auto-update behavior
 zstyle ':omz:update' mode auto      # update automatically without asking
@@ -23,8 +21,8 @@ zstyle ':omz:update' frequency 7
 
 # Configure Go environment
 # GOPATH MUST BE OUTSIDE OF GOROOT directory!!!
-export GO111MODULE=on
-export GOROOT=/usr/lib/golang
+#export GO111MODULE=on
+export GOROOT=/usr/lib/go
 export GOPATH=/home/nicholas.judge/goPackages
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
@@ -57,6 +55,8 @@ _dotnet_zsh_complete()
 
 
 compdef _dotnet_zsh_complete dotnet
+
+alias dotnet="~/tools/dotnet/dotnet"
 
 #remap neovim to the appimage
 alias nvim="~/tools/nvim.appimage"
@@ -136,24 +136,21 @@ alias ip="ip addr"
 # directory shortcuts
 alias solutions="cd ~/solutions"
 alias compliance="cd ~/solutions/compliance"
+alias finance="cd ~/solutions/finance"
 alias neovimConfig="cd ~/.config/nvim"
 alias configFolder="cd ~/.config"
-alias discovery="cd ~/solutions/discovery"
 alias messaging="cd ~/solutions/messaging"
-alias tooling="cd ~/solutions/tooling"
+alias tools="cd ~/tools"
 alias nugetFolder="cd ~/solutions/NuGet/"
 
-# dotnet tooling
+# Envionment Configuration
 alias envConfigSetDev="~/solutions/tooling/environmentconfigurator/ShareASale.EnvironmentConfigurationTool/bin/Debug/net7.0/ShareASale.EnvironmentConfigurationTool SetEnvironment=dev"
 alias envConfigSetProd="~/solutions/tooling/environmentconfigurator/ShareASale.EnvironmentConfigurationTool/bin/Debug/net7.0/ShareASale.EnvironmentConfigurationTool SetEnvironment=prod"
 alias envConfigUi="~/solutions/tooling/environmentconfigurator/EnvironmentConfigurationUi/bin/Debug/net7.0/EnvironmentConfigurationUi"
-
 export PATH=$PATH:"~/solutions/tooling/environmentconfigurator/EnvironmentConfigurationTool/bin/Debug/net7.0/"
 
+# bun + bun completions
 
-# bun completions
-[ -s "/home/nicholas.judge/.bun/_bun" ] && source "/home/nicholas.judge/.bun/_bun"
-
-# bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+[ -s "/home/nicholas.judge/.bun/_bun" ] && source "/home/nicholas.judge/.bun/_bun"
