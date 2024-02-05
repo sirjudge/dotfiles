@@ -10,10 +10,5 @@ cp -r ~/.config/nvim .
 echo "copying zshrc"
 cp ~/.zshrc .
 
-echo "push to git"
-git pull
-git add .
-git commit -m "update dotfiles from script"
-git push
 
 
