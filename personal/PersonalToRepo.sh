@@ -2,7 +2,7 @@ echo "copying neovim config folder and zipping"
 if [ -d "/nvim" ]; then
     rm -r nvim
 fi
-cp ~/.config/nvim .
+cp -r ~/.config/nvim .
 
 echo "copying zshrc"
 cp ~/.zshrc .
@@ -14,6 +14,7 @@ cp -r ~/.config/i3 .
 
 if [ -d "/eww" ]; then
     rm -r eww
+fi
 cp -r ~/.config/eww .
 
 if [ -d "/terminator" ]; then
