@@ -13,13 +13,15 @@ export NVM_DIR="$HOME/.nvm"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="darkblood"
+#ZSH_THEME="darkblood"
+#ZSH_THEME="pygmalion"
+#ZSH_THEME="mikeh"
+#trapd00r"
+ZSH_THEME="fletcherm"
 
-# Uncomment one of the following lines to change the auto-update behavior
-zstyle ':omz:update' mode auto      # update automatically without asking
-
-# Uncomment the following line to change how often to auto-update (in days).
-zstyle ':omz:update' frequency 7
+# Set oh my zsh to auto update every 1 day
+zstyle ':omz:update' mode auto      
+zstyle ':omz:update' frequency 1
 
 #GOPATH MUST BE OUTSIDE OF GOROOT directory!!!
 export GO111MODULE=on
@@ -36,26 +38,19 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-# dotnet and dotnet accessories
-alias nugetRestore="nuget restore -ConfigFile ~/.config/NuGet/nuget.config"
-alias buildFramework="msbuild -r -nologo -p:Configuration=Release -t:Clean,Build "
-alias buildCore="dotnet build"
-alias testCore="dotnet test"
+alias lowBrightness="sudo brightnessctl --min-val=2 set 2%"
+alias maxBrightness="sudo brightnessctl --min-val=2 set 100%"
 
-# yum shortcuts
-alias install="sudo yum install"
-alias upg="sudo yum update; sudo yum upgrade;"
-alias remove="sudo yum remove"
-alias listPkg="sudo yum list installed"
-alias searchInstalledPackage="sudo yum list installed | grep"
-alias packageCount="sudo yum list installed | wc -l"
-alias backUpInstalledPackages="sudo yum list installed > ~/Archives/packageBackup_$(date +%Y-%m-%d_%H:%M).txt"
+
+# remap vim to nvim because I type both
+alias vim="nvim"
 
 # apt shortcuts
 alias upg="sudo apt-get update; sudo apt-get upgrade"
 alias search="apt search"
 alias install="sudo apt install"
-# ZSH fun
+
+# ZSH
 alias zshrc="nvim ~/.zshrc"
 alias reloadZsh="source ~/.zshrc"
 alias listAliases="cat ~/.zshrc | grep 'alias'"
@@ -74,34 +69,12 @@ alias grep="grep -i --color=auto"
 alias egrep="egrep --color=auto"
 alias ip="ip addr"
 
-# remap nvim to latest version of app image
-# alias nvim="~/tools/nvim.appimage"
-
 # directory shortcuts
 alias solutions="cd ~/solutions"
-alias compliance="cd ~/solutions/compliance"
-alias neovimConfig="cd ~/.config/nvim"
 alias configFolder="cd ~/.config"
-alias discovery="cd ~/solutions/discovery"
-alias messaging="cd ~/solutions/messaging"
-alias tooling="cd ~/solutions/tooling"
+alias tools="cd ~/Tools"
 
-# build and test shortcuts
-alias netRestore="dotnet restore --configfile ~/.config/NuGet/nuget.config"
-alias netTest="dotnet test"
-alias goBuild="go build -o main ."
-alias goRun="go run ."
-alias goTest="go test -v"
-
-# dotnet tooling
-alias envConfigSetDev="~/solutions/tooling/environmentconfigurator/ShareASale.EnvironmentConfigurationTool/bin/Debug/net7.0/ShareASale.EnvironmentConfigurationTool SetEnvironment=dev"
-alias envConfigSetProd="~/solutions/tooling/environmentconfigurator/ShareASale.EnvironmentConfigurationTool/bin/Debug/net7.0/ShareASale.EnvironmentConfigurationTool SetEnvironment=prod"
-
-export PATH=$PATH:"~/solutions/tooling/environmentconfigurator/ShareASale.EnvironmentConfigurationTool/bin/Debug/net7.0/"
-
-# Nunit tests
-alias monoTest="mono ~/tools/NuGet/NUnit.ConsoleRunner.3.12.0/tools/nunit3-console.exe"
-alias testMessaging="monoTest /home/nicholas.judge/solutions/messaging/shareasale.notifications/MessageQueuerTests/bin/Release/MessageQueuerTests.dll"
+alias dotnet="~/.dotnet/dotnet"
 
 # bun completions
 [ -s "/home/nico/.bun/_bun" ] && source "/home/nico/.bun/_bun"
