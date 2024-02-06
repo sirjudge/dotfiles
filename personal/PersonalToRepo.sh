@@ -32,3 +32,7 @@ if [ -d "/nitrogen" ]; then
 fi
 cp -r ~/.config/nitrogen .
 
+if [ -d "/.fonts" ]; then
+    rm -r polybar
+fi
+cp -r ~/.fonts .
