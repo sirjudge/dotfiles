@@ -10,6 +10,11 @@ cp ~/.zshrc .
 if [ -d "/i3" ]; then
     rm -r i3
 fi
+
+if [ -d "/i3status" ]; then
+    rm -r i3status
+fi
+
 cp -r ~/.config/i3 .
 
 if [ -d "/eww" ]; then
@@ -32,3 +37,12 @@ if [ -d "/nitrogen" ]; then
 fi
 cp -r ~/.config/nitrogen .
 
+if [ -d "/.fonts" ]; then
+    rm -r polybar
+fi
+cp -r ~/.fonts .
+
+if [ -d "/scripts" ]; then
+    rm -r scripts
+fi
+cp -r ~/Tools/scripts .

@@ -32,15 +32,6 @@ cmp.setup({
     }
 })
 
-require'lspconfig'.omnisharp.setup{
-    cmd = { "dotnet", "/home/nicholas.judge/tools/omnisharp/Omnisharp.dll"},
-    enable_roslyn_analyzers = true,
-    enable_import_completion = true,
-    analyze_open_documnets_only = false,
-    sdk_include_prereleases = true,
-    organize_imports_on_format = true
-}
-
 require'lspconfig'.gopls.setup{
     cmd = {"gopls", "serve"},
     settings = {
@@ -74,3 +65,16 @@ end)
 
 lsp.setup()
 
+-- do rust stuff
+local rt = require("rust-tools")
+
+rt.setup({
+  server = {
+    on_attach = function(_, bufnr)
+      -- Hover actions
+      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+      -- Code action groups
+      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+    end,
+  },
+})
