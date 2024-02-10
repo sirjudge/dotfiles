@@ -38,9 +38,20 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+# SSH commands
+alias homelab="ssh nico@192.168.1.34"   
+
+# screenshotting
+alias screenshotSelect="scrot -s --file '/home/nico/Pictures/Screenshots/%Y-%m-%d_$wx$h_scrot.png'"
+
+# set brightness commands
 alias lowBrightness="sudo brightnessctl --min-val=2 set 2%"
 alias maxBrightness="sudo brightnessctl --min-val=2 set 100%"
 
+# set monitor commands
+alias officeMonitor="xrandr --output eDP-1-1 --primary --auto --left-of DP-0;" 
+alias officeDualMonitors="xrandr --output eDP-1-1 --mode 1920x1080 --output DP-0.1 --mode 2560x1080 --right-of eDP-1-1 --output DP-0.3 --mode 2560x1080 --below DP-0.1;"
+alias bedroomMonitor=" xrandr --output eDP-1-1 --mode 1920x1080 --output HDMI-0 --mode 1920x1080 --right-of eDP-1-1 "
 
 # remap vim to nvim because I type both
 alias vim="nvim"

@@ -32,20 +32,28 @@ return require('packer').startup(function(use)
 
   -- ls-zero stuff
   use {
-	  'VonHeikemen/lsp-zero.nvim',
-	  branch = 'v2.x',
-	  requires = {
-		  -- LSP Support
-		  {'neovim/nvim-lspconfig'},             -- Required
-		  {'williamboman/mason.nvim'},           -- Optional
-		  {'williamboman/mason-lspconfig.nvim'}, -- Optional
+      'VonHeikemen/lsp-zero.nvim',
+      branch = 'v2.x',
+      requires = {
+          -- LSP Support
+          {'neovim/nvim-lspconfig'},             -- Required
+          {'williamboman/mason.nvim'},           -- Optional
+          {'williamboman/mason-lspconfig.nvim'}, -- Optional
 
-		  -- Autocompletion
-		  {'hrsh7th/nvim-cmp'},     -- Required
-		  {'hrsh7th/cmp-nvim-lsp'}, -- Required
-		  {'L3MON4D3/LuaSnip'},     -- Required
-	  }
+          -- Autocompletion
+          {'hrsh7th/nvim-cmp'},     -- Required
+          {'hrsh7th/cmp-nvim-lsp'}, -- Required
+          {'L3MON4D3/LuaSnip'},     -- Required
+      }
   }
+
+
+  -- rust
+  use 'simrat39/rust-tools.nvim'
+
+  -- Debugging
+  use 'mfussenegger/nvim-dap'
+
 
 end)
 

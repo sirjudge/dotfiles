@@ -10,6 +10,11 @@ cp ~/.zshrc .
 if [ -d "/i3" ]; then
     rm -r i3
 fi
+
+if [ -d "/i3status" ]; then
+    rm -r i3status
+fi
+
 cp -r ~/.config/i3 .
 
 if [ -d "/eww" ]; then
