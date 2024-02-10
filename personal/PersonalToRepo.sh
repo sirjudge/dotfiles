@@ -41,3 +41,8 @@ if [ -d "/.fonts" ]; then
     rm -r polybar
 fi
 cp -r ~/.fonts .
+
+if [ -d "/scripts" ]; then
+    rm -r scripts
+fi
+cp -r ~/Tools/scripts .
