@@ -56,7 +56,19 @@ _dotnet_zsh_complete()
 
 compdef _dotnet_zsh_complete dotnet
 
+
+# dotnet shortcuts
 alias dotnet="~/tools/dotnet/dotnet"
+alias sudoDotnet="sudo ~/tools/dotnet/dotnet"
+alias sudoNugetRestore="sudo nuget restore -ConfigFile /home/nicholas.judge/.config/NuGet/nuget.config"
+alias clearNuget="rm -r ~/.nuget/packages"
+
+# local smtp servers
+alias smtp4DevBinary="sudo ~/tools/smtp4Dev/Rnwood.Smtp4dev"
+alias smtp4DevDocker="sudo docker run --rm -it -p 3000:80 -p 2525:25 rnwood/smtp4dev"
+
+alias mailTrap="sudo docker container run -d --rm -it --init --name=mailtrap -p 127.0.0.1:9080:80 -p 127.0.0.1:9025:25 dbck/mailtrap"
+alias mailTrapAllPorts="sudo docker container run -d --rm --init --name=mailtrap -p 127.0.0.1:9080:80 -p 127.0.0.1:9025:25 -p 127.0.0.1:9587:587 -p 127.0.0.1:9143:143 dbck/mailtrap"
 
 #remap neovim to the appimage
 alias nvim="~/tools/nvim.appimage"
@@ -104,13 +116,9 @@ alias testMessaging="monoTest /home/nicholas.judge/solutions/messaging/shareasal
 alias terraform="~/tools/terraform"
 
 # yum shortcuts
-alias install="sudo yum install"
+alias install="sudo apt-get install"
 alias upg="sudo apt-get update; sudo apt-get upgrade"
-alias remove="sudo yum remove"
-alias listPkg="sudo yum list installed"
-alias searchInstalledPackage="sudo yum list installed | grep"
-alias packageCount="sudo yum list installed | wc -l"
-alias backUpInstalledPackages="sudo yum list installed > ~/Archives/packageBackup_$(date +%Y-%m-%d_%H:%M).txt"
+alias remove="sudo apt-get remove"
 
 # ZSH shortcuts
 alias zshrc="nvim ~/.zshrc"

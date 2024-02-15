@@ -20,7 +20,14 @@ if [ -d "/.themes" ]; then
     rm -r .themes
 fi
 
-echo copying gtk files
+if [ -d "/powerline" ]; then
+    rm -r powerline
+fi
+
+echo "copying powerline"
+cp -r ~/.config/powerline .
+
+echo "copying gtk files"
 cp -r ~/.icons .
 cp -r ~/.themes .
 
@@ -36,3 +43,7 @@ cp -r ~/.config/nvim .
 echo "copying zshrc"
 cp ~/.zshrc .
 
+
+# copy apt details
+dpkg --get-selections > Package.list
+sudo cp -R /etc/apt/sources.list* 
