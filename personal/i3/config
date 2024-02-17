@@ -20,19 +20,17 @@ bindsym Print   exec scrot '%Y-%m-%d_$wx$h_scrot.png' -f -s -e 'mv $f ~/Pictures
 bindsym Print+d exec scrot '%Y-%m-%d_$wx$h_scrot.png' -f -s -e 'mv $f ~/Pictures/Screenshots' -d 5
 
 # keyboard shortcuts for quickly doing stuff
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+set $Locker $HOME/.config/i3/lock.sh
+set $mode_system System (l) lock, (e) logout,(h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym l exec --no-startup-id /home/nico/.config/i3/lock.sh, mode "default"
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
-    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym Escape mode "default"
 bindsym $mod+p mode "$mode_system
 
 # Rebind Media keys and bind an update to refresh status inside i3
@@ -68,25 +66,22 @@ exec --no-startup-id blueman-applet
 #======================#
 # Background services =#
 #================#=====#
-# start Compositor and background
+# start Compositor and set background
 exec --no-startup-id compton
-exec --no-startup-id nitrogen --restore --sync
+exec --no-startup-id nitrogen --set-zoom-fill ~/Pictures/\[1920x1080\]\ hyper\ beast\ dark\ mode\ so\ you\ don\'t\ get\ blinded..png 
 
 # start up notification manager
 exec --no-startup-id dunst
 
-# Turns off autoscreen shutoff
+#  use xset to turn off annoying features
 exec xset s off
 exec xset -dpms
-exec xsete s noblank
+exec xset s noblank
 exec xset dpms force suspend
 exec xset dpms force on
 
 # start up notification manager
 exec --no-startup-id dunst
-
-#disables the touchpad while typing
-#exec syndaemon -i 0.5 -t -K -R &
 
 #==================#
 #= Config options =#

@@ -3,6 +3,7 @@ if [ -d "/nvim" ]; then
     rm -r nvim
 fi
 cp -r ~/.config/nvim .
+rm -r nvim/node_modules
 
 echo "copying zshrc"
 cp ~/.zshrc .
