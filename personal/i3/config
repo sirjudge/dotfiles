@@ -16,8 +16,13 @@ bindsym $mod+Shift+d exec /home/nico/Documents/applications/rofi-network-manager
 # misc Hotkey =#
 #==============#
 # Set Screenshot bindings
-bindsym Print   exec scrot '%Y-%m-%d_$wx$h_scrot.png' -f -s -e 'mv $f ~/Pictures/Screenshots'
-bindsym Print+d exec scrot '%Y-%m-%d_$wx$h_scrot.png' -f -s -e 'mv $f ~/Pictures/Screenshots' -d 5
+#bindsym $mod+p 
+#bindsym $mod+p maim ~/Pictures/Screenshots/$(date -u +"%Y-%m-%dT%H:%M:%S%Z")1.png
+#scrot -s --file '/home/nico/Pictures/Screenshots/%Y-%m-%d_$wx$h_scrot.png'
+#exec --no-startup-id maim ~/screenshots/$(date -u +"%Y-%m-%dT%H:%M:%S%Z").png
+
+#exec "scrot -s --file '/home/nico/Pictures/Screenshots/%Y-%m-%d_$wx$h_scrot.png'"
+#bindsym Print+Shift exec scrot -s --file '/home/nico/Pictures/Screenshots/%Y-%m-%d_$wx$h_scrot.png' -d 5
 
 # keyboard shortcuts for quickly doing stuff
 set $Locker $HOME/.config/i3/lock.sh
@@ -27,11 +32,11 @@ mode "$mode_system" {
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
-    # back to normal: Enter or Escape
+# back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+p mode "$mode_system
+bindsym $mod+Shift+p mode "$mode_system
 
 # Rebind Media keys and bind an update to refresh status inside i3
 set $refresh_i3status killall -SIGUSR1 i3status

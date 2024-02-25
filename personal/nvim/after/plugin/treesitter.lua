@@ -3,15 +3,15 @@
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
   -- master list can be found here: https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
-  ensure_installed = { 
+  ensure_installed = {
 	  "javascript",
 	  "typescript",
 	  "c_sharp",
 	  "css",
 	  "git_config",
-	  "lua", 
-	  "vim", 
-	  "vimdoc", 
+	  "lua",
+	  "vim",
+	  "vimdoc",
 	  "query",
 	  "graphql",
 	  "html",
@@ -20,7 +20,10 @@ require'nvim-treesitter.configs'.setup {
 	  "sql",
 	  "vimdoc",
 	  "yaml",
-
+      "norg",
+      "org",
+      "rust",
+      "toml",
   },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -43,7 +46,8 @@ require'nvim-treesitter.configs'.setup {
     -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
     -- the name of the parser)
     -- list of language that will be disabled
-    disable = { "c", "rust" },
+    disable = { "c" },
+   -- "rust" },
     -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
     disable = function(lang, buf)
         local max_filesize = 100 * 1024 -- 100 KB
