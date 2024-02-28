@@ -108,4 +108,10 @@ return require('packer').startup(function(use)
             }
         end,
     }
+
+    use {
+        'mrcjkb/rustaceanvim',
+        version = '^4', -- Recommended
+        ft = { 'rust' },
+    }
 end)

@@ -3,7 +3,7 @@ lsp.preset("recommended")
 
 lsp.ensure_installed({
 	'tsserver',
-	'rust_analyzer',
+	--'rust_analyzer',
     'gopls',
     'omnisharp',
 })
@@ -44,7 +44,8 @@ require'lspconfig'.gopls.setup{
     },
 
 }
-require'lspconfig'.rust_analyzer.setup{}
+
+-- TODO: commenting this out for now
 
 lsp.on_attach(function(client, bufnr)
 	-- see :help lsp-zero-keybindings
@@ -62,6 +63,7 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
+
 
 lsp.setup()
 
