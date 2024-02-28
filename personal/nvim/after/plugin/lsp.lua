@@ -3,7 +3,7 @@ lsp.preset("recommended")
 
 lsp.ensure_installed({
 	'tsserver',
-	'rust_analyzer',
+	--'rust_analyzer',
     'gopls',
     'omnisharp',
 })
@@ -44,7 +44,8 @@ require'lspconfig'.gopls.setup{
     },
 
 }
-require'lspconfig'.rust_analyzer.setup{}
+
+-- TODO: commenting this out for now
 
 lsp.on_attach(function(client, bufnr)
 	-- see :help lsp-zero-keybindings
@@ -63,18 +64,6 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
 
+
 lsp.setup()
 
--- do rust stuff
-local rt = require("rust-tools")
-
-rt.setup({
-  server = {
-    on_attach = function(_, bufnr)
-      -- Hover actions
-      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-      -- Code action groups
-      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
-    end,
-  },
-})

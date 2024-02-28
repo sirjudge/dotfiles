@@ -49,15 +49,15 @@ alias lowBrightness="sudo brightnessctl --min-val=2 set 2%"
 alias maxBrightness="sudo brightnessctl --min-val=2 set 100%"
 
 # set monitor commands
-alias officeMonitor="xrandr --output eDP-1-1 --primary --auto --left-of DP-0;" 
-alias officeDualMonitors="xrandr --output eDP-1-1 --mode 1920x1080 --output DP-0.1 --mode 2560x1080 --right-of eDP-1-1 --output DP-0.3 --mode 2560x1080 --below DP-0.1;"
+alias officeMonitor="xrandr --output eDP-1-1 --primary --auto --output DP-0 --auto --right-of eDP-1-1;" 
+alias officeDualMonitors="~/Tools/scripts/DualOfficeMonitor.sh"
 alias bedroomMonitor=" xrandr --output eDP-1-1 --mode 1920x1080 --output HDMI-0 --mode 1920x1080 --right-of eDP-1-1 "
 
 # remap vim to nvim because I type both
 alias vim="nvim"
 
 # apt shortcuts
-alias upg="sudo apt-get update; sudo apt-get upgrade"
+alias upg="sudo apt-get update; sudo apt-get upgrade; sudo flatpak update"
 alias search="apt search"
 alias install="sudo apt install"
 
@@ -84,6 +84,7 @@ alias ip="ip addr"
 alias solutions="cd ~/solutions"
 alias configFolder="cd ~/.config"
 alias tools="cd ~/Tools"
+alias dataComp="cd ~/solutions/data_comparison_tool"
 
 alias dotnet="~/.dotnet/dotnet"
 
