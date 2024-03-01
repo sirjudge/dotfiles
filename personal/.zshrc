@@ -8,15 +8,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-#ZSH_THEME="darkblood"
-#ZSH_THEME="pygmalion"
-#ZSH_THEME="mikeh"
-#trapd00r"
 ZSH_THEME="fletcherm"
 
 # Set oh my zsh to auto update every 1 day
@@ -29,14 +24,25 @@ export GOROOT=/usr/lib/go-1.18
 export GOPATH=/home/nico/goPackages
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
+# set tmux to launch on zsh startup
+if [ -z "$TMUX" ]; then
+    tmux attach -t default || tmux new -s default
+fi
+
+# Load plugins
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
+
+# Tmux
+alias tmuxReload="tmux source  ~/.config/tmux/tmux.conf"
+alias tmuxNew="tmux new -s"
+alias tmuxAttach="tmux attach -t"
+alias tmuxList="tmux list-sessions"
+alias tmuxKill="tmux kill-session -t"
+
+# remap clear to cls because I am lazy
+alias cls="clear"
 
 # SSH commands
 alias homelab="ssh nico@192.168.1.34"   
