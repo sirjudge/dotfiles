@@ -5,7 +5,7 @@ lsp.ensure_installed({
 	'tsserver',
 	'rust_analyzer',
     'gopls',
-    'omnisharp',
+    --'csharp-language-server',
 })
 
 lsp.nvim_workspace()
@@ -15,10 +15,18 @@ local cmp_action = require('lsp-zero').cmp_action()
 
 -- Maps keys to lsp pop up
 cmp.setup({
+    sources = {
+        {name = 'copilot'},
+        {name = 'nvim_lsp'},
+    },
     mapping = {
         -- `Enter` key to confirm completion
-        ['<CR>'] = cmp.mapping.confirm({select = false}),
-
+        ['<CR>'] = cmp.mapping.confirm({
+            -- documentation says this is important.
+            -- I don't know why.
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = false,
+        }),
         -- Ctrl+Space to trigger completion menu
         ['<C-Space>'] = cmp.mapping.complete(),
         -- Navigate between snippet placeholder
@@ -32,16 +40,9 @@ cmp.setup({
     }
 })
 
+require'lspconfig'.csharp_ls.setup{
+    filetypes = { "cs" , "cshtml", "razor", "csx" },
 
-
-
-require'lspconfig'.omnisharp.setup{
-    cmd = { "dotnet", "/home/nicholas.judge/tools/omnisharp/Omnisharp.dll"},
-    enable_roslyn_analyzers = true,
-    enable_import_completion = true,
-    analyze_open_documnets_only = false,
-    sdk_include_prereleases = true,
-    organize_imports_on_format = true
 }
 
 require'lspconfig'.gopls.setup{
@@ -56,6 +57,7 @@ require'lspconfig'.gopls.setup{
     },
 
 }
+
 require'lspconfig'.rust_analyzer.setup{}
 
 lsp.on_attach(function(client, bufnr)
@@ -77,3 +79,16 @@ end)
 
 lsp.setup()
 
+-- do rust stuff
+local rt = require("rust-tools")
+
+rt.setup({
+  server = {
+    on_attach = function(_, bufnr)
+      -- Hover actions
+      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+      -- Code action groups
+      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+    end,
+  },
+})
