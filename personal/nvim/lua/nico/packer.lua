@@ -18,10 +18,8 @@ return require('packer').startup(function(use)
   }
 
   --color schemes
-  --use({'folke/tokyonight.nvim',as = 'tokyonight'})
-  -- vim.cmd.colorscheme('tokyonight')
+  use({'folke/tokyonight.nvim',as = 'tokyonight'})
   use({ 'rose-pine/neovim', as = 'rose-pine' })
-  vim.cmd.colorscheme('rose-pine')
 
   -- treesitter
   use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate'})
@@ -120,7 +118,7 @@ return require('packer').startup(function(use)
 
     use {
          "christoomey/vim-tmux-navigator",
-         lazy = false,
+         lazy = true,
     }
 
     use {

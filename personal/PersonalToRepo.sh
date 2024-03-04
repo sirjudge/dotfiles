@@ -5,6 +5,13 @@ fi
 cp -r ~/.config/nvim .
 rm -r nvim/node_modules
 
+echo "copying tmux"
+if [ -d "/tmux" ]; then
+    rm -r tmux
+fi
+cp -r ~/.config/tmux .
+rm -r tmux/plugins
+
 echo "copying zshrc"
 cp ~/.zshrc .
 
