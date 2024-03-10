@@ -55,7 +55,7 @@ alias lowBrightness="sudo brightnessctl --min-val=2 set 2%"
 alias maxBrightness="sudo brightnessctl --min-val=2 set 100%"
 
 # set monitor commands
-alias officeMonitor="xrandr --output eDP-1-1 --primary --auto --output DP-0 --auto --right-of eDP-1-1;" 
+alias officeMonitor="xrandr --output eDP-1-1 --primary --auto --output DP-0 --auto --left-of eDP-1-1;" 
 alias officeDualMonitors="~/Tools/scripts/DualOfficeMonitor.sh"
 alias bedroomMonitor=" xrandr --output eDP-1-1 --mode 1920x1080 --output HDMI-0 --mode 1920x1080 --right-of eDP-1-1 "
 

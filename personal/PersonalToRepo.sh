@@ -10,7 +10,7 @@ if [ -d "/tmux" ]; then
     rm -r tmux
 fi
 cp -r ~/.config/tmux .
-rm -r tmux/plugins
+sudo rm -r tmux/plugins
 
 echo "copying zshrc"
 cp ~/.zshrc .
