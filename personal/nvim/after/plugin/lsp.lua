@@ -3,7 +3,6 @@ lsp.preset("recommended")
 
 lsp.ensure_installed({
 	'tsserver',
-	--'rust_analyzer',
     'gopls',
     'omnisharp',
 })
@@ -18,7 +17,6 @@ cmp.setup({
     mapping = {
         -- `Enter` key to confirm completion
         ['<CR>'] = cmp.mapping.confirm({select = false}),
-
         -- Ctrl+Space to trigger completion menu
         ['<C-Space>'] = cmp.mapping.complete(),
         -- Navigate between snippet placeholder
@@ -27,11 +25,13 @@ cmp.setup({
         -- remap tab and shift tab because copilot should use those
         ['<Tab>'] = nil,
         ['<S-Tab>'] = nil,
+        -- Navigate between cmp items
         ['<C-j>'] = cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select}),
         ['<C-k>'] = cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select})
     }
 })
 
+-- enable gopls, and set some settings
 require'lspconfig'.gopls.setup{
     cmd = {"gopls", "serve"},
     settings = {
@@ -44,8 +44,6 @@ require'lspconfig'.gopls.setup{
     },
 
 }
-
--- TODO: commenting this out for now
 
 lsp.on_attach(function(client, bufnr)
 	-- see :help lsp-zero-keybindings

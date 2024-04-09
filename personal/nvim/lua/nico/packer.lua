@@ -53,9 +53,6 @@ return require('packer').startup(function(use)
       }
   }
 
-  -- rust
-  use 'simrat39/rust-tools.nvim'
-
   -- dap + debugging
   use 'ldelossa/nvim-dap-projects'
   require("nvim-dap-projects").search_project_config()
@@ -72,8 +69,6 @@ return require('packer').startup(function(use)
              })
        end,
   }
-
-
   -- markdown and writing
   use {
         "lukas-reineke/headlines.nvim",
@@ -82,31 +77,6 @@ return require('packer').startup(function(use)
             require("headlines").setup()
         end,
     }
-
-    use {
-        "nvim-neorg/neorg",
-        run = ":Neorg sync-parsers", -- This is the important bit!
-        config = function()
-            require("neorg").setup {
-                load = {
-                    ["core.defaults"] = {},
-                    ["core.concealer"] = {},
-                    ["core.dirman"] = {
-                        config = {
-                            workspaces = {
-                                work = "~/notes/work",
-                                home = "~/notes/home",
-                                dnd = "~/notes/dnd",
-                                journal = "~/notes/journal"
-                            },
-                            default_workspace = "home"
-                        }
-                    }
-                }
-            }
-        end,
-    }
-
     use {
             "folke/zen-mode.nvim",
             opts = {
@@ -126,6 +96,4 @@ return require('packer').startup(function(use)
         version = '^4', -- Recommended
         ft = { 'rust' },
     }
-
-
 end)

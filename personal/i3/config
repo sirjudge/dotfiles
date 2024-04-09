@@ -73,7 +73,7 @@ exec --no-startup-id blueman-applet
 #================#=====#
 # start Compositor and set background
 exec --no-startup-id compton
-exec --no-startup-id nitrogen --set-zoom-fill ~/Pictures/\[1920x1080\]\ hyper\ beast\ dark\ mode\ so\ you\ don\'t\ get\ blinded..png 
+exec --no-startup-id nitrogen --set-zoom-fill ~/Pictures/hypeBeast.png
 
 # start up notification manager
 exec --no-startup-id dunst
