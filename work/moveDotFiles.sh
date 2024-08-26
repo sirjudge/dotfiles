@@ -23,7 +23,7 @@ fi
 
 echo "copying nvim files in to repo"
 cp -r ~/.config/nvim/lua nvim/.
-cp -r ~/.config/nvim/plugin nvim/.
+cp -r ~/.config/nvim/after nvim/.
 cp ~/.config/nvim/init.lua nvim/.
 
 # i3
