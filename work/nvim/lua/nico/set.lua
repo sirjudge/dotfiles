@@ -22,3 +22,4 @@ vim.opt.colorcolumn = "80"
 
 vim.g.terminal_emulator='zsh'
 vim.api.nvim_set_var('terminal_emulator','zsh')
+

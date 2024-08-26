@@ -1,41 +1,56 @@
 #Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+# set NVM environment and enable bash completion
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
+# enable docker proress to always be plain text
+export BUILDKIT_PROGRESS=plain
+
+# Set Theme name
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# set to "random" to use a random theme
+# run to view theme: echo $RANDOM_THEME
 ZSH_THEME="refined"
 
-# Uncomment one of the following lines to change the auto-update behavior
-zstyle ':omz:update' mode auto      # update automatically without asking
+# set to auto update
+zstyle ':omz:update' mode auto      
 
-# Uncomment the following line to change how often to auto-update (in days).
-zstyle ':omz:update' frequency 7
+# set to check every day
+zstyle ':omz:update' frequency 1 
 
 # Configure Go environment
 # GOPATH MUST BE OUTSIDE OF GOROOT directory!!!
-#export GO111MODULE=on
 export GOROOT=/usr/lib/go
 export GOPATH=/home/nicholas.judge/goPackages
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # Configure Rust
-#Cargo's bin directory ($HOME/.cargo/bin)
+# Cargo's bin directory ($HOME/.cargo/bin)
 export PATH="$HOME/.cargo/bin:$PATH"
 
-# Which plugins would you like to load?
+
+# bun + bun completions
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+[ -s "/home/nicholas.judge/.bun/_bun" ] && source "/home/nicholas.judge/.bun/_bun"
+
+# try and get tab completion back
+autoload -Uz compinit && compinit
+
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
+
+# tmux + tmux completions
+# set tmux to launch on zsh startup
+if [ -z "$TMUX" ]; then
+    tmux attach -t default || tmux new -s default
+fi
 
 # Set default dotnet root
 export DOTNET_ROOT="$HOME/.dotnet"
@@ -55,6 +70,44 @@ _dotnet_zsh_complete()
   _values = "${(ps:\n:)completions}"
 }
 compdef _dotnet_zsh_complete dotnet
+
+# clean apt/old package stuff
+alias purgeApt="sudo apt clean"
+alias purgeDocker="docker system prune -af --volumes"
+alias showFreeSpace="df -Th | grep -v fs"
+alias showLargeFiles="sudo find / -size +1G"
+
+# copy tracking replay logs to local
+alias switchToDevEks="kubectl config set-context arn:aws:eks:us-east-2:648679051309:cluster/dev-shareasale-us-east-2-cluster"
+alias switchToProdEks="kubectl config set-context prod-shareasale-us-east-2-cluster"
+alias copyReplayLogs="kubectl cp admin-transfer-files:app/logs ~/solutions/tracking/replayLogs -n tracking"
+
+# remap dotnet commands to shorter ones
+alias db="dotnet build"
+alias dr="dotnet run"
+alias dt="dotnet test"
+alias dc="dotnet clean"
+alias dp="dotnet publish"
+alias whatEnv="echo $ASPNETCORE_ENVIRONMENT"
+alias addAllToSln="dotnet sln add **/*.csproj"
+alias dnewsol="dotnet new sln -n "
+
+
+alias devEnv="source ~/solutions/envFiles/dev.env"
+alias prodEnv="source ~/solutions/envFiles/prod.env"
+alias editEnv="nvim ~/solutions/envFiles/."
+
+
+# remap vim to nvim because I'm lazy sometimes
+alias vim="nvim"
+
+# tmux
+alias cls="clear"
+alias tmuxReload="tmux source  ~/.config/tmux/tmux.conf"
+alias tmuxNew="tmux new -s"
+alias tmuxAttach="tmux attach -t"
+alias tmuxList="tmux list-sessions"
+alias tmuxKill="tmux kill-session -t"
 
 # See open used ports
 alias seePorts="sudo lsof -i -P -n | grep LISTEN"
@@ -81,31 +134,19 @@ alias startDocker="sudo systemctl start docker;sudo service docker start"
 alias gdiff="git difftool --tool vimdiff"
 alias gcheck="git checkout -b "
 alias gpush="git push"
+alias gp="git push"
 alias gpull="git pull"
+alias gpu="git pull"
 alias gadd="git add ."
+alias ga="git add ."
 alias gcommit="git commit -m "
+
 
 # copilot shortcuts
 alias copilotSuggest="gh suggest "
 
 # Build + restore .net commands
 alias clearNuget="rm -r ~/.nuget/packages"
-alias dotnetRestore="dotnet restore --configfile ~/.config/NuGet/nuget.config"
-alias nugetRestore="nuget restore -ConfigFile ~/.config/NuGet/nuget.config"
-alias FrameworkBuild="msbuild -r -nologo -p:Configuration=Release -t:Clean,Build "
-alias coreBuild="dotnet build --configfile ~/.config/NuGet/nuget.config"
-alias coreRestore="dotnet restore --configfile ~/.config/NuGet/nuget.config"
-alias coreTest="dotnet test --no-build"
-alias coreFullSuite="coreRestore ;coreBuild; coreTest"
-
-# Specific testing commands
-alias loggerDDTests="dotnet test --no-build --filter DataDogTests"
-alias loggerUtilityTests="dotnet test --no-build --filter UtilityTests"
-
-# build and test shortcuts
-alias goBuild="go build -o main ."
-alias goRun="go run ."
-alias goTest="go test -v"
 
 # apt shortcuts
 alias searchApt="apt search --names-only"
@@ -113,10 +154,10 @@ alias listInstalled="apt list --installed"
 alias install="sudo apt-get install"
 alias upg="sudo apt-get update; sudo apt-get upgrade"
 alias remove="sudo apt-get remove"
+alias autoremove="sudo apt-get autoremove"
 
 # ZSH shortcuts
 alias zshrc="nvim ~/.zshrc"
-alias update="sudo yum update; sudo yum upgrade;"
 alias reloadZsh="source ~/.zshrc"
 alias listAliases="cat ~/.zshrc | grep 'alias'"
 
@@ -135,23 +176,23 @@ alias grep="grep -i --color=auto"
 alias egrep="egrep --color=auto"
 alias ip="ip addr"
 
+# config shortcuts
+alias neovimConfig="nvim ~/.config/nvim/."
+
 # directory shortcuts
-alias solutions="cd ~/solutions"
+alias configFolder="cd ~/.config"
+alias sol="cd ~/solutions"
+
+# tools folder
+alias tools="cd ~/tools"
+
+# Specific solution paths
 alias compliance="cd ~/solutions/compliance"
 alias finance="cd ~/solutions/finance"
-alias neovimConfig="cd ~/.config/nvim"
-alias configFolder="cd ~/.config"
-alias messaging="cd ~/solutions/messaging"
-alias tools="cd ~/tools"
 alias nugetFolder="cd ~/solutions/NuGet/"
+alias tracking="cd ~/solutions/tracking" 
 
-# Envionment Configuration
-alias envConfigSetDev="~/solutions/tooling/environmentconfigurator/ShareASale.EnvironmentConfigurationTool/bin/Debug/net8.0/ShareASale.EnvironmentConfigurationTool SetEnvironment=dev"
-alias envConfigSetProd="~/solutions/tooling/environmentconfigurator/ShareASale.EnvironmentConfigurationTool/bin/Debug/net8.0/ShareASale.EnvironmentConfigurationTool SetEnvironment=prod"
-alias envConfigUi="dotnet run --project ~/solutions/tooling/environmentconfigurator/EnvironmentConfigurationUi/EnvironmentConfigurationUi.csproj"
-export PATH=$PATH:"~/solutions/tooling/environmentconfigurator/EnvironmentConfigurationTool/bin/Debug/net8.0/"
+# Shopify path
+alias shopify="cd /home/nicholas.judge/solutions/shopify/shopifyapp"
+alias analyticsApi="cd /home/nicholas.judge/solutions/shopify/analyticsapi"
 
-# bun + bun completions
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-[ -s "/home/nicholas.judge/.bun/_bun" ] && source "/home/nicholas.judge/.bun/_bun"

@@ -1,4 +1,6 @@
+
 vim.cmd [[packadd packer.nvim]]
+
 
 return require('packer').startup(function(use)
   -- initialize packer plugin
@@ -18,67 +20,110 @@ return require('packer').startup(function(use)
   --color schemes
   use({'folke/tokyonight.nvim',as = 'tokyonight'})
   use({ 'rose-pine/neovim', as = 'rose-pine' })
-  -- vim.cmd.colorscheme('tokyonight')
-  vim.cmd.colorscheme('rose-pine')
 
+  -- treesitter
   use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate'})
   use('nvim-treesitter/playground', {})
+
+  -- file exploration
   use('nvim-lua/plenary.nvim')
   use( 'ThePrimeagen/harpoon')
+
+  -- Git
   use ('tpope/vim-fugitive')
-  use ('github/copilot.vim')
-  use({ 'numToStr/Comment.nvim',lazy = true })
 
-
-  -- Display mark down real nice
-  use {"ellisonleao/glow.nvim", config = function() require("glow").setup() end}
-
-
-  -- DotNet stuff
-  use({
-      "utilyre/barbecue.nvim",
-      name = "barbecue",
-      version = "*",
-      dependencies = {
-          "SmiteshP/nvim-navic",
-          "nvim-tree/nvim-web-devicons", -- optional dependency
-      },
-      lazy = true
-  })
-
-
-  --debug stuff
-  use({ 'mfussenegger/nvim-dap',                        lazy = true })
-  use({ "rcarriga/nvim-dap-ui",                         dependencies = { "mfussenegger/nvim-dap" }, lazy = true })
-  use({ 'theHamsta/nvim-dap-virtual-text',              lazy = true })
-  use({ 'nvim-telescope/telescope-dap.nvim',            lazy = true })
-  use({
-		'nvim-treesitter/nvim-treesitter-textobjects',
-		dependencies = { 'nvim-treesitter/nvim-treesitter' },
-		lazy = false,
-	})
-
-  -- ls-zero stuff
+  -- Ai assitance
+  --use ('github/copilot.vim')
   use {
-	  'VonHeikemen/lsp-zero.nvim',
-	  branch = 'v2.x',
-	  requires = {
-		  -- LSP Support
-		  {'neovim/nvim-lspconfig'},             -- Required
-		  {'williamboman/mason.nvim'},           -- Optional
-		  {'williamboman/mason-lspconfig.nvim'}, -- Optional
-
-		  -- Autocompletion
-		  {'hrsh7th/nvim-cmp'},     -- Required
-		  {'hrsh7th/cmp-nvim-lsp'}, -- Required
-		  {'L3MON4D3/LuaSnip'},     -- Required
-	  }
+      "zbirenbaum/copilot.lua",
+      cmd = "Copilot",
+      event = "InsertEnter",
+      config = function()
+          require("copilot").setup({
+              panel = {
+                  enabled = true,
+                  auto_refresh = false,
+                  keymap = {
+                      jump_prev = "[[",
+                      jump_next = "]]",
+                      accept = "<CR>",
+                      refresh = "gr",
+                      open = "<M-CR>"
+                  }
+              },
+              suggestion = {
+                  enabled = true,
+                  auto_trigger = false,
+                  debounce = 75,
+                  keymap = {
+                      accept = "<S-Tab>",
+                      accept_word = false,
+                      accept_line = false,
+                  },
+              },
+          })
+      end
   }
 
-  -- rust
-  use 'simrat39/rust-tools.nvim'
+  -- ls-zero and lsp
+  use 'neovim/nvim-lspconfig'
+  use {
+      'VonHeikemen/lsp-zero.nvim',
+      branch = 'v2.x',
+      requires = {
+          -- LSP Support
+          {'neovim/nvim-lspconfig'},             -- Required
+          {'williamboman/mason.nvim'},           -- Optional
+          {'williamboman/mason-lspconfig.nvim'}, -- Optional
 
-  -- Debugging
-  use 'mfussenegger/nvim-dap'
+          -- Autocompletion
+          {'hrsh7th/nvim-cmp'},     -- Required
+          {'hrsh7th/cmp-nvim-lsp'}, -- Required
+          {'L3MON4D3/LuaSnip'},     -- Required
+      }
+  }
 
+  -- dap + debugging
+  use 'ldelossa/nvim-dap-projects'
+  require("nvim-dap-projects").search_project_config()
+ 
+  use {
+      'mfussenegger/nvim-dap',
+      opts = function(_, opts)
+         -- add more things to the ensure_installed table protecting against community packs modifying it
+         opts.ensure_installed =
+         require("astronvim.utils")
+             .list_insert_unique(opts.ensure_installed, {
+                 "codelldb",
+                 "cpptools",
+             })
+       end,
+  }
+  -- markdown and writing
+  use {
+        "lukas-reineke/headlines.nvim",
+        after = "nvim-treesitter",
+        config = function()
+            require("headlines").setup()
+        end,
+    }
+    use {
+            "folke/zen-mode.nvim",
+            opts = {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            }
+        }
+
+    use {
+         "christoomey/vim-tmux-navigator",
+         lazy = true,
+    }
+
+    use {
+        'mrcjkb/rustaceanvim',
+        version = '^4', -- Recommended
+        ft = { 'rust' },
+    }
 end)
