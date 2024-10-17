@@ -72,10 +72,15 @@ _dotnet_zsh_complete()
 compdef _dotnet_zsh_complete dotnet
 
 # clean apt/old package stuff
-alias purgeApt="sudo apt clean"
+alias purgeApt="sudo apt autoremove && sudo apt clean"
 alias purgeDocker="docker system prune -af --volumes"
+alias purgeJetbrainsCache="sudo rm -rf ~/.cache/JetBrains/*"
+
+
+# Get storage info
 alias showFreeSpace="df -Th | grep -v fs"
 alias showLargeFiles="sudo find / -size +1G"
+alias showFolderBreakdown="sudo du -x -h -d1 /"
 
 # copy tracking replay logs to local
 alias switchToDevEks="kubectl config set-context arn:aws:eks:us-east-2:648679051309:cluster/dev-shareasale-us-east-2-cluster"
@@ -196,3 +201,5 @@ alias tracking="cd ~/solutions/tracking"
 alias shopify="cd /home/nicholas.judge/solutions/shopify/shopifyapp"
 alias analyticsApi="cd /home/nicholas.judge/solutions/shopify/analyticsapi"
 
+
+if [ -e /home/nicholas.judge/.nix-profile/etc/profile.d/nix.sh ]; then . /home/nicholas.judge/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

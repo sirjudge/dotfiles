@@ -1,4 +1,3 @@
-vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 -- neo-test suite
@@ -61,3 +60,4 @@ vim.keymap.set("n", "<C-j>", "<cmd>lua require('tmux').move_bottom()<CR>")
 vim.keymap.set("n", "<C-k>", "<cmd>lua require('tmux').move_top()<CR>")
 vim.keymap.set("n", "<C-l>", "<cmd>lua require('tmux').move_right()<CR>")
 vim.keymap.set("n", "<C-\\>", "<cmd>lua require('tmux').toggle_zoom()<CR>")
+

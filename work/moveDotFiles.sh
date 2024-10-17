@@ -18,13 +18,10 @@ if [ -d "/nvim" ]; then
     rm -r nvim
     mkdir nvim
 else
-    mkdir nvim
+    cp -r ~/.config/nvim .
 fi
 
-echo "copying nvim files in to repo"
-cp -r ~/.config/nvim/lua nvim/.
-cp -r ~/.config/nvim/after nvim/.
-cp ~/.config/nvim/init.lua nvim/.
+
 
 # i3
 if [ -d "/i3" ]; then

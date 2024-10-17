@@ -1,1 +1,1 @@
-require("nico")
+require("config")

@@ -1,3 +1,6 @@
+--opts.rocks.hererocks = false
+
+-- options
 vim.opt.guicursor = ""
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -20,6 +23,8 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
 
+-- set zsh as terminal
 vim.g.terminal_emulator='zsh'
 vim.api.nvim_set_var('terminal_emulator','zsh')
+
 
