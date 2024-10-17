@@ -3,7 +3,7 @@ return {
         {
             'VonHeikemen/lsp-zero.nvim',
             branch = 'v4.x',
-            lazy = true,
+            --lazy = true,
             config = false,
         },
 
@@ -19,9 +19,23 @@ return {
                         {name = 'nvim_lsp'},
                     },
                     mapping = cmp.mapping.preset.insert({
+                      -- old map
+                      --  ['<C-Space>'] = cmp.mapping.complete(),
+                      --  ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+                      --  ['<C-d>'] = cmp.mapping.scroll_docs(4),
+                        -- `Enter` key to confirm completion
+                        ['<CR>'] = cmp.mapping.confirm({select = false}),
+                        -- Ctrl+Space to trigger completion menu
                         ['<C-Space>'] = cmp.mapping.complete(),
-                        ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-                        ['<C-d>'] = cmp.mapping.scroll_docs(4),
+                        -- Navigate between snippet placeholder
+                        --['<C-f>'] = cmp_action.luasnip_jump_forward(),
+                       -- ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+                        -- remap tab and shift tab because copilot should use those
+                        ['<Tab>'] = nil,
+                        ['<S-Tab>'] = nil,
+                        -- Navigate between cmp items
+                        ['<C-j>'] = cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select}),
+                        ['<C-k>'] = cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select})
                     }),
                     snippet = {
                         expand = function(args)
