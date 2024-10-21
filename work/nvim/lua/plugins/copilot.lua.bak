@@ -1,0 +1,99 @@
+return {
+    {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        --event = "InsertEnter",
+        config = function()
+            require('copilot').setup({
+                panel = {
+                    enabled = true,
+                    auto_refresh = false,
+                    keymap = {
+                        jump_prev = "[[",
+                        jump_next = "]]",
+                        accept = "<CR>",
+                        refresh = "gr",
+                        open = "<M-CR>" },
+                    layout = {
+                        position = "bottom", -- | top | left | right
+                        ratio = 0.4
+                    },
+                },
+                suggestion = {
+                    enabled = true,
+                    auto_trigger = false,
+                    hide_during_completion = true,
+                    debounce = 75,
+                    keymap = {
+                        accept = "<M-l>",
+                        accept_word = false,
+                        accept_line = false,
+                        next = "<M-]>",
+                        prev = "<M-[>",
+                        dismiss = "<C-]>",
+                    },
+                },
+                filetypes = {
+                    yaml = false,
+                    markdown = false,
+                    help = false,
+                    gitcommit = false,
+                    gitrebase = false,
+                    hgcommit = false,
+                    svn = false,
+                    cvs = false,
+                    ["."] = false,
+                },
+                copilot_node_command = 'node', -- Node.js version must be > 18.x
+                server_opts_overrides = {},
+            })            
+            --vim.api.nvim_set_keymap('i','<Tab>','copilot#Accept("<CR>")', {expr = true, silent=true})
+            --vim.api.nvim_set_keymap('i','<S-Tab>','copilot#Accept("<CR>")', {expr = true, silent=true})
+            --vim.g.copilot_filetypes = { VimspectorPrompt = false }
+        end
+    },
+    {
+        "CopilotC-Nvim/CopilotChat.nvim",
+        branch = "canary",
+        dependencies = {
+            { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+            { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+        },
+        --build = "make tiktoken", -- Only on MacOS or Linux
+        opts = {
+            debug = false, -- Enable debug logging
+            model = 'gpt-4o', -- GPT model to use, 'gpt-3.5-turbo', 'gpt-4', or 'gpt-4o'
+            temperature = 0.1, -- GPT temperature
+
+            question_header = '## User ', -- Header to use for user questions
+            answer_header = '## Copilot ', -- Header to use for AI answers
+            error_header = '## Error ', -- Header to use for errors
+            separator = '───', -- Separator to use in chat
+            window = {
+                layout = 'float',
+                relative = 'cursor',
+                width = 1,
+                height = 0.4,
+                row = 1
+            },
+            show_folds = true, -- Shows folds for sections in chat
+            show_help = true, -- Shows help message as virtual lines when waiting for user input
+            auto_follow_cursor = true, -- Auto-follow cursor in chat
+            auto_insert_mode = false, -- Automatically enter insert mode when opening window and on new prompt
+            insert_at_end = false, -- Move cursor to end of buffer when inserting text
+            clear_chat_on_new_prompt = false, -- Clears chat on every new prompt
+            highlight_selection = true, -- Highlight selection in the source buffer when in the chat window
+            history_path = vim.fn.stdpath('data') .. '/copilotchat_history', -- Default path to stored history
+        }
+    },
+    config = function()
+        require("CopilotChat").setup()
+        require("CopilotChat.integrations.cmp").setup()
+        --vim.api.nvim_set_keymap('n', '<leader>p', ':CopilotChatOpen<CR>', { noremap = true, silent = true })
+
+        vim.keymap.set({ 'n', 'v' }, '<leader>aa', chat.toggle, { desc = 'AI Toggle' })
+        vim.keymap.set({ 'n', 'v' }, '<leader>ax', chat.reset, { desc = 'AI Reset' })
+        vim.keymap.set({ 'n', 'v' }, '<leader>ah', pick(actions.help_actions), { desc = 'AI Help Actions' })
+        vim.keymap.set({ 'n', 'v' }, '<leader>ap', pick(actions.prompt_actions), { desc = 'AI Prompt Actions' })
+    end
+} 

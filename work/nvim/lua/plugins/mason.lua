@@ -11,8 +11,8 @@ return {
                 "stylua",
                 "shfmt",
                 'omnisharp',
-                'ts_ls',
                 'gopls',
+                'lua-language-server'
             },
         },
         ---@param opts MasonSettings | {ensure_installed: string[]}
