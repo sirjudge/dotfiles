@@ -1,5 +1,4 @@
 
-
 # declare two variables
 action=""
 setup=""
@@ -19,6 +18,8 @@ done
 # if setup is true move to accept user input
 if [ "$setup" = "true" ]; then 
     echo "enabling set up"
+    $action="on"
+
     echo "select a room"
     echo "1) Bedroom"
     echo "2) Gaming"
@@ -32,20 +33,13 @@ if [ "$setup" = "true" ]; then
             echo "1) Dual wide"
             echo "2) Gaming"
             read monitorType
-            if ["$monitorType" = "1"]; then
-                    echo "setting dual wide"
-
-                    xrandr --output eDP-1-1 --mode 1920x1080 --rate 144.00 --rotate normal \
-                        --output DP-0.1 --mode 2560x1080 --left-of eDP-1-1 \
-                        --output DP-0.2 --mode 2560x1080 --below DP-0.1 --verbose
-            exit 1
-            elif ["$monitorType" = "2"]; then
-                    echo "setting gaming"
-                    xrandr --output eDP-1-1 --mode 1920x1080 --rate 144.00 --pos 0x0 --primary \
-                        --output DP-0 --mode 2560x1440 --pos 1920x0 \
-                        --output HDMI-0 --mode 1920x1080 --rate 239.76 --pos 4480x0 
+            if ["$monitorType" -eq "1"]; then
+                echo "setting dual wide"
+                $action=officeGaming
+            elif ["$monitorType" -eq "2"]; then
+                echo "setting gaming"
+                $action=officeGaming
             fi
-            exit 1
             ;;
         *) 
             echo "did not recognize room"       
