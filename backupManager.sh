@@ -18,16 +18,21 @@ if [ "$setup" = "office" ]; then
     if [ "$action" = "restore" ]; then
         if [ "$clean" = "true" ]; then
             echo "cleaning existing files and folders"
-            #TODO: remove existing config sections
+            rm -r ~/.config/powerline
+            rm -r ~/.config/rofi
+            rm -r ~/.icons
+            rm -r ~/.fonts
+            rm -r ~/.themes
+            rm ~/.zshrc
         fi
         echo "restore office setup"
     elif [ "$action" = "backup" ]; then
+        # delete current work folder
         if [ "$clean" = "true" ]; then
             echo "cleaning existing files and folders"
             rm -r work/*
         fi
-
-
+        # Remake new directory folders
         if [ ! -d "work" ]; then
             mkdir work
             mkdir work/tmux
@@ -51,7 +56,12 @@ elif [ "$setup" = "personal" ]; then
     if [ "$action" = "restore" ]; then
         if [ "$clean" = "true" ]; then
             echo "cleaning existing files and folders"
-            rm -r personal/*
+            rm -r ~/.config/i3
+            rm -r ~/.config/nitrogen
+            rm -r ~/.config/eww
+            rm -r ~/.config/rofi
+            rm -r ~/.config/polybar
+            rm -r ~/.config/i3status
         fi
         echo "copying personal setup"
     elif [ "$action" = "backup" ]; then
