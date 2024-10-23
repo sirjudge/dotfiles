@@ -23,9 +23,10 @@ zstyle ':omz:update' frequency 1
 
 # Configure Go environment
 # GOPATH MUST BE OUTSIDE OF GOROOT directory!!!
-export GOROOT=/usr/lib/go
+#export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export GOROOT=/usr/local/go
 export GOPATH=/home/nicholas.judge/goPackages
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export PATH=$PATH:/usr/local/go/bin
 
 # Configure Rust
 # Cargo's bin directory ($HOME/.cargo/bin)
