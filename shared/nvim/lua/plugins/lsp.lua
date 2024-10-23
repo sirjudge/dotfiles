@@ -3,10 +3,11 @@ return {
         {
             'VonHeikemen/lsp-zero.nvim',
             branch = 'v4.x',
-            --lazy = true,
             config = false,
         },
-
+        {
+            'ms-jpq/coq_nvim',
+        },
         -- Autocompletion
         {
             'hrsh7th/nvim-cmp',
@@ -45,7 +46,6 @@ return {
                 })
             end
         },
-
         -- LSP
         {
             'neovim/nvim-lspconfig',
@@ -61,6 +61,7 @@ return {
             end,
             config = function()
                 local lsp_defaults = require('lspconfig').util.default_config
+                local coq = require('coq')
 
                 -- Add cmp_nvim_lsp capabilities settings to lspconfig
                 -- This should be executed before you configure any language server
@@ -76,7 +77,6 @@ return {
                     desc = 'LSP actions',
                     callback = function(event)
                         local opts = {buffer = event.buf}
-
                         vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
                         vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
                         vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
@@ -92,7 +92,7 @@ return {
 
                 -- These are just examples. Replace them with the language
                 -- servers you have installed in your system
-                require('lspconfig').gopls.setup({
+                require('lspconfig').gopls.setup(coq.lsp_ensure_capabilities({
                     cmd = {"gopls", "serve"},
                     settings = {
                         gopls = {
@@ -100,19 +100,54 @@ return {
                             staticcheck = true
                         }
                     }
-                })
+                }))
+            
+                require'lspconfig'.lua_ls.setup(coq.lsp_ensure_capabilities({
+                    --require'lspconfig'.lua_ls.setup {
+                    on_init = function(client)
+                        if client.workspace_folders then
+                            local path = client.workspace_folders[1].name
+                            if vim.uv.fs_stat(path..'/.luarc.json') or vim.uv.fs_stat(path..'/.luarc.jsonc') then
+                                return
+                            end
+                        end
 
+                        client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+                            runtime = {
+                                -- Tell the language server which version of Lua you're using
+                                -- (most likely LuaJIT in the case of Neovim)
+                                version = 'LuaJIT'
+                            },
+                            -- Make the server aware of Neovim runtime files
+                            workspace = {
+                                checkThirdParty = false,
+                                library = {
+                                    vim.env.VIMRUNTIME
+                                    -- Depending on the usage, you might want to add additional paths here.
+                                    -- "${3rd}/luv/library"
+                                    -- "${3rd}/busted/library",
+                                }
+                                -- or pull in all of 'runtimepath'. NOTE: this is a lot slower and will cause issues when working on your own configuration (see https://github.com/neovim/nvim-lspconfig/issues/3189)
+                                -- library = vim.api.nvim_get_runtime_file("", true)
+                            }
+                        })
+                    end,
+                    settings = {
+                        Lua = {}
+                    }
+                }))
+              
                 require('lspconfig').omnisharp.setup({
                     cmd = { "dotnet", "/home/nicholas.judge/.local/share/nvim/mason/packages/omnisharp/libexec/OmniSharp.dll"},
                     settings = {
                         FormattingOptions = {
                             -- Enables support for reading code style, naming convention and analyzer
                             -- settings from .editorconfig.
-                            EnableEditorConfigSupport = false,
+                            EnableEditorConfigSupport = true,
 
                             -- Specifies whether 'using' directives should be grouped and sorted during
                             -- document formatting.
-                            OrganizeImports = nil,
+                            OrganizeImports = true,
                         },
                         MsBuild = {
                             -- If true, MSBuild project system will only load projects for files that
@@ -121,7 +156,7 @@ return {
                             -- for projects that are relevant to code that is being edited. With this
                             -- setting enabled OmniSharp may load fewer projects and may thus display
                             -- incomplete reference lists for symbols.
-                            LoadProjectsOnDemand = nil,
+                            LoadProjectsOnDemand = true,
                         },
                         RoslynExtensionsOptions = {
                             -- Enables support for roslyn analyzers, code fixes and rulesets.
@@ -140,7 +175,7 @@ return {
                         Sdk = {
                             -- Specifies whether to include preview versions of the .NET SDK when
                             -- determining which version to use for project loading.
-                            IncludePrereleases = true,
+                            IncludePrereleases = false,
                         },
                     },
                 })
