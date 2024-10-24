@@ -47,10 +47,10 @@ dotnet_style_qualification_for_method = false:suggestion
 dotnet_style_qualification_for_event = false:suggestion
 
 # Types: use keywords instead of BCL types, and permit var only when the type is clear
-csharp_style_var_for_built_in_types = true
-csharp_style_var_when_type_is_apparent = true
+csharp_style_var_for_built_in_types = false
+csharp_style_var_when_type_is_apparent = false
 #false:suggestion
-csharp_style_var_elsewhere = true 
+csharp_style_var_elsewhere = false
 #true:suggestion
 dotnet_style_predefined_type_for_locals_parameters_members = true
 #true:suggestion
@@ -157,7 +157,7 @@ csharp_space_between_parentheses = false
 csharp_space_between_square_brackets = false
 
 # License header
-file_header_template = Licensed to the .NET Foundation under one or more agreements.\nThe .NET Foundation licenses this file to you under the MIT license.
+#file_header_template = Licensed to the .NET Foundation under one or more agreements.\nThe .NET Foundation licenses this file to you under the MIT license.
 
 # C++ Files
 [*.{cpp,h,in}]

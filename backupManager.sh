@@ -1,13 +1,15 @@
 #!/bin/bash
-while getopts 'a:s:h:c' flag; do
+while getopts 'a:s:h:c:so' flag; do
     case "${flag}" in
         a) action="${OPTARG}" ;;
         s) setup="${OPTARG}" ;;
         c) clean="${OPTARG}" ;;
+        so) sourceBackup="${OPTARG}" ;;
         h) echo "a => [a]ction (restore/backup)\n"\
             "s => [s]etup to work on (office/personal)\n"\
             "c => [c]lean existing files and folders\n"\
-            "example Usage: Monitor.sh -a backup -s office -c true;"
+            "so => [so]urce list backup\n"\
+            "example Usage: Monitor.sh -a backup -s office -c true"
             exit 1 ;;
     esac
 done
@@ -30,7 +32,7 @@ if [ "$setup" = "office" ]; then
         # delete current work folder
         if [ "$clean" = "true" ]; then
             echo "cleaning existing files and folders"
-            rm -r work/*
+            rm -rf work/*
         fi
         # Remake new directory folders
         if [ ! -d "work" ]; then
@@ -44,12 +46,9 @@ if [ "$setup" = "office" ]; then
         cp -r ~/.config/powerline work/powerline
         cp -r ~/.config/rofi work/rofi
         cp -r ~/.icons work/icons
-        cp -r ~/.fonts work/fonts
-        cp -r ~/.themes work/themes
+        cp -r ~/.fonts/ work/
+        cp -r ~/.themes/ work/
         cp -r ~/.zshrc work/
-        # copy currently installed packages and sources
-        dpkg --get-selections > work/Package.list
-        sudo cp -R /etc/apt/sources.list* work/
     fi
 elif [ "$setup" = "personal" ]; then
     # copy or back up personal files
@@ -82,16 +81,23 @@ elif [ "$setup" = "personal" ]; then
 fi
 
 # Shared folders to restore
+if [ "$sourceBackup" = "true" ]; then
+    dpkg --get-selections > work/Package.list
+    sudo cp -R /etc/apt/sources.list* work/
+fi
+
 if [ "$clean" = "true" ]; then
     echo "cleaning existing files and folders"
     if [ "$action" = "copy" ]; then
         rm -r ~/.config/nvim
         rm -r ~/.config/tmux
         rm -r ~/.config/kitty
+        rm ~/solutions/.editorconfig
     elif [ "$action" = "backup" ]; then
         rm -r shared/nvim
         rm -r shared/tmux
         rm -r shared/kitty
+        rm shared/.editorconfig
     fi
 fi
 
@@ -100,6 +106,7 @@ if [ "$action" = "restore" ]; then
     cp -r shared/nvim ~/.config/
     cp -r shared/tmux ~/.config/
     cp -r shared/kitty ~/.config/
+    cp -r shared/.editorconfig ~/solutions/
 elif [ "$action" = "backup" ]; then
     echo "backing up shared files"
     cp -r ~/.config/nvim ~/shared/
@@ -108,4 +115,5 @@ elif [ "$action" = "backup" ]; then
     fi
     cp -r ~/.config/tmux/tmux.conf shared/tmux/
     cp -r ~/.config/kitty shared/
+    cp -r ~/solutions/.editorconfig shared/
 fi
