@@ -91,6 +91,7 @@ alias copyReplayLogs="kubectl cp admin-transfer-files:app/logs ~/solutions/track
 # remap dotnet commands to shorter ones
 alias db="dotnet build"
 alias dr="dotnet run"
+alias drp="dotnet run --project"
 alias dt="dotnet test"
 alias dc="dotnet clean"
 alias dp="dotnet publish"
@@ -145,7 +146,7 @@ alias gpull="git pull"
 alias gpu="git pull"
 alias gadd="git add ."
 alias ga="git add ."
-alias gcommit="git commit -m "
+alias gct="git commit -m "
 
 
 # copilot shortcuts
