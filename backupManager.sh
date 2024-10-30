@@ -74,6 +74,7 @@ elif [ "$setup" = "personal" ]; then
         cp -r ~/.config/picom personal/
         cp -r ~/.fonts personal/
         cp -r ~/Tools/scripts personal/
+        cp -r ~/.config/i3status-rust personal/
     fi
 fi
 
