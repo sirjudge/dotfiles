@@ -109,10 +109,10 @@ if [ "$action" = "restore" ]; then
     cp -r shared/.editorconfig ~/solutions/
 elif [ "$action" = "backup" ]; then
     echo "backing up shared files"
-    cp -r ~/.config/nvim ~/shared/
     if [ ! -d "shared/tmux" ]; then
         mkdir shared/tmux
     fi
+    cp -r ~/.config/nvim ~/shared/
     cp -r ~/.config/tmux/tmux.conf shared/tmux/
     cp -r ~/.config/kitty shared/
     cp -r ~/solutions/.editorconfig shared/
