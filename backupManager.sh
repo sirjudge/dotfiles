@@ -24,7 +24,6 @@ if [ "$setup" = "office" ]; then
             rm -r ~/.config/rofi
             rm -r ~/.icons
             rm -r ~/.fonts
-            rm -r ~/.themes
             rm ~/.zshrc
         fi
         echo "restore office setup"
@@ -57,10 +56,9 @@ elif [ "$setup" = "personal" ]; then
             echo "cleaning existing files and folders"
             rm -r ~/.config/i3
             rm -r ~/.config/nitrogen
-            rm -r ~/.config/eww
             rm -r ~/.config/rofi
             rm -r ~/.config/polybar
-            rm -r ~/.config/i3status
+            rm -r ~/.config/picom
         fi
         echo "copying personal setup"
     elif [ "$action" = "backup" ]; then
@@ -71,10 +69,9 @@ elif [ "$setup" = "personal" ]; then
         echo "backing up personal setup"
         cp -r ~/.config/i3 personal/
         cp -r ~/.config/nitrogen personal/
-        cp -r ~/.config/eww personal/
         cp -r ~/.config/rofi personal/
         cp -r ~/.config/polybar personal/
-        cp -r ~/.config/i3status personal/
+        cp -r ~/.config/picom personal/
         cp -r ~/.fonts personal/
         cp -r ~/Tools/scripts personal/
     fi

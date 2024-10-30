@@ -4,9 +4,40 @@ set $mod Mod4
 # open terminal
 bindsym $mod+Return exec ~/.local/kitty.app/bin/kitty
 
-#========#
-#= Gaps =# 
-#========#
+#=========#
+#= Colors #
+#=========#
+# see the following for latest version
+# https://github.com/rose-pine/i3/blob/main/themes/rose-pine-moon.theme
+# set primary Rosé Pine Moon colorscheme colors
+set $base           #232136
+set $surface        #2a273f
+set $overlay        #393552
+set $muted          #6e6a86
+set $subtle         #908caa
+set $text           #e0def4
+set $love           #eb6f92
+set $gold           #f6c177
+set $rose           #ea9a97
+set $pine           #3e8fb0
+set $foam           #9ccfd8
+set $iris           #c4a7e7
+set $highlightlow   #2a283e
+set $highlightmed   #44415a
+set $highlighthigh  #56526e
+
+# Teming border and Windows --------------
+# target                 title     bg    text   indicator  border
+client.focused           $rose     $base $text  $rose      $rose
+client.focused_inactive  $text     $base $text  $subtle    $surface
+client.unfocused         $text     $base $text  $overlay   $overlay
+client.urgent            $text     $base $text  $love      $love
+client.placeholder       $base     $base $text  $overlay   $overlay
+client.background        $base
+
+#====================#
+#= Gaps and Desktop =# 
+#====================#
 # Configure 5px of space between windows and to the screen edges.
 gaps inner 5px
 
@@ -14,12 +45,15 @@ gaps inner 5px
 # for a total gap of 10px to the screen edges, and 5px between windows.
 gaps outer 5px
 
-# Overwrite gaps to 0, I need all the space I can get on workspace 3.
-#workspace 3 gaps inner 0
-#workspace 3 gaps outer 0
+# start Compositor and set background
+exec --no-startup-id picom 
+exec --no-startup-id nitrogen --set-zoom-fill ~/Pictures/hypeBeast.png
 
-# Only enable outer gaps when there is exactly one window or split container on the workspace.
-#smart_gaps inverse_outer
+#===========#
+#= Polybar =#
+#===========#
+
+exec --no-startup-id /home/nico/.config/polybar/launch.sh
 
 #========#
 #= Rofi =#
@@ -32,12 +66,14 @@ bindsym $mod+Shift+d exec /home/nico/Documents/applications/rofi-network-manager
 #= Screenshot =#
 #==============#
 # BUG: for some reason this is not working
+# mod+x and mod+Shift+x keybinds are find but script now running? also when it was 
+# Scrot it still wasn't working. feels bad man. . . 
 bindsym $mod+x exec --no-startup-id /home/nico/.config/i3/screenshotSave.sh 
 bindsym $mod+Shift+x exec --no-startup-id /home/nico/.config/i3/screenshotSelect.sh
 
-#================#
-#= System modes =#
-#================#
+#===============#
+#= System modes =
+#===============#
 set $Locker $HOME/.config/i3/lock.sh
 set $mode_system System (l) lock, (e) logout,(h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
@@ -86,10 +122,6 @@ exec --no-startup-id blueman-applet
 #======================#
 # Background services =#
 #======================#
-# start Compositor and set background
-exec --no-startup-id compton
-exec --no-startup-id nitrogen --set-zoom-fill ~/Pictures/hypeBeast.png
-
 # start up notification manager
 exec --no-startup-id dunst
 
@@ -241,8 +273,3 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 bindsym $mod+r mode "resize"
-
-#===========#
-#= Polybar =#
-#===========#
-exec_always --no-startup-id ~/.config/polybar/launch.sh & 
