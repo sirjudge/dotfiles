@@ -1,30 +1,43 @@
 # Set mod key
 set $mod Mod4
 
-#======================#
-# Application Hotkeys =#
-#================#=====#
-bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Shift+x exec --no-startup-id flatpak run dev.goats.xivlauncher
+# open terminal
+bindsym $mod+Return exec ~/.local/kitty.app/bin/kitty
 
-# application launcher hotkeys
+#========#
+#= Gaps =# 
+#========#
+# Configure 5px of space between windows and to the screen edges.
+gaps inner 5px
+
+# Configure an additional 5px of extra space to the screen edges,
+# for a total gap of 10px to the screen edges, and 5px between windows.
+gaps outer 5px
+
+# Overwrite gaps to 0, I need all the space I can get on workspace 3.
+#workspace 3 gaps inner 0
+#workspace 3 gaps outer 0
+
+# Only enable outer gaps when there is exactly one window or split container on the workspace.
+#smart_gaps inverse_outer
+
+#========#
+#= Rofi =#
+#========#
 bindsym $mod+d exec rofi -modi combi -opacity 80 -show drun -fake-transparency
 bindsym $mod+g exec rofi -show ssh -opacity 10
 bindsym $mod+Shift+d exec /home/nico/Documents/applications/rofi-network-manager/rofi-network-manager.sh
 
 #==============#
-# misc Hotkey =#
+#= Screenshot =#
 #==============#
-# Set Screenshot bindings
-#bindsym $mod+p 
-#bindsym $mod+p maim ~/Pictures/Screenshots/$(date -u +"%Y-%m-%dT%H:%M:%S%Z")1.png
-#scrot -s --file '/home/nico/Pictures/Screenshots/%Y-%m-%d_$wx$h_scrot.png'
-#exec --no-startup-id maim ~/screenshots/$(date -u +"%Y-%m-%dT%H:%M:%S%Z").png
+# BUG: for some reason this is not working
+bindsym $mod+x exec --no-startup-id /home/nico/.config/i3/screenshotSave.sh 
+bindsym $mod+Shift+x exec --no-startup-id /home/nico/.config/i3/screenshotSelect.sh
 
-#exec "scrot -s --file '/home/nico/Pictures/Screenshots/%Y-%m-%d_$wx$h_scrot.png'"
-#bindsym Print+Shift exec scrot -s --file '/home/nico/Pictures/Screenshots/%Y-%m-%d_$wx$h_scrot.png' -d 5
-
-# keyboard shortcuts for quickly doing stuff
+#================#
+#= System modes =#
+#================#
 set $Locker $HOME/.config/i3/lock.sh
 set $mode_system System (l) lock, (e) logout,(h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
@@ -38,7 +51,9 @@ mode "$mode_system" {
 }
 bindsym $mod+Shift+p mode "$mode_system
 
-# Rebind Media keys and bind an update to refresh status inside i3
+#==============#
+#= Media Keys =#
+#==============#
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
@@ -70,7 +85,7 @@ exec --no-startup-id blueman-applet
 
 #======================#
 # Background services =#
-#================#=====#
+#======================#
 # start Compositor and set background
 exec --no-startup-id compton
 exec --no-startup-id nitrogen --set-zoom-fill ~/Pictures/hypeBeast.png
@@ -85,13 +100,9 @@ exec xset s noblank
 exec xset dpms force suspend
 exec xset dpms force on
 
-# start up notification manager
-exec --no-startup-id dunst
-
 #==================#
 #= Config options =#
 #==================#
-
 #stop focus following the mouse
 focus_follows_mouse no
 
@@ -105,9 +116,9 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-#==============#
-#= i3 hotkeys =#
-#==============#
+#======================#
+#= Window Interaction =#
+#======================#
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -158,8 +169,9 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
+#===================#
+#= Workspace setup =#
+#===================#
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -195,6 +207,9 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
+#=================#
+#= Reload config =#
+#=================#
 # reload the configuration file
 bindsym $mod+Shift+c reload
 
@@ -204,14 +219,11 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
+#==========#
+#= resize =#
+#==========#
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
         bindsym j resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
         bindsym l resize shrink height 10 px or 10 ppt
@@ -228,24 +240,9 @@ mode "resize" {
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
-
 bindsym $mod+r mode "resize"
 
-#========================#
-#= Configure status bar =#
-#========================#
-
-bar {
-	status_command i3status
-    position top
-	workspace_buttons yes
-    separator_symbol 
-    colors  {
-		background #0F0F0F
-			statusline #D5D5D5
-			focused_workspace #F5F5FF #7FB256
-			active_workspace #E5E5E5 #5697B2
-			inactive_workspace #E5E5E5 #5697B2
-			urgent_workspace #E5E5E5 #BC9B54
-	}
-}
+#===========#
+#= Polybar =#
+#===========#
+exec_always --no-startup-id ~/.config/polybar/launch.sh & 

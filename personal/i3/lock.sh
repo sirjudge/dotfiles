@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#BUG: i3lock isn't locking all three monitors
+
 icon="$HOME/Pictures/hypeBeast.png"
 tmpbg='/tmp/screen.png'
 
