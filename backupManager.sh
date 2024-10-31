@@ -59,6 +59,7 @@ elif [ "$setup" = "personal" ]; then
             rm -r ~/.config/rofi
             rm -r ~/.config/polybar
             rm -r ~/.config/picom
+            rm -r ~/.config/macchina
         fi
         echo "copying personal setup"
     elif [ "$action" = "backup" ]; then
@@ -75,6 +76,7 @@ elif [ "$setup" = "personal" ]; then
         cp -r ~/.fonts personal/
         cp -r ~/Tools/scripts personal/
         cp -r ~/.config/i3status-rust personal/
+        cp -r ~/.config/macchina personal/
     fi
 fi
 
