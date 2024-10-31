@@ -4,6 +4,11 @@ set $mod Mod4
 # open terminal
 bindsym $mod+Return exec ~/.local/kitty.app/bin/kitty
 
+# ===========#
+# = borders =#
+# ===========#
+for_window [class="^.*"] border pixel 0
+exec_always --no-startup-id /home/nico/Tools/xborder/xborders & 
 #=========#
 #= Colors #
 #=========#
@@ -26,7 +31,6 @@ set $highlightlow   #2a283e
 set $highlightmed   #44415a
 set $highlighthigh  #56526e
 
-# Teming border and Windows --------------
 # target                 title     bg    text   indicator  border
 client.focused           $rose     $base $text  $rose      $rose
 client.focused_inactive  $text     $base $text  $subtle    $surface
@@ -269,11 +273,10 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-#===========#
-#= Polybar =#
-#===========#
-# exec_always --no-startup-id /home/nico/.config/polybar/launch.sh
 
+#===============#
+#= i3status-rs =#
+#===============#
 bar {
     font pango:DejaVu Sans Mono, FontAwesome 12
     position top
