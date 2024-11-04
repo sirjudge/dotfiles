@@ -1,16 +1,31 @@
 icons_format = "{icon}"
 
 [theme]
-theme = "solarized-dark"
-[theme.overrides]
-idle_bg = "#123456"
-idle_fg = "#abcdef"
+theme = "ctp-macchiato"
+
+#[theme.overrides]
+#idle_bg = "#123456"
+#idle_fg = "#abcdef"
 
 [icons]
 icons = "awesome4"
-[icons.overrides]
-bat = ["|E|", "|_|", "|=|", "|F|"]
-bat_charging = "|^| "
+
+[[block]]
+block = "net"
+format = " $icon {$signal_strength $ssid $frequency|Wired connection} via $device "
+
+[[block]]
+block = "battery"
+format = " $icon $percentage"
+
+[[block]]
+block = "nvidia_gpu"
+
+[[block]]
+block = "packages"
+
+[[block]]
+block = "uptime"
 
 [[block]]
 block = "cpu"
@@ -35,6 +50,7 @@ format_alt = " $icon_swap $swap_used_percents.eng(w:2) "
 
 [[block]]
 block = "sound"
+
 [[block.click]]
 button = "left"
 cmd = "pavucontrol"

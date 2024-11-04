@@ -1,11 +1,14 @@
 # Beryllium
-
 spacing         = 3
-hide_ascii      = true
+hide_ascii      = false
 key_color       = "#7067CF"
 separator       = ""
 
+[custom_ascii]
+color           = "#7067CF"
+path = "~/.config/macchina/ascii.txt"
 [box]
+title           = "Nico"
 border          = "plain"
 visible         = true
 
@@ -22,6 +25,3 @@ visible         = true
 [box.inner_margin]
 x               = 2
 y               = 1
-
-[custom_ascii]
-color           = "#FF7001"

@@ -1,18 +1,33 @@
 #!/bin/bash
-while getopts 'a:s:h:c:so' flag; do
+NEWLINE=$'\n'
+while getopts 'a:s:hc:so' flag; do
     case "${flag}" in
         a) action="${OPTARG}" ;;
         s) setup="${OPTARG}" ;;
         c) clean="${OPTARG}" ;;
         so) sourceBackup="${OPTARG}" ;;
-        h) echo "a => [a]ction (restore/backup)\n"\
-            "s => [s]etup to work on (office/personal)\n"\
-            "c => [c]lean existing files and folders\n"\
-            "so => [so]urce list backup\n"\
-            "example Usage: Monitor.sh -a backup -s office -c true"
+        h) echo\
+            "a => [a]ction (restore/backup)${NEWLINE}"\
+            "s => [s]etup to work on (office/personal)${NEWLINE}"\
+            "c => [c]lean existing files and folders${NEWLINE}"\
+            "so => [so]urce list backup${NEWLINE}"\
+            "example Usage: Monitor.sh -a  backup -s office -c true"
             exit 1 ;;
     esac
 done
+
+# Validation
+if [ "$setup" = "" ]; then
+    echo "Please provide a setup to work on using the -s flag: '-s {office/personal}'${NEWLINE}"
+    exit 1
+fi
+
+if [ "$action" = "" ]; then
+    echo "Please provide an action to perform using the -a flag: '-a {restore/backup}'${NEWLINE}"
+    exit 1
+fi
+
+
 
 if [ "$setup" = "office" ]; then
     # Clean existing files and folders
@@ -42,12 +57,12 @@ if [ "$setup" = "office" ]; then
         fi
 
         echo "backing up office setup"
-        cp -r ~/.config/powerline work/powerline
-        cp -r ~/.config/rofi work/rofi
-        cp -r ~/.icons work/icons
-        cp -r ~/.fonts/ work/
-        cp -r ~/.themes/ work/
-        cp -r ~/.zshrc work/
+        rsync -a ~/.config/powerline work/powerline
+        rsync -a ~/.config/rofi work/rofi
+        rsync -a ~/.icons work/icons
+        rsync -a ~/.fonts/ work/
+        rsync -a ~/.themes/ work/
+        rsync -a ~/.zshrc work/
     fi
 elif [ "$setup" = "personal" ]; then
     # copy or back up personal files
@@ -68,17 +83,18 @@ elif [ "$setup" = "personal" ]; then
             rm -r personal/*
         fi
         echo "backing up personal setup"
-        cp -r ~/.config/i3 personal/
-        cp -r ~/.config/nitrogen personal/
-        cp -r ~/.config/rofi personal/
-        cp -r ~/.config/polybar personal/
-        cp -r ~/.config/picom personal/
-        cp -r ~/.fonts personal/
-        cp -r ~/Tools/scripts personal/
-        cp -r ~/.config/i3status-rust personal/
-        cp -r ~/.config/macchina personal/
+        rsync -a  ~/.config/i3 personal/
+        rsync -a ~/.config/nitrogen personal/
+        rsync -a ~/.config/rofi personal/
+        rsync -a ~/.config/polybar personal/
+        rsync -a ~/.config/picom personal/
+        rsync -a  ~/.fonts personal/
+        rsync -a ~/Tools/scripts personal/
+        rsync -a ~/.config/i3status-rust personal/
+        rsync -a ~/.config/macchina personal/
     fi
 fi
+
 
 # Shared folders to restore
 if [ "$sourceBackup" = "true" ]; then
@@ -103,17 +119,17 @@ fi
 
 if [ "$action" = "restore" ]; then
     echo "restoring shared files"
-    cp -r shared/nvim ~/.config/
-    cp -r shared/tmux ~/.config/
-    cp -r shared/kitty ~/.config/
-    cp -r shared/.editorconfig ~/solutions/
+    rsync -a shared/nvim ~/.config/
+    rsync -a shared/tmux ~/.config/
+    rsync -a shared/kitty ~/.config/
+    rsync -a shared/.editorconfig ~/solutions/
 elif [ "$action" = "backup" ]; then
     echo "backing up shared files"
     if [ ! -d "shared/tmux" ]; then
         mkdir shared/tmux
     fi
-    cp -r ~/.config/nvim ~/shared/
-    cp -r ~/.config/tmux/tmux.conf shared/tmux/
-    cp -r ~/.config/kitty shared/
-    cp -r ~/solutions/.editorconfig shared/
+    rsync -a ~/.config/nvim ~/shared/
+    rsync -a ~/.config/tmux/tmux.conf shared/tmux/
+    rsync -a ~/.config/kitty shared/
+    rsync -a ~/solutions/.editorconfig shared/
 fi

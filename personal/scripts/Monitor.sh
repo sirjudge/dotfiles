@@ -89,6 +89,3 @@ sleep 5
 
 # restore wallpapers
 nitrogen --set-zoom-fill ~/Pictures/hypeBeast.png  
-
-# restart polybar
-~/.config/polybar/launch.sh &
