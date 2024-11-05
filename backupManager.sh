@@ -110,9 +110,15 @@ if [ "$clean" = "true" ]; then
         rm -r ~/.config/kitty
         rm ~/solutions/.editorconfig
     elif [ "$action" = "backup" ]; then
-        rm -r shared/nvim
-        rm -r shared/tmux
-        rm -r shared/kitty
+        if [ -d "shared/nvim" ]; then
+            rm -r shared/nvim
+        fi
+        if [ -d "shared/tmux" ]; then
+            rm -r shared/tmux
+        fi
+        if [ -d "shared/kitty" ]; then
+            rm -r shared/kitty
+        fi
         rm shared/.editorconfig
     fi
 fi
