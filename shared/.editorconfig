@@ -2,7 +2,6 @@
 # top-most EditorConfig file
 root = true
 
-
 # Default settings:
 # A newline ending every file
 # Use 4 spaces as indentation
@@ -11,10 +10,6 @@ insert_final_newline = true
 indent_style = space
 indent_size = 4
 trim_trailing_whitespace = true
-
-# Set makefile indent style to tab
-[Makefile]
-indent_style = tab
 
 [project.json]
 indent_size = 2

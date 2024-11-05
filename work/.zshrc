@@ -1,11 +1,6 @@
 #Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# set NVM environment and enable bash completion
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 # enable docker proress to always be plain text
 export BUILDKIT_PROGRESS=plain
 
@@ -20,6 +15,16 @@ zstyle ':omz:update' mode auto
 
 # set to check every day
 zstyle ':omz:update' frequency 1 
+
+# set NVM environment and enable bash completion
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Configure lua enviorment
+export LUA_LS_PATH="$HOME/tools/lua-language-server/bin"
+export PATH=$PATH:$LUA_LS_PATH
+alias lua-language-server="/home/nicholas.judge/tools/lua-language-server/bin/lua-language-server"
 
 # Configure Go environment
 # GOPATH MUST BE OUTSIDE OF GOROOT directory!!!
@@ -93,6 +98,7 @@ alias db="dotnet build"
 alias dr="dotnet run"
 alias drp="dotnet run --project"
 alias dt="dotnet test"
+alias dtf="dotnet test --filter"
 alias dc="dotnet clean"
 alias dp="dotnet publish"
 alias whatEnv="echo $ASPNETCORE_ENVIRONMENT"
