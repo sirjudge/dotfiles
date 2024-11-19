@@ -26,6 +26,9 @@ export LUA_LS_PATH="$HOME/tools/lua-language-server/bin"
 export PATH=$PATH:$LUA_LS_PATH
 alias lua-language-server="/home/nicholas.judge/tools/lua-language-server/bin/lua-language-server"
 
+# DevBox
+alias dvbx="devbox shell"
+
 # Configure Go environment
 # GOPATH MUST BE OUTSIDE OF GOROOT directory!!!
 #export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
@@ -77,11 +80,19 @@ _dotnet_zsh_complete()
 }
 compdef _dotnet_zsh_complete dotnet
 
+# Awin Configurations
+alias tlptDev="tsh ssh nicholas.judge@feb2c45c-4989-4987-9fd1-d591ebed7355"
+export DOCKER_HOST="tcp://d-lhr1-docker-035.zanox.com:2375"
+export ACE_PROJECT_DIR="/home/nicholas.judge/tools/awin-container-environment/"
+export ACE_CONFIG_PATH="$HOME/.config/awin-container-environment/lhl-publisher-registration.yaml"
+
 # clean apt/old package stuff
 alias purgeApt="sudo apt autoremove && sudo apt clean"
 alias purgeDocker="docker system prune -af --volumes"
 alias purgeJetbrainsCache="sudo rm -rf ~/.cache/JetBrains/*"
 
+# Font Updates
+alias updateFonts="fc-cache -f -v"
 
 # Get storage info
 alias showFreeSpace="df -Th | grep -v fs"

@@ -16,7 +16,6 @@ return {
                 'prettier',
                 'bash-language-server',
                 'typescript-language-server',
-                --'eslint',
                 'html-lsp'
             },
         },
