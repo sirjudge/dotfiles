@@ -27,8 +27,6 @@ if [ "$action" = "" ]; then
     exit 1
 fi
 
-
-
 if [ "$setup" = "office" ]; then
     # Clean existing files and folders
     # copy or back up office files
@@ -83,12 +81,12 @@ elif [ "$setup" = "personal" ]; then
             rm -r personal/*
         fi
         echo "backing up personal setup"
-        rsync -a  ~/.config/i3 personal/
+        rsync -a ~/.config/i3 personal/
         rsync -a ~/.config/nitrogen personal/
         rsync -a ~/.config/rofi personal/
         rsync -a ~/.config/polybar personal/
         rsync -a ~/.config/picom personal/
-        rsync -a  ~/.fonts personal/
+        rsync -a ~/.fonts personal/
         rsync -a ~/Tools/scripts personal/
         rsync -a ~/.config/i3status-rust personal/
         rsync -a ~/.config/macchina personal/
