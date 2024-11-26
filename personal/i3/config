@@ -2,7 +2,8 @@
 set $mod Mod4
 
 # open terminal
-bindsym $mod+Return exec ~/.local/kitty.app/bin/kitty
+#bindsym $mod+Return exec ~/.local/kitty.app/bin/kitty
+bindsym $mod+Return exec alacritty 
 
 # ===========#
 # = borders =#

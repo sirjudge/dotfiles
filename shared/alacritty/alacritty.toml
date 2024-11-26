@@ -1,0 +1,9 @@
+[general]
+import = ["~/.config/alacritty/rose-pine.toml"]
+
+[window]
+decorations = "None"
+opacity = 0.9
+
+[font]
+normal = {family="JetBrainsMono Nerd Font", style="Mono"}
