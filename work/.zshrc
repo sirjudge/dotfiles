@@ -84,6 +84,10 @@ _dotnet_zsh_complete()
 }
 compdef _dotnet_zsh_complete dotnet
 
+# GitLab
+alias glssh="ssh -i ~/.ssh/sas/sas-private-production.pem ubuntu@10.115.5.72"
+
+
 # Awin Configurations
 alias tlptDev="tsh ssh nicholas.judge@feb2c45c-4989-4987-9fd1-d591ebed7355"
 export DOCKER_HOST="tcp://d-lhr1-docker-035.zanox.com:2375"
