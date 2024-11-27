@@ -55,12 +55,12 @@ if [ "$setup" = "office" ]; then
         fi
 
         echo "backing up office setup"
-        rsync -r ~/.config/powerline work/powerline
-        rsync -r ~/.config/rofi work/rofi
-        rsync -r ~/.icons work/icons
-        rsync -r ~/.fonts/ work/
-        rsync -r ~/.themes/ work/
-        rsync -r ~/.zshrc work/
+        rsync -a ~/.config/powerline work/powerline
+        rsync -a ~/.config/rofi work/rofi
+        rsync -a ~/.icons work/icons
+        rsync -a ~/.fonts/ work/
+        rsync -a ~/.themes/ work/
+        rsync -a ~/.zshrc work/
     fi
 elif [ "$setup" = "personal" ]; then
     # copy or back up personal files
@@ -81,15 +81,15 @@ elif [ "$setup" = "personal" ]; then
             rm -r personal/*
         fi
         echo "backing up personal setup"
-        rsync -r ~/.config/i3 personal/
-        rsync -r ~/.config/nitrogen personal/
-        rsync -r ~/.config/rofi personal/
-        rsync -r ~/.config/polybar personal/
-        rsync -r ~/.config/picom personal/
-        rsync -r ~/.fonts personal/
-        rsync -r ~/Tools/scripts personal/
-        rsync -r ~/.config/i3status-rust personal/
-        rsync -r ~/.config/macchina personal/
+        rsync -a ~/.config/i3 personal/
+        rsync -a ~/.config/nitrogen personal/
+        rsync -a ~/.config/rofi personal/
+        rsync -a ~/.config/polybar personal/
+        rsync -a ~/.config/picom personal/
+        rsync -a ~/.fonts personal/
+        rsync -a ~/Tools/scripts personal/
+        rsync -a ~/.config/i3status-rust personal/
+        rsync -a ~/.config/macchina personal/
     fi
 fi
 
@@ -123,17 +123,17 @@ fi
 
 if [ "$action" = "restore" ]; then
     echo "restoring shared files"
-    rsync -r shared/nvim ~/.config/
-    rsync -r shared/tmux ~/.config/
-    rsync -r shared/kitty ~/.config/
-    rsync -r shared/.editorconfig ~/solutions/
+    rsync -a shared/nvim/ ~/.config/nvim/
+    rsync -a shared/tmux/ ~/.config/tmux/
+    rsync -a shared/kitty/ ~/.config/kitty/
+    rsync -a shared/.editorconfig ~/solutions/
 elif [ "$action" = "backup" ]; then
     echo "backing up shared files"
     if [ ! -d "shared/tmux" ]; then
         mkdir shared/tmux
     fi
-    rsync -r ~/.config/nvim ~/shared/
-    rsync -r ~/.config/tmux/tmux.conf shared/tmux/
-    rsync -r ~/.config/kitty shared/
-    rsync -r ~/solutions/.editorconfig shared/
+    rsync -a ~/.config/nvim/ ~/shared/
+    rsync -a ~/.config/tmux/tmux.conf shared/tmux/
+    rsync -a ~/.config/kitty/ shared/
+    rsync -a ~/solutions/.editorconfig shared/
 fi
