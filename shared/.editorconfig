@@ -2,6 +2,11 @@
 # top-most EditorConfig file
 root = true
 
+[{Makefile,**.mk}]
+# Use tabs for indentation (Makefiles require tabs)
+indent_style = tab
+
+
 # Default settings:
 # A newline ending every file
 # Use 4 spaces as indentation

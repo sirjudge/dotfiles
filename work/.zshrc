@@ -1,6 +1,9 @@
 #Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+export EDITOR='nvim'
+export VISUAL='nvim'
+
 # enable docker proress to always be plain text
 export BUILDKIT_PROGRESS=plain
 
@@ -57,6 +60,7 @@ source $ZSH/oh-my-zsh.sh
 
 # tmux + tmux completions
 # set tmux to launch on zsh startup
+alias tmux="TERM=screen-256color-bce tmux"
 if [ -z "$TMUX" ]; then
     tmux attach -t default || tmux new -s default
 fi
@@ -191,6 +195,7 @@ alias ln="ln -v"
 alias cp="cp -v"
 alias rm="rm -v"
 alias ls="ls --group-directories-first --color=always"
+alias fs="du -sh"
 alias ls-A="ls -a --group-directories-first --dereference-command-line-symlink-to-dir --color=auto"
 alias ll="ls --dereference-command-line-symlink-to-dir -lh"
 alias l="ls -la --dereference-command-line-symlink-to-dir"
@@ -202,23 +207,21 @@ alias ip="ip addr"
 
 # config shortcuts
 alias neovimConfig="nvim ~/.config/nvim/."
+alias tmuxConfig="nvim ~/.config/tmux/."
 
 # directory shortcuts
 alias configFolder="cd ~/.config"
 alias sol="cd ~/solutions"
-
-# tools folder
+alias sasCargo="cd ~/solutions/cargoInternal"
 alias tools="cd ~/tools"
-
-# Specific solution paths
 alias compliance="cd ~/solutions/compliance"
 alias finance="cd ~/solutions/finance"
 alias nugetFolder="cd ~/solutions/NuGet/"
 alias tracking="cd ~/solutions/tracking" 
-
-# Shopify path
-alias shopify="cd /home/nicholas.judge/solutions/shopify/shopifyapp"
+alias shopify="cd /home/nicholas.judge/solutions/shopify/"
+alias shopifyApp="cd /home/nicholas.judge/solutions/shopify/shopify-app"
 alias analyticsApi="cd /home/nicholas.judge/solutions/shopify/analyticsapi"
 
 
 if [ -e /home/nicholas.judge/.nix-profile/etc/profile.d/nix.sh ]; then . /home/nicholas.judge/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+fpath+=${ZDOTDIR:-~}/.zsh_functions
