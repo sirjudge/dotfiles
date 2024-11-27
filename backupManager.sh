@@ -140,10 +140,10 @@ elif [ "$action" = "backup" ]; then
     fi
     # we only want to backup the tmux.conf file and
     # not the entire tmux folder because plugins are installed
-    cp ~/.cconfig/tmux/tmux.conf shared/tmux/.
+    cp ~/.config/tmux/tmux.conf shared/tmux/.
 
-    rsync -a ~/.config/nvim/ ~/shared/nvim/
-    rsync -a ~/.config/kitty/ shared/kitty/
-    rsync -a ~/.config/alacritty/ shared/alacritty/
-    rsync -a ~/solutions/.editorconfig shared/
+    rsync -r ~/.config/nvim/ ~/shared/nvim/
+    rsync -r ~/.config/kitty/ shared/kitty/
+    rsync -r ~/.config/alacritty/ shared/alacritty/
+    rsync -r ~/solutions/.editorconfig shared/
 fi
