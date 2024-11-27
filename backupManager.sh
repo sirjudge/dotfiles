@@ -129,11 +129,21 @@ if [ "$action" = "restore" ]; then
     rsync -a shared/.editorconfig ~/solutions/
 elif [ "$action" = "backup" ]; then
     echo "backing up shared files"
+
+    # create shared folder if it does not exist
+    if [ ! -d "shared" ]; then
+        mkdir shared
+    fi
+
     if [ ! -d "shared/tmux" ]; then
         mkdir shared/tmux
     fi
-    rsync -a ~/.config/nvim/ ~/shared/
-    rsync -a ~/.config/tmux/tmux.conf shared/tmux/
-    rsync -a ~/.config/kitty/ shared/
+    # we only want to backup the tmux.conf file and
+    # not the entire tmux folder because plugins are installed
+    cp ~/.cconfig/tmux/tmux.conf shared/tmux/.
+
+    rsync -a ~/.config/nvim/ ~/shared/nvim/
+    rsync -a ~/.config/kitty/ shared/kitty/
+    rsync -a ~/.config/alacritty/ shared/alacritty/
     rsync -a ~/solutions/.editorconfig shared/
 fi
