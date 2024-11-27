@@ -1,9 +1,18 @@
 [general]
-import = ["~/.config/alacritty/rose-pine.toml"]
+import = ["~/.config/alacritty/rose-pine-moon.toml"]
 
 [window]
 decorations = "None"
 opacity = 0.9
 
-[font]
-normal = {family="JetBrainsMono Nerd Font", style="Mono"}
+#[font]
+#normal = {family="JetBrainsMono Nerd Font", style="regular"}
+
+[selection]
+save_to_clipboard = true
+
+[cursor]
+style = { shape = "Block", blinking = "Always"}
+
+[terminal]
+shell = "/bin/zsh"

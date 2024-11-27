@@ -20,18 +20,11 @@ return {
                         {name = 'nvim_lsp'},
                     },
                     mapping = cmp.mapping.preset.insert({
-                      -- old map
-                      --  ['<C-Space>'] = cmp.mapping.complete(),
-                      --  ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-                      --  ['<C-d>'] = cmp.mapping.scroll_docs(4),
                         -- `Enter` key to confirm completion
                         ['<CR>'] = cmp.mapping.confirm({select = false}),
                         -- Ctrl+Space to trigger completion menu
                         ['<C-Space>'] = cmp.mapping.complete(),
-                        -- Navigate between snippet placeholder
-                        --['<C-f>'] = cmp_action.luasnip_jump_forward(),
-                       -- ['<C-b>'] = cmp_action.luasnip_jump_backward(),
-                        -- remap tab and shift tab because copilot should use those
+                        -- unmap tab and shift tab because copilot should use those
                         ['<Tab>'] = nil,
                         ['<S-Tab>'] = nil,
                         -- Navigate between cmp items
@@ -70,6 +63,7 @@ return {
                     lsp_defaults.capabilities,
                     require('cmp_nvim_lsp').default_capabilities()
                 )
+
                 -- LspAttach is where you enable features that only work
                 -- if there is a language server active in the file
                 vim.api.nvim_create_autocmd('LspAttach', {
@@ -144,6 +138,29 @@ return {
                     end,
                     settings = {
                         Lua = {}
+                    }
+                }))
+
+                require('lspconfig').prettier.setup(coq.lsp_ensure_capabilities({
+                    cli_options = {
+                        arrow_parens = "always",
+                        bracket_spacing = true,
+                        bracket_same_line = false,
+                        embedded_language_formatting = "auto",
+                        end_of_line = "lf",
+                        html_whitespace_sensitivity = "css",
+                        -- jsx_bracket_same_line = false,
+                        jsx_single_quote = false,
+                        print_width = 80,
+                        prose_wrap = "preserve",
+                        quote_props = "as-needed",
+                        semi = true,
+                        single_attribute_per_line = false,
+                        single_quote = false,
+                        tab_width = 2,
+                        trailing_comma = "es5",
+                        use_tabs = false,
+                        vue_indent_script_and_style = false,
                     }
                 }))
 

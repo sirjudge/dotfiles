@@ -13,7 +13,6 @@ return {
                 'omnisharp',
                 'gopls',
                 'lua-language-server',
-                'prettier',
                 'bash-language-server',
                 'typescript-language-server',
                 'html-lsp'
