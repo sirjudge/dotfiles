@@ -46,7 +46,7 @@ return {
                 },
                 copilot_node_command = 'node', -- Node.js version must be > 18.x
                 server_opts_overrides = {},
-            })            
+            })
             --vim.api.nvim_set_keymap('i','<Tab>','copilot#Accept("<CR>")', {expr = true, silent=true})
             --vim.api.nvim_set_keymap('i','<S-Tab>','copilot#Accept("<CR>")', {expr = true, silent=true})
             --vim.g.copilot_filetypes = { VimspectorPrompt = false }
@@ -54,7 +54,7 @@ return {
     },
     {
         "CopilotC-Nvim/CopilotChat.nvim",
-        branch = "canary",
+        branch = "main",
         dependencies = {
             { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
             { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
