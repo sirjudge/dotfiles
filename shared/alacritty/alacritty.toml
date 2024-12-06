@@ -6,10 +6,10 @@ decorations = "None"
 opacity = 0.9
 
 [font]
-normal.family = "JetBrainsMono"
-bold.family = "JetBrainsMono"
-italic.family = "JetBrainsMono"
-bold_italic.family = "JetBrainsMono Nerd Font"
+#normal.family = "JetBrainsMono"
+#bold.family = "JetBrainsMono"
+#italic.family = "JetBrainsMono"
+#bold_italic.family = "JetBrainsMono Nerd Font"
 
 [selection]
 save_to_clipboard = true

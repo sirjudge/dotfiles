@@ -10,6 +10,7 @@ bindsym $mod+Return exec alacritty
 # ===========#
 for_window [class="^.*"] border pixel 0
 exec_always --no-startup-id /home/nico/Tools/xborder/xborders & 
+
 #=========#
 #= Colors #
 #=========#
@@ -81,7 +82,6 @@ mode "$mode_system" {
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
-# back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
