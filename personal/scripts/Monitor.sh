@@ -72,7 +72,7 @@ elif  [ "$action" = "on" ] && [ "$setup" = "officeMain" ]; then
 
     xrandr \
         --output eDP-1-1 --mode 1920x1080 --rate 144.00 --pos 0x0 \
-        --output DP-0.2 --mode 1920x1080 --rate 239.76 --pos 4480x0 \
+        --output DP-0.2 --mode 1920x1080 --rate 143.98 --pos 4480x0 \
         --output DP-0.1 --mode 2560x1440 --rate 144.00 --pos 1920x0 --primary \
 
 
@@ -81,7 +81,7 @@ elif  [ "$action" = "on" ] && [ "$setup" = "officeMain" ]; then
 elif  [ "$action" = "on" ] && [ "$setup" = "officeGaming1080" ]; then
     xrandr --output eDP-1-1 --mode 1920x1080 --rate 144.00 --pos 0x0 --primary \
        --output DP-0.1 --mode 1920x1080 --pos 1920x0 \
-       --output DP-0.2 --mode 1920x1080 --rate 239.76 --pos 3840x0
+       --output DP-0.2 --mode 1920x1080 --rate 143.98 --pos 3840x0
 # | Laptop | Acer |
 elif [ "$action" = "on" ] && [ "$setup" = "bedroom" ]; then
     xrandr --output eDP-1-1 --mode 1920x1080 \
