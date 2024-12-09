@@ -54,6 +54,7 @@ if [ "$action" = "off" ]; then
     echo "Turn off both external monitors"
     xrandr --output DP-0.1 --off --verbose
     xrandr --output DP-0.2 --off --verbose
+    xrandr --output DP-0.3 --off --verbose
     xrandr --output HDMI-0 --off --verbose
     exit 1
 fi
@@ -73,6 +74,7 @@ elif  [ "$action" = "on" ] && [ "$setup" = "officeMain" ]; then
     xrandr \
         --output eDP-1-1 --mode 1920x1080 --rate 144.00 --pos 0x0 \
         --output DP-0.2 --mode 1920x1080 --rate 239.76 --pos 4480x0 \
+        --output DP-0.3 --mode 1920x1080 --rate 60.00 --pos 0x-1080 \
         --output DP-0.1 --mode 2560x1440 --rate 144.00 --pos 1920x0 --primary \
 
 
