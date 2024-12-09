@@ -69,17 +69,16 @@ if [ "$action" = "on" ] && [ "$setup" = "officeDouble" ]; then
         --output DP-0.1 --mode 2560x1080 --left-of eDP-1-1 \
         --output DP-0.2 --mode 2560x1080 --below DP-0.1 --verbose
 elif  [ "$action" = "on" ] && [ "$setup" = "officeMain" ]; then
-
     xrandr \
         --output eDP-1-1 --mode 1920x1080 --rate 144.00 --pos 0x0 \
+        --output DP-0.1 --mode 2560x1440 --rate 144.00 --pos 1920x0 --primary \
         --output DP-0.2 --mode 1920x1080 --rate 239.76 --pos 4480x0 \
         --output DP-0.3 --mode 1920x1080 --rate 60.00 --pos 0x-1080 \
-        --output DP-0.1 --mode 2560x1440 --rate 144.00 --pos 1920x0 --primary \
 # ( but in 1080p)
 elif  [ "$action" = "on" ] && [ "$setup" = "officeGaming1080" ]; then
     xrandr \
-        --output eDP-1-1 --mode 1920x1080 --rate 144.00 --pos 0x0 --primary \
-        --output DP-0.1 --mode 1920x1080 --pos 1920x0 \
+        --output eDP-1-1 --mode 1920x1080 --rate 144.00 --pos 0x0  \
+        --output DP-0.1 --mode 1920x1080 --pos 1920x0 --primary \
         --output DP-0.2 --mode 1920x1080 --rate 239.76 --pos 3840x0 \
         --output DP-0.3 --mode 1920x1080 --rate 60.00 --pos 0x-1080 \
 # | Laptop | Acer |
