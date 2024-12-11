@@ -1,5 +1,7 @@
 [general]
-import = ["~/.config/alacritty/rose-pine-moon.toml"]
+import = ["~/.config/alacritty/themes/oxcarbon.toml"]
+#import = ["~/.config/alacritty/themes/rose-pine-moon.toml"]
+#import = ["~/.config/alacritty/themes/nightfox.toml"]
 
 [window]
 decorations = "None"

@@ -9,7 +9,7 @@ bindsym $mod+Return exec alacritty
 # = borders =#
 # ===========#
 for_window [class="^.*"] border pixel 0
-exec_always --no-startup-id /home/nico/Tools/xborder/xborders & 
+#exec_always --no-startup-id /home/nico/Tools/xborder/xborders & 
 
 #=========#
 #= Colors #
@@ -54,7 +54,7 @@ gaps outer 5px
 # start Compositor and set background
 #exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
 exec_always --no-startup-id picom &
-exec --no-startup-id nitrogen --set-zoom-fill ~/Pictures/hypeBeast.png
+exec --no-startup-id nitrogen --set-zoomfill ~/Pictures/pikachu_jellies.png
 
 #========#
 #= Rofi =#
