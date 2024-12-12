@@ -29,8 +29,8 @@ fi
 
 # Shared folders to restore
 if [ "$sourceBackup" = "true" ]; then
-    dpkg --get-selections > work/Package.list
-    sudo cp -R /etc/apt/sources.list* work/
+    dpkg --get-selections > ~/solutions/dotfiles/work/Package.list
+    sudo cp -R /etc/apt/sources.list* ~/solutions/dotfiles/work/
 fi
 
 if [ "$setup" = "office" ]; then
@@ -50,23 +50,23 @@ if [ "$setup" = "office" ]; then
         # delete current work folder
         if [ "$clean" = "true" ]; then
             echo "cleaning existing files and folders"
-            rm -rf work/*
+            rm -rf ~/solutions/dotfiles/work/*
         fi
         # Remake new directory folders
-        if [ ! -d "work" ]; then
-            mkdir work
-            mkdir work/tmux
-            mkdir work/icons
-            mkdir work/fonts
+        if [ ! -d "~/solutions/dotfiles/work" ]; then
+            mkdir ~/solutions/dotfiles/work/
+            mkdir ~/solutions/dotfiles/work/tmux
+            mkdir ~/solutions/dotfiles/work/icons
+            mkdir ~/solutions/dotfiles/work/fonts
         fi
 
         echo "backing up office setup"
-        rsync -a ~/.config/powerline work/powerline
-        rsync -a ~/.config/rofi work/rofi
-        rsync -a ~/.icons work/icons
-        rsync -a ~/.fonts/ work/
-        rsync -a ~/.themes/ work/
-        rsync -a ~/.zshrc work/
+        rsync -a ~/.config/powerline ~/solutions/dotfiles/work/powerline
+        rsync -a ~/.config/rofi ~/solutions/dotfiles/work/rofi
+        rsync -a ~/.icons ~/solutions/dotfiles/work/icons
+        rsync -a ~/.fonts/ ~/solutions/dotfiles/work/
+        rsync -a ~/.themes/ ~/solutions/dotfiles/work/
+        rsync -a ~/.zshrc ~/solutions/dotfiles/work/
     fi
 elif [ "$setup" = "personal" ]; then
     # copy or back up personal files
@@ -109,28 +109,28 @@ if [ "$clean" = "true" ]; then
         rm ~/solutions/.editorconfig
     elif [ "$action" = "backup" ]; then
         if [ -d "shared/nvim" ]; then
-            rm -r shared/nvim
+            rm -r ~/solutions/dotfiles/shared/nvim
         fi
         if [ -d "shared/tmux" ]; then
-            rm -r shared/tmux
+            rm -r ~/solutions/dotfiles/shared/tmux
         fi
         if [ -d "shared/kitty" ]; then
-            rm -r shared/kitty
+            rm -r ~/solutions/dotfiles/shared/kitty
         fi
         if [ -d "shared/alacritty" ]; then
-            rm -r shared/alacritty
+            rm -r ~/solutions/dotfiles/shared/alacritty
         fi
-        rm shared/.editorconfig
+        rm ~/solutions/dotfiles/shared/.editorconfig
     fi
 fi
 
 if [ "$action" = "restore" ]; then
     echo "restoring shared files"
-    rsync -a shared/nvim/ ~/.config/nvim/
-    rsync -a shared/tmux/ ~/.config/tmux/
-    rsync -a shared/kitty/ ~/.config/kitty/
-    rsync -a shared/alacritty/ ~/.config/alacritty/
-    rsync -a shared/.editorconfig ~/solutions/
+    rsync -a ~/solutions/dotfiles/shared/nvim/ ~/.config/nvim/
+    rsync -a ~/solutions/dotfiles/shared/tmux/ ~/.config/tmux/
+    rsync -a ~/solutions/dotfiles/shared/kitty/ ~/.config/kitty/
+    rsync -a ~/solutions/dotfiles/shared/alacritty/ ~/.config/alacritty/
+    rsync -a ~/solutions/dotfiles/shared/.editorconfig ~/solutions/
 elif [ "$action" = "backup" ]; then
     echo "backing up shared files"
 
@@ -140,15 +140,15 @@ elif [ "$action" = "backup" ]; then
     fi
 
     if [ ! -d "shared/tmux" ]; then
-        mkdir shared/tmux
+        mkdir ~/solutions/dotfiles/shared/tmux
     fi
     # we only want to backup the tmux.conf file and
     # not the entire tmux folder because plugins are installed
-    cp ~/.config/tmux/tmux.conf shared/tmux/.
+    cp ~/.config/tmux/tmux.conf ~/solutions/dotfiles/shared/tmux/.
 
     # back up the rest of the configs as normal
-    rsync -a ~/.config/nvim/ shared/nvim/
-    rsync -a ~/.config/kitty/ shared/kitty/
-    rsync -a ~/.config/alacritty/ shared/alacritty/
-    rsync -a ~/solutions/.editorconfig shared/
+    rsync -a ~/.config/nvim/ ~/solutions/dotfiles/shared/nvim/
+    rsync -a ~/.config/kitty/ ~/solutions/dotfiles/shared/kitty/
+    rsync -a ~/.config/alacritty/ ~/solutions/dotfiles/shared/alacritty/
+    rsync -a ~/solutions/.editorconfig ~/solutions/dotfiles/shared/
 fi
