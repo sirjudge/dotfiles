@@ -1,4 +1,5 @@
 #!/bin/bash
+# Configure new line and take in command line arguments
 NEWLINE=$'\n'
 while getopts 'a:s:c:so' flag; do
     case "${flag}" in
@@ -33,6 +34,7 @@ if [ "$sourceBackup" = "true" ]; then
     sudo cp -R /etc/apt/sources.list* ~/solutions/dotfiles/work/
 fi
 
+# Run office specific tasks
 if [ "$setup" = "office" ]; then
     # Clean existing files and folders
     # copy or back up office files
@@ -53,7 +55,7 @@ if [ "$setup" = "office" ]; then
             rm -rf ~/solutions/dotfiles/work/*
         fi
         # Remake new directory folders
-        if [ ! -d "~/solutions/dotfiles/work" ]; then
+        if [ ! -d ~/solutions/dotfiles/work ]; then
             mkdir ~/solutions/dotfiles/work/
             mkdir ~/solutions/dotfiles/work/tmux
             mkdir ~/solutions/dotfiles/work/icons
@@ -68,11 +70,11 @@ if [ "$setup" = "office" ]; then
         rsync -a ~/.themes/ ~/solutions/dotfiles/work/
         rsync -a ~/.zshrc ~/solutions/dotfiles/work/
     fi
+# Run personal specific tasks
 elif [ "$setup" = "personal" ]; then
-    # copy or back up personal files
     if [ "$action" = "restore" ]; then
         if [ "$clean" = "true" ]; then
-            echo "cleaning .config files in personal setup"
+            echo "cleaning .config/"
             rm -rf ~/.config/i3
             rm -rf ~/.config/nitrogen
             rm -rf ~/.config/rofi
@@ -84,10 +86,10 @@ elif [ "$setup" = "personal" ]; then
         echo "copying personal setup"
     elif [ "$action" = "backup" ]; then
         if [ "$clean" = "true" ]; then
-            echo "cleaning existing files and folders from personal/ backup folder"
+            echo "cleaning dotfiles/peronsal/"
             rm -r ~/solutions/dotfiles/personal/*
         fi
-        echo "backing up personal setup from .config/ to personal/"
+        echo "backing up .config/ files to dotfiles/personal"
         rsync -a ~/.config/i3 ~/solutions/dotfiles/personal/
         rsync -a ~/.config/nitrogen ~/solutions/dotfiles/personal/
         rsync -a ~/.config/rofi ~/solutions/dotfiles/personal/
@@ -99,55 +101,62 @@ elif [ "$setup" = "personal" ]; then
     fi
 fi
 
-
+# Run cleanup on shared files
 if [ "$clean" = "true" ]; then
     if [ "$action" = "copy" ]; then
-        echo "cleaning existing files in .config/ for shared files"
+        echo "cleaning shared .config/ folders"
         rm -r ~/.config/nvim
         rm -r ~/.config/tmux
         rm -r ~/.config/kitty
+        rm -r ~/.config/alacritty
+        rm -r ~/.config/tmux
         rm ~/solutions/.editorconfig
     elif [ "$action" = "backup" ]; then
-        echo "cleaning existing files in shared/ backup folder"
-        if [ -d "shared/nvim" ]; then
+        echo "cleaning dotfiles/shared/"
+        if [ -d ~/solutions/dotfiles/shared/nvim ]; then
             rm -r ~/solutions/dotfiles/shared/nvim
         fi
-        if [ -d "shared/tmux" ]; then
+        if [ -d ~/solutions/dotfiles/shared/tmux ]; then
             rm -r ~/solutions/dotfiles/shared/tmux
         fi
-        if [ -d "shared/kitty" ]; then
+        if [ -d ~/solutions/dotfiles/shared/kitty ]; then
             rm -r ~/solutions/dotfiles/shared/kitty
         fi
-        if [ -d "shared/alacritty" ]; then
+        if [ -d ~/solutions/dotfiles/shared/alacritty ]; then
             rm -r ~/solutions/dotfiles/shared/alacritty
         fi
-        rm ~/solutions/dotfiles/shared/.editorconfig
+        if [ -f ~/solutions/.editorconfig ]; then
+            rm ~/solutions/dotfiles/shared/.editorconfig
+        fi
     fi
 fi
 
+# restore or backup shared files
 if [ "$action" = "restore" ]; then
-    echo "restoring shared files"
+    echo "restoring dotfiles/shared to .config/ folders"
     rsync -a ~/solutions/dotfiles/shared/nvim/ ~/.config/nvim/
     rsync -a ~/solutions/dotfiles/shared/tmux/ ~/.config/tmux/
     rsync -a ~/solutions/dotfiles/shared/kitty/ ~/.config/kitty/
     rsync -a ~/solutions/dotfiles/shared/alacritty/ ~/.config/alacritty/
     rsync -a ~/solutions/dotfiles/shared/.editorconfig ~/solutions/
 elif [ "$action" = "backup" ]; then
-    echo "backing up shared files"
+    echo "backing up shared .config/ folders"
 
     # create shared folder if it does not exist
-    if [ ! -d "shared" ]; then
+    if [ ! -d ~/solutions/dotfiles/shared ]; then
+        echo "creating dotfiles/shared folder"
         mkdir ~/solutions/dotfiles/shared
     fi
 
-    if [ ! -d "shared/tmux" ]; then
+    if [ ! -d ~/solutions/dotfiles/shared/tmux ]; then
+        echo "creating tmux folder in dotfiles/shared folder"
         mkdir ~/solutions/dotfiles/shared/tmux
     fi
-    # we only want to backup the tmux.conf file and
-    # not the entire tmux folder because plugins are installed
+
+    echo "copying tmux config to dotfiles/shared/tmux"
     cp ~/.config/tmux/tmux.conf ~/solutions/dotfiles/shared/tmux/.
 
-    # back up the rest of the configs as normal
+    echo "backing up nvim, kitty, alacritty, and .editor config"
     rsync -a ~/.config/nvim/ ~/solutions/dotfiles/shared/nvim/
     rsync -a ~/.config/kitty/ ~/solutions/dotfiles/shared/kitty/
     rsync -a ~/.config/alacritty/ ~/solutions/dotfiles/shared/alacritty/
