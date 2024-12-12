@@ -38,7 +38,7 @@ if [ "$setup" = "office" ]; then
     # copy or back up office files
     if [ "$action" = "restore" ]; then
         if [ "$clean" = "true" ]; then
-            echo "cleaning existing files and folders"
+            echo "cleaning existing .config files in office setup"
             rm -r ~/.config/powerline
             rm -r ~/.config/rofi
             rm -r ~/.icons
@@ -49,7 +49,7 @@ if [ "$setup" = "office" ]; then
     elif [ "$action" = "backup" ]; then
         # delete current work folder
         if [ "$clean" = "true" ]; then
-            echo "cleaning existing files and folders"
+            echo "cleaning existing files and folders from work/ backup folder"
             rm -rf ~/solutions/dotfiles/work/*
         fi
         # Remake new directory folders
@@ -72,7 +72,7 @@ elif [ "$setup" = "personal" ]; then
     # copy or back up personal files
     if [ "$action" = "restore" ]; then
         if [ "$clean" = "true" ]; then
-            echo "cleaning existing files and folders"
+            echo "cleaning .config files in personal setup"
             rm -rf ~/.config/i3
             rm -rf ~/.config/nitrogen
             rm -rf ~/.config/rofi
@@ -84,30 +84,31 @@ elif [ "$setup" = "personal" ]; then
         echo "copying personal setup"
     elif [ "$action" = "backup" ]; then
         if [ "$clean" = "true" ]; then
-            echo "cleaning existing files and folders"
-            rm -r personal/*
+            echo "cleaning existing files and folders from personal/ backup folder"
+            rm -r ~/solutions/dotfiles/personal/*
         fi
-        echo "backing up personal setup"
-        rsync -a ~/.config/i3 personal/
-        rsync -a ~/.config/nitrogen personal/
-        rsync -a ~/.config/rofi personal/
-        rsync -a ~/.config/polybar personal/
-        rsync -a ~/.config/picom personal/
-        rsync -a ~/.fonts personal/
-        rsync -a ~/Tools/Scripts personal/
-        rsync -a ~/.config/i3status-rust personal/
+        echo "backing up personal setup from .config/ to personal/"
+        rsync -a ~/.config/i3 ~/solutions/dotfiles/personal/
+        rsync -a ~/.config/nitrogen ~/solutions/dotfiles/personal/
+        rsync -a ~/.config/rofi ~/solutions/dotfiles/personal/
+        rsync -a ~/.config/polybar ~/solutions/dotfiles/personal/
+        rsync -a ~/.config/picom ~/solutions/dotfiles/personal/
+        rsync -a ~/.fonts ~/solutions/dotfiles/personal/
+        rsync -a ~/Tools/Scripts ~/solutions/dotfiles/personal/
+        rsync -a ~/.config/i3status-rust ~/solutions/dotfiles/personal/
     fi
 fi
 
 
 if [ "$clean" = "true" ]; then
-    echo "cleaning existing files and folders"
     if [ "$action" = "copy" ]; then
+        echo "cleaning existing files in .config/ for shared files"
         rm -r ~/.config/nvim
         rm -r ~/.config/tmux
         rm -r ~/.config/kitty
         rm ~/solutions/.editorconfig
     elif [ "$action" = "backup" ]; then
+        echo "cleaning existing files in shared/ backup folder"
         if [ -d "shared/nvim" ]; then
             rm -r ~/solutions/dotfiles/shared/nvim
         fi
@@ -136,7 +137,7 @@ elif [ "$action" = "backup" ]; then
 
     # create shared folder if it does not exist
     if [ ! -d "shared" ]; then
-        mkdir shared
+        mkdir ~/solutions/dotfiles/shared
     fi
 
     if [ ! -d "shared/tmux" ]; then
