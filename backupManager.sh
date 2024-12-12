@@ -1,6 +1,6 @@
 #!/bin/bash
 NEWLINE=$'\n'
-while getopts 'a:s:hc:so' flag; do
+while getopts 'a:s:c:so' flag; do
     case "${flag}" in
         a) action="${OPTARG}" ;;
         s) setup="${OPTARG}" ;;
@@ -78,7 +78,7 @@ elif [ "$setup" = "personal" ]; then
             rm -rf ~/.config/rofi
             rm -rf ~/.config/polybar
             rm -rf ~/.config/picom
-            rm -rf ~/Tools/scripts
+            rm -rf ~/Tools/Scripts
             rm -rf ~/.config/i3status-rust
         fi
         echo "copying personal setup"
@@ -94,7 +94,7 @@ elif [ "$setup" = "personal" ]; then
         rsync -a ~/.config/polybar personal/
         rsync -a ~/.config/picom personal/
         rsync -a ~/.fonts personal/
-        rsync -a ~/Tools/scripts personal/
+        rsync -a ~/Tools/Scripts personal/
         rsync -a ~/.config/i3status-rust personal/
     fi
 fi

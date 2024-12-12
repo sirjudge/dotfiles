@@ -129,6 +129,9 @@ exec xset s noblank
 exec xset dpms force suspend
 exec xset dpms force on
 
+# use systemctl to turn off sleep
+exec sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+
 #==================#
 #= Config options =#
 #==================#
