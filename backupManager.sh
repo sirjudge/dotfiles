@@ -166,14 +166,21 @@ fi
 currentPath=$(pwd)
 
 if [ "$action" = "backup" ]; then
-    echo "Do you want to push changes to git? (y/n)"
-    read gitPush
-    if [ "$gitPush" = "y" ]; then
-        echo "pushing changes to git"
-        cd ~/solutions/dotfiles
-        git add .
-        git commit -m "Automated file backup"
-        git push
-        cd $currentPath
+    if [ -n "$(git status --porcelain)" ]; then
+        echo "Changes detected, do you want to push changes to git? (y/n)"
+        read gitPush
+        if [ "$gitPush" = "y" ]; then
+            echo "pushing changes to git"
+            cd ~/solutions/dotfiles
+            git add .
+            git commit -m "Automated file backup"
+            git push
+            cd $currentPath
+        fi
+    else
+        echo "no changes detected, exiting"
     fi
 fi
+
+echo "$action $setup completed"
+exit 1
