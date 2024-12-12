@@ -162,3 +162,18 @@ elif [ "$action" = "backup" ]; then
     rsync -a ~/.config/alacritty/ ~/solutions/dotfiles/shared/alacritty/
     rsync -a ~/solutions/.editorconfig ~/solutions/dotfiles/shared/
 fi
+
+currentPath=$(pwd)
+
+if [ "$action" = "backup" ]; then
+    echo "Do you want to push changes to git? (y/n)"
+    read gitPush
+    if [ "$gitPush" = "y" ]; then
+        echo "pushing changes to git"
+        cd ~/solutions/dotfiles
+        git add .
+        git commit -m "Automated file backup"
+        git push
+        cd $currentPath
+    fi
+fi
