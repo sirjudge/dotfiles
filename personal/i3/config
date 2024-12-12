@@ -66,12 +66,9 @@ bindsym $mod+Shift+d exec /home/nico/Documents/applications/rofi-network-manager
 #==============#
 #= Screenshot =#
 #==============#
-# BUG: for some reason this is not working
-# mod+x and mod+Shift+x keybinds are find but script now running? also when it was 
-# Scrot it still wasn't working. feels bad man. . . 
-bindsym $mod+x exec --no-startup-id /home/nico/.config/i3/screenshotSave.sh 
-bindsym $mod+Shift+x exec --no-startup-id /home/nico/.config/i3/screenshotSelect.sh
-
+bindsym --release Print exec --no-startup-id scrot -s -e 'xclip -selection clipboard -t image/png -i $f'
+bindsym --release $mod+Print exec --no-startup-id scrot -s --file '/home/nico/Pictures/Screenshots/%Y-%m-%d_$wx$h_scrot.png'
+ 
 #===============#
 #= System modes =
 #===============#
