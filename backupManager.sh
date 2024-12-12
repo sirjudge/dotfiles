@@ -27,6 +27,12 @@ if [ "$action" = "" ]; then
     exit 1
 fi
 
+# Shared folders to restore
+if [ "$sourceBackup" = "true" ]; then
+    dpkg --get-selections > work/Package.list
+    sudo cp -R /etc/apt/sources.list* work/
+fi
+
 if [ "$setup" = "office" ]; then
     # Clean existing files and folders
     # copy or back up office files
@@ -67,12 +73,13 @@ elif [ "$setup" = "personal" ]; then
     if [ "$action" = "restore" ]; then
         if [ "$clean" = "true" ]; then
             echo "cleaning existing files and folders"
-            rm -r ~/.config/i3
-            rm -r ~/.config/nitrogen
-            rm -r ~/.config/rofi
-            rm -r ~/.config/polybar
-            rm -r ~/.config/picom
-            rm -r ~/.config/macchina
+            rm -rf ~/.config/i3
+            rm -rf ~/.config/nitrogen
+            rm -rf ~/.config/rofi
+            rm -rf ~/.config/polybar
+            rm -rf ~/.config/picom
+            rm -rf ~/Tools/scripts
+            rm -rf ~/.config/i3status-rust
         fi
         echo "copying personal setup"
     elif [ "$action" = "backup" ]; then
@@ -89,16 +96,9 @@ elif [ "$setup" = "personal" ]; then
         rsync -a ~/.fonts personal/
         rsync -a ~/Tools/scripts personal/
         rsync -a ~/.config/i3status-rust personal/
-        rsync -a ~/.config/macchina personal/
     fi
 fi
 
-
-# Shared folders to restore
-if [ "$sourceBackup" = "true" ]; then
-    dpkg --get-selections > work/Package.list
-    sudo cp -R /etc/apt/sources.list* work/
-fi
 
 if [ "$clean" = "true" ]; then
     echo "cleaning existing files and folders"
@@ -117,6 +117,9 @@ if [ "$clean" = "true" ]; then
         if [ -d "shared/kitty" ]; then
             rm -r shared/kitty
         fi
+        if [ -d "shared/alacritty" ]; then
+            rm -r shared/alacritty
+        fi
         rm shared/.editorconfig
     fi
 fi
@@ -126,6 +129,7 @@ if [ "$action" = "restore" ]; then
     rsync -a shared/nvim/ ~/.config/nvim/
     rsync -a shared/tmux/ ~/.config/tmux/
     rsync -a shared/kitty/ ~/.config/kitty/
+    rsync -a shared/alacritty/ ~/.config/alacritty/
     rsync -a shared/.editorconfig ~/solutions/
 elif [ "$action" = "backup" ]; then
     echo "backing up shared files"
@@ -141,6 +145,8 @@ elif [ "$action" = "backup" ]; then
     # we only want to backup the tmux.conf file and
     # not the entire tmux folder because plugins are installed
     cp ~/.config/tmux/tmux.conf shared/tmux/.
+
+    # back up the rest of the configs as normal
     rsync -a ~/.config/nvim/ shared/nvim/
     rsync -a ~/.config/kitty/ shared/kitty/
     rsync -a ~/.config/alacritty/ shared/alacritty/
