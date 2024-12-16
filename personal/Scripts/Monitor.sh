@@ -85,7 +85,7 @@ elif  [ "$action" = "on" ] && [ "$setup" = "officeGaming1080" ]; then
 elif [ "$action" = "on" ] && [ "$setup" = "bedroom" ]; then
     xrandr \
         --output eDP-1-1 --mode 1920x1080 \
-        --output HDMI-0 --primary --mode 1920x1080 --right-of eDP-1-1
+        --output DP-0 --primary --mode 1920x1080 --right-of eDP-1-1
 fi
 
 # sleep for 5 seconds to allow the monitors to turn on
