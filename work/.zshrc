@@ -144,7 +144,7 @@ alias editEnv="nvim ~/solutions/envFiles/."
 alias vim="nvim"
 
 # tmux
-alias cls="clear"
+alias cls="clear; ls -a"
 alias tmuxReload="tmux source  ~/.config/tmux/tmux.conf"
 alias tmuxNew="tmux new -s"
 alias tmuxAttach="tmux attach -t"
