@@ -43,8 +43,6 @@ if [ "$setup" = "office" ]; then
             echo "cleaning existing .config files in office setup"
             rm -r ~/.config/powerline
             rm -r ~/.config/rofi
-            rm -r ~/.icons
-            rm -r ~/.fonts
             rm ~/.zshrc
         fi
         echo "restore office setup"
@@ -65,9 +63,6 @@ if [ "$setup" = "office" ]; then
         echo "backing up office setup"
         rsync -a ~/.config/powerline ~/solutions/dotfiles/work/powerline
         rsync -a ~/.config/rofi ~/solutions/dotfiles/work/rofi
-        rsync -a ~/.icons ~/solutions/dotfiles/work/icons
-        rsync -a ~/.fonts/ ~/solutions/dotfiles/work/
-        rsync -a ~/.themes/ ~/solutions/dotfiles/work/
         rsync -a ~/.zshrc ~/solutions/dotfiles/work/
     fi
 # Run personal specific tasks
