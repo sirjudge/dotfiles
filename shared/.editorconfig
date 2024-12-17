@@ -2,19 +2,23 @@
 # top-most EditorConfig file
 root = true
 
-[{Makefile,**.mk}]
-# Use tabs for indentation (Makefiles require tabs)
-indent_style = tab
-
-
-# Default settings:
-# A newline ending every file
-# Use 4 spaces as indentation
 [*]
+# new line automatically added at end of file
+# This is good practice for a better cross-machine compatibility with how each
+# operating system handles new lines (hint: they don't)
 insert_final_newline = true
+
+# default indentation is 4 spaces instead of tabs
 indent_style = space
 indent_size = 4
+
+# auto trim any whitespace at the end of a line
 trim_trailing_whitespace = true
+
+# Set makefile indent style to tab
+[Makefile]
+indent_style = tab
+
 
 [project.json]
 indent_size = 2
@@ -23,7 +27,6 @@ indent_size = 2
 [*{_AssemblyInfo.cs,.notsupported.cs}]
 generated_code = true
 
-# C# files
 [*.cs]
 # New line preferences
 csharp_new_line_before_open_brace = all
@@ -161,18 +164,13 @@ csharp_space_between_method_declaration_parameter_list_parentheses = false
 csharp_space_between_parentheses = false
 csharp_space_between_square_brackets = false
 
-# License header
-#file_header_template = Licensed to the .NET Foundation under one or more agreements.\nThe .NET Foundation licenses this file to you under the MIT license.
-
-# C++ Files
-[*.{cpp,h,in}]
-curly_bracket_next_line = true
-indent_brace_style = Allman
-
-# Xml project files
+# Xml project files, most are unlikely to be used but in the
+# case they are, they should be honored
 [*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,nativeproj,locproj}]
 indent_size = 2
 
+# Set a speciiic charset for all project files that support
+#UTF-8
 [*.{csproj,vbproj,proj,nativeproj,locproj}]
 charset = utf-8
 
@@ -198,3 +196,17 @@ end_of_line = lf
 
 [*.{cmd,bat}]
 end_of_line = crlf
+
+[*.rs]
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+indent_style = space
+indent_size = 4
+max_line_length = 120
+
+[*.md]
+# double whitespace at end of line
+# denotes a line break in Markdown
+trim_trailing_whitespace = false

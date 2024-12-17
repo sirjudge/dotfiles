@@ -1,9 +1,9 @@
 return {
     {
         'rose-pine/neovim',
-        -- config = function()
-        --     vim.cmd.colorscheme('rose-pine-moon')
-        -- end
+        config = function()
+            vim.cmd.colorscheme('rose-pine-moon')
+        end
     },
     {
         "folke/tokyonight.nvim",
@@ -14,12 +14,15 @@ return {
     {
         "catppuccin/nvim",
         name = "catppuccin",
+        -- config = function()
+        --     vim.cmd.colorscheme('catppuccin')
+        -- end
     },
     {
         "nyoom-engineering/oxocarbon.nvim",
-        config = function()
-            vim.cmd.colorscheme('oxocarbon')
-        end
+        -- config = function()
+        --     vim.cmd.colorscheme('oxocarbon')
+        -- end
     }
 }
 
