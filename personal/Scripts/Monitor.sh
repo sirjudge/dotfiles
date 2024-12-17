@@ -71,8 +71,7 @@ if [ "$action" = "on" ] && [ "$setup" = "officeDouble" ]; then
 elif  [ "$action" = "on" ] && [ "$setup" = "officeMain" ]; then
     xrandr \
         --output eDP-1-1 --mode 1920x1080 --rate 144.00 --pos 0x0 \
-        --output DP-0.2 --mode 1920x1080 --rate 239.76 --pos 4480x0 \
-        --output DP-0.3 --mode 1920x1080 --rate 60.00 --pos 0x1080 \
+        --output DP-0.2 --mode 1920x1080 --rate 143.98 --pos 4480x0 \
         --output DP-0.1 --mode 2560x1440 --rate 144.00 --pos 1920x0 --primary \
 # ( but in 1080p)
 elif  [ "$action" = "on" ] && [ "$setup" = "officeGaming1080" ]; then
