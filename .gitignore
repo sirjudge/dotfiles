@@ -1,0 +1,19 @@
+# ignore gzip files
+*.gz
+
+# sometimes configs like to generate noisy node files, begone with them
+node_modules/
+*/node_modules/
+
+# ignore any build directories
+build/
+*/build/
+
+# also ignore any possible .idea or .vscode directories in case they accidentally get added
+.idea/
+.vscode/
+
+# Make especially sure no .env files make it in
+.env
+*.env
+*.env.*

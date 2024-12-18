@@ -95,7 +95,7 @@ if [ "$archive" = "1" ]; then
     todaysDate=$(date +%Y%m%d)
 
     # Compress the config file and rename it
-    gzip -c config_file > ".config_${todaysDate}.gz"
+    gzip -c config_file > "config_${todaysDate}.gz"
 fi
 
 
