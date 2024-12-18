@@ -1,5 +1,4 @@
 [general]
-#import = ["~/.config/alacritty/themes/oxcarbon.toml"]
 import = ["~/.config/alacritty/themes/rose-pine-moon.toml"]
 
 [window]
@@ -9,13 +8,13 @@ opacity = 0.9
 decorations_theme_variant = "Dark"
 
 [font.normal]
-family = "JetbrainsMono Nerd Font"
+#family = "JetbrainsMono Nerd Font"
 
-[font.bold]
-family = "JetbrainsMono Nerd Font"
-
-[font.italic]
-family = "JetbrainsMono Nerd Font"
+# [font.bold]
+# family = "JetbrainsMono Nerd Font"
+#
+# [font.italic]
+# family = "JetbrainsMono Nerd Font"
 
 [selection]
 save_to_clipboard = true

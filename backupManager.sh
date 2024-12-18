@@ -87,8 +87,6 @@ if [ "$interactive" = "1" ]; then
     fi
 fi
 
-#TODO: Hard forcing archive value to true for now
-archive="1"
 if [ "$archive" = "1" ]; then
     echo "archiving existing .config/ folders"
     # Get today's date in YYYYMMDD format
