@@ -99,127 +99,16 @@ fi
 
 # Run office specific tasks
 if [ "$setup" = "office" ]; then
-    # Clean existing files and folders
-    # copy or back up office files
-    if [ "$action" = "restore" ]; then
-        if [ "$clean" = "true" ]; then
-            echo "cleaning existing .config files in office setup"
-            rm -r ~/.config/powerline
-            rm -r ~/.config/rofi
-            rm ~/.zshrc
-        fi
-        echo "restore office setup"
-    elif [ "$action" = "backup" ]; then
-        # delete current work folder
-        if [ "$clean" = "true" ]; then
-            echo "cleaning existing files and folders from work/ backup folder"
-            rm -rf ~/solutions/dotfiles/work/*
-        fi
-        # Remake new directory folders
-        if [ ! -d ~/solutions/dotfiles/work ]; then
-            mkdir ~/solutions/dotfiles/work/
-            mkdir ~/solutions/dotfiles/work/tmux
-            mkdir ~/solutions/dotfiles/work/icons
-            mkdir ~/solutions/dotfiles/work/fonts
-        fi
+    # run backupWork.sh file
+    ./backupWork.sh "$action" "$clean"
 
-        echo "backing up office setup"
-        rsync -a ~/.config/powerline ~/solutions/dotfiles/work/powerline
-        rsync -a ~/.config/rofi ~/solutions/dotfiles/work/rofi
-        rsync -a ~/.zshrc ~/solutions/dotfiles/work/
-    fi
 # Run personal specific tasks
 elif [ "$setup" = "personal" ]; then
-    if [ "$action" = "restore" ]; then
-        if [ "$clean" = "true" ]; then
-            echo "cleaning .config/"
-            rm -rf ~/.config/i3
-            rm -rf ~/.config/nitrogen
-            rm -rf ~/.config/rofi
-            rm -rf ~/.config/polybar
-            rm -rf ~/.config/picom
-            rm -rf ~/Tools/Scripts
-            rm -rf ~/.config/i3status-rust
-        fi
-        echo "copying personal setup"
-    elif [ "$action" = "backup" ]; then
-        if [ "$clean" = "true" ]; then
-            echo "cleaning dotfiles/peronsal/"
-            rm -r ~/solutions/dotfiles/personal/*
-        fi
-        echo "backing up .config/ files to dotfiles/personal"
-        rsync -a ~/.config/i3 ~/solutions/dotfiles/personal/
-        rsync -a ~/.config/nitrogen ~/solutions/dotfiles/personal/
-        rsync -a ~/.config/rofi ~/solutions/dotfiles/personal/
-        rsync -a ~/.config/polybar ~/solutions/dotfiles/personal/
-        rsync -a ~/.config/picom ~/solutions/dotfiles/personal/
-        rsync -a ~/.fonts ~/solutions/dotfiles/personal/
-        rsync -a ~/Tools/Scripts ~/solutions/dotfiles/personal/
-        rsync -a ~/.config/i3status-rust ~/solutions/dotfiles/personal/
-    fi
+    ./backupPersonal.sh "$action" "$clean"
 fi
 
-# Run cleanup on shared files
-if [ "$clean" = "true" ]; then
-    if [ "$action" = "copy" ]; then
-        echo "cleaning shared .config/ folders"
-        rm -r ~/.config/nvim
-        rm -r ~/.config/tmux
-        rm -r ~/.config/kitty
-        rm -r ~/.config/alacritty
-        rm -r ~/.config/tmux
-        rm ~/solutions/.editorconfig
-    elif [ "$action" = "backup" ]; then
-        echo "cleaning dotfiles/shared/"
-        if [ -d ~/solutions/dotfiles/shared/nvim ]; then
-            rm -r ~/solutions/dotfiles/shared/nvim
-        fi
-        if [ -d ~/solutions/dotfiles/shared/tmux ]; then
-            rm -r ~/solutions/dotfiles/shared/tmux
-        fi
-        if [ -d ~/solutions/dotfiles/shared/kitty ]; then
-            rm -r ~/solutions/dotfiles/shared/kitty
-        fi
-        if [ -d ~/solutions/dotfiles/shared/alacritty ]; then
-            rm -r ~/solutions/dotfiles/shared/alacritty
-        fi
-        if [ -f ~/solutions/.editorconfig ]; then
-            rm ~/solutions/dotfiles/shared/.editorconfig
-        fi
-    fi
-fi
+./backupShared.sh "$action" "$clean"
 
-# restore or backup shared files
-if [ "$action" = "restore" ]; then
-    echo "restoring dotfiles/shared to .config/ folders"
-    rsync -a ~/solutions/dotfiles/shared/nvim/ ~/.config/nvim/
-    rsync -a ~/solutions/dotfiles/shared/tmux/ ~/.config/tmux/
-    rsync -a ~/solutions/dotfiles/shared/kitty/ ~/.config/kitty/
-    rsync -a ~/solutions/dotfiles/shared/alacritty/ ~/.config/alacritty/
-    rsync -a ~/solutions/dotfiles/shared/.editorconfig ~/solutions/
-elif [ "$action" = "backup" ]; then
-    echo "backing up shared .config/ folders"
-
-    # create shared folder if it does not exist
-    if [ ! -d ~/solutions/dotfiles/shared ]; then
-        echo "creating dotfiles/shared folder"
-        mkdir ~/solutions/dotfiles/shared
-    fi
-
-    if [ ! -d ~/solutions/dotfiles/shared/tmux ]; then
-        echo "creating tmux folder in dotfiles/shared folder"
-        mkdir ~/solutions/dotfiles/shared/tmux
-    fi
-
-    echo "copying tmux config to dotfiles/shared/tmux"
-    cp ~/.config/tmux/tmux.conf ~/solutions/dotfiles/shared/tmux/.
-
-    echo "backing up nvim, kitty, alacritty, and .editor config"
-    rsync -a ~/.config/nvim/ ~/solutions/dotfiles/shared/nvim/
-    rsync -a ~/.config/kitty/ ~/solutions/dotfiles/shared/kitty/
-    rsync -a ~/.config/alacritty/ ~/solutions/dotfiles/shared/alacritty/
-    rsync -a ~/solutions/.editorconfig ~/solutions/dotfiles/shared/
-fi
 
 currentPath=$(pwd)
 
@@ -229,11 +118,11 @@ if [ "$action" = "backup" ]; then
         read gitPush -r
         if [ "$gitPush" = "y" ]; then
             echo "pushing changes to git"
-            cd ~/solutions/dotfiles
+            cd ~/solutions/dotfiles || return
             git add .
             git commit -m "Automated file backup"
             git push
-            cd "$currentPath"
+            cd "$currentPath" || return
         fi
     else
         echo "no changes detected, exiting"
