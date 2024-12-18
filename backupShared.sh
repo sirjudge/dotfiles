@@ -1,10 +1,9 @@
 #!/bin/bash
-
 # Declare input args
 action="$1"
 clean="$2"
-
-# Run cleanup on shared files
+backup="$3"
+# ============== CLEAN UP ==============
 if [ "$clean" = "true" ]; then
     if [ "$action" = "copy" ]; then
         echo "cleaning shared .config/ folders"
@@ -34,7 +33,22 @@ if [ "$clean" = "true" ]; then
     fi
 fi
 
-# restore or backup shared files
+# ============== BACKUP ==============
+if [ "$backup" = "1" ]; then
+    echo "backing up personal setup"
+    if [ ! -d ~/.config/config_backup ]; then
+        mkdir ~/.config/config_backup
+    fi
+    cp -r ~/.config/nvim ~/.config/config_backup/nvim
+    cp -r ~/.config/tmux ~/.config/config_backup/tmux
+    cp -r ~/.config/kitty ~/.config/config_backup/kitty
+    cp -r ~/.config/alacritty ~/.config/config_backup/alacritty
+    cp -r ~/.solutions/.editorconfig ~/solutions/.editorconfig_backup
+    echo "finished backuing up personal setup"
+fi
+
+
+# ============== RESTORE ==============
 if [ "$action" = "restore" ]; then
     echo "restoring dotfiles/shared to .config/ folders"
     rsync -a ~/solutions/dotfiles/shared/nvim/ ~/.config/nvim/
@@ -42,7 +56,12 @@ if [ "$action" = "restore" ]; then
     rsync -a ~/solutions/dotfiles/shared/kitty/ ~/.config/kitty/
     rsync -a ~/solutions/dotfiles/shared/alacritty/ ~/.config/alacritty/
     rsync -a ~/solutions/dotfiles/shared/.editorconfig ~/solutions/
-elif [ "$action" = "backup" ]; then
+    echo "finished restoring personal setup"
+    exit 0
+fi
+
+# ============== BACKUP ==============
+if [ "$action" = "backup" ]; then
     echo "backing up shared .config/ folders"
 
     # create shared folder if it does not exist
@@ -64,4 +83,7 @@ elif [ "$action" = "backup" ]; then
     rsync -a ~/.config/kitty/ ~/solutions/dotfiles/shared/kitty/
     rsync -a ~/.config/alacritty/ ~/solutions/dotfiles/shared/alacritty/
     rsync -a ~/solutions/.editorconfig ~/solutions/dotfiles/shared/
+
+    echo "finished backing up shared .config/ folders"
+    exit 0
 fi

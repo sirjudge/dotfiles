@@ -92,16 +92,16 @@ archive="1"
 if [ "$archive" = "1" ]; then
     echo "archiving existing .config/ folders"
     # Get today's date in YYYYMMDD format
-    todaysDate=$(date +%Y%m%d)
+    todaysDate=$(date +%Y%m%d%H%M%S)
 
     # Compress the config file and rename it
-    gzip -c config_file > "config_${todaysDate}.gz"
+    cp -r "$HOME/.config" "$HOME/.config_$todaysDate"
 fi
 
 
 # Run office specific tasks
 if [ "$setup" = "office" ]; then
-    ./backupWork.sh "$action" "$clean" "$sourceBackup" "$archive"
+    ./backupWork.sh "$action" "$clean" "$sourceBackup" "$archive" "$archive"
 
 # Run personal specific tasks
 elif [ "$setup" = "personal" ]; then
