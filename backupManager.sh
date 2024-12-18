@@ -7,7 +7,7 @@ while getopts 'a:s:c:sohi' flag; do
         s) setup="${OPTARG}" ;;
         c) clean="${OPTARG}" ;;
         o) sourceBackup="${OPTARG}" ;;
-        i) interactive=1 ;;
+        i) interactive="1" ;;
         h) echo\
             "i => [i]nteractive"\
             "a => [a]ction (restore/backup)${NEWLINE}"\
@@ -21,8 +21,8 @@ while getopts 'a:s:c:sohi' flag; do
 done
 
 # Validation if interaactive flag is not set
-if [ $interactive = 0 ]; then
-    if [ "$action" = "" ]; then
+if [ "$interactive" == "0" ]; then
+    if [ "$action" == "" ]; then
         echo "Please provide an action to perform using the -a flag: '-a {restore/backup}'${NEWLINE}"
         exit 1
     fi
@@ -34,8 +34,7 @@ if [ $interactive = 0 ]; then
 fi
 
 # Validation if interactive is set
-
-if [ $interactive = 1 ]; then
+if [ "$interactive" = "1" ]; then
     echo "Enter the setup to work on ([o]ffice/[p]ersonal):"
     read setup_input -r
     if [ "$setup_input" = "o" ]; then

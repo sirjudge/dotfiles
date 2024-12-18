@@ -67,7 +67,6 @@ return {
                     --require('cmp_nvim_lsp').default_capabilities()
                 )
 
-                
                 -- LspAttach is where you enable features that only work
                 -- if there is a language server active in the file
                 vim.api.nvim_create_autocmd('LspAttach', {
@@ -97,6 +96,12 @@ return {
                             javascript = true
                         }
                     }
+                }))
+
+                require('lspconfig').bashls.setup(coq.lsp_ensure_capabilities({
+                    capabilities = capabilities,
+                    cmd = { "bash-language-server", "start" },
+                    filetypes = { "sh", "bash" },
                 }))
 
                 -- These are just examples. Replace them with the language

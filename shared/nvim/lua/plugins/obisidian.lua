@@ -20,9 +20,17 @@ return {
   opts = {
       workspaces = {
           {
-              name = "personal",
-              path = "~/vaults",
+              name = "personalSync",
+              path = "~/vaults/PersonalSync/",
           },
+            {
+                name = "workSync",
+                path = "~/vaults/WorkSync/",
+            },
+            {
+                name = "thoughts",
+                path = "~/vaults/Thoughts/",
+            }
       },
       -- Optional, completion of wiki links, local markdown links, and tags using nvim-cmp.
       completion = {
