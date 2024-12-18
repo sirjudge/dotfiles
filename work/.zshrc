@@ -1,6 +1,7 @@
 #Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+
 alias nvim="/usr/local/bin/nvim"
 export EDITOR='nvim'
 export VISUAL='nvim'
@@ -144,7 +145,7 @@ alias editEnv="nvim ~/solutions/envFiles/."
 alias vim="nvim"
 
 # tmux
-alias cls="clear; ls -a"
+alias cls="clear;"
 alias tmuxReload="tmux source  ~/.config/tmux/tmux.conf"
 alias tmuxNew="tmux new -s"
 alias tmuxAttach="tmux attach -t"
