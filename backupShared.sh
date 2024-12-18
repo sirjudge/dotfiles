@@ -2,16 +2,17 @@
 # Declare input args
 action="$1"
 clean="$2"
-backup="$3"
+archive="$3"
 
 # ============== BACKUP ==============
-if [ "$backup" = "1" ]; then
+if [ "$archive" = "1" ]; then
     echo "backing up personal setup"
     if [ ! -d ~/.config/config_backup ]; then
         mkdir ~/.config/config_backup
+        mkdir ~/.config/config_backup/tmux
     fi
     cp -r ~/.config/nvim ~/.config/config_backup/nvim
-    cp -r ~/.config/tmux ~/.config/config_backup/tmux
+    cp -r ~/.config/tmux/tmux.conf ~/.config/config_backup/tmux/
     cp -r ~/.config/kitty ~/.config/config_backup/kitty
     cp -r ~/.config/alacritty ~/.config/config_backup/alacritty
     cp -r ~/.solutions/.editorconfig ~/solutions/.editorconfig_backup
