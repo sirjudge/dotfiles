@@ -1,6 +1,4 @@
 #!/bin/bash
-
-
 # Declare input args
 action="$1"
 clean="$2"
@@ -20,9 +18,20 @@ if [ "$action" = "restore" ]; then
         rm -r ~/.config/powerline
         rm -r ~/.config/rofi
         rm ~/.zshrc
+        rm -r ~/.config/tmux
     fi
-    echo "restore office setup"
-elif [ "$action" = "backup" ]; then
+
+    # copy files from this repo to the .config fodler location
+    echo "restoring office setup"
+    rsync -a ~/solutions/dotfiles/work/powerline ~/.config/
+    rsync -a ~/solutions/dotfiles/work/rofi ~/.config/
+    rsync -a ~/solutions/dotfiles/work/.zshrc ~/
+    rsync -a ~/solutions/dotfiles/work/tmux ~/.config/
+
+    echo "finished restoring office setup"
+fi
+
+if [ "$action" = "backup" ]; then
     # delete current work folder
     if [ "$clean" = "true" ]; then
         echo "cleaning existing files and folders from work/ backup folder"
@@ -32,8 +41,6 @@ elif [ "$action" = "backup" ]; then
     if [ ! -d ~/solutions/dotfiles/work ]; then
         mkdir ~/solutions/dotfiles/work/
         mkdir ~/solutions/dotfiles/work/tmux
-        mkdir ~/solutions/dotfiles/work/icons
-        mkdir ~/solutions/dotfiles/work/fonts
     fi
 
     echo "backing up office setup"
