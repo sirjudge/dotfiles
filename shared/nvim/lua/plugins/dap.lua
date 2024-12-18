@@ -8,7 +8,7 @@ return {
                 command = '/home/nicholas.judge/tools/netcoredbg',
                 args = {'--interpreter=vscode'}
             }
-            
+
             dap.configurations.cs = {
                 type = "coreclr",
                 name = "launch - netcoredbg",
@@ -19,7 +19,7 @@ return {
             }
         end
     },
-    { 
+    {
         "rcarriga/nvim-dap-ui",
         dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
         config = function()

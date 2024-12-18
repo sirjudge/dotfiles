@@ -47,9 +47,6 @@ return {
                 copilot_node_command = 'node', -- Node.js version must be > 18.x
                 server_opts_overrides = {},
             })
-            --vim.api.nvim_set_keymap('i','<Tab>','copilot#Accept("<CR>")', {expr = true, silent=true})
-            --vim.api.nvim_set_keymap('i','<S-Tab>','copilot#Accept("<CR>")', {expr = true, silent=true})
-            --vim.g.copilot_filetypes = { VimspectorPrompt = false }
         end
     },
     {
@@ -63,7 +60,8 @@ return {
         opts = {
             debug = false, -- Enable debug logging
             --model = 'gpt-4o', -- GPT model to use, 'gpt-3.5-turbo', 'gpt-4', or 'gpt-4o'
-            model = 'claude-3.5-sonnet', -- GPT model to use, 'gpt-3.5-turbo', 'gpt-4', or 'gpt-4o'
+            --model = 'claude-3.5-sonnet', -- GPT model to use, 'gpt-3.5-turbo', 'gpt-4', or 'gpt-4o'
+            model = 'gpt-4o',
             temperature = 0.1, -- GPT temperature
 
             question_header = '## User ', -- Header to use for user questions
@@ -116,8 +114,6 @@ return {
             { "<leader>ae", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
             { "<leader>at", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
             { "<leader>ar", "<cmd>CopilotChatReview<cr>", desc = "CopilotChat - Review code" },
-            { "<leader>an", "<cmd>CopilotChatBetterNamings<cr>", desc = "CopilotChat - Better Naming" },
-            -- Chat with Copilot in visual mode
             {
                 "<leader>av",
                ":CopilotChatVisual",

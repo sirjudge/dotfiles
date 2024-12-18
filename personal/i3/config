@@ -9,7 +9,8 @@ bindsym $mod+Return exec alacritty
 # = borders =#
 # ===========#
 for_window [class="^.*"] border pixel 0
-exec_always --no-startup-id /home/nico/Tools/xborder/xborders & 
+#exec_always --no-startup-id /home/nico/Tools/xborder/xborders & 
+
 #=========#
 #= Colors #
 #=========#
@@ -53,7 +54,7 @@ gaps outer 5px
 # start Compositor and set background
 #exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
 exec_always --no-startup-id picom &
-exec --no-startup-id nitrogen --set-zoom-fill ~/Pictures/hypeBeast.png
+exec --no-startup-id nitrogen --set-zoomfill ~/Pictures/pikachu_jellies.png
 
 #========#
 #= Rofi =#
@@ -65,12 +66,9 @@ bindsym $mod+Shift+d exec /home/nico/Documents/applications/rofi-network-manager
 #==============#
 #= Screenshot =#
 #==============#
-# BUG: for some reason this is not working
-# mod+x and mod+Shift+x keybinds are find but script now running? also when it was 
-# Scrot it still wasn't working. feels bad man. . . 
-bindsym $mod+x exec --no-startup-id /home/nico/.config/i3/screenshotSave.sh 
-bindsym $mod+Shift+x exec --no-startup-id /home/nico/.config/i3/screenshotSelect.sh
-
+bindsym --release Print exec --no-startup-id scrot -s -e 'xclip -selection clipboard -t image/png -i $f'
+bindsym --release $mod+Print exec --no-startup-id scrot -s --file '/home/nico/Pictures/Screenshots/%Y-%m-%d_$wx$h_scrot.png'
+ 
 #===============#
 #= System modes =
 #===============#
@@ -81,7 +79,6 @@ mode "$mode_system" {
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
-# back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -131,6 +128,9 @@ exec xset -dpms
 exec xset s noblank
 exec xset dpms force suspend
 exec xset dpms force on
+
+# use systemctl to turn off sleep
+exec sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
 #==================#
 #= Config options =#

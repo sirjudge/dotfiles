@@ -45,7 +45,8 @@ return {
             cmd = 'LspInfo',
             event = {'BufReadPre', 'BufNewFile'},
             dependencies = {
-                {'hrsh7th/cmp-nvim-lsp'},
+--                {'hrsh7th/cmp-nvim-lsp'},
+                { 'saghen/blink.cmp' }
             },
             init = function()
                 -- Reserve a space in the gutter
@@ -53,15 +54,17 @@ return {
                 vim.opt.signcolumn = 'yes'
             end,
             config = function()
-                local lsp_defaults = require('lspconfig').util.default_config
+                local lsp_config = require('lspconfig').util.default_config
                 local coq = require('coq')
+                local capabilities = require('blink.cmp').get_lsp_capabilities()
 
                 -- Add cmp_nvim_lsp capabilities settings to lspconfig
                 -- This should be executed before you configure any language server
-                lsp_defaults.capabilities = vim.tbl_deep_extend(
+                lsp_config.capabilities = vim.tbl_deep_extend(
                     'force',
-                    lsp_defaults.capabilities,
-                    require('cmp_nvim_lsp').default_capabilities()
+                    lsp_config.capabilities,
+                    capabilities
+                    --require('cmp_nvim_lsp').default_capabilities()
                 )
 
                 -- LspAttach is where you enable features that only work
@@ -84,6 +87,7 @@ return {
                 })
 
                 require'lspconfig'.html.setup(coq.lsp_ensure_capabilities({
+                    capabilities = capabilities,
                     filetypes = { "html", "cshtml" },
                     init_options = {
                         configurationSection = { "html", "css", "javascript" },
@@ -94,9 +98,16 @@ return {
                     }
                 }))
 
+                require('lspconfig').bashls.setup(coq.lsp_ensure_capabilities({
+                    capabilities = capabilities,
+                    cmd = { "bash-language-server", "start" },
+                    filetypes = { "sh", "bash" },
+                }))
+
                 -- These are just examples. Replace them with the language
                 -- servers you have installed in your system
                 require('lspconfig').gopls.setup(coq.lsp_ensure_capabilities({
+                    capabilities = capabilities,
                     cmd = {"gopls", "serve"},
                     settings = {
                         gopls = {
@@ -108,6 +119,7 @@ return {
 
 
                 require'lspconfig'.lua_ls.setup(coq.lsp_ensure_capabilities({
+                    capabilities = capabilities,
                     on_init = function(client)
                         if client.workspace_folders then
                             local path = client.workspace_folders[1].name
@@ -141,31 +153,9 @@ return {
                     }
                 }))
 
-                require('lspconfig').prettier.setup(coq.lsp_ensure_capabilities({
-                    cli_options = {
-                        arrow_parens = "always",
-                        bracket_spacing = true,
-                        bracket_same_line = false,
-                        embedded_language_formatting = "auto",
-                        end_of_line = "lf",
-                        html_whitespace_sensitivity = "css",
-                        -- jsx_bracket_same_line = false,
-                        jsx_single_quote = false,
-                        print_width = 80,
-                        prose_wrap = "preserve",
-                        quote_props = "as-needed",
-                        semi = true,
-                        single_attribute_per_line = false,
-                        single_quote = false,
-                        tab_width = 2,
-                        trailing_comma = "es5",
-                        use_tabs = false,
-                        vue_indent_script_and_style = false,
-                    }
-                }))
-
                 require('lspconfig').ts_ls.setup(coq.lsp_ensure_capabilities(
                 {
+                    capabilities = capabilities,
                     init_options = {
                         plugins = {
                             {
@@ -183,6 +173,7 @@ return {
                 }))
 
                 require('lspconfig').eslint.setup(coq.lsp_ensure_capabilities({
+                    capabilities = capabilities,
                     on_attach = function(client, bufnr)
                         vim.api.nvim_create_autocmd("BufWritePre", {
                             buffer = bufnr,
@@ -192,6 +183,7 @@ return {
                 }))
 
                 require('lspconfig').omnisharp.setup(coq.lsp_ensure_capabilities({
+                    capabilities = capabilities,
                     cmd = { "dotnet", "/home/nicholas.judge/.local/share/nvim/mason/packages/omnisharp/libexec/OmniSharp.dll"},
                     settings = {
                         FormattingOptions = {

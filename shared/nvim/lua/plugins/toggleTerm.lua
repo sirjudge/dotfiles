@@ -3,7 +3,7 @@ return {
         'akinsho/toggleterm.nvim',
         version = "*",
         keys = {
-            {'<leader>tt', "<cmd>:ToggleTerm<CR>", desc = "Toggle terminal"},
+            {'<leader>tt', "<cmd>:ToggleTerm direction=horizontal size=20 border=curved<CR>", desc = "Toggle terminal"},
             {'<leader>tts',
             function ()
                 local trim_spaces = true
@@ -16,6 +16,10 @@ return {
             close_on_exit = true,
             start_in_insert = true,
             hide_numbers = true,
+            direction = 'vertical',
+            persist_mode = true,
+            size = 30,
+            border = 'curved'
         },
         config = function ()
             require("toggleterm").setup({})

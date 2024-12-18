@@ -1,6 +1,8 @@
 #Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+
+alias nvim="/usr/local/bin/nvim"
 export EDITOR='nvim'
 export VISUAL='nvim'
 
@@ -11,7 +13,8 @@ export BUILDKIT_PROGRESS=plain
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # set to "random" to use a random theme
 # run to view theme: echo $RANDOM_THEME
-ZSH_THEME="refined"
+#ZSH_THEME="refined"
+ZSH_THEME="rose-pine"
 
 # set to auto update
 zstyle ':omz:update' mode auto      
@@ -97,10 +100,10 @@ alias glssh="ssh -i ~/.ssh/sas/sas-private-production.pem ubuntu@10.115.5.72"
 
 
 # Awin Configurations
-alias tlptDev="tsh ssh nicholas.judge@feb2c45c-4989-4987-9fd1-d591ebed7355"
-export DOCKER_HOST="tcp://d-lhr1-docker-035.zanox.com:2375"
-export ACE_PROJECT_DIR="/home/nicholas.judge/tools/awin-container-environment/"
-export ACE_CONFIG_PATH="$HOME/.config/awin-container-environment/lhl-publisher-registration.yaml"
+#alias tlptDev="tsh ssh nicholas.judge@feb2c45c-4989-4987-9fd1-d591ebed7355"
+#export DOCKER_HOST="tcp://d-lhr1-docker-035.zanox.com:2375"
+#export ACE_PROJECT_DIR="/home/nicholas.judge/tools/awin-container-environment/"
+#export ACE_CONFIG_PATH="$HOME/.config/awin-container-environment/lhl-publisher-registration.yaml"
 
 # clean apt/old package stuff
 alias purgeApt="sudo apt autoremove && sudo apt clean"
@@ -142,7 +145,7 @@ alias editEnv="nvim ~/solutions/envFiles/."
 alias vim="nvim"
 
 # tmux
-alias cls="clear"
+alias cls="clear;"
 alias tmuxReload="tmux source  ~/.config/tmux/tmux.conf"
 alias tmuxNew="tmux new -s"
 alias tmuxAttach="tmux attach -t"
@@ -160,10 +163,8 @@ alias mailTrapAllPorts="sudo docker container run -d --rm --init --name=mailtrap
 alias stopMailTrap="sudo docker stop mailtrap"
 alias bytemarkSmtp="sudo docker run --restart always --name mailing -p 25:25 -d bytemark/smtp"
 
-#remap neovim to the appimage
-alias nvim="~/tools/nvim.appimage"
 
-#remap to jetbrains toolbox
+# jetbrains toolbox
 alias jetbrains="~/tools/jetbrains-toolbox/jetbrains-toolbox"
 alias clearRiderCache="sudo rm -r ~/.cache/JetBrains/Rider*"
 
@@ -230,6 +231,7 @@ alias compliance="cd ~/solutions/compliance"
 alias finance="cd ~/solutions/finance"
 alias nugetFolder="cd ~/solutions/NuGet/"
 alias tracking="cd ~/solutions/tracking" 
+alias cloudflare="cd ~/solutions/tracking/cloudflare" 
 alias shopify="cd /home/nicholas.judge/solutions/shopify/"
 alias shopifyApp="cd /home/nicholas.judge/solutions/shopify/shopify-app"
 alias analyticsApi="cd /home/nicholas.judge/solutions/shopify/analyticsapi"
