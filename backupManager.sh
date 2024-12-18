@@ -1,34 +1,41 @@
 #!/bin/bash
 # Configure new line and take in command line arguments
 NEWLINE=$'\n'
-while getopts 'a:s:c:sohi' flag; do
+while getopts 'a:s:c:b:sohir' flag; do
     case "${flag}" in
         a) action="${OPTARG}" ;;
         s) setup="${OPTARG}" ;;
         c) clean="${OPTARG}" ;;
         o) sourceBackup="${OPTARG}" ;;
         i) interactive="1" ;;
+        r) archive="${OPTARG}" ;;
         h) echo\
             "i => [i]nteractive"\
             "a => [a]ction (restore/backup)${NEWLINE}"\
             "s => [s]etup to work on (office/personal)${NEWLINE}"\
             "c => [c]lean existing files and folders${NEWLINE}"\
             "o => s[o]urce list backup${NEWLINE}"\
+            "r => a[r]chive existing .config${NEWLINE}"\
             "example Usage: Monitor.sh -a  backup -s office -c true"
             exit 1 ;;
-        *) echo "Invalid flag provided, exiting"; exit 1 ;;
+        *) echo "Invalid flag provided, exiting${NEWLINE}"; exit 1 ;;
     esac
 done
 
-# Validation if interaactive flag is not set
+# Validation if interactive flag is not set
 if [ "$interactive" == "0" ]; then
+    invalidInput=0
     if [ "$action" == "" ]; then
         echo "Please provide an action to perform using the -a flag: '-a {restore/backup}'${NEWLINE}"
-        exit 1
+        invalidInput=1
     fi
 
     if [ "$setup" = "" ]; then
         echo "Please provide a setup to work on using the -s flag: '-s {office/personal}'${NEWLINE}"
+        invalidInput=1
+    fi
+
+    if [ "$invalidInput" ]; then
         exit 1
     fi
 fi
@@ -80,34 +87,28 @@ if [ "$interactive" = "1" ]; then
     fi
 fi
 
-# Validation
-if [ "$setup" = "" ]; then
-    echo "Please provide a setup to work on using the -s flag: '-s {office/personal}'${NEWLINE}"
-    exit 1
+#TODO: Hard forcing archive value to true for now
+archive="1"
+if [ "$archive" = "1" ]; then
+    echo "archiving existing .config/ folders"
+    # Get today's date in YYYYMMDD format
+    todaysDate=$(date +%Y%m%d)
+
+    # Compress the config file and rename it
+    gzip -c config_file > ".config_${todaysDate}.gz"
 fi
 
-if [ "$action" = "" ]; then
-    echo "Please provide an action to perform using the -a flag: '-a {restore/backup}'${NEWLINE}"
-    exit 1
-fi
-
-# Shared folders to restore
-if [ "$sourceBackup" = "true" ]; then
-    dpkg --get-selections > ~/solutions/dotfiles/work/Package.list
-    sudo cp -R /etc/apt/sources.list* ~/solutions/dotfiles/work/
-fi
 
 # Run office specific tasks
 if [ "$setup" = "office" ]; then
-    # run backupWork.sh file
-    ./backupWork.sh "$action" "$clean"
+    ./backupWork.sh "$action" "$clean" "$sourceBackup" "$archive"
 
 # Run personal specific tasks
 elif [ "$setup" = "personal" ]; then
-    ./backupPersonal.sh "$action" "$clean"
+    ./backupPersonal.sh "$action" "$clean" "$archive"
 fi
 
-./backupShared.sh "$action" "$clean"
+./backupShared.sh "$action" "$clean" "$archive"
 
 
 currentPath=$(pwd)
