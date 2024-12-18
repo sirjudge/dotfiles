@@ -1,8 +1,9 @@
 # My ricing DotFiles
-## Overview
-### Description
+# Overview
+## Description
 Back up of work and personal configuration files with a simple bash script to back up or restore files
 
+## Dependencies
 ### Personal
 - [i3wm](https://i3wm.org/docs/)
 - [i3status-rust](https://github.com/greshake/i3status-rust)
@@ -19,18 +20,27 @@ Back up of work and personal configuration files with a simple bash script to ba
 - [tmux](https://github.com/tmux/tmux/wiki)
 - [alacritty](https://alacritty.org/)
 
-## Setup and runtime
-### Shell commands
-- if script is not executable
-- Run backupManager.sh script
+# Setup and runtime
+## Shell commands
+### If scripts are not executable
 ```shell
+    chmod +x backupManager.sh
+    chmod +x backupPersonal.sh
+    chmod +x backupWork.sh
+    chmod +x backupShared.sh
+```
+### running backupManager.sh script
+```shell
+# example command
+backupManager.sh -a {backup/restore} -s {office/personal} -c {true/false}
+
 # Back up work folders:
 backupManager.sh -a backup -s office -c true;
 
 # Restore work configs
 backupManager.sh -a restore -s office -c true;
 ```
-### CLI Flags
+## CLI Flags
 | Flag | Description |
 |------|-------------|
 | `-i` | interactive mode or not |
