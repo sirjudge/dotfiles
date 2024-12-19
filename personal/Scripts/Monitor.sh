@@ -12,18 +12,18 @@ while getopts 'a:s:h' flag; do
         a) action="${OPTARG}" ;;
         s) setup="${OPTARG}" ;;
         h) echo "Usage: Monitor.sh -a <action> -s <setup>"; exit 1 ;;
-        *) echo "Unknown flag passed in flag:{$flag}"; exit 1 ;;
     esac
 done
 
 # if setup is true move to accept user input
 if [ "$setup" = "true" ]; then
     echo "enabling set up"
-    action="on"
+    $action="on"
+
     echo "select a room"
     echo "1) Bedroom"
     echo "2) Gaming"
-    read room -r
+    read room
     case $room in
         1)
             echo "selected bredroom. Select setup"
@@ -32,13 +32,13 @@ if [ "$setup" = "true" ]; then
             echo "selected Gaming. Select setup"
             echo "1) Dual wide"
             echo "2) Gaming"
-            read monitorType -r
-            if [ "$monitorType" -eq "1" ]; then
+            read monitorType
+            if ["$monitorType" -eq "1"]; then
                 echo "setting dual wide"
-                action=officeGaming
-            elif [ "$monitorType" -eq "2" ]; then
+                $action=officeGaming
+            elif ["$monitorType" -eq "2"]; then
                 echo "setting gaming"
-                action=officeGaming
+                $action=officeGaming
             fi
             ;;
         *)
@@ -51,7 +51,7 @@ fi
 
 # if action is off disable everything
 if [ "$action" = "off" ]; then
-    echo "disabling all monitors except eDP-1-1"
+    echo "Turn off both external monitors"
     xrandr --output DP-0.1 --off --verbose
     xrandr --output DP-0.2 --off --verbose
     xrandr --output DP-0.3 --off --verbose
@@ -71,14 +71,14 @@ if [ "$action" = "on" ] && [ "$setup" = "officeDouble" ]; then
 elif  [ "$action" = "on" ] && [ "$setup" = "officeMain" ]; then
     xrandr \
         --output eDP-1-1 --mode 1920x1080 --rate 144.00 --pos 0x0 \
-        --output DP-0.2 --mode 1920x1080 --rate 143.98 --pos 4480x0 --rotate left\
+        --output DP-0.2 --mode 1920x1080 --rate 143.98 --pos 4480x0 \
         --output DP-0.1 --mode 2560x1440 --rate 144.00 --pos 1920x0 --primary \
 # ( but in 1080p)
 elif  [ "$action" = "on" ] && [ "$setup" = "officeGaming1080" ]; then
     xrandr \
         --output eDP-1-1 --mode 1920x1080 --rate 144.00 --pos 0x0 --primary \
         --output DP-0.1 --mode 1920x1080 --pos 1920x0 \
-        --output DP-0.2 --mode 1920x1080 --rate 239.76 --pos 3840x0 --rotate left\
+        --output DP-0.2 --mode 1920x1080 --rate 239.76 --pos 3840x0 \
         --output DP-0.3 --mode 1920x1080 --rate 60.00 --pos 0x-1080 \
 # | Laptop | Acer |
 elif [ "$action" = "on" ] && [ "$setup" = "bedroom" ]; then

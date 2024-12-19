@@ -35,11 +35,12 @@ return {
                 default = { 'lsp', 'path', 'snippets', 'buffer' },
                 -- optionally disable cmdline completions
                 -- cmdline = {},
+                completion = {
+                    enabled_providers = { 'ecolog', 'lsp', 'path', 'snippets', 'buffer' },
+                },
                 providers = {
-                    copilot = {
-                        name = "copilot",
-                        module = "blink-cmp-copilot",
-                    },
+                    copilot = { name = "copilot", module = "blink-cmp-copilot" },
+                    ecolog = { name = 'ecolog', module = 'ecolog.integrations.cmp.blink_cmp' },
                 }
             },
 
