@@ -16,18 +16,13 @@ if [ "$action" = "restore" ]; then
     if [ "$clean" = "true" ]; then
         echo "cleaning existing .config files in office setup"
         rm -r ~/.config/powerline
-        rm -r ~/.config/rofi
         rm ~/.zshrc
-        rm -r ~/.config/tmux
     fi
 
     # copy files from this repo to the .config fodler location
     echo "restoring office setup"
     rsync -a ~/solutions/dotfiles/work/powerline ~/.config/
-    rsync -a ~/solutions/dotfiles/work/rofi ~/.config/
     rsync -a ~/solutions/dotfiles/work/.zshrc ~/
-    rsync -a ~/solutions/dotfiles/work/tmux ~/.config/
-
     echo "finished restoring office setup"
 fi
 
@@ -40,11 +35,9 @@ if [ "$action" = "backup" ]; then
     # Remake new directory folders
     if [ ! -d ~/solutions/dotfiles/work ]; then
         mkdir ~/solutions/dotfiles/work/
-        mkdir ~/solutions/dotfiles/work/tmux
     fi
 
     echo "backing up office setup"
     rsync -a ~/.config/powerline ~/solutions/dotfiles/work/powerline
-    rsync -a ~/.config/rofi ~/solutions/dotfiles/work/rofi
     rsync -a ~/.zshrc ~/solutions/dotfiles/work/
 fi

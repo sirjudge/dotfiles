@@ -9,12 +9,12 @@ if [ "$backup" = "1" ]; then
         mkdir ~/.config/config_backup
     fi
 
-    cp -r ~/.config/i3 ~/.config/config_backup
-    cp -r ~/.config/nitrogen ~/.config/config_backup/nitrogen
-    cp -r ~/.config/rofi ~/.config/config_backup/rofi
-    cp -r ~/.config/picom ~/.config/config_backup/picom
-    cp -r ~/Tools/Scripts/ ~/.config/config_backup/picom
-    cp -r ~/.config/i3status-rust ~/.config/config_backup/i3status-rust
+    cp -r ~/.config/i3 ~/.config/config_backup/
+    cp -r ~/.config/nitrogen ~/.config/config_backup/
+    cp -r ~/.config/rofi ~/.config/config_backup/
+    cp -r ~/.config/picom ~/.config/config_backup/
+    cp -r ~/Tools/Scripts/ ~/Tools/Scripts_backup
+    cp -r ~/.config/i3status-rust ~/.config/config_backup/
 
     echo "finished backuing up personal setup"
 fi
