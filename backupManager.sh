@@ -108,9 +108,7 @@ fi
 
 ./backupShared.sh "$action" "$clean" "$archive"
 
-
 currentPath=$(pwd)
-
 if [ "$action" = "backup" ]; then
     if [ -n "$(git status --porcelain)" ]; then
         echo "Changes detected, do you want to push changes to git? (y/n)"
