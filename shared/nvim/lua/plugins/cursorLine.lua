@@ -1,3 +1,5 @@
+-- Highlights the current word and line the cursor is on
+-- to increase readability
 return {
     {
         "yamatsum/nvim-cursorline",

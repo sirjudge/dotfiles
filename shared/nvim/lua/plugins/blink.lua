@@ -1,68 +1,75 @@
 return {
     {
+        "giuxtaposition/blink-cmp-copilot",
+        config = function()
+            require("copilot").setup({
+                suggestion = { enabled = false },
+                panel = { enabled = false },
+            })
+        end,
+    },
+    {
+        'saghen/blink.compat',
+        version = '*',
+        lazy = true,
+        opts = {},
+    },
+    {
         'saghen/blink.cmp',
-        lazy = false, -- lazy loading handled internally
-        -- optional: provides snippets for the snippet source
+        lazy = false,
         dependencies = 'rafamadriz/friendly-snippets',
-
-        -- use a release tag to download pre-built binaries
-        version = 'v0.*',
-        keymap = { preset = 'default' },
-
+        version = '*',
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
         opts = {
-            -- 'default' for mappings similar to built-in completion
-            -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
-            -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
-            -- see the "default configuration" section below for full documentation on how to define
-            -- your own keymap.
-            keymap = { preset = 'default' },
+            keymap = { 
+                preset = 'none', 
+                ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+                ['<C-e>'] = { 'hide', 'fallback' },
+                ['<CR>'] = { 'accept', 'fallback' },
+                ['<Tab>'] = { 'snippet_forward', 'fallback' },
+                ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
 
+                ['<Up>'] = { 'select_prev', 'fallback' },
+                ['<Down>'] = { 'select_next', 'fallback' },
+                ['<C-p>'] = { 'select_prev', 'fallback' },
+                ['<C-n>'] = { 'select_next', 'fallback' },
+                ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
+                ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
+            },
             appearance = {
-                -- Sets the fallback highlight groups to nvim-cmp's highlight groups
-                -- Useful for when your theme doesn't support blink.cmp
-                -- will be removed in a future release
                 use_nvim_cmp_as_default = true,
-                -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-                -- Adjusts spacing to ensure icons are aligned
                 nerd_font_variant = 'mono'
             },
-
-            -- default list of enabled providers defined so that you can extend it
-            -- elsewhere in your config, without redefining it, via `opts_extend`
             sources = {
-                default = { 'lsp', 'path', 'snippets', 'buffer' },
-                -- optionally disable cmdline completions
-                -- cmdline = {},
-                completion = {
-                    enabled_providers = { 'ecolog', 'lsp', 'path', 'snippets', 'buffer' },
-                },
+                default = { 'lsp', 'path', 'snippets', 'buffer', 'ecolog', 'digraphs', 'copilot' },
                 providers = {
-                    copilot = { name = "copilot", module = "blink-cmp-copilot" },
-                    ecolog = { name = 'ecolog', module = 'ecolog.integrations.cmp.blink_cmp' },
+                    copilot = {
+                        name = "copilot", module = "blink-cmp-copilot", async = true, score_offset = 100
+                    },
+                    ecolog = {
+                        name = 'ecolog', module = 'ecolog.integrations.cmp.blink_cmp'
+                    },
+                    digraphs = {
+                        name = 'digraphs', module = 'blink.compat.source'
+                    },
                 }
             },
-
-            -- experimental signature help support
-            -- signature = { enabled = true }
         },
-        -- allows extending the providers array elsewhere in your config
-        -- without having to redefine it
-        opts_extend = { "sources.default" },
-
+        opts_extend = {
+            "sources.completion.enabled_provides"
+        },
         completion = {
             keyword = {
-                -- 'prefix' will fuzzy match on the text before the cursor
-                -- 'full' will fuzzy match on the text before *and* after the cursor
-                -- example: 'foo_|_bar' will match 'foo_' for 'prefix' and 'foo__bar' for 'full'
                 range = 'prefix',
-                -- Regex used to get the text when fuzzy matching
                 regex = '[-_]\\|\\k',
-                -- After matching with regex, any characters matching this regex at the prefix will be excluded
                 exclude_from_prefix_regex = '[\\-]',
+                menu = { border = 'single' },
+                documentation = {
+                    window = { border = 'single' }
+                },
             },
         },
-
+        signature = { window = { border = 'single' } },
     }
 }
