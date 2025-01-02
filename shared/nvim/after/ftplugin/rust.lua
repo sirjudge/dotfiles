@@ -4,7 +4,7 @@ local bufnr = vim.api.nvim_get_current_buf()
 -- or vim.lsp.buf.codeAction() if you don't want grouping.
 vim.keymap.set(
     "n",
-    "<leader>a",
+    "<leader>ca",
     function()
         vim.cmd.RustLsp('codeAction')
     end,
