@@ -27,11 +27,3 @@ shell = "/bin/zsh"
 
 [mouse]
 hide_when_typing = true
-
-[keyboard]
-# force home and end keys to work properly
-bindings = [
-    { key = "Return", mods = "Control|Shift", action = "SpawnNewInstance" },
-    { key = "Home", mode = "Vi",  action = "First" },
-    { key = "End", mode = "Vi",  action = "Last" }
-]

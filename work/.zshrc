@@ -2,18 +2,18 @@
 export ZSH="$HOME/.oh-my-zsh"
 
 
+# NVIM aliases and default setups
 alias nvim="/usr/local/bin/nvim"
+alias vim="nvim"
+alias clearNvimCache="rm -rf ~/.local/share/nvim/"
 export EDITOR='nvim'
 export VISUAL='nvim'
+
 
 # enable docker proress to always be plain text
 export BUILDKIT_PROGRESS=plain
 
-# Set Theme name
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# set to "random" to use a random theme
-# run to view theme: echo $RANDOM_THEME
-#ZSH_THEME="refined"
+# Set ZSH theme
 ZSH_THEME="rose-pine"
 
 # set to auto update
@@ -139,10 +139,6 @@ alias dnewsol="dotnet new sln -n "
 alias devEnv="source ~/solutions/envFiles/dev.env"
 alias prodEnv="source ~/solutions/envFiles/prod.env"
 alias editEnv="nvim ~/solutions/envFiles/."
-
-
-# remap vim to nvim because I'm lazy sometimes
-alias vim="nvim"
 
 # tmux
 alias cls="clear;"
