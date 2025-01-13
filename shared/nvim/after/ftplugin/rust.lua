@@ -8,7 +8,10 @@ vim.keymap.set(
     function()
         vim.cmd.RustLsp('codeAction')
     end,
-    { silent = true, buffer = bufnr }
+    { 
+        silent = true,
+        buffer = bufnr 
+    }
 )
 
 -- Override Neovim's built-in hover keymap with rustaceanvim's hover actions
@@ -18,6 +21,9 @@ vim.keymap.set(
     function()
         vim.cmd.RustLsp({'hover', 'actions'})
     end,
-    { silent = true, buffer = bufnr }
+    { 
+        silent = true,
+        buffer = bufnr 
+    }
 )
 

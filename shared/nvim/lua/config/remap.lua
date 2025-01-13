@@ -1,5 +1,3 @@
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
-
 -- move highlited text up and down
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -18,7 +16,6 @@ vim.keymap.set("n", "N", "Nzzzv")
 --when pasting over something else don't put the highlted something else in the register
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
--- next greatest remap ever : asbjornHaland
 -- when in normal visual mode, leader + y copies into system clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
@@ -48,4 +45,3 @@ vim.keymap.set("n", "<C-j>", "<cmd>lua require('tmux').move_bottom()<CR>")
 vim.keymap.set("n", "<C-k>", "<cmd>lua require('tmux').move_top()<CR>")
 vim.keymap.set("n", "<C-l>", "<cmd>lua require('tmux').move_right()<CR>")
 vim.keymap.set("n", "<C-\\>", "<cmd>lua require('tmux').toggle_zoom()<CR>")
-

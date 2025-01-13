@@ -23,7 +23,8 @@ return {
         ---@type blink.cmp.Config
         opts = {
             keymap = { 
-                preset = 'super-tab', 
+                -- preset = 'super-tab', 
+                preset = 'default',
             },
             appearance = {
                 use_nvim_cmp_as_default = true,
@@ -52,12 +53,20 @@ return {
                 range = 'prefix',
                 regex = '[-_]\\|\\k',
                 exclude_from_prefix_regex = '[\\-]',
-                menu = { border = 'single' },
+                menu = { 
+                    border = 'single' 
+                },
                 documentation = {
-                    window = { border = 'single' }
+                    window = { 
+                        border = 'single' 
+                    }
                 },
             },
         },
-        signature = { window = { border = 'single' } },
+        signature = { 
+            window = {
+                border = 'single' 
+            } 
+        },
     }
 }
