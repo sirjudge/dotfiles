@@ -1,14 +1,5 @@
 return {
     {
-        "giuxtaposition/blink-cmp-copilot",
-        config = function()
-            require("copilot").setup({
-                suggestion = { enabled = false },
-                panel = { enabled = false },
-            })
-        end,
-    },
-    {
         'saghen/blink.compat',
         version = '*',
         lazy = true,
@@ -31,11 +22,8 @@ return {
                 nerd_font_variant = 'mono'
             },
             sources = {
-                default = { 'lsp', 'path', 'snippets', 'buffer', 'ecolog', 'digraphs', 'copilot' },
+                default = { 'lsp', 'path', 'snippets', 'buffer', 'ecolog', 'digraphs' },
                 providers = {
-                    copilot = {
-                        name = "copilot", module = "blink-cmp-copilot", async = true, score_offset = 100
-                    },
                     ecolog = {
                         name = 'ecolog', module = 'ecolog.integrations.cmp.blink_cmp'
                     },
