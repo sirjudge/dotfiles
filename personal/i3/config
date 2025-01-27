@@ -123,11 +123,11 @@ exec --no-startup-id blueman-applet
 exec --no-startup-id dunst
 
 #  use xset to turn off annoying features
-exec xset s off
-exec xset -dpms
-exec xset s noblank
-exec xset dpms force suspend
-exec xset dpms force on
+exec_always --no-startup-id xset s off
+exec_always --no-startup-id xset -dpms
+exec_always --no-startup-id xset s noblank
+# exec_always --no-startup-id xset dpms force suspend
+# exec_always --no-startup-id xset dpms force on
 
 # use systemctl to turn off sleep
 exec sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target

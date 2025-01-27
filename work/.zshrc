@@ -17,10 +17,10 @@ export BUILDKIT_PROGRESS=plain
 ZSH_THEME="rose-pine"
 
 # set to auto update
-zstyle ':omz:update' mode auto      
+zstyle ':omz:update' mode auto
 
 # set to check every day
-zstyle ':omz:update' frequency 1 
+zstyle ':omz:update' frequency 1
 
 # Set up kitty shell integration
 if test -n "$KITTY_INSTALLATION_DIR"; then
@@ -159,12 +159,11 @@ alias mailTrapAllPorts="sudo docker container run -d --rm --init --name=mailtrap
 alias stopMailTrap="sudo docker stop mailtrap"
 alias bytemarkSmtp="sudo docker run --restart always --name mailing -p 25:25 -d bytemark/smtp"
 
-
 # jetbrains toolbox
 alias jetbrains="~/tools/jetbrains-toolbox/jetbrains-toolbox"
 alias clearRiderCache="sudo rm -r ~/.cache/JetBrains/Rider*"
 
-# docker 
+# docker
 alias startDocker="sudo systemctl start docker;sudo service docker start"
 
 # git shortcuts
@@ -177,7 +176,6 @@ alias gpu="git pull"
 alias gadd="git add ."
 alias ga="git add ."
 alias gct="git commit -m "
-
 
 # copilot shortcuts
 alias copilotSuggest="gh suggest "
@@ -226,8 +224,8 @@ alias tools="cd ~/tools"
 alias compliance="cd ~/solutions/compliance"
 alias finance="cd ~/solutions/finance"
 alias nugetFolder="cd ~/solutions/NuGet/"
-alias tracking="cd ~/solutions/tracking" 
-alias cloudflare="cd ~/solutions/tracking/cloudflare" 
+alias tracking="cd ~/solutions/tracking"
+alias cloudflare="cd ~/solutions/tracking/cloudflare"
 alias shopify="cd /home/nicholas.judge/solutions/shopify/"
 alias shopifyApp="cd /home/nicholas.judge/solutions/shopify/shopify-app"
 alias analyticsApi="cd /home/nicholas.judge/solutions/shopify/analyticsapi"
