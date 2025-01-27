@@ -11,7 +11,7 @@ return {
                 builtin.grep_string({ search = vim.fn.input("Grep > ") }
                 );
             end)
-
+            vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>")
             require('telescope').load_extension('ecolog')
 
             require('telescope').setup({
