@@ -8,11 +8,10 @@
 
 	# Load nvidia driver for Xorg and Wayland
 	services.xserver.videoDrivers = ["nvidia"];
-
 	hardware.nvidia = {
 		# Modesetting is required.
 		modesetting.enable = true;
-
+		
 		# Nvidia power management. Experimental, and can cause sleep/suspend to fail.
 		# Enable this if you have graphical corruption issues or application crashes after waking
 		# up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
@@ -41,14 +40,18 @@
 
 	hardware.nvidia.prime = {
 		offload = {
-			enable = true;
-			enableOffloadCmd = true;
+			enable = false;
+			enableOffloadCmd = false;
 		};
+		sync.enable = false;
 		# Make sure to use the correct Bus ID values for your system!
 		intelBusId = "PCI:0:2:0";      # Adjusted for your Intel GPU (i915)
 		nvidiaBusId = "PCI:1:0:0";     # Adjusted for your Nvidia GPU};
+		reverseSync.enable = true;
 	};
  	
 	# dock stuff
 	boot.kernelModules = ["evdi" "udl" ];
+    	boot.kernelParams = ["nvidia-drm.modeset=1"];
+
 }

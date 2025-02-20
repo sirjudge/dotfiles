@@ -1,4 +1,4 @@
-{ config, pkgs, host, username, options, lib, inputs, system, ...}:
+{pkgs, host, username, options, lib, inputs, system, ...}:
 
 {
   imports = [ 
@@ -14,7 +14,6 @@
         systemd-boot.enable = true;
 	efi.canTouchEfiVariables = true;
     };
-    kernelParams = ["nvidia-drm.modeset=1"];
   };
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -94,11 +93,19 @@
     "cuda_nvcc"
     "google-chrome"
     "obsidian"
+    "datagrip"
+    "rust-rover"
+    "idea-ultimate"
   ];
 
   environment.systemPackages = with pkgs; [
-    pkginalsasys 
-    misc.alsa
+    # hardware compatability
+    thunderbolt
+    # file
+    xfce.thunar
+    file
+    zip
+    unzip
     # CLI apps
     ripgrep
     wget
@@ -106,24 +113,17 @@
     git
     kitty
     neovim
-    # dev libraries and langauges
-    gcc
-    clang
-    cmake
-    ninja
     # GPU Stuff
     seatd
     # DE
     xorg.xrandr
     mako
     wofi
-    obsidian
     hyprpaper  
     gtk3
     pango
-    cairo
     hyprutils
-    ];
+  ];
 
     
   programs.firefox.enable = true;
@@ -136,42 +136,74 @@
     description = "nico";
     extraGroups = [ "networkmanager" "wheel" "video" "seat"];
     packages = with pkgs; [
-	    # CLI
-	    nerdfetch  
-	    usbutils
-	    htop-vim
-	    lshw
-	    pciutils
-	    pavucontrol
-	    # Applications 
-	    onlyoffice-bin
-	    discord-ptb
-	    autorandr
-	    # Develeopment
-	    pkg-config
-	    luarocks
-	    luajit
-	    nodejs_22 
-	    rustup
-	    # Media
-	    qbittorrent
-	    lutris
-	    heroic
-	    google-chrome
-	    # themeing and ricing
-	    nwg-displays
-	    # bevy dev
-	    udev 
-	    alsa-lib
-	    alsa-lib.dev
-	    vulkan-loader
-	    xorg.libX11
-	    xorg.libXcursor
-	    xorg.libXi
-	    xorg.libXrandr # To use the x11 feature
-	    libxkbcommon
-	    wayland # To use the wayland feature
-	    #libudev
+	# Screenshots
+	grim 
+        slurp 
+	# dev libraries and langauges
+	gcc
+	clang
+	cmake
+	ninja
+	cairo
+	# CLI
+	nerdfetch  
+	usbutils
+	htop-vim
+	lshw
+	pciutils
+	pavucontrol
+	# Applications 
+	obsidian
+	onlyoffice-bin
+	discord-ptb
+	autorandr
+	# Develeopment
+	pkg-config
+	luarocks
+	luajit
+	nodejs_22 
+	rustup
+	# Media
+	qbittorrent
+	lutris
+	heroic
+	google-chrome
+	# themeing and ricing
+	nwg-displays
+	# bevy dev
+	# udev 
+	# alsa-lib
+	# alsa-lib.dev
+	# vulkan-loader
+	# xorg.libX11
+	# xorg.libXcursor
+	# xorg.libXi
+	# xorg.libXrandr # To use the x11 feature
+	# libxkbcommon
+	# wayland # To use the wayland feature
+	#libudev
+	pkg-config
+	alsa-lib
+	vulkan-tools
+	vulkan-headers
+	vulkan-loader
+	vulkan-validation-layers
+	udev
+	clang
+	lld
+	# If on x11
+	xorg.libX11
+	xorg.libX11
+	xorg.libXcursor
+	xorg.libXi
+	xorg.libXrandr
+	# If on wayland
+	libxkbcommon
+	wayland
+	# Jet brains
+	jetbrains.datagrip
+	jetbrains.rust-rover
+	jetbrains.idea-ultimate
     ];
   };
 
