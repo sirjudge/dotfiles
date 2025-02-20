@@ -95,7 +95,10 @@
     "google-chrome"
     "obsidian"
   ];
+
   environment.systemPackages = with pkgs; [
+    pkginalsasys 
+    misc.alsa
     # CLI apps
     ripgrep
     wget
@@ -120,8 +123,9 @@
     pango
     cairo
     hyprutils
-  ];
+    ];
 
+    
   programs.firefox.enable = true;
   programs.hyprland.enable = true;
   programs.waybar.enable = true;
@@ -159,6 +163,7 @@
 	    # bevy dev
 	    udev 
 	    alsa-lib
+	    alsa-lib.dev
 	    vulkan-loader
 	    xorg.libX11
 	    xorg.libXcursor
@@ -166,7 +171,7 @@
 	    xorg.libXrandr # To use the x11 feature
 	    libxkbcommon
 	    wayland # To use the wayland feature
-
+	    #libudev
     ];
   };
 

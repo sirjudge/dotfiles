@@ -40,6 +40,5 @@
     ./git.nix
     ./hyprland/hyprland.nix
     ./hyprland/waybar.nix
-    ./bevy.nix
   ];
 }
