@@ -93,8 +93,8 @@
     "cuda_cccl"
     "cuda_nvcc"
     "google-chrome"
+    "obsidian"
   ];
-  
   environment.systemPackages = with pkgs; [
     # CLI apps
     ripgrep
@@ -112,10 +112,14 @@
     seatd
     # DE
     xorg.xrandr
-    #hyprland
     mako
     wofi
-    #waybar
+    obsidian
+    hyprpaper  
+    gtk3
+    pango
+    cairo
+    hyprutils
   ];
 
   programs.firefox.enable = true;
@@ -152,6 +156,17 @@
 	    google-chrome
 	    # themeing and ricing
 	    nwg-displays
+	    # bevy dev
+	    udev 
+	    alsa-lib
+	    vulkan-loader
+	    xorg.libX11
+	    xorg.libXcursor
+	    xorg.libXi
+	    xorg.libXrandr # To use the x11 feature
+	    libxkbcommon
+	    wayland # To use the wayland feature
+
     ];
   };
 

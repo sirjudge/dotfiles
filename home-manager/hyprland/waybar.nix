@@ -127,7 +127,7 @@
       position = "bottom";
       tray = { spacing = 10; };
       modules-center = [ "hyprland/window" ];
-      modules-left = [ "hyprland/workspaces" "hyprland/mode" ];
+      modules-left = [ "hyprland/workspaces" "hyprland/submap" ];
       modules-right = [
         "pulseaudio"
         "network"
@@ -184,7 +184,7 @@
         format-source-muted = "";
         on-click = "pavucontrol";
       };
-      "hyprland/mode" = { format = ''<span style="italic">{}</span>''; };
+      "hyprland/submap" = { format = ''<span style="italic">{}</span>''; };
       temperature = {
         critical-threshold = 80;
         format = "{temperatureC}°C {icon}";
