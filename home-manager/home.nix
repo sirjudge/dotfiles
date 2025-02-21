@@ -39,6 +39,6 @@
     ./terminal/kitty.nix
     ./git.nix
     ./hyprland/hyprland.nix
-    ./hyprland/waybar.nix
+    ./waybar/waybar.nix
   ];
 }
