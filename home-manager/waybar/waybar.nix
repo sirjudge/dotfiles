@@ -38,7 +38,6 @@ in
           critical = 15;
           warning = 30;
         };
-        tooltip = true;
         tooltip-format = "{capacity}% {icon} {time}";
       };
       clock = {
@@ -67,7 +66,7 @@ in
           default = [ "" "" "" ];
           handsfree = "";
           headphones = "";
-          headset = "";
+          headset = "";
           phone = "";
           portable = "";
         };
