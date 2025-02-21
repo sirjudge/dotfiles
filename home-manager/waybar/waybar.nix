@@ -77,7 +77,9 @@ in
           format-source-muted = "";
           on-click = "pavucontrol";
         };
-        "hyprland/submap" = { format = ''<span style="italic">{}</span>''; };
+        "hyprland/submap" = { 
+          format = ''<span style="italic">{}</span>''; 
+        };
         temperature = {
           critical-threshold = 80;
           format = "{temperatureC}°C {icon}";

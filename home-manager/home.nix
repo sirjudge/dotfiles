@@ -38,6 +38,7 @@
     ./terminal/tmux.nix 
     ./terminal/kitty.nix
     ./git.nix
+    ./wofi.nix
     ./hyprland/hyprland.nix
     ./waybar/waybar.nix
   ];
