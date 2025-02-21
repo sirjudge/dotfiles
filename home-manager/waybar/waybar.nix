@@ -19,7 +19,7 @@ in
           "hyprland/workspaces" "hyprland/submap"
         ];
         modules-left = [
-          "hyprland/window" "privacy" "tray" 
+          "tray" "privacy" "hyprland/window"   
         ];
         modules-right = [
           "pulseaudio" "network" "cpu" "memory" "temperature" "battery" "clock"
@@ -90,8 +90,12 @@ in
       layer = "top";
       position = "bottom";
       tray = { spacing = 10; };
-      modules-center = [ "hyprland/window" ];
-      modules-left = [ "hyprland/workspaces" "hyprland/submap" ];
+      modules-center = [
+        "hyprland/workspaces" "hyprland/submap"
+      ];
+      modules-left = [
+        "tray" "privacy" "hyprland/window"   
+      ];
     }
     {
       output = ["eDP-1"];
@@ -99,8 +103,12 @@ in
       layer = "top";
       position = "bottom";
       tray = { spacing = 10; };
-      modules-center = [ "hyprland/window" ];
-      modules-left = [ "hyprland/workspaces" "hyprland/submap" ];
+      modules-center = [
+        "hyprland/workspaces" "hyprland/submap"
+      ];
+      modules-left = [
+        "tray" "privacy" "hyprland/window"   
+      ];
     }
     ];
   };
