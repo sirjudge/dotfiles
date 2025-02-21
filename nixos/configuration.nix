@@ -116,6 +116,7 @@
     # GPU Stuff
     seatd
     # DE
+    networkmanagerapplet
     xorg.xrandr
     mako
     wofi
@@ -140,8 +141,14 @@
 	grim 
         slurp 
 	# dev libraries and langauges
-	gcc
+	nwg-displays
+	pkg-config
+	udev
 	clang
+	lld
+	libxkbcommon
+	wayland
+	gcc
 	cmake
 	ninja
 	cairo
@@ -169,37 +176,12 @@
 	heroic
 	google-chrome
 	# themeing and ricing
-	nwg-displays
-	# bevy dev
-	# udev 
-	# alsa-lib
-	# alsa-lib.dev
-	# vulkan-loader
-	# xorg.libX11
-	# xorg.libXcursor
-	# xorg.libXi
-	# xorg.libXrandr # To use the x11 feature
-	# libxkbcommon
-	# wayland # To use the wayland feature
-	#libudev
-	pkg-config
-	alsa-lib
-	vulkan-tools
-	vulkan-headers
-	vulkan-loader
-	vulkan-validation-layers
-	udev
-	clang
-	lld
-	# If on x11
-	xorg.libX11
-	xorg.libX11
-	xorg.libXcursor
-	xorg.libXi
-	xorg.libXrandr
+	#xorg.libX11
+	#xorg.libX11
+	#xorg.libXcursor
+	#xorg.libXi
+	#xorg.libXrandr
 	# If on wayland
-	libxkbcommon
-	wayland
 	# Jet brains
 	jetbrains.datagrip
 	jetbrains.rust-rover
