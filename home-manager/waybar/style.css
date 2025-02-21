@@ -22,12 +22,14 @@
 * {
     font-size: 18px;
 }
+
 window#waybar {
     background-color: @base;
     padding-top: 5px;
     border-bottom: 2px solid @highlightLow;
     border-top: 2px solid @highlightLow;
     padding-top: 5px;
+    border-radius: 50px;
     color: @text;
     transition-property: background-color;
     transition-duration: .5s;
@@ -83,12 +85,13 @@ window#waybar {
 #mpd, #pulseaudio, #network, #cpu, #memory, #temperature, #clock, #window {
     padding-left: 8px;
     padding-right: 8px;
-    background-color: @base;
-    color: inherit;
+    background-color: @highlightHigh;
+    color: @iris;
     font-weight: 600;
     border-top: 4px solid transparent;
     border-bottom: 3px solid transparent;
     border-left: 2px dashed #a678d3;
+    border-radius: 50px;
 }
 
 #window {
