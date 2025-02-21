@@ -1,7 +1,7 @@
 
 { config, pkgs, lib, ... }:
 let 
-  waybar_style = builtins.readFile ./style.css;
+waybar_style = builtins.readFile ./style.css;
 in
 {
   programs.waybar = {
@@ -18,14 +18,15 @@ in
       modules-center = [ "hyprland/window" ];
       modules-left = [ "hyprland/workspaces" "hyprland/submap" ];
       modules-right = [
+        "privacy"
         "pulseaudio"
-          "network"
-          "cpu"
-          "memory"
-          "temperature"
-          "battery" 
-          "clock"
-          "tray"
+        "network"
+        "cpu"
+        "memory"
+        "temperature"
+        "battery" 
+        "clock"
+        "tray"
       ];
       battery = {
         format = "{capacity}% {icon}";
@@ -37,6 +38,8 @@ in
           critical = 15;
           warning = 30;
         };
+        tooltip = true;
+        tooltip-format = "{capacity}% {icon} {time}";
       };
       clock = {
         format-alt = "{:%Y-%m-%d}";
@@ -51,8 +54,8 @@ in
         interval = 1;
         format-alt = "{ifname}: {ipaddr}/{cidr}";
         format-disconnected = "Disconnected ⚠";
-        format-ethernet = "{ifname}: {ipaddr}/{cidr}   up: {bandwidthUpBits} down: {bandwidthDownBits}";
-        format-linked = "{ifname} (No IP) ";
+        format-ethernet = "{ifname}: {ipaddr}/{cidr} 󰈀 up: {bandwidthUpBits} down: {bandwidthDownBits}";
+        format-linked = "{ifname} (No IP) 󰤭";
         format-wifi = "{essid} ({signalStrength}%) ";
       };
       pulseaudio = {
@@ -62,7 +65,7 @@ in
         format-icons = {
           car = "";
           default = [ "" "" "" ];
-          handsfree = "";
+          handsfree = "";
           headphones = "";
           headset = "";
           phone = "";
@@ -77,7 +80,7 @@ in
       temperature = {
         critical-threshold = 80;
         format = "{temperatureC}°C {icon}";
-        format-icons = [ "" "" "" ];
+        format-icons = [ "" "" "" ];
       };
     }
     {

@@ -116,7 +116,6 @@
     # GPU Stuff
     seatd
     # DE
-    networkmanagerapplet
     xorg.xrandr
     mako
     wofi
@@ -124,6 +123,11 @@
     gtk3
     pango
     hyprutils
+    # bar
+    networkmanagerapplet
+    cava
+    wireplumber
+
   ];
 
     
@@ -137,9 +141,13 @@
     description = "nico";
     extraGroups = [ "networkmanager" "wheel" "video" "seat"];
     packages = with pkgs; [
-	# Screenshots
+	# DE stuff
+	playerctl
+	brightnessctl
 	grim 
         slurp 
+	grimblast
+	
 	# dev libraries and langauges
 	nwg-displays
 	pkg-config
@@ -175,13 +183,6 @@
 	lutris
 	heroic
 	google-chrome
-	# themeing and ricing
-	#xorg.libX11
-	#xorg.libX11
-	#xorg.libXcursor
-	#xorg.libXi
-	#xorg.libXrandr
-	# If on wayland
 	# Jet brains
 	jetbrains.datagrip
 	jetbrains.rust-rover
