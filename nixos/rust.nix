@@ -1,5 +1,3 @@
-
-
 {
   description = "Configure rust environment",
   inputs = {

@@ -24,8 +24,14 @@
         shellAliases = {
             # nix
             nixReload = "sudo nixos-rebuild switch; home-manager switch";
-            nixHome = "home-manager switch";
+            nixHome = "home-manager switch;hyprctl reload;waybar &";
             nixSystem = "sudo nixos-rebuild switch";
+            nixUpdate = "sudo nix-channel --update; sudo nixos-rebuild switch; home-manager switch";
+
+            # hyprland and bar
+            hypreload = "hyprctl reload; waybar &";
+            reloadWaybar = "hyprctl dispatch exec waybar";
+
             # Files and Folders
             mv="mv -v";
             ln="ln -v";
@@ -39,6 +45,7 @@
             grep="grep -i --color=auto";
             egrep="egrep --color=auto";
             ip="ip addr";
+
             # Tmux
             tmuxReload="tmux source  ~/.config/tmux/tmux.conf";
             tmuxNew="tmux new -s";
@@ -60,31 +67,25 @@
             maxBrightness="sudo brightnessctl --min-val=2 set 100%";
 
             # set monitor commands
-            officeMonitor="xrandr --output eDP-1-1 --auto --output DP-0 --primary --auto --left-of eDP-1-1;" ;
-            officeDualMonitors="~/Tools/scripts/DualOfficeMonitor.sh";
-            bedroomMonitor="xrandr --output eDP-1-1 --mode 1920x1080 --output HDMI-0 --primary --mode 1920x1080 --right-of eDP-1-1 ";
-
-            # remap vim to nvim because I type both
-            vim="nvim";
-
-            # apt shortcuts
-            upg="sudo apt-get update; sudo apt-get upgrade; sudo flatpak update";
-            search="apt search";
-            install="sudo apt install";
+            #officeMonitor="xrandr --output eDP-1-1 --auto --output DP-0 --primary --auto --left-of eDP-1-1;" ;
+            #officeDualMonitors="~/Tools/scripts/DualOfficeMonitor.sh";
+            #bedroomMonitor="xrandr --output eDP-1-1 --mode 1920x1080 --output HDMI-0 --primary --mode 1920x1080 --right-of eDP-1-1 ";
 
             # ZSH
             zshrc="nvim ~/.zshrc";
             reloadZsh="source ~/.zshrc";
             listAliases="cat ~/.zshrc | grep 'alias'";
+
             # directory shortcuts
-            solutions="cd ~/solutions";
+            justAGuy="cd ~/solutions/just-a-little-guy/";
             sol="cd ~/solutions";
-            configFolder="cd ~/.config";
-            tools="cd ~/Tools";
+            homeConfig="cd ~/.config/home-manager/";
         };
         ohMyZsh = {
             enable = true;
-            plugins = [ "git" "aws" "battery" "dotenv" "emoji" "kubectl" "rust" ];
+            plugins = [ 
+            "git" "aws" "battery" "dotenv" "emoji" "kubectl" "rust"
+            ];
             theme = "fletcherm";
         };
     };
