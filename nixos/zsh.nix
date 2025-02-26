@@ -27,10 +27,15 @@
             nixHome = "home-manager switch;hyprctl reload;waybar &";
             nixSystem = "sudo nixos-rebuild switch";
             nixUpdate = "sudo nix-channel --update; sudo nixos-rebuild switch; home-manager switch";
+	    nixConfigEdit = "sudo nvim /etc/nixos/configuration.nix";
+	    nixPackageUpdate = "sudo nvim /etc/nixos/packages.nix";
+	    nixCdConfig = "cd /etc/nixos/";
+	    nixCdHome = "cd /etc/nixos/";
+	    
 
             # hyprland and bar
-            hypreload = "hyprctl reload; waybar &";
-            reloadWaybar = "hyprctl dispatch exec waybar";
+            hyprReload = "home-manager switch -b backup;hyprctl reload";
+            waybarReload = "home-manager switch -b backup; hyprctl dispatch exec waybar";
 
             # Files and Folders
             mv="mv -v";
@@ -59,9 +64,6 @@
             # SSH commands
             homelab="ssh nico@192.168.1.34";
 
-            # screenshotting
-            screenshotSelect="scrot -s --file '/home/nico/Pictures/Screenshots/%Y-%m-%d_$wx$h_scrot.png'";
-
             # set brightness commands
             lowBrightness="sudo brightnessctl --min-val=2 set 2%";
             maxBrightness="sudo brightnessctl --min-val=2 set 100%";
@@ -73,7 +75,7 @@
 
             # ZSH
             zshrc="nvim ~/.zshrc";
-            reloadZsh="source ~/.zshrc";
+            reloadZsh="home-manager switch -b backup; /source ~/.zshrc";
             listAliases="cat ~/.zshrc | grep 'alias'";
 
             # directory shortcuts

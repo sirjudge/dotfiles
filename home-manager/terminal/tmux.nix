@@ -10,9 +10,11 @@
       ]);
 	  extraConfig = ''
         set -g default-command ${pkgs.zsh}/bin/zsh
-
+        set-option -sg escape-time 10
         # fix colors in terminal
-		set -as terminal-overrides ",screen*:Tc"
+        # this is the command 		    
+        set -as terminal-overrides ",screen*:Tc"
+        #set-option -g default-terminal "screen-256color"
 
         # enable mouse support
         set -g mouse on
@@ -48,15 +50,4 @@
 
 		  '';
   };
-  
-
 }
-#set -g @plugin 'tmux-plugins/tmux-yank'
-#set -g @plugin 'rose-pine/tmux'
-# set vim keybindings
-#set -g @plugin 'christoomey/vim-tmux-navigator'
-
-# install tmux plugins and defult keybindings
-#set -g @plugin 'tmux-plugins/tpm'
-#set -g @plugin 'tmux-plugins/tmux-sensible'
-#run '~/.tmux/plugins/tpm/tpm'

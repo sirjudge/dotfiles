@@ -24,21 +24,23 @@
   environment.systemPackages = with pkgs; [
     # hardware compatability
     thunderbolt
+    
     # file
     xfce.thunar
     file
     zip
     unzip
-    # CLI apps
-    ripgrep
     wget
+    
+    # terminal
     zsh
     git
     kitty
+   
+    # Neovim and neovim accessories
     neovim
-    # GPU Stuff
-    seatd
-    # DE
+
+    # DE and bar
     xorg.xrandr
     mako
     wofi
@@ -48,13 +50,42 @@
     hyprutils
     libxkbcommon
     wayland
-    # bar
     networkmanagerapplet
     cava
     wireplumber
+
+    # CLI apps
+    direnv
+    texliveFull
+    cachix
+    ripgrep
+    lynx
+    ghostscript
+    tectonic
+    mermaid-cli
+    fd
+    imagemagick
+    graph-easy
+    slides
+    
+    # GPU Stuff
+    seatd
+   
     # dev libraries and langauges
+    udev  
+    alsa-lib
+    vulkan-loader
+    xorg.libX11
+    xorg.libXcursor
+    xorg.libXi
+    xorg.libXrandr 
+    libxkbcommon
+    wayland 
+    alsa-lib.dev
+    go
     pkg-config
     luarocks
+    lua
     luajit
     nodejs_22 
     rustup
@@ -67,9 +98,16 @@
     cmake
     ninja
     cairo
+    gnumake
   ];
 
   programs.firefox.enable = true;
   programs.waybar.enable = true;
   programs.hyprland.enable = true;
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
 }

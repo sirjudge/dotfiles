@@ -13,7 +13,8 @@
 	grimblast
 	# CLI
 	nerdfetch  
-	usbutils
+	loc
+        usbutils
 	htop-vim
 	lshw
 	pciutils
