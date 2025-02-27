@@ -13,8 +13,10 @@
         set-option -sg escape-time 10
         # fix colors in terminal
         # this is the command 		    
-        set -as terminal-overrides ",screen*:Tc"
+        #set -as terminal-overrides ",screen*:Tc"
         #set-option -g default-terminal "screen-256color"
+        #set -ag terminal-overrides ",xterm-kitty:Tc"
+        set -g default-terminal "tmux-256color"
 
         # enable mouse support
         set -g mouse on

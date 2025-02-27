@@ -31,7 +31,8 @@
     zip
     unzip
     wget
-    
+    kdePackages.okular    
+
     # terminal
     zsh
     git
@@ -67,6 +68,7 @@
     imagemagick
     graph-easy
     slides
+    loc
     
     # GPU Stuff
     seatd

@@ -38,6 +38,5 @@
     ./wofi.nix
     ./hyprland/hyprland.nix
     ./waybar/waybar.nix
-    ./nvim/nvim.nix
   ];
 }
