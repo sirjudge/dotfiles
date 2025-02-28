@@ -19,19 +19,23 @@
     "datagrip"
     "rust-rover"
     "idea-ultimate"
+    "aseprite"
   ];
+    
+
 
   environment.systemPackages = with pkgs; [
     # hardware compatability
     thunderbolt
-    
+    solaar
+    gnomeExtensions.solaar-extension
+
     # file
     xfce.thunar
     file
     zip
     unzip
     wget
-    kdePackages.okular    
 
     # terminal
     zsh
@@ -49,6 +53,7 @@
     gtk3
     pango
     hyprutils
+
     libxkbcommon
     wayland
     networkmanagerapplet
@@ -57,18 +62,13 @@
 
     # CLI apps
     direnv
-    texliveFull
     cachix
     ripgrep
     lynx
     ghostscript
     tectonic
-    mermaid-cli
     fd
     imagemagick
-    graph-easy
-    slides
-    loc
     
     # GPU Stuff
     seatd
@@ -104,12 +104,10 @@
   ];
 
   programs.firefox.enable = true;
-  programs.waybar.enable = true;
-  programs.hyprland.enable = true;
-  programs.steam = {
+  programs.hyprland = {
+    # Install the packages from nixpkgs
     enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+    # Whether to enable XWayland
+    xwayland.enable = true;
   };
 }

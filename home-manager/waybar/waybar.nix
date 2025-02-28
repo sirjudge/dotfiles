@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 let 
-waybar_style = builtins.readFile ./style.css;
+  waybar_style = builtins.readFile ./style.css;
 in
 {
   programs.waybar = {

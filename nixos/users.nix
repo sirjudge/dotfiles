@@ -1,5 +1,5 @@
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+{ pkgs, lib, config, ... }:
+{
   users.users.nico = {
     isNormalUser = true;
     description = "nico";
@@ -12,6 +12,18 @@
         slurp 
 	grimblast
 	# CLI
+	mermaid-cli
+	texliveFull
+	graph-easy
+	slides
+	loc
+	nerdfetch  
+	usbutils
+	htop-vim
+	lshw
+	pciutils
+	pavucontrol
+	krabby
 	nerdfetch  
         usbutils
 	htop-vim
@@ -19,6 +31,7 @@
 	pciutils
 	pavucontrol
 	# Applications 
+	kdePackages.okular    
 	obsidian
 	onlyoffice-bin
 	discord-ptb
@@ -32,6 +45,11 @@
 	jetbrains.datagrip
 	jetbrains.rust-rover
 	jetbrains.idea-ultimate
+	# Art apps
+	aseprite
+	krita
+	libresprite
+	pixelorama
     ];
   };
 
@@ -39,5 +57,17 @@
     enable = true;
     acceleration = "cuda";
   };
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
+
+}
+
+
+
 
 
