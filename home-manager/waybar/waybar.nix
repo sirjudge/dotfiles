@@ -112,6 +112,19 @@ in
         "tray" "privacy" "hyprland/window"   
       ];
     }
+    {
+      output = ["DP-3"];
+      height = 30;
+      layer = "top";
+      position = "bottom";
+      tray = { spacing = 10; };
+      modules-center = [
+        "hyprland/workspaces" "hyprland/submap"
+      ];
+      modules-left = [
+        "tray" "privacy" "hyprland/window"   
+      ];
+    }
     ];
   };
 }

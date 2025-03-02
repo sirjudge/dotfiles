@@ -5,11 +5,10 @@
       ./hardware-configuration.nix
       ./packages.nix
       ./nvidia.nix
-      ./zsh.nix
+      ./terminal.nix
       ./fonts.nix
       ./users.nix
   ];
-
   # Bootloader.
   boot = {
     loader = {
@@ -19,6 +18,7 @@
     blacklistedKernelModules = [
     	"dell_smbios"	
     ];
+    kernelParams = [ "psmouse.synaptics_intertouch=0" ];
   };
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -26,6 +26,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -59,7 +60,6 @@
     variant = "";
   };
 
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -82,6 +82,9 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
+  # multi-touch gesture recognizer
+  services.touchegg.enable = true;
+
   # enable flake support
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
@@ -97,10 +100,10 @@
   services.seatd.enable = true;
 
   # Shell 
-  users.defaultUserShell = pkgs.zsh;
-  programs.zsh.enable = true;
-  environment.shells = with pkgs; [ zsh];
-  system.userActivationScripts.zshrc = "touch .zshrc";
+  # users.defaultusershell = pkgs.zsh;
+  # programs.zsh.enable = true;
+  # environment.shells = with pkgs; [ zsh];
+  # system.userActivationScripts.zshrc = "touch .zshrc";
 
 
   # This value determines the NixOS release from which the default
