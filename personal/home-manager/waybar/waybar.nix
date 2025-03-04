@@ -19,7 +19,7 @@ in
           "hyprland/workspaces" "hyprland/submap"
         ];
         modules-left = [
-          "tray" "privacy" "hyprland/window"   
+         "tray" "privacy" "hyprland/window"   
         ];
         modules-right = [
           "pulseaudio" "network" "cpu" "memory" "temperature" "battery" "clock"
@@ -85,7 +85,11 @@ in
           format = "{temperatureC}°C {icon}";
           format-icons = [ "" "" "" ];
         };
-      }
+        "custom/power" = {
+          format = " ⏻ ";
+          on-click= "wlogout --protocol layer-shell";
+        };
+    }
     {
       output = ["DP-7"];
       height = 30;

@@ -3,7 +3,7 @@
   users.users.nico = {
     isNormalUser = true;
     description = "nico";
-    extraGroups = [ "networkmanager" "wheel" "video" "seat"];
+    extraGroups = [ "networkmanager" "wheel" "video" "seat" "docker"];
     packages = with pkgs; [
 	# DE stuff
 	playerctl
@@ -36,6 +36,7 @@
 	onlyoffice-bin
 	discord-ptb
 	autorandr
+	wlogout
 	# Media
 	qbittorrent
 	lutris

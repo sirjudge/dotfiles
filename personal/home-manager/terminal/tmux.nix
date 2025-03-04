@@ -14,9 +14,9 @@
         # fix colors in terminal
         # this is the command 		    
         #set -as terminal-overrides ",screen*:Tc"
-        #set-option -g default-terminal "screen-256color"
+        set-option -g default-terminal "screen-256color"
         #set -ag terminal-overrides ",xterm-kitty:Tc"
-        set -g default-terminal "tmux-256color"
+        #set -g default-terminal "tmux-256color"
 
         # enable mouse support
         set -g mouse on
@@ -36,9 +36,9 @@
         bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
     
         # set default behavior to open tabs and splits in the same directory
-		bind  c  new-window      -c "#{pane_current_path}"
-		bind  %  split-window -h -c "#{pane_current_path}"
-		bind '"' split-window -v -c "#{pane_current_path}"
+        bind  c  new-window      -c "#{pane_current_path}"
+        bind  %  split-window -h -c "#{pane_current_path}"
+        bind '"' split-window -v -c "#{pane_current_path}"
 
         # set colorscheme back to rose pine
         set -g @rose_pine_variant 'moon'
