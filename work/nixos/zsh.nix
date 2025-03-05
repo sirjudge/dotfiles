@@ -32,7 +32,6 @@
 	    nixCdConfig = "cd /etc/nixos/";
 	    nixCdHome = "cd /etc/nixos/";
 	    
-
             # hyprland and bar
             hyprReload = "home-manager switch -b backup;hyprctl reload";
             waybarReload = "home-manager switch -b backup; hyprctl dispatch exec waybar";

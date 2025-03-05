@@ -14,7 +14,7 @@
         # fix colors in terminal
         # this is the command 		    
         #set -as terminal-overrides ",screen*:Tc"
-        set-option -g default-terminal "screen-256color"
+        #set-option -g default-terminal "screen-256color"
         #set -ag terminal-overrides ",xterm-kitty:Tc"
         #set -g default-terminal "tmux-256color"
 

@@ -11,6 +11,7 @@
       ./packages.nix  
       ./terminal.nix
       ./docker.nix
+      ./zsh.nix
      ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
