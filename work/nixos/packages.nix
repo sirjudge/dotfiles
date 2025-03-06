@@ -70,6 +70,7 @@
     ghostty
     neovim
     tmux
+    fastfetch
 
     # DE and bar
     xorg.xrandr
