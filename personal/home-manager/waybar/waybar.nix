@@ -3,7 +3,8 @@ let
   waybar_style = builtins.readFile ./style.css;
 in
 {
-  programs.waybar = {
+
+programs.waybar = {
     enable = true;
     systemd.enable = true;
     style = waybar_style;

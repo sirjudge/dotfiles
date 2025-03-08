@@ -3,7 +3,9 @@
 {
 	# Enable OpenGL
 	hardware.graphics = {
-		enable = true;
+	  enable = true;
+	  #driSupport = true;
+	  #driSupport32Bit = true;
 	};
 
 	# Load nvidia driver for Xorg and Wayland
@@ -11,12 +13,12 @@
 	hardware.nvidia = {
 		# Modesetting is required.
 		modesetting.enable = true;
-		
+
 		# Nvidia power management. Experimental, and can cause sleep/suspend to fail.
 		# Enable this if you have graphical corruption issues or application crashes after waking
 		# up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
 		# of just the bare essentials.
-		powerManagement.enable = false;
+		powerManagement.enable = true;
 
 		# Fine-grained power management. Turns off GPU when not in use.
 		# Experimental and only works on modern Nvidia GPUs (Turing or newer).
@@ -35,23 +37,28 @@
 		nvidiaSettings = true;
 
 		# Optionally, you may need to select the appropriate driver version for your specific GPU.
-		package = config.boot.kernelPackages.nvidiaPackages.stable;
+		#package = config.boot.kernelPackages.nvidiaPackages.stable;
+		#package = config.boot.kernelPackages.nvidiaPackages.beta;
+		package = config.boot.kernelPackages.nvidiaPackages.latest;
 	};
 
 	hardware.nvidia.prime = {
-		offload = {
-			enable = false;
-			enableOffloadCmd = false;
-		};
-		sync.enable = false;
+		# offload = {
+		# 	enable = false;
+		# 	enableOffloadCmd = false;
+		# };
+		sync.enable = true;
+		
 		# Make sure to use the correct Bus ID values for your system!
 		intelBusId = "PCI:0:2:0";      # Adjusted for your Intel GPU (i915)
 		nvidiaBusId = "PCI:1:0:0";     # Adjusted for your Nvidia GPU};
-		reverseSync.enable = true;
+	
+		#reverseSync.enable = true;
 	};
  	
 	# dock stuff
 	boot.kernelModules = ["evdi" "udl" ];
-    	boot.kernelParams = ["nvidia-drm.modeset=1"];
-
+    
+    #boot.kernelParams = ["nvidia-drm.modeset=1"];
+    #boot.kernelParams = [ "module_blacklist=i915" ];
 }

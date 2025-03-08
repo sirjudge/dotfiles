@@ -5,52 +5,55 @@
     description = "nico";
     extraGroups = [ "networkmanager" "wheel" "video" "seat" "docker"];
     packages = with pkgs; [
-	# DE stuff
-	playerctl
-	brightnessctl
-	grim 
-        slurp 
-	grimblast
-	# CLI
-	mermaid-cli
-	texliveFull
-	graph-easy
-	slides
-	loc
-	nerdfetch  
-	usbutils
-	htop-vim
-	lshw
-	pciutils
-	pavucontrol
-	krabby
-	nerdfetch  
-        usbutils
-	htop-vim
-	lshw
-	pciutils
-	pavucontrol
-	# Applications 
-	kdePackages.okular    
-	obsidian
-	onlyoffice-bin
-	discord-ptb
-	autorandr
-	wlogout
-	# Media
-	qbittorrent
-	lutris
-	heroic
-	google-chrome
-	# Jet brains
-	jetbrains.datagrip
-	jetbrains.rust-rover
-	jetbrains.idea-ultimate
-	# Art apps
-	aseprite
-	krita
-	libresprite
-	pixelorama
+      # DE stuff
+      playerctl
+      brightnessctl
+      grim 
+      slurp 
+      grimblast
+     
+      # CLI
+      mermaid-cli
+      texliveFull
+      graph-easy
+      slides
+      loc
+      nerdfetch  
+      htop-vim
+      lshw
+      pciutils
+      usbutils
+      htop-vim
+      pciutils
+      pavucontrol
+      krabby
+      nerdfetch  
+      pavucontrol
+      
+      #Misc Applications 
+      kdePackages.okular    
+      obsidian
+      onlyoffice-bin
+      discord-ptb
+      autorandr
+      wlogout
+     
+      # Media
+      qbittorrent
+      lutris
+      heroic
+      google-chrome
+      
+      # Jet brains
+      jetbrains.datagrip
+      jetbrains.rust-rover
+      jetbrains.idea-ultimate
+      
+      # Art apps
+      aseprite
+      krita
+      libresprite
+      pixelorama
     ];
   };
 
@@ -76,6 +79,7 @@
   };
 
 }
+
 
 
 

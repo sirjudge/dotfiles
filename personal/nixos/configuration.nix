@@ -11,6 +11,7 @@
       ./docker.nix
       ./audio.nix
       ./bluetooth.nix
+      ./hyprland.nix
   ];
 
   # Bootloader.
@@ -19,18 +20,19 @@
         systemd-boot.enable = true;
 	efi.canTouchEfiVariables = true;
     };
+
+    # causes weird issues with not recognizing the dock on start up
     blacklistedKernelModules = [
     	"dell_smbios"	
     ];
+    
     kernelParams = [ "psmouse.synaptics_intertouch=0" ];
   };
 
   networking.hostName = "nixos"; # Define your hostname.
-  #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable networking
   networking.networkmanager.enable = true;
-
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -51,8 +53,8 @@
   };
   
   # Enable the GNOME Desktop Environment.
+  services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.gdm.wayland = true;
   services.xserver.desktopManager.gnome.enable = true;
 
   # Enable flatpak because sometimes I just don't feel like using my braincells
@@ -77,22 +79,36 @@
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   environment.sessionVariables = rec {
+   # get electron on wayland
+    NIXOS_OZONE_WL = "1";
+
+    # Ensure XDG paths and variables are set
     XDG_CACHE_HOME  = "$HOME/.cache";
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_DATA_HOME   = "$HOME/.local/share";
     XDG_STATE_HOME  = "$HOME/.local/state";
+    XDG_CURRENT_DESKTOP="Hyprland";
+    XDG_SESSION_TYPE="wayland";
+    XDG_SESSION_DESKTOP="Hyprland";
+   
+    # GPU driver nonsense
     AQ_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";		
+    #AQ_DRM_DEVICES = "/dev/dri/card0:/dev/dri/card1";		
+    LIBVA_DRIVER_NAME="nvidia";
+    WLR_DRM_NO_MODIFIERS="1";
+    GBM_BACKEND="nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME="nvidia";
+
+    # Wayland specifications for other random nonsense
+    # GDK_BACKEND="wayland,x11,*";
+    #QT_QPA_PLATFORM="wayland;xcb";
+    # SDL_VIDEODRIVER="wayland";
+ 
+    # Screenshot
+    # HYPRSHOT_DIR="/home/nico/Pictures/Screenshots";
   };
 
-  # Install firefox.
   services.seatd.enable = true;
-
-  # Shell 
-  # users.defaultusershell = pkgs.zsh;
-  # programs.zsh.enable = true;
-  # environment.shells = with pkgs; [ zsh];
-  # system.userActivationScripts.zshrc = "touch .zshrc";
-
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

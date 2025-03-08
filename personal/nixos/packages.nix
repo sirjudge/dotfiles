@@ -9,9 +9,7 @@
 
   ];
 
-
-
-# Allow certain non-free open source services
+  # Allow certain non-free open source services
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "steam"
     "steam-original"
@@ -35,8 +33,26 @@
     
 
   environment.systemPackages = with pkgs; [
+    # kitty image support in terminal
+    yazi
+    ranger
+    imagemagick
+    libcaca
+    ffmpeg-full
+    highlight
+    _7zz
+    w3m
+    poppler_utils
+    calibre
+    #djvutxt
+    sqlite-utils
+    sqlite
+    fontforge
+    tdf
+    mpv 
+
     # Wine and wine accessories
-     # support both 32-bit and 64-bit applications
+    # support both 32-bit and 64-bit applications
     wineWowPackages.stable
     # support 32-bit only
     wine
@@ -66,24 +82,11 @@
     # terminal
     zsh
     git
-    kitty
+    ghostty
 
     # Neovim and neovim accessories
     neovim
 
-    # DE and bar
-    xorg.xrandr
-    mako
-    wofi
-    hyprutils
-    hyprpaper  
-    gtk3
-    pango
-    libxkbcommon
-    wayland
-    networkmanagerapplet
-    cava
-    wireplumber
 
     # CLI apps
     docker
@@ -94,7 +97,6 @@
     ghostscript
     tectonic
     fd
-    imagemagick
     fzf
     just
     ninja
@@ -104,7 +106,7 @@
     
     # GPU Stuff
     seatd
-   
+
     # dev libraries and langauges
     udev  
     alsa-lib
@@ -132,10 +134,4 @@
   ];
 
   programs.firefox.enable = true;
-  programs.hyprland = {
-    # Install the packages from nixpkgs
-    enable = true;
-    # Whether to enable XWayland
-    xwayland.enable = true;
-  };
 }
