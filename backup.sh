@@ -9,14 +9,6 @@ while getopts "biwp" opt; do
     esac
 done
 
-
-echo "Backup: $backup"
-echo "Insert: $insert"
-echo "Work: $work"
-echo "Personal: $personal"
-
-
-
 if [ "$backup" = true ]; then
     # Shared configs
     cp -r ~/.config/nvim ./
