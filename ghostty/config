@@ -1,0 +1,17 @@
+theme=rose-pine-moon
+cursor-click-to-move=true
+background-blur=true
+background-opacity=0.75
+window-decoration=client
+window-theme=ghostty
+focus-follows-mouse=false
+clipboard-trim-trailing-spaces=true
+clipboard-paste-protection=true
+copy-on-select=false
+shell-integration=zsh
+cursor-style=block
+cursor-style-blink=true
+maximize=true
+link-url=true
+working-directory=~/solutions/
+auto-update=check
