@@ -9,8 +9,20 @@ while getopts "biwp" opt; do
     esac
 done
 
+
+echo "Backup: $backup"
+echo "Insert: $insert"
+echo "Work: $work"
+echo "Personal: $personal"
+
+
+
 if [ "$backup" = true ]; then
+    # Shared configs
     cp -r ~/.config/nvim ./
+    cp -r ~/.config/ghostty ./
+
+    # personal and work setups
     if [ "$personal" = true ]; then
         cp -r /etc/nixos ./personal/.
         cp -r ~/.config/home-manager/ ./personal/.
@@ -23,14 +35,17 @@ if [ "$backup" = true ]; then
 fi
 
 if [ "$insert" = true ]; then
+    # shared configs
+    cp -r ./nvim ~/.config/
+    cp -r ./ghostty ~/.config/
+
+    # personal and work setups
     if [ "$personal" = true ]; then
         cp -r ./personal/nixos /etc/
         cp -r ./personal/home-manager ~/.config/
-        cp -r ./personal/nvim ~/.config/
     elif [ "$work" = true ]; then
         cp -r ./work/nixos /etc/
         cp -r ./work/home-manager ~/.config/
-        cp -r ./personal/nvim ~/.config/
     fi
 fi
 
