@@ -17,10 +17,13 @@
                 tmux attach -t default || tmux new -s default
 	    fi
 
+	    source ~/.config/zsh/rose-pine-zsh/rose-pine-zsh.zsh
+	    colorize_zsh rose-pine
 	'';
         shellAliases = {
             # nix
-            nixReload = "sudo nixos-rebuild switch; home-manager switch";
+            nixBackup = "/home/nico/solutions/dotfiles/backup.sh -b -p";
+	    nixReload = "sudo nixos-rebuild switch; home-manager switch";
             nixHome = "home-manager switch;hyprctl reload;waybar &";
             nixSystem = "sudo nixos-rebuild switch";
             nixUpdate = "sudo nix-channel --update; sudo nixos-rebuild switch; home-manager switch";
@@ -28,7 +31,6 @@
 	    nixPackageUpdate = "sudo nvim /etc/nixos/packages.nix";
 	    nixCdConfig = "cd /etc/nixos/";
 	    nixCdHome = "cd /etc/nixos/";
-	    
 
             # hyprland and bar
             hyprReload = "home-manager switch -b backup;hyprctl reload";
@@ -65,14 +67,8 @@
             lowBrightness="sudo brightnessctl --min-val=2 set 2%";
             maxBrightness="sudo brightnessctl --min-val=2 set 100%";
 
-            # set monitor commands
-            #officeMonitor="xrandr --output eDP-1-1 --auto --output DP-0 --primary --auto --left-of eDP-1-1;" ;
-            #officeDualMonitors="~/Tools/scripts/DualOfficeMonitor.sh";
-            #bedroomMonitor="xrandr --output eDP-1-1 --mode 1920x1080 --output HDMI-0 --primary --mode 1920x1080 --right-of eDP-1-1 ";
-
             # ZSH
-            zshrc="nvim ~/.zshrc";
-            reloadZsh="home-manager switch -b backup; /source ~/.zshrc";
+            editTerminalSettings="sudo nvim /etc/nixos/terminal.nix";
             listAliases="cat ~/.zshrc | grep 'alias'";
 
             # directory shortcuts

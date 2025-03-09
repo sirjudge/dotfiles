@@ -4,14 +4,14 @@
   imports = [ 
       ./hardware-configuration.nix
       ./packages.nix
-      ./nvidia.nix
+      ./gpu.nix
       ./terminal.nix
       ./fonts.nix
       ./users.nix
       ./docker.nix
       ./audio.nix
       ./bluetooth.nix
-      ./hyprland.nix
+      ./hyprland/hyprland.nix
   ];
 
   # Bootloader.
@@ -21,12 +21,14 @@
 	efi.canTouchEfiVariables = true;
     };
 
+    #TODO: gonna uncomment this out, wonder if it'll fix anything magically. . . would be nice
     # causes weird issues with not recognizing the dock on start up
     blacklistedKernelModules = [
     	"dell_smbios"	
     ];
     
     kernelParams = [ "psmouse.synaptics_intertouch=0" ];
+    kernelModules = ["evdi" "udl" ];
   };
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -87,19 +89,20 @@
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_DATA_HOME   = "$HOME/.local/share";
     XDG_STATE_HOME  = "$HOME/.local/state";
-    XDG_CURRENT_DESKTOP="Hyprland";
-    XDG_SESSION_TYPE="wayland";
-    XDG_SESSION_DESKTOP="Hyprland";
    
     # GPU driver nonsense
-    AQ_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";		
-    #AQ_DRM_DEVICES = "/dev/dri/card0:/dev/dri/card1";		
+    # Use the following to idenntify card
+    #AQ_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";		
+    AQ_DRM_DEVICES = "/dev/dri/card0:/dev/dri/card1";		
     LIBVA_DRIVER_NAME="nvidia";
     WLR_DRM_NO_MODIFIERS="1";
     GBM_BACKEND="nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME="nvidia";
 
     # Wayland specifications for other random nonsense
+    #XDG_CURRENT_DESKTOP="Hyprland";
+    #XDG_SESSION_TYPE="wayland";
+    #XDG_SESSION_DESKTOP="Hyprland";
     # GDK_BACKEND="wayland,x11,*";
     #QT_QPA_PLATFORM="wayland;xcb";
     # SDL_VIDEODRIVER="wayland";
