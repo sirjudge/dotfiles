@@ -13,14 +13,17 @@
       ./bluetooth.nix
       ./vpn.nix
       ./hyprland.nix
-      # inputs.ssbm-nix.overlay 
+      inputs.ssbm-nix.overlay 
   ];
 
-  # # environment.systemPackages = [ pkgs.slippi-launcher ];
+  # imports = [ 
+  # ];
+  # environment.systemPackages = [ 
+  # ];
   environment.systemPackages = [
     inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
+    pkgs.slippi-launcher 
   ];
-
 
   # app image stuff
   programs.appimage.enable = true;

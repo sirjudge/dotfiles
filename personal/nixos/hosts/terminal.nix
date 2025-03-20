@@ -20,8 +20,7 @@
 	    source ~/.config/zsh/rose-pine-zsh/rose-pine-zsh.zsh
 	    colorize_zsh rose-pine
 
-	    # tmux source  ~/.config/tmux/tmux.conf
-	'';
+	    # tmux source  ~/.config/tmux/tmux.conf '';
         shellAliases = {
             # nix
             nixBackup = "/home/nico/solutions/dotfiles/backup.sh -b -p";

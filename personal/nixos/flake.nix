@@ -18,7 +18,6 @@
     };
   };
  
-  #outputs = { self, hyprland, ssbm-nix, nixpkgs, home-manager, rose-pine-hyprcursor,...}: {
   outputs = { self, nixpkgs, ...} @inputs: {
     nix.settings = {
       substituters = ["https://hyprland.cachix.org"];
@@ -36,7 +35,7 @@
           home-manager.useUserPackages = true;
           home-manager.users.nico = import ./home/home.nix;
         }
-        # inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
+        # inputs.rose-pine-hyprcursor.packages.${nixpkgs.system}.default
       ];
     };
   };

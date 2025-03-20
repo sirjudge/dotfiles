@@ -1,4 +1,4 @@
-{ config, pkgs, lib,... }:
+{ config, pkgs, lib,inputs,... }:
 {
   # programs.home-manager.enable = true;
 # Home Manager needs a bit of information about you and the paths it should
@@ -41,25 +41,30 @@
 
   # load files after home manager has been loaded and initialized
   imports = [
+    # inputs.ssbm-nix.homeMangagerModule
     ./terminal/tmux.nix 
     ./terminal/kitty.nix
     ./git.nix
     ./wofi.nix
-    # ./ssbm.nix
     ./hyprland/hyprland.nix
     ./waybar/waybar.nix
   ];
 
   gtk = {
 	  enable = true;
-	  font.name = "Ubuntu Nerd Font";
+	  # font.name = "Ubuntu Nerd Font";
+	  font.name = "JetBrainsMono Nerd Font";
 	  theme = {
-		  name = "Arc-Dark";
-		  package = pkgs.arc-theme;
+		  # name = "Arc-Dark";
+		  # package = pkgs.arc-theme;
+		  name = "rose-pine";
+		  package = pkgs.rose-pine-gtk-theme;
 	  };
 	  iconTheme = {
-		  name = "Arc";
-		  package = pkgs.arc-icon-theme;
+		  # name = "Arc";
+		  # package = pkgs.arc-icon-theme;
+		  name = "Rose pine icons";
+		  package = pkgs.rose-pine-icon-theme;
 	  };
   };
 

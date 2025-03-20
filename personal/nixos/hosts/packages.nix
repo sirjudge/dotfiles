@@ -65,7 +65,6 @@
     libcaca
     highlight
 
-   
     # Terminal -> Shell and Emulator
     zsh
     ghostty
