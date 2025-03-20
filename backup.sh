@@ -17,7 +17,6 @@ if [ "$backup" = true ]; then
     # personal and work setups
     if [ "$personal" = true ]; then
         cp -r /etc/nixos ./personal/.
-        cp -r ~/.config/home-manager/ ./personal/.
         cp -r ~/.config/nixpkgs ./personal/.
     elif [ "$work" = true ]; then
         sudo cp -r /etc/nixos ./work/.
