@@ -7,11 +7,6 @@ let
   hypr_keys = builtins.readFile ./keys.conf;
 in
 {
-
-  home.packages = with pkgs; [
-   kitty hyprland hyprpaper hyprshot
-  ];
-
   #home.stateVersion = "23.05"; # or the appropriate version for your setup
   home.file.".config/hypr/hyprland.conf".text = hyprlandConfig;
   home.file.".config/hypr/monitors.conf".text = monitorsConfig;
