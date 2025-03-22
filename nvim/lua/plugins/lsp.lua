@@ -9,15 +9,16 @@ return {
 		},
 		-- example using `opts` for defining servers
 		config = function()
-			-- make sure we import java
+			-- set up java before the remaining lsp config
 			require("java").setup()
+
+			-- make sure we import java
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 			local lspconfig = require("lspconfig")
 			local coq = require("coq")
 
-			lspconfig["jdtls"].setup({ capabilities = capabilities })
-
-			lspconfig["lua-ls"].setup({ capabilities = capabilities })
+			lspconfig["jdtls"].setup({})
+			-- lspconfig["jdtls"].setup({ capabilities = capabilities })
 
 			lspconfig["bashls"].setup(coq.lsp_ensure_capabilities({
 				capabilities = capabilities,
