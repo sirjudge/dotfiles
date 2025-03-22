@@ -33,9 +33,9 @@ in
         "~/Pictures/wallpapers/rosePineFunkyPattern.jpg"
       ];
       wallpaper = [
-        "DP-6,~/Pictures/wallpapers/kittyRainbow.jpg"
+        "DP-6,~/Pictures/wallpapers/kittyRainbow.png"
         "DP-7,~/Pictures/wallpapers/rosePineFunkyPattern.jpg"
-        "eDP-1,~/Pictures/wallpapers/kittyRainbow.jpg"
+        "eDP-1,~/Pictures/wallpapers/kittyRainbow.png"
       ];
     };
   };
