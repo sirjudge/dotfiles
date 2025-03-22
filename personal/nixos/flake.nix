@@ -16,26 +16,26 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.hyprlang.follows = "hyprland/hyprlang";
     };
+    stylix.url = "github:danth/stylix";
   };
  
   outputs = { self, nixpkgs, ...} @inputs: {
     nix.settings = {
       substituters = ["https://hyprland.cachix.org"];
       trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-
     };
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [ 
         ./hosts/configuration.nix 
         inputs.hyprland.nixosModules.default
+	inputs.stylix.nixosModules.stylix
 	inputs.home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.nico = import ./home/home.nix;
         }
-        # inputs.rose-pine-hyprcursor.packages.${nixpkgs.system}.default
       ];
     };
   };

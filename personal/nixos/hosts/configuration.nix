@@ -1,8 +1,9 @@
-{pkgs, host, username, options, lib, inputs, system, ...}:
+{pkgs, config, host, username, options, lib, inputs, system, ...}:
 
 {
   imports = [ 
       ./hardware-configuration.nix
+      ./boot.nix
       ./gnome.nix
       ./packages.nix
       ./gpu.nix
@@ -15,11 +16,11 @@
       ./hyprland.nix
       inputs.ssbm-nix.overlay 
   ];
+  
+# Set up dolphin udev rules to get controller working
+  services.udev.packages = [ pkgs.dolphin-emu ];
 
-  # imports = [ 
-  # ];
-  # environment.systemPackages = [ 
-  # ];
+  # built slippi and hyprcursor
   environment.systemPackages = [
     inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
     pkgs.slippi-launcher 
@@ -46,23 +47,6 @@
     pkgs.nerd-fonts.jetbrains-mono
   ];
 
-  # Bootloader.
-  boot = {
-    loader = {
-        systemd-boot.enable = true;
-	efi.canTouchEfiVariables = true;
-    };
-
-    #TODO: gonna uncomment this out, wonder if it'll fix anything magically. . . would be nice
-    # causes weird issues with not recognizing the dock on start up
-    blacklistedKernelModules = [
-    	"dell_smbios"	
-    ];
-    
-    kernelParams = [ "psmouse.synaptics_intertouch=0" ];
-    kernelModules = ["evdi" "udl" ];
-  };
-
   networking.hostName = "nixos"; # Define your hostname.
 
   # Enable networking
@@ -86,7 +70,6 @@
     LC_TIME = "en_US.UTF-8";
   };
   
-
   # Enable flatpak because sometimes I just don't feel like using my braincells
   services.flatpak.enable = true;
   

@@ -48,6 +48,7 @@
     ./wofi.nix
     ./hyprland/hyprland.nix
     ./waybar/waybar.nix
+    # inputs.ssbm-nix.homeManagerModule
   ];
 
   gtk = {
