@@ -3,8 +3,15 @@
   users.users.nico = {
     isNormalUser = true;
     description = "nico";
-    extraGroups = [ "networkmanager" "wheel" "video" "seat" "docker"];
+    extraGroups = [ "networkmanager" "wheel" "video" "seat" "docker" "vboxusers"];
     packages = with pkgs; [
+      # VPN
+      openvpn
+
+      # OS stuff
+      ventoy-full
+      caligula
+     
       # DE stuff
       playerctl
       brightnessctl
@@ -17,19 +24,19 @@
       texliveFull
       graph-easy
       slides
-      loc
+      
+      #loc
       nerdfetch  
-      htop-vim
       lshw
       pciutils
       usbutils
-      htop-vim
       pciutils
       pavucontrol
       krabby
       nerdfetch  
       pavucontrol
-      
+      fastfetch
+
       #Misc Applications 
       kdePackages.okular    
       obsidian
@@ -79,9 +86,4 @@
   };
 
 }
-
-
-
-
-
 

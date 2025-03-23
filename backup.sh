@@ -12,7 +12,11 @@ while getopts "biwp" opt; do
 done
 
 if [ "$backup" = true ]; then
+    # Shared configs
     cp -r ~/.config/nvim ./
+    cp -r ~/.config/ghostty ./
+
+    # personal and work setups
     if [ "$personal" = true ]; then
         cp -r /etc/nixos ./personal/.
         cp -r ~/.config/nixpkgs ./personal/.
@@ -22,9 +26,14 @@ if [ "$backup" = true ]; then
 fi
 
 if [ "$insert" = true ]; then
-    cp -r ./personal/nvim ~/.config/
+    # shared configs
+    cp -r ./nvim ~/.config/
+    cp -r ./ghostty ~/.config/
+
+    # personal and work setups
     if [ "$personal" = true ]; then
         cp -r ./personal/nixos /etc/
+        # cp -r ./personal/home-manager ~/.config/
     elif [ "$work" = true ]; then
         cp -r ./work/.zshrc ~/
     fi

@@ -1,35 +1,51 @@
-{pkgs, host, username, options, lib, inputs, system, ...}:
+{pkgs, config, host, username, options, lib, inputs, system, ...}:
 
 {
   imports = [ 
       ./hardware-configuration.nix
+      ./boot.nix
+      ./gnome.nix
       ./packages.nix
       ./gpu.nix
       ./terminal.nix
-      ./fonts.nix
       ./users.nix
       ./docker.nix
       ./audio.nix
       ./bluetooth.nix
-      ./hyprland/hyprland.nix
+      ./vpn.nix
+      ./hyprland.nix
+      inputs.ssbm-nix.overlay 
+  ];
+  
+# Set up dolphin udev rules to get controller working
+  services.udev.packages = [ pkgs.dolphin-emu ];
+
+  # built slippi and hyprcursor
+  environment.systemPackages = [
+    inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
+    pkgs.slippi-launcher 
   ];
 
-  # Bootloader.
-  boot = {
-    loader = {
-        systemd-boot.enable = true;
-	efi.canTouchEfiVariables = true;
-    };
+  # app image stuff
+  programs.appimage.enable = true;
+  programs.appimage.binfmt = true;
 
-    #TODO: gonna uncomment this out, wonder if it'll fix anything magically. . . would be nice
-    # causes weird issues with not recognizing the dock on start up
-    blacklistedKernelModules = [
-    	"dell_smbios"	
+  # Slippi
+  programs.appimage.package = pkgs.appimage-run.override {
+    extraPkgs = pkgs: [
+      pkgs.curl
+      pkgs.libmpg123
     ];
-    
-    kernelParams = [ "psmouse.synaptics_intertouch=0" ];
-    kernelModules = ["evdi" "udl" ];
   };
+
+  # keyboard 
+  hardware.keyboard.zsa.enable = true;
+
+  fonts.packages  = [
+    pkgs.nerd-fonts._0xproto
+    pkgs.nerd-fonts.droid-sans-mono
+    pkgs.nerd-fonts.jetbrains-mono
+  ];
 
   networking.hostName = "nixos"; # Define your hostname.
 
@@ -54,18 +70,13 @@
     LC_TIME = "en_US.UTF-8";
   };
   
-  # Enable the GNOME Desktop Environment.
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
   # Enable flatpak because sometimes I just don't feel like using my braincells
   services.flatpak.enable = true;
   
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
-    variant = "";
+    # variant = "";
   };
 
   # Enable CUPS to print documents.
@@ -128,35 +139,4 @@
     options = "--delete-older-than 7d";
   };
   
-  # Set some dconf options declaratively
-  programs.dconf = {
-    enable = true;
-    profiles.user.databases = [ {
-      settings = with lib.gvariant; {
-        # Don't show a welcome dialog
-        "org/gnome/shell" = {
-          welcome-dialog-last-shown-version = "9999999999";
-        };
-        # No timeouts
-        "org/gnome/desktop/session" = {
-          idle-delay = mkUint32 0;
-        };
-        "org/gnome/settings-daemon/plugins/power" = {
-          sleep-inactive-ac-type = "nothing";
-          sleep-inactive-battery-type = "nothing";
-        };
-
-        # Faster key repeat
-        "org/gnome/desktop/peripherals/keyboard" = {
-          delay = mkUint32 200;
-          repeat-interval = mkUint32 25;
-        };
-
-        # Bigger default console font size
-        "org/gnome/Console" = {
-          font-scale = 2.0;
-        };
-      };
-    } ];
-  };
 }
