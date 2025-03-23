@@ -33,7 +33,7 @@ if [ "$insert" = true ]; then
     # personal and work setups
     if [ "$personal" = true ]; then
         cp -r ./personal/nixos /etc/
-        cp -r ./personal/home-manager ~/.config/
+        # cp -r ./personal/home-manager ~/.config/
     elif [ "$work" = true ]; then
         cp -r ./work/nixos /etc/
         cp -r ./work/home-manager ~/.config/

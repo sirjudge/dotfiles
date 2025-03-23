@@ -44,11 +44,11 @@
     # inputs.ssbm-nix.homeMangagerModule
     ./terminal/tmux.nix 
     ./terminal/kitty.nix
+    ./terminal/shell.nix
     ./git.nix
     ./wofi.nix
     ./hyprland/hyprland.nix
     ./waybar/waybar.nix
-    # inputs.ssbm-nix.homeManagerModule
   ];
 
   gtk = {

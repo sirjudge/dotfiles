@@ -5,6 +5,7 @@ let
   workspacesConfig = builtins.readFile ./workspaces.conf;
   rosePineMoonConfig = builtins.readFile ./rose-pine-moon.conf;
   hypr_keys = builtins.readFile ./keys.conf;
+  window_rules = builtins.readFile ./window-rules.conf;
 in
 {
   xdg.portal = {
@@ -22,6 +23,7 @@ in
   home.file.".config/hypr/workspaces.conf".text = workspacesConfig;
   home.file.".config/hypr/rose-pine-moon.conf".text = rosePineMoonConfig;
   home.file.".config/hypr/keys.conf".text = hypr_keys;
+  home.file.".config/hypr/window-rules.conf".text = window_rules;
 
   services.hyprpaper = {
     enable = true;

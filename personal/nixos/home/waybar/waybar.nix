@@ -20,7 +20,7 @@ programs.waybar = {
           "hyprland/workspaces" "hyprland/submap"
         ];
         modules-left = [
-         "tray" "privacy" "hyprland/window"   
+         "custom/power" "tray" "privacy" "hyprland/window"   
         ];
         modules-right = [
           "pulseaudio" "network" "cpu" "memory" "temperature" "battery" "clock"
@@ -56,7 +56,7 @@ programs.waybar = {
           interval = 1;
           format-alt = "{ifname}: {ipaddr}/{cidr}";
           format-disconnected = "Disconnected ⚠";
-          format-ethernet = "{ifname}: {ipaddr}/{cidr} 󰈀  up: {bandwidthUpBits} down: {bandwidthDownBits}";
+          format-ethernet = "{ifname}:󰈀  up: {bandwidthUpBits} down: {bandwidthDownBits}";
           format-linked = "{ifname} (No IP) 󰤭 ";
           format-wifi = "{essid} ({signalStrength}%)  ";
         };
