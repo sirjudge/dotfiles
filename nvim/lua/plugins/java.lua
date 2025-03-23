@@ -1,7 +1,5 @@
 return {
-	{
-		"nvim-java/nvim-java",
-	},
+	{ "nvim-java/nvim-java" },
 	{
 		"eatgrass/maven.nvim",
 		cmd = { "Maven", "MavenExec" },
