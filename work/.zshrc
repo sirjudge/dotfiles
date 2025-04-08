@@ -2,11 +2,16 @@
 export ZSH="$HOME/.oh-my-zsh"
 
 # wsl stuff
-# export DISPLAY="$(ip route list default | awk '{print $3}'):0"
 export BROWSER=wslview
 export LIBGL_ALWAYS_INDIRECT=1
 
+
+# Note: I think this breaks things even more?
+# export DISPLAY="$(ip route list default | awk '{print $3}'):0"
+#export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0.0
+
 # enable docker proress to always be plain text
+#
 export BUILDKIT_PROGRESS=plain
 
 # Add nvim bin to path
@@ -133,7 +138,8 @@ alias seePorts="sudo lsof -i -P -n | grep LISTEN"
 
 # docker 
 alias startDocker="sudo systemctl start docker;sudo service docker start"
-alias dockerFullUninstall="for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done"
+#alias dockerFullUninstall="for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done"
+
 # git shortcuts
 alias gdiff="git difftool --tool vimdiff"
 alias gcheck="git checkout -b "
@@ -181,15 +187,11 @@ alias configFolder="cd ~/.config"
 alias sol="cd ~/solutions"
 alias tools="cd ~/tools"
 
-if [ -e /home/nicholas.judge/.nix-profile/etc/profile.d/nix.sh ]; then . /home/nicholas.judge/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-
-# awin
+# awin auth
 alias awinDockerLogin="cat ~/solutions/envFiles/dockerCredentials.txt | docker login -u nicholas.judge registry.awin.com --password-stdin"
-alias awinWslAuth="/root/solutions/aws-systemsengineering/utils/sso/wslPatch.sh -a -u nicholas.judge"
-
-alias curlAwinPrivate="timeout 3 curl -o /dev/null -s -w "%{http_code}\n" https://awin.com"
-alias curlAwinPublic="timeout 3 curl -o /dev/null -s -w "%{http_code}\n" https://registry.awin.com"
-
-alias awinLogin="/root/solutions/aws-systemsengineering/utils/sso/login-engineer.sh nicholas.judge springfield"
-alias getAwinDevToken="curl http://ui.d-lhr1-docker-020.dev.awin.com/idpbackend/token -d 'grant_type=client_credentials&client_id=migrationTestClient&client_secret=$AWIN_SPRINGFIELD_STAGING_CLIENT_SECRET'"
-alias getAwinStagingToken="curl http://ui.staging.awin.com/idpbackend/token -d 'grant_type=client_credentials&client_id=migrationTestClient&client_secret=$AWIN_SPRINGFIELD_DEV_CLIENT_SECRET'"
+alias awinAwsLogin="/root/solutions/Tiger/aws-systemsengineering/utils/sso/wslPatch.sh -a -u nicholas.judge"
+alias awinFullLogin="awinDockerLogin;awinAwsLogin"
+alias awinCurlPrivate="timeout 3 curl -o /dev/null -s -w "%{http_code}\n" https://awin.com"
+alias awinCurlPublic="timeout 3 curl -o /dev/null -s -w "%{http_code}\n" https://registry.awin.com"
+alias awinDevToken="curl http://ui.d-lhr1-docker-020.dev.awin.com/idpbackend/token -d 'grant_type=client_credentials&client_id=migrationTestClient&client_secret=$AWIN_SPRINGFIELD_STAGING_CLIENT_SECRET'"
+alias awinStagingToken="curl http://ui.staging.awin.com/idpbackend/token -d 'grant_type=client_credentials&client_id=migrationTestClient&client_secret=$AWIN_SPRINGFIELD_DEV_CLIENT_SECRET'"
