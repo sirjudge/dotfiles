@@ -4,8 +4,7 @@ Back up of work and personal configuration files with a simple bash script to ba
 
 ## Dependencies
 ### Personal
-- nixos
-
+- (NixOs)[https://nixos.org/]
 ### Work
 - [powerline](https://github.com/powerline/powerline)
 - [kitty](https://github.com/kovidgoyal/kitty)
@@ -15,13 +14,12 @@ Back up of work and personal configuration files with a simple bash script to ba
 ### Shared
 - [neovim](https://neovim.io/)
 
-
 ## Setup and runtime Shell commands
-### If scripts are not executable
+Make script executable
 ```shell
     chmod +x backup.sh
 ```
-### running backupManager.sh script
+Run back up or install
 ```shell
 # Back up work folders:
 ./backup.sh -b -w
@@ -34,5 +32,5 @@ Back up of work and personal configuration files with a simple bash script to ba
 |------|-------------|
 | `-i` | Install files from dotfiles repo to system configurations |
 | `-b` | backup action should occurr |
-| `-w` | work computer |
-| `-p` | personal computer  |
+| `-w` | work Configuration |
+| `-p` | personal  configuration|
