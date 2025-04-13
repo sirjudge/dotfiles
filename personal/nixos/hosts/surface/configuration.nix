@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{inputs, hardware, config, pkgs, lib, ... }:
 
 {
   imports =
@@ -81,7 +81,11 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
+
+  # multi-touch gesture recognizer
+  services.touchegg.enable = true;
+
 
  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
    "obsidian"
@@ -148,9 +152,36 @@
   # Install firefox.
   programs.firefox.enable = true;
 
+  # Set up dolphin udev rules to get controller working
+  services.udev.packages = [ pkgs.dolphin-emu ];
+
+  # app image stuff
+  programs.appimage.enable = true;
+  programs.appimage.binfmt = true;
+
+  # Slippi
+  programs.appimage.package = pkgs.appimage-run.override {
+    extraPkgs = pkgs: [
+      pkgs.curl
+      pkgs.libmpg123
+    ];
+  };
+
+  # keyboard 
+  hardware.keyboard.zsa.enable = true;
+
+  fonts.packages  = [
+    pkgs.nerd-fonts._0xproto
+    pkgs.nerd-fonts.droid-sans-mono
+    pkgs.nerd-fonts.jetbrains-mono
+  ];
+
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
+    # pkgs.slippi-launcher 
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     iptsd
@@ -163,25 +194,19 @@
     pavucontrol
   ];
 
+  environment.sessionVariables = rec {
+   # get electron on wayland
+    NIXOS_OZONE_WL = "1";
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+    # Ensure XDG paths and variables are set
+    XDG_CACHE_HOME  = "$HOME/.cache";
+    XDG_CONFIG_HOME = "$HOME/.config";
+    XDG_DATA_HOME   = "$HOME/.local/share";
+    XDG_STATE_HOME  = "$HOME/.local/state";
+ 
+    # Screenshot
+    HYPRSHOT_DIR="/home/nico/Pictures/Screenshots";
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -191,4 +216,11 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
 
+
+  # Set up weekly garbage collection to keep bloat down
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
 }
