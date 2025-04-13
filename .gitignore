@@ -1,6 +1,8 @@
 # ignore gzip files
 *.gz
 
+
+
 # sometimes configs like to generate noisy node files, begone with them
 node_modules/
 */node_modules/
@@ -19,4 +21,5 @@ build/
 *.env.*
 
 # ignore lazy lock file
-lazy-lock.json
+*/lazy-lock.json
+*.lock.json
