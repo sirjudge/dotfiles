@@ -9,9 +9,15 @@ return {
         },
         -- example using `opts` for defining servers
         config = function()
+
+            require('java').setup()
             local capabilities = require('blink.cmp').get_lsp_capabilities()
             local lspconfig = require "lspconfig"
             local coq = require "coq"
+
+
+            
+            lspconfig['jdtls'].setup({ capabilities = capabilities })
 
             lspconfig['lua-ls'].setup({ capabilities = capabilities })
 

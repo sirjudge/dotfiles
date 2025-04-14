@@ -189,8 +189,10 @@ alias tools="cd ~/tools"
 
 # awin auth
 alias awinDockerLogin="cat ~/solutions/envFiles/dockerCredentials.txt | docker login -u nicholas.judge registry.awin.com --password-stdin"
-alias awinAwsLogin="/root/solutions/Tiger/aws-systemsengineering/utils/sso/wslPatch.sh -a -u nicholas.judge"
+alias awinAwsLogin="/root/solutions/CloudOps/aws-systemsengineering/utils/sso/wslPatch.sh -a -u nicholas.judge"
 alias awinFullLogin="awinDockerLogin;awinAwsLogin"
+
+# Awin testing
 alias awinCurlPrivate="timeout 3 curl -o /dev/null -s -w "%{http_code}\n" https://awin.com"
 alias awinCurlPublic="timeout 3 curl -o /dev/null -s -w "%{http_code}\n" https://registry.awin.com"
 alias awinDevToken="curl http://ui.d-lhr1-docker-020.dev.awin.com/idpbackend/token -d 'grant_type=client_credentials&client_id=migrationTestClient&client_secret=$AWIN_SPRINGFIELD_STAGING_CLIENT_SECRET'"

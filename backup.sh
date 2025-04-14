@@ -14,12 +14,12 @@ done
 if [ "$backup" = true ]; then
     # Shared configs
     cp -r ~/.config/nvim ./
-    cp -r ~/.config/ghostty ./
 
     # personal and work setups
     if [ "$personal" = true ]; then
         cp -r /etc/nixos ./personal/.
         cp -r ~/.config/nixpkgs ./personal/.
+        cp -r ~/.config/ghostty ./
     elif [ "$work" = true ]; then
         cp -r ~/.zshrc ./work/
     fi
