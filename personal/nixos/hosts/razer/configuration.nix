@@ -22,7 +22,7 @@
 
   # built slippi and hyprcursor
   environment.systemPackages = [
-    inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
+    # inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
     pkgs.slippi-launcher 
   ];
 

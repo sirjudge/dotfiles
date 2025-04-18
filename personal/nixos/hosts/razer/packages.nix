@@ -142,11 +142,19 @@
     # hardware compatability
     thunderbolt
     solaar
-    gnomeExtensions.solaar-extension
+    # gnomeExtensions.solaar-extension
     pamixer # Command-line mixer for PulseAudio
     bluez # Bluetooth support
     bluez-tools # Bluetooth tools
-    
+   
+    # Java
+    maven
+    jdt-language-server
+    jdk
+
+    # lua
+    lua
+    lua-language-server
   ];
 
   programs.firefox.enable = true;

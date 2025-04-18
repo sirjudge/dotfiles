@@ -24,6 +24,11 @@
       texliveFull
       graph-easy
       slides
+
+      # Pokemon themeing
+      pokemonsay
+      pokemon-cursor
+      krabby
       
       #loc
       nerdfetch  
