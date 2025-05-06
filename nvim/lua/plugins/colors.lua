@@ -20,6 +20,15 @@ return {
         "nyoom-engineering/oxocarbon.nvim",
     },
     {
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+    },
+    {
+        "nyoom-engineering/oxocarbon.nvim",
+    },
+    {
       "comfysage/cuddlefish.nvim",
       config = function()
         require('cuddlefish').setup({
@@ -42,7 +51,7 @@ return {
           end,
         })
 
-        --vim.cmd.colorscheme [[cuddlefish]]
+        -- vim.cmd.colorscheme [[cuddlefish]]
       end
     }
 }
