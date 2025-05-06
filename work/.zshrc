@@ -189,7 +189,7 @@ alias tools="cd ~/tools"
 
 # awin auth
 alias awinDockerLogin="cat ~/solutions/envFiles/dockerCredentials.txt | docker login -u nicholas.judge registry.awin.com --password-stdin"
-alias awinAwsLogin="/root/solutions/CloudOps/aws-systemsengineering/utils/sso/wslPatch.sh -a -u nicholas.judge"
+alias awinAwsLogin="/root/solutions/CloudOps/aws-systemsengineering/utils/sso/wslPatch.sh -a -u nicholas.judge -e /root/solutions/envFiles/dev.env"
 alias awinFullLogin="awinDockerLogin;awinAwsLogin"
 
 # Awin testing
