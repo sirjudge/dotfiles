@@ -39,10 +39,25 @@
 
 
   environment.systemPackages = with pkgs; [
+    # Nix
+    nix-search
+    nix-search-cli
+
+    # Get qt support for wayland
+    # Note: Bit unstable at the moment
+    # qtwayland
+    kdePackages.qtwayland
+    libsForQt5.qt5.qtwayland
+
+    # gtk and themeing
+    lxappearance
 
     # get app images working
     appimage-run
 
+    # Audio 
+    alsa-utils
+  
     # offline ergodox Keyboard mapper
     keymapp
 

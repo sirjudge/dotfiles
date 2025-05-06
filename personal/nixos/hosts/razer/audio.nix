@@ -1,6 +1,5 @@
 { pkgs, lib, config, ... }:
 {
-
   # TODO: THis doesn't work with flakes
   # imports =
   # [ # ...
@@ -45,7 +44,7 @@
     #network.startWhenNeeded = true; # systemd feature: only start MPD service upon connection to its socket
   };
 
-    services.jack = {
+  services.jack = {
     jackd.enable = true;
     # support ALSA only programs via ALSA JACK PCM plugin
     alsa.enable = false;
@@ -58,8 +57,4 @@
       #'';
     };
   };
-
-
-
-
 }

@@ -3,7 +3,7 @@ return {
     {
         'rose-pine/neovim',
         config = function()
-            --vim.cmd.colorscheme('rose-pine-moon')
+            vim.cmd.colorscheme('rose-pine-main')
         end
     },
     {
@@ -42,7 +42,7 @@ return {
           end,
         })
 
-        vim.cmd.colorscheme [[cuddlefish]]
+        --vim.cmd.colorscheme [[cuddlefish]]
       end
     }
 }

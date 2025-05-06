@@ -46,7 +46,6 @@
       kdePackages.okular    
       obsidian
       onlyoffice-bin
-      discord-ptb
       autorandr
       wlogout
       bottles
@@ -54,9 +53,13 @@
       # Media
       qbittorrent
       lutris
-      heroic
       google-chrome
       vlc
+
+      # Gamin
+      heroic
+      sunshine
+      moonlight-qt
 
       #music
       bitwig-studio
@@ -81,12 +84,30 @@
     acceleration = "cuda";
   };
 
+  # Get Game Streaming To work real good
+  security.wrappers.sunshine = {
+      owner = "root";
+      group = "root";
+      capabilities = "cap_sys_admin+p";
+      source = "${pkgs.sunshine}/bin/sunshine";
+  };
+  services.avahi.publish.enable = true;
+  services.avahi.publish.userServices = true;
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
+
+  networking.firewall = {
+  enable = true;
+  allowedTCPPorts = [ 47984 47989 47990 48010 ];
+  allowedUDPPortRanges = [
+    { from = 47998; to = 48000; }
+    #{ from = 8000; to = 8010; }
+  ];
+};
 
   programs.obs-studio = {
     enable = true;

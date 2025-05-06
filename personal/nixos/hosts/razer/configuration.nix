@@ -15,6 +15,7 @@
       ./vpn.nix
       ./hyprland.nix
       inputs.ssbm-nix.overlay 
+      ./discord.nix
   ];
   
 # Set up dolphin udev rules to get controller working

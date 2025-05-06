@@ -19,17 +19,6 @@ in
     ];
   };
 
-  # programs.kitty.enable = true; # required for the default Hyprland config
-  # wayland.windowManager.hyprland = {
-  #   enable = true; # enable Hyprland
-  #   plugins = [
-  #     inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
-  #     inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
-  #
-  #   ];
-  #   # extraConfig = '' plugin = ${inputs.hy3.packages.${pkgs.system}.hy3}/lib/libhy3.so '';
-  # };
-
   wayland.windowManager.hyprland = {
     enable = true; # enable Hyprland
     plugins = [
@@ -37,20 +26,14 @@ in
       inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
     ];
     extraConfig = ''
+      ${rosePineMoonConfig}
       ${hyprlandConfig}
       ${monitorsConfig}
       ${workspacesConfig}
-      ${rosePineMoonConfig}
       ${hypr_keys}
       ${window_rules}
     '';
   };
-  # # home.file.".config/hypr/hyprland.conf".text = hyprlandConfig;
-  # home.file.".config/hypr/monitors.conf".text = monitorsConfig;
-  # home.file.".config/hypr/workspaces.conf".text = workspacesConfig;
-  # home.file.".config/hypr/rose-pine-moon.conf".text = rosePineMoonConfig;
-  # home.file.".config/hypr/keys.conf".text = hypr_keys;
-  # home.file.".config/hypr/window-rules.conf".text = window_rules;
 
   services.hyprpaper = {
     enable = true;
