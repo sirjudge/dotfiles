@@ -72,7 +72,7 @@ return {
                 layout = 'float',
                 relative = 'cursor',
                 width = 1,
-                height = 0.4,
+                height = 0.8,
                 row = 1
             },
             show_folds = true, -- Shows folds for sections in chat
@@ -86,15 +86,6 @@ return {
         },
         event = "VeryLazy",
         keys = {
-            -- Show help actions with telescope
-            {
-                "<leader>ah",
-                function()
-                    local actions = require("CopilotChat.actions")
-                    require("CopilotChat.integrations.telescope").pick(actions.help_actions())
-                end,
-                desc = "CopilotChat - Help actions",
-            },
             -- Show prompts actions with telescope
             {
                 "<leader>ap",
@@ -135,7 +126,7 @@ return {
             -- Fix the issue with diagnostic
             { "<leader>af", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "CopilotChat - Fix Diagnostic" },
             -- Clear buffer and chat history
-            { "<leader>al", "<cmd>CopilotChatReset<cr>", desc = "CopilotChat - Clear buffer and chat history" },
+            { "<leader>acl", "<cmd>CopilotChatReset<cr>", desc = "CopilotChat - Clear buffer and chat history" },
             -- Toggle Copilot Chat Vsplit
             { "<leader>av", "<cmd>CopilotChatToggle<cr>", desc = "CopilotChat - Toggle" },
             -- Copilot Chat Models
