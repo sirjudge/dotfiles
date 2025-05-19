@@ -9,9 +9,12 @@
       openvpn
 
       # OS stuff
-      ventoy-full
       caligula
-     
+      
+      # Game Dev
+      ldtk
+      godot
+      
       # DE stuff
       playerctl
       brightnessctl
@@ -60,6 +63,7 @@
       heroic
       sunshine
       moonlight-qt
+      prismlauncher
 
       #music
       bitwig-studio

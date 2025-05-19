@@ -1,4 +1,8 @@
-{ config, pkgs, lib,inputs,... }:
+{ config, pkgs, lib,inputs,system,... }:
+
+let 
+  system = "x86_64-linux";
+in
 {
   # programs.home-manager.enable = true;
 # Home Manager needs a bit of information about you and the paths it should

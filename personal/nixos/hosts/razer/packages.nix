@@ -139,7 +139,14 @@
     poppler_utils
     calibre
     fontforge
-    # nerdfonts
+  
+    # Godot and dotnet/mono
+
+    godot_4
+    godot_4-mono
+    godot-mono
+    dotnetCorePackages.sdk_9_0_1xx-bin
+    blender
 
     # Database
     sqlite-utils

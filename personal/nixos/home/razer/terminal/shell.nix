@@ -53,7 +53,8 @@ history = {
 };
 
 # shellInit = ''
-initExtra = ''
+# initExtra = ''
+initContent = ''
     # Set oh my zsh to auto update every 1 day
     zstyle ':omz:update' mode auto      
     zstyle ':omz:update' frequency 1

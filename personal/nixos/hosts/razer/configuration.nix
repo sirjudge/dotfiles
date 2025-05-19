@@ -24,6 +24,7 @@
   # built slippi and hyprcursor
   environment.systemPackages = [
     # inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
+    inputs.zen-browser.packages.${pkgs.system}.default
     pkgs.slippi-launcher 
   ];
 
@@ -48,7 +49,7 @@
     pkgs.nerd-fonts.jetbrains-mono
   ];
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nico"; # Define your hostname.
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -137,7 +138,7 @@
   nix.gc = {
     automatic = true;
     dates = "weekly";
-    options = "--delete-older-than 7d";
+    options = "--delete-older-than 3d";
   };
   
 }
