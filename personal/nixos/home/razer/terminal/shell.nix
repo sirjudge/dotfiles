@@ -3,8 +3,7 @@
   home.packages = with pkgs; [
     pkgs.oh-my-zsh
   ];
-
-    
+  
   # starship
   home.sessionVariables.STARSHIP_CACHE = "${config.xdg.cacheHome}/starship";
 
@@ -117,6 +116,9 @@
       # ZSH
       editTerminalSettings="nvim /etc/nixos/terminal.nix";
       listAliases="cat ~/.zshrc | grep 'alias'";
+
+      # logout 
+      lo="wlogout --protocol layer-shell";
 
       # directory shortcuts
       justAGuy="cd ~/solutions/just-a-little-guy/";

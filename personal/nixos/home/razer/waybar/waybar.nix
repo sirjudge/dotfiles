@@ -11,19 +11,28 @@ programs.waybar = {
     settings = 
       [
       {
-        output = ["DP-6"];
+        output = [
+        "eDP-1"
+        "DP-4"
+        "DP-5"
+        "DP-6"
+        "DP-7"
+        "DP-8"
+        "HDMI-A-1"
+        ];
         height = 30;
         layer = "top";
         position = "bottom";
         tray = { spacing = 10; };
         modules-center = [
-          "hyprland/workspaces" "hyprland/submap"
+          # "hyprland/workspaces" "hyprland/submap"
+          "hyprland/workspaces" #"hyprland/submap"
         ];
         modules-left = [
-         "custom/power" "tray" "privacy" "hyprland/window"   
+         "custom/power" "tray"   
         ];
         modules-right = [
-          "pulseaudio" "network" "cpu" "memory" "temperature" "battery" "clock"
+          "pulseaudio" "network" "cpu" "memory" "clock"
         ];
         idle_inhibitor = {
           format = "{icon}";
@@ -56,7 +65,7 @@ programs.waybar = {
           interval = 1;
           format-alt = "{ifname}: {ipaddr}/{cidr}";
           format-disconnected = "Disconnected ⚠";
-          format-ethernet = "{ifname}:󰈀  up: {bandwidthUpBits} down: {bandwidthDownBits}";
+          format-ethernet = "{ifname}:󰈀 ";
           format-linked = "{ifname} (No IP) 󰤭 ";
           format-wifi = "{essid} ({signalStrength}%)  ";
         };
@@ -90,58 +99,6 @@ programs.waybar = {
           format = " ⏻ ";
           on-click= "wlogout --protocol layer-shell";
         };
-    }
-    {
-      output = ["DP-7"];
-      height = 30;
-      layer = "top";
-      position = "bottom";
-      tray = { spacing = 10; };
-      modules-center = [
-        "hyprland/workspaces" "hyprland/submap"
-      ];
-      modules-left = [
-        "tray" "privacy" "hyprland/window"   
-      ];
-    }
-    {
-      output = ["eDP-1"];
-      height = 30;
-      layer = "top";
-      position = "bottom";
-      tray = { spacing = 10; };
-      modules-center = [
-        "hyprland/workspaces" "hyprland/submap"
-      ];
-      modules-left = [
-        "tray" "privacy" "hyprland/window"   
-      ];
-    }
-    {
-      output = ["DP-3"];
-      height = 30;
-      layer = "top";
-      position = "bottom";
-      tray = { spacing = 10; };
-      modules-center = [
-        "hyprland/workspaces" "hyprland/submap"
-      ];
-      modules-left = [
-        "tray" "privacy" "hyprland/window"   
-      ];
-    }
-    {
-      output = ["HDMI-A-1"];
-      height = 30;
-      layer = "top";
-      position = "bottom";
-      tray = { spacing = 10; };
-      modules-center = [
-        "hyprland/workspaces" "hyprland/submap"
-      ];
-      modules-left = [
-        "tray" "privacy" "hyprland/window"   
-      ];
     }
     ];
   };

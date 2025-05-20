@@ -51,10 +51,9 @@
       };
 
       targets.nixvim.enable = false;
-# targets.rofi.enable = false; = {
-  package = inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default;
-  name = "rose-pine-cursor";
-  size = 24;
-};
-};
+      package = inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default;
+      name = "rose-pine-cursor";
+      size = 24;
+    };
+  };
 }

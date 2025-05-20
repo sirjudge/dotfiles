@@ -1,8 +1,7 @@
-/*
- * Variant: Rosé Pine Moon
- * Maintainer: DankChoir
+/* 
+ * define preset colors based on rose pine color pallet 
+ * https://rosepinetheme.com/palette/
  */
-
 @define-color base            #232136;
 @define-color surface         #2a273f;
 @define-color overlay         #393552;
@@ -19,58 +18,42 @@
 @define-color highlightMed    #44415a;
 @define-color highlightHigh   #56526e;
 
+/* default the font size */
 * {
     font-size: 18px;
+    color: @rose;
 }
 
 window#waybar {
-    background-color: @base;
     padding-top: 5px;
-    border-bottom: 2px solid @highlightLow;
-    border-top: 2px solid @highlightLow;
     padding-top: 5px;
-    border-radius: 50px;
-    color: @text;
-    transition-property: background-color;
+    border-radius: 15px;
     transition-duration: .5s;
+    background-color: transparent;
 }
 
-#workspaces button.focused {
-    background: rgba(0, 0, 0, 0.2);
-    border-top: 3px solid @highlightLow;
-    border-bottom: 3px solid @highlightLow;
-    border-left: 2px dashed @highlightLow;
-    border-right: 2px dashed @highlightLow;
-    color: #9730fd;
+/* #workspaces button.focused { */
+#workspaces button.active {
+    border-top: 3px solid @love;
+    border-bottom: 3px solid @love;
+    border-left: 2px solid @love;
+    border-right: 2px solid @love;
+
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
+    background-color: @love;
 }
-
-
-#tray {
-    padding-left: 4px;
-    padding-right:4px;
-    min-width: 30px;
-    border-left: 2px dashed @;
-    font-size: 20px;
-}
-
 
 #workspaces button {
     padding-left: 10px;
     padding-right: 10px;
-    background-color: transparent;
-    color: inherit;
-    font-weight: 600;
-    border-top: 4px solid transparent;
-    border-bottom: 3px solid transparent;
-    border-left: 2px dashed #a678d3;
-}
-
-#workspaces button:first-child {
-    border-left: 0;
+    background-color: @surface;
+    border-top: 3px solid @pine;
+    border-bottom: 3px solid @pine;
+    border-left: 2px solid @pine;
+    border-right: 2px solid @pine;
+    border-radius: 25px;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
@@ -78,26 +61,22 @@ window#waybar {
     background: rgba(0, 0, 0, 0.2);
     box-shadow: inherit;
     text-shadow: inherit;
-    border-bottom: 3px solid @highlightLow;
-    border-top: 3px solid @highlightLow; 
+    border-bottom: 2px solid @highlightLow;
+    border-top: 2px solid @highlightLow; 
 }
 
-#mpd, #pulseaudio, #network, #cpu, #memory, #temperature, #clock, #window {
+#clock, #mpd, #pulseaudio, #network, #cpu, #memory, #temperature, #clock, #window,  #tray {
     padding-left: 8px;
     padding-right: 8px;
-    background-color: @highlightHigh;
-    color: @iris;
+    background-color: @surface;
     font-weight: 600;
-    border-top: 4px solid transparent;
-    border-bottom: 3px solid transparent;
-    border-left: 2px dashed #a678d3;
-    border-radius: 50px;
+    border-radius: 25px;
+    border-top: 3px solid @pine;
+    border-bottom: 3px solid @pine;
+    border-left: 2px solid @pine;
+    border-right: 2px solid @pine;
 }
 
 #window {
     min-width: 500px;
-}
-
-#clock {
-    font-size: 14px;
 }
