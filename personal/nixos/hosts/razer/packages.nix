@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ...}:
+{ inputs, pkgs, config, lib, ...}:
 {
   # Explicitely allow dynamic link packages 
   programs.nix-ld.enable = true;
@@ -6,6 +6,7 @@
     # Add any missing dynamic libraries for unpackaged programs
     # here, NOT in environment.systemPackages
   ];
+
 
   # Allow certain non-free open source services
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
@@ -37,8 +38,15 @@
     "cursor"
   ];
 
-
   environment.systemPackages = with pkgs; [
+    # lua
+    (lua.withPackages(ps: with ps; [ busted luafilesystem ]))
+    luajit
+    luarocks
+    lua
+    lua5_1
+    lua-language-server
+
     # Nix
     nix-search
     nix-search-cli
@@ -56,7 +64,12 @@
     appimage-run
 
     # Audio 
+    pamixer 
     alsa-utils
+    alsa-lib
+    alsa-lib.dev
+    ffmpeg-full
+    mpv 
   
     # offline ergodox Keyboard mapper
     keymapp
@@ -95,7 +108,7 @@
     tokei
     code-cursor
 
-    # Terminal -> Build and compile
+    # Compilation tools
     lynx
     tectonic
     just
@@ -105,18 +118,26 @@
     gnumake
     seatd
     udev  
-    go
     pkg-config
-    luarocks
-    lua
-    luajit
-    nodejs_22 
-    rustup
-    pkg-config
-    udev
     clang
     lld
     cairo
+   
+    # Rust
+    rustup
+    cargo
+    rust-analyzer
+    cargo
+    rustfmt
+    rust-analyzer
+    cargo
+
+
+    # Programming Lnaguages and libraries
+    go
+    nodejs_22 
+    zathura
+    bacon
 
     # Desktop Environment + Display
     nwg-displays
@@ -127,13 +148,6 @@
     xorg.libXrandr 
     libxkbcommon
     wayland 
-   
-    
-    # Audio
-    alsa-lib
-    alsa-lib.dev
-    ffmpeg-full
-    mpv 
 
     # Font and font accessories
     poppler_utils
@@ -141,7 +155,6 @@
     fontforge
   
     # Godot and dotnet/mono
-
     godot_4
     godot_4-mono
     godot-mono
@@ -164,8 +177,6 @@
     # hardware compatability
     thunderbolt
     solaar
-    # gnomeExtensions.solaar-extension
-    pamixer # Command-line mixer for PulseAudio
     bluez # Bluetooth support
     bluez-tools # Bluetooth tools
    
@@ -174,9 +185,6 @@
     jdt-language-server
     jdk
 
-    # lua
-    lua
-    lua-language-server
   ];
 
   programs.firefox.enable = true;

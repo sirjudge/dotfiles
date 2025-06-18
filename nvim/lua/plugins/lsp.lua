@@ -6,20 +6,29 @@ return {
             { 'saghen/blink.cmp' },
             { "ms-jpq/coq_nvim"}, 
             { "ms-jpq/coq.artifacts", branch = "artifacts" },
+            { 'nvim-java/nvim-java' },  -- Add nvim-java as a dependency
         },
         -- example using `opts` for defining servers
         config = function()
 
-            require('java').setup()
+
             local capabilities = require('blink.cmp').get_lsp_capabilities()
+            
             local lspconfig = require "lspconfig"
+           
             local coq = require "coq"
 
-
+            -- require('java').setup()
+            -- copilot tells me we don't need this but I am suspicious
+            lspconfig['jdtls'].setup(coq.lsp_ensure_capabilities(
+            {
+                capabilities = capabilities,
+            }))
             
-            lspconfig['jdtls'].setup({ capabilities = capabilities })
-
-            lspconfig['lua-ls'].setup({ capabilities = capabilities })
+            lspconfig['lua-ls'].setup(coq.lsp_ensure_capabilities(
+            {
+                capabilities = capabilities,
+            }))
 
             lspconfig['bashls'].setup(coq.lsp_ensure_capabilities(
             {

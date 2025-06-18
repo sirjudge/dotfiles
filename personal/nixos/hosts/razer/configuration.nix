@@ -49,10 +49,12 @@
     pkgs.nerd-fonts.jetbrains-mono
   ];
 
-  networking.hostName = "nico"; # Define your hostname.
+  networking = {
+    hostName = "nico"; # Define your hostname.
 
-  # Enable networking
-  networking.networkmanager.enable = true;
+    # Enable networking
+    networkmanager.enable = true;
+  };
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -137,8 +139,8 @@
   # Set up weekly garbage collection to keep bloat down
   nix.gc = {
     automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 3d";
+    dates = "daily";
+    options = "--delete-older-than 2d";
   };
   
 }

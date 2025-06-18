@@ -8,7 +8,6 @@ let
   window_rules = builtins.readFile ./window-rules.conf;
 in
 {
-
   xdg.portal = {
     enable = true;
     config.common.default = "*";
@@ -43,11 +42,15 @@ in
         "~/Pictures/wallpapers/kirbyCup.webp"
         "~/Pictures/wallpapers/kittyRainbow.png"
         "~/Pictures/wallpapers/rosePineFunkyPattern.jpg"
+        "~/Pictures/wallpapers/hollow-knight.jpg"
       ];
       wallpaper = [
-        "DP-7,~/Pictures/wallpapers/kittyRainbow.png"
-        "DP-6,~/Pictures/wallpapers/rosePineFunkyPattern.jpg"
-        "eDP-1,~/Pictures/wallpapers/kittyRainbow.png"
+        "DP-3,~/Pictures/wallpapers/hollow-knight.jpg"
+        "DP-4,~/Pictures/wallpapers/hollow-knight.jpg"
+        "DP-5,~/Pictures/wallpapers/hollow-knight.jpg"
+        "DP-6,~/Pictures/wallpapers/hollow-knight.jpg"
+        "DP-7,~/Pictures/wallpapers/hollow-knight.jpg"
+        "eDP-1,~/Pictures/wallpapers/hollow-knight.jpg"
       ];
     };
   };

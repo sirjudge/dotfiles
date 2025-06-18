@@ -8,5 +8,7 @@ return {
     config = function()
         require('render-markdown').setup({
             completions = { blink = { enabled = true } },
+            latex = { enabled = true }, -- or 'katex'
+            html = {enabled = false },
         })    end
 }

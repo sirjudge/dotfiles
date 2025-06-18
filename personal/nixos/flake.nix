@@ -29,7 +29,14 @@
     # nixgl.url = "github:nix-community/nixGL";
   };
 
-  outputs = { self, godot, nixpkgs, hyprland-plugins, hyprland, zen-browser,... } @ inputs: {
+  outputs = { self, godot, nixpkgs, hyprland-plugins, hyprland, zen-browser,... }
+  @ inputs: 
+  let 
+    # initialize new settings
+    username = "nico";
+    hostname = "razer";
+  in
+  {
     # nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
     nixosConfigurations.nico = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -40,6 +47,7 @@
         inputs.stylix.nixosModules.stylix
         inputs.musnix.nixosModules.musnix
         #BUG: Something is going wrong with the following godot imports
+        # Keep em out for now until we need them
         # inputs.godot.packages.x86_64-linux.godot # for godot without Mono / C#
         # inputs.godot.packages.x86_64-linux.godotHeadless # for godot headless
         # inputs.godot.packages.x86_64-linux.godotMono
