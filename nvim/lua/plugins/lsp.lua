@@ -19,7 +19,6 @@ return {
             local coq = require "coq"
 
             -- require('java').setup()
-            -- copilot tells me we don't need this but I am suspicious
             lspconfig['jdtls'].setup(coq.lsp_ensure_capabilities(
             {
                 capabilities = capabilities,

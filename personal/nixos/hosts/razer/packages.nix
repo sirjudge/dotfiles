@@ -10,7 +10,6 @@
 
   # Allow certain non-free open source services
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    # Gamin and Graphics
     "steam"
     "steam-original"
     "steam-unwrapped"
@@ -18,8 +17,8 @@
     # Allow nvidia closed source drivers
     "nvidia-x11"
     "nvidia-settings"
-    "cuda_cudart"
     "libcublas"
+    "cuda_cudart"
     "cuda_cccl"
     "cuda_nvcc"
     # Web + Social
@@ -36,6 +35,7 @@
     "keymapp"
     "bitwig-studio-unwrapped"
     "cursor"
+    "doctl"
   ];
 
   environment.systemPackages = with pkgs; [
@@ -46,6 +46,11 @@
     lua
     lua5_1
     lua-language-server
+
+    # CUDA/GPU stuff
+    cudatoolkit
+    libGLU 
+    libGL
 
     # Nix
     nix-search
@@ -99,7 +104,7 @@
     zsh
     ghostty
 
-    # Terminal IDE
+    # Coding and deploying
     neovim
     git
     docker
@@ -107,6 +112,7 @@
     cachix
     tokei
     code-cursor
+    doctl
 
     # Compilation tools
     lynx

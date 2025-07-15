@@ -1,5 +1,12 @@
 { pkgs, lib, config, ... }:
 {
+
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "claude-code"
+  ];
+
+  nixpkgs.config.allowUnfree = true;
+
   users.users.nico = {
     isNormalUser = true;
     description = "nico";
@@ -27,13 +34,6 @@
       texliveFull
       graph-easy
       slides
-
-      # Pokemon themeing
-      pokemonsay
-      pokemon-cursor
-      krabby
-      
-      #loc
       nerdfetch  
       lshw
       pciutils
@@ -44,6 +44,17 @@
       nerdfetch  
       pavucontrol
       fastfetch
+
+      # IDES/AI 
+      jetbrains.datagrip
+      jetbrains.rust-rover
+      jetbrains.idea-ultimate
+
+      # Pokemon themeing
+      pokemonsay
+      pokemon-cursor
+      krabby
+      
 
       #Misc Applications 
       kdePackages.okular    
@@ -71,9 +82,6 @@
       qsynth
 
       # Jet brains
-      jetbrains.datagrip
-      jetbrains.rust-rover
-      jetbrains.idea-ultimate
       
       # Art apps
       aseprite
