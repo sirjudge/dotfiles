@@ -12,6 +12,9 @@
     description = "nico";
     extraGroups = [ "networkmanager" "wheel" "video" "seat" "docker" "vboxusers"];
     packages = with pkgs; [
+      # Game stuff
+      pokemmo-installer
+
       # VPN
       openvpn
 
@@ -30,6 +33,7 @@
       grimblast
      
       # CLI
+      htop
       mermaid-cli
       texliveFull
       graph-easy
@@ -49,6 +53,8 @@
       jetbrains.datagrip
       jetbrains.rust-rover
       jetbrains.idea-ultimate
+      jetbrains.rider
+      zed-editor
 
       # Pokemon themeing
       pokemonsay

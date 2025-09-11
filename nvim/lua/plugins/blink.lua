@@ -22,14 +22,15 @@ return {
                 nerd_font_variant = 'mono'
             },
             sources = {
-                default = { 'lsp', 'path', 'snippets', 'buffer', 'ecolog', 'digraphs' },
+                -- default = { 'lsp', 'path', 'snippets', 'buffer', 'ecolog', 'digraphs' },
+                default = { 'lsp', 'path', 'snippets', 'buffer' },
                 providers = {
-                    ecolog = {
-                        name = 'ecolog', module = 'ecolog.integrations.cmp.blink_cmp'
-                    },
-                    digraphs = {
-                        name = 'digraphs', module = 'blink.compat.source'
-                    },
+                    -- ecolog = {
+                    --     name = 'ecolog', module = 'ecolog.integrations.cmp.blink_cmp'
+                    -- },
+                    -- digraphs = {
+                    --     name = 'digraphs', module = 'blink.compat.source'
+                    -- },
                 }
             },
         },
