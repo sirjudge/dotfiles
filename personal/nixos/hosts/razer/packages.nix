@@ -47,6 +47,10 @@
     lua5_1
     lua-language-server
 
+    # dotnet
+    #roslyn
+    omnisharp-roslyn
+
     # CUDA/GPU stuff
     cudatoolkit
     libGLU 
@@ -80,6 +84,7 @@
     keymapp
 
     # Terminal -> File applications
+    jq
     yazi
     ranger
     _7zz

@@ -34,6 +34,7 @@
      
       # CLI
       htop
+      btop
       mermaid-cli
       texliveFull
       graph-easy
@@ -94,6 +95,8 @@
       krita
       libresprite
       pixelorama
+      gimp3-with-plugins
+      darktable
     ];
   };
 
