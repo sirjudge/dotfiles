@@ -61,10 +61,15 @@
       # set tmux to launch on zsh startup
       if [ -z "$TMUX" ]; then
         tmux attach -t default || tmux new -s default
-          fi
+      fi
 
-          source ~/.config/zsh/rose-pine-zsh/rose-pine-zsh.zsh
-          colorize_zsh rose-pine
+      source ~/.config/zsh/rose-pine-zsh/rose-pine-zsh.zsh
+      colorize_zsh rose-pine
+
+
+      
+      # Load .net tool path
+      export PATH="$PATH:/home/nico/.dotnet/tools"
     '';
 
 

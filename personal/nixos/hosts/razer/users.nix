@@ -15,8 +15,10 @@
       # Game stuff
       pokemmo-installer
 
-      # VPN
+      # yarr
       openvpn
+      miru
+      popcorntime
 
       # OS stuff
       caligula

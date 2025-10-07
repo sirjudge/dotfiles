@@ -1,5 +1,4 @@
 {pkgs, config, host, username, options, lib, inputs, system, ...}:
-
 {
   imports = [ 
       ./hardware-configuration.nix
@@ -17,8 +16,22 @@
       inputs.ssbm-nix.overlay 
       ./discord.nix
   ];
-  
-# Set up dolphin udev rules to get controller working
+
+  # set up printing auto find
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+   
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.cnijfilter2 ];
+  };
+
+
+
+  # Set up dolphin udev rules to get controller working
   services.udev.packages = [ pkgs.dolphin-emu ];
 
   # built slippi and hyprcursor
@@ -60,9 +73,7 @@
   ];
 
   networking = {
-    hostName = "nico"; # Define your hostname.
-
-    # Enable networking
+    hostName = "nico";
     networkmanager.enable = true;
   };
 
@@ -71,7 +82,6 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
     LC_IDENTIFICATION = "en_US.UTF-8";
@@ -84,17 +94,15 @@
     LC_TIME = "en_US.UTF-8";
   };
   
-  # Enable flatpak because sometimes I just don't feel like using my braincells
+  # Enable flatpak because sometimes I just don't feel 
+  # like using my braincells
   services.flatpak.enable = true;
   
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
-    # variant = "";
   };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
@@ -106,8 +114,12 @@
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   environment.sessionVariables = rec {
-   # get electron on wayland
+    # get electron on wayland
     NIXOS_OZONE_WL = "1";
+
+    # Dotnet stuff
+    # DOTNET_ROOT = "/nix/store/3sq3xhyww1189623wf083rz58yki8fj3-system-path/bin/dotnet";
+    DOTNET_ROOT = "${pkgs.dotnet-sdk}/share/dotnet/";
 
     # Ensure XDG paths and variables are set
     XDG_CACHE_HOME  = "$HOME/.cache";
