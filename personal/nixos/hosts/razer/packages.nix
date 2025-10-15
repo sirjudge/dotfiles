@@ -170,6 +170,7 @@
     godot_4-mono
     godot-mono
     dotnetCorePackages.sdk_9_0_1xx-bin
+    dotnetCorePackages.sdk_8_0_3xx-bin
     blender
 
     # Database
