@@ -14,7 +14,6 @@ return {
         ---@type blink.cmp.Config
         opts = {
             keymap = { 
-                -- preset = 'super-tab', 
                 preset = 'default',
             },
             appearance = {
@@ -24,7 +23,7 @@ return {
             fuzzy = { implementation = "prefer_rust_with_warning" },
             sources = {
                 -- default = { 'lsp', 'path', 'snippets', 'buffer' },
-                default = { 'lsp', 'path' },
+                default = { 'lsp', 'path', 'buffer' },
                 providers = {
                     ["easy-dotnet"] = {
                         name = "easy-dotnet",

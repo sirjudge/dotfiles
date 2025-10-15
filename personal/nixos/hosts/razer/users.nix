@@ -51,6 +51,7 @@
       nerdfetch  
       pavucontrol
       fastfetch
+      netcoredbg
 
       # IDES/AI 
       jetbrains.datagrip

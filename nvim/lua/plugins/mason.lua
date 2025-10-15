@@ -11,6 +11,8 @@ return {
                 "stylua",
                 "shfmt",
                 'omnisharp',
+                'csharpier',
+                'netcoredbg',
                 'gopls',
                 'lua-language-server',
                 'bash-language-server',
