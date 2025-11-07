@@ -197,6 +197,10 @@
     jdt-language-server
     jdk
 
+    libreoffice-qt
+    hunspell
+    hunspellDicts.uk_UA
+    hunspellDicts.th_TH
   ];
 
   programs.firefox.enable = true;

@@ -35,6 +35,7 @@
       grimblast
      
       # CLI
+      gdb
       htop
       btop
       mermaid-cli
