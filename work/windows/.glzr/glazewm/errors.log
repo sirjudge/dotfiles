@@ -1,0 +1,28 @@
+[2m2025-10-28T14:53:10.099807Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Another instance of the application is already running.
+[2m2025-10-28T14:55:24.201423Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Another instance of the application is already running.
+[2m2025-10-28T14:57:28.169099Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m gaps.outer_gap: invalid type: string "1px", expected struct RectDelta at line 45 column 14
+[2m2025-10-28T14:59:53.162161Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m gaps.outer_gap: invalid type: string "1px", expected struct RectDelta at line 45 column 14
+[2m2025-10-28T15:00:16.348643Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m gaps.outer_gap: invalid type: string "1px", expected struct RectDelta at line 45 column 14
+[2m2025-10-28T15:01:03.662711Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m window_rules[0]: missing field `commands` at line 135 column 5
+[2m2025-10-28T15:02:35.346408Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m did not find expected key at line 136 column 5, while parsing a block mapping at line 135 column 5
+[2m2025-10-28T16:59:02.558908Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m No common ancestor between containers.
+[2m2025-10-28T19:33:37.189909Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m No common ancestor between containers.
+[2m2025-10-29T22:13:53.559722Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Failed to send response: channel closed
+[2m2025-10-29T22:13:53.560441Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Failed to send response: channel closed
+[2m2025-10-29T22:13:53.560609Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Failed to send response: channel closed
+[2m2025-10-30T12:35:05.718061Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m window_rules[0].match[0]: invalid type: string "window_process=\"/Taskmgr|ScreenClippingHost/\"", expected struct WindowMatchConfig at line 137 column 9
+[2m2025-10-30T12:44:35.093764Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m window_rules[0].match[0]: invalid type: string "window_process=\"/Taskmgr|ScreenClippingHost/\"", expected struct WindowMatchConfig at line 137 column 9
+[2m2025-10-30T12:44:56.857329Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m window_rules[0].match[0]: data did not match any variant of untagged enum MatchType at line 141 column 9
+[2m2025-10-30T12:45:15.325431Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m keybindings[38].commands: unexpected argument found
+ at line 273 column 15
+[2m2025-10-30T12:45:23.841424Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m keybindings[38].commands: unexpected argument found
+ at line 273 column 15
+[2m2025-10-30T12:46:19.126381Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m keybindings[38].commands: unexpected argument found
+ at line 273 column 15
+[2m2025-10-31T18:55:36.378513Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m No common ancestor between containers.
+[2m2025-11-03T13:30:04.365447Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Another instance of the application is already running.
+[2m2025-11-07T13:22:19.998420Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Failed to send response: channel closed
+[2m2025-11-15T00:09:14.353948Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Failed to send response: channel closed
+[2m2025-11-15T00:09:14.377075Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Failed to send response: channel closed
+[2m2025-11-15T00:09:14.378683Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Failed to send response: channel closed
+[2m2025-11-15T00:09:14.379133Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Failed to send response: channel closed
