@@ -70,6 +70,8 @@
       
       # Load .net tool path
       export PATH="$PATH:/home/nico/.dotnet/tools"
+
+      export PATH="$HOME/.npm-global/bin:$PATH"
     '';
 
 

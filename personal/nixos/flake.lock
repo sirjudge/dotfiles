@@ -846,6 +846,7 @@
         "musnix": "musnix",
         "nixpkgs": "nixpkgs_4",
         "rose-pine-hyprcursor": "rose-pine-hyprcursor",
+        "rust-overlay": "rust-overlay",
         "ssbm-nix": "ssbm-nix",
         "stylix": "stylix",
         "zen-browser": "zen-browser"
@@ -873,6 +874,26 @@
       "original": {
         "owner": "ndom91",
         "repo": "rose-pine-hyprcursor",
+        "type": "github"
+      }
+    },
+    "rust-overlay": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1763174172,
+        "narHash": "sha256-u6dcvXk2K6eYVYhmfiN3xmhIf3yUo5KPwm79UOD37Jo=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "89af6762b01409edbb595888a69311e8e5954110",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
         "type": "github"
       }
     },

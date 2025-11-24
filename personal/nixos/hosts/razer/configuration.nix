@@ -17,6 +17,8 @@
       ./discord.nix
   ];
 
+  nixpkgs.overlays = [ inputs.rust-overlay.overlays.default];
+
   # set up printing auto find
   services.avahi = {
     enable = true;
@@ -65,6 +67,11 @@
 
   # keyboard 
   hardware.keyboard.zsa.enable = true;
+
+
+  # Trying to fix controller bluetooth bs. 
+  hardware.xone.enable = true;
+  hardware.xpadneo.enable = true;
 
   fonts.packages  = [
     pkgs.nerd-fonts._0xproto

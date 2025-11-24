@@ -1,4 +1,12 @@
 { inputs, pkgs, config, lib, ...}:
+let rustToolchain = pkgs.rust-bin.stable.latest.default.override { 
+  extensions = [ 
+    "rust-src" 
+    "rustfmt"
+    "rust-analyzer-preview"
+    "clippy" 
+  ]; 
+}; in 
 {
   # Explicitely allow dynamic link packages 
   programs.nix-ld.enable = true;
@@ -136,13 +144,10 @@
    
     # Rust
     rustup
-    cargo
-    rust-analyzer
-    cargo
-    rustfmt
-    rust-analyzer
-    cargo
-
+    rustToolchain
+    # cargo
+    # rust-analyzer
+    # rustfmt
 
     # Programming Lnaguages and libraries
     go

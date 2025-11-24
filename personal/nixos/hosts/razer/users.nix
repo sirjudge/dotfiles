@@ -12,6 +12,9 @@
     description = "nico";
     extraGroups = [ "networkmanager" "wheel" "video" "seat" "docker" "vboxusers"];
     packages = with pkgs; [
+      # Bluetooth Controller
+      dualsensectl
+
       # Game stuff
       pokemmo-installer
 
@@ -47,7 +50,6 @@
       pciutils
       usbutils
       pciutils
-      pavucontrol
       krabby
       nerdfetch  
       pavucontrol
@@ -65,8 +67,7 @@
       pokemonsay
       pokemon-cursor
       krabby
-      
-
+     
       #Misc Applications 
       kdePackages.okular    
       obsidian

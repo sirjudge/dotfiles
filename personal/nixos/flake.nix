@@ -9,6 +9,10 @@
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     ssbm-nix = {
       url = "github:NormalFall/ssbm-nix";
       inputs.nixpkgs.follows = "nixpkgs";
