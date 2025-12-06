@@ -51,6 +51,7 @@ in
         "DP-6,~/Pictures/wallpapers/hollow-knight.jpg"
         "DP-7,~/Pictures/wallpapers/hollow-knight.jpg"
         "eDP-1,~/Pictures/wallpapers/hollow-knight.jpg"
+        "HDMI-A-1,~/Pictures/wallpapers/hollow-knight.jpg"
       ];
     };
   };
