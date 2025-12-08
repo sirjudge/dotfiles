@@ -26,7 +26,7 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 -- unbind the holy hell that is capital Q
 vim.keymap.set("n", "Q", "<nop>")
 
--- do good indentation using lsp
+-- lsp format
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
 -- quick fix naviagtation
@@ -37,7 +37,6 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 -- replace the currently highlited word
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 -- remap tmux things
 vim.keymap.set("n", "<C-h>", "<cmd>lua require('tmux').move_left()<CR>")

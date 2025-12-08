@@ -19,7 +19,7 @@ return {
                     {
                         "gd",
                         function()
-                            require("omnisharp_extended").telescope_lsp_definitions()
+                            vim.lsp.buf.definition()
                         end,
                         desc = "Goto Definition"
                     },
