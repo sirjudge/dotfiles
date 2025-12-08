@@ -53,6 +53,10 @@ return {
             fps = 60,
             duration = 20
         },
+        notifier = {
+            enabled = true,
+            timeout = 5000,
+        },
         picker = {
             backend = "snacks",
             matcher = {
