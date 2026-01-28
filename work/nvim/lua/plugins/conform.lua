@@ -22,9 +22,10 @@ return {
 			lua = { "stylua" },
 			python = { "isort", "black" },
 			javascript = { "prettierd", "prettier", stop_after_first = true },
-			-- java = { "astyle", "google-java-format" },
+			java = { "astyle", "google-java-format" },
 			bash = { "beautysh" },
 			rust = { "rustfmt", lsp_format = "fallback" },
+            csharp = { "csharpier" },
 			-- Use the "*" filetype to run formatters on all filetypes.
 			["*"] = { "codespell" },
 			-- Use the "_" filetype to run formatters on filetypes that don't

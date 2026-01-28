@@ -13,13 +13,13 @@ if (-not $Backup -and -not $Insert) {
 
 if ($Backup) {
     Copy-Item -Path "$env:USERPROFILE\.config\nvim" -Destination ".\work\nvim" -Recurse -Force
-    if ($Verbose) { Write-Host "Backed up nvim config to .\work\nvim" }
+    if ($Verbose) { Write-Host "Backed up nvim config to .\work\" }
 
-    Copy-Item -Path "$env:USERPROFILE\.glzr" -Destination ".\work\.glzr" -Recurse -Force
-    if ($Verbose) { Write-Host "Backed up glzr config to .\work\.glzr" }
+    Copy-Item -Path "$env:USERPROFILE\.glzr" -Destination ".\work\.glzr\" -Recurse -Force
+    if ($Verbose) { Write-Host "Backed up glzr config to .\work\" }
 
     Copy-Item -Path "$env:USERPROFILE\.wezterm.lua" -Destination ".\work\.wezterm.lua" -Recurse -Force
-    if ($Verbose) { Write-Host "Backed up wezterm config to .\work\.wezterm.lua" }
+    if ($Verbose) { Write-Host "Backed up wezterm config to .\work\" }
 
     Write-Host "Backed up Windows work configs (.glzr, nvim)"
 }
