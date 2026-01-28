@@ -1,0 +1,37 @@
+return {
+    -- lazy.nvim
+    {
+        "GustavEikaas/easy-dotnet.nvim",
+        dependencies = { "nvim-lua/plenary.nvim", 'nvim-telescope/telescope.nvim', },
+        config = function()
+            local dotnet = require("easy-dotnet")
+            dotnet.setup({
+                lsp = {
+                    enabled = true, -- Enable builtin roslyn lsp
+                    roslynator_enabled = true, -- Automatically enable roslynator analyzer
+                    analyzer_assemblies = {}, -- Any additional roslyn analyzers you might use like SonarAnalyzer.CSharp
+                    config = {},
+                }, 
+                new = {
+                    project = {
+                        prefix = "sln" -- "sln" | "none"
+                    }
+                },
+                picker = "snacks",
+                diagnostics = {
+                    default_severity = "warning",
+                    setqflist = false,
+                }
+            })
+            -- Example command
+            vim.api.nvim_create_user_command('Secrets', function()
+                dotnet.secrets()
+            end, {})
+
+            -- Example keybinding
+            vim.keymap.set("n", "<C-p>", function()
+                dotnet.run_project()
+            end)
+        end
+    }
+}
