@@ -13,7 +13,9 @@ return {
         cmd = 'LspInfo',
         dependencies = {
             { 'saghen/blink.cmp' },
-            { 'nvim-java/nvim-java' },  
+            -- Don't need java for now, keep it out
+            -- { 'nvim-java/nvim-java' },  
+            { 'Hoffs/omnisharp-extended-lsp.nvim' }, 
         },
         opts = {
             servers = {
@@ -53,10 +55,26 @@ return {
                         if value.percentage then
                             notification = string.format("%s (%.0f%%)", notification, value.percentage)
                         end
-                        Snacks.notify(notification, { title = "LSP Progress" })
+                        Snacks.notify(notification, { title = "LSP Progress", level = vim.log.levels.INFO })
                     end
                 end
             })
+
+            vim.lsp.handlers["window/logMessage"] = function(_, result, ctx)
+                local client = vim.lsp.get_client_by_id(ctx.client_id)
+                local name = client and client.name or "LSP"
+                local level_map = {
+                    [1] = vim.log.levels.ERROR,
+                    [2] = vim.log.levels.WARN,
+                    [3] = vim.log.levels.INFO,
+                    [4] = vim.log.levels.DEBUG,
+                }
+                local level = level_map[result.type] or vim.log.levels.INFO
+                local message = result.message or ""
+                if message ~= "" then
+                    Snacks.notify(string.format("%s: %s", name, message), { title = "LSP Log", level = level })
+                end
+            end
 
             local capabilities = require('blink.cmp').get_lsp_capabilities()
 
@@ -75,7 +93,8 @@ return {
 
 
             local project_library_path = "C:\\Users\\NicoJudge\\solutions"
-            local cmd = {"ngserver", "--stdio", "--tsProbeLocations", project_library_path , "--ngProbeLocations", project_library_path}
+            local global_node_modules = "C:\\Users\\NicoJudge\\AppData\\Roaming\\npm\\node_modules"
+            local cmd = {"ngserver", "--stdio", "--tsProbeLocations", project_library_path .. "," .. global_node_modules, "--ngProbeLocations", project_library_path .. "," .. global_node_modules}
             vim.lsp.config('angularls',
             {
                 cmd = cmd,
@@ -112,11 +131,11 @@ return {
                     "--encoding",
                     "utf-8",
                     "--loglevel",
-                    "Error"
+                    "Warning"
                 },
                 enable_roslyn_analyzers = true,
                 enable_import_completion = true,
-                organize_imports_on_format = true,
+                organize_imports_on_format = false,
                 enable_decompilation_support = true,
                 filetypes = { 'cs', 'vb', 'csproj', 'sln', 'slnx', 'props', 'csx', 'targets', 'tproj', 'slngen', 'fproj' },
                 settings = {
@@ -129,7 +148,26 @@ return {
                     Sdk = {
                         IncludePrereleases = true
                     }
-                }
+                },
+                -- RoslynExtensionsOptions = {
+                --     documentAnalysisTimeoutMs = 30000,
+                --     enableAnalyzersSupport = true,
+                --     diagnosticWorkersThreadCount = 8,
+                --     inlayHintsOptions = {
+                --         enableForParameters = true,
+                --         forLiteralParameters =  true,
+                --         forIndexerParameters = true,
+                --         forObjectCreationParameters = true,
+                --         forOtherParameters = true,
+                --         suppressForParametersThatDifferOnlyBySuffix = false,
+                --         suppressForParametersThatMatchMethodIntent = false,
+                --         suppressForParametersThatMatchArgumentName = false,
+                --         enableForTypes = true,
+                --         forImplicitVariableTypes= true,
+                --         forLambdaParameterTypes = true,
+                --         forImplicitObjectCreation = true
+                --     }
+                -- }
             })
             vim.lsp.enable('omnisharp')
         end

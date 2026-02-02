@@ -56,6 +56,14 @@ return {
         notifier = {
             enabled = true,
             timeout = 5000,
+            level = vim.log.levels.INFO,
+            icons = {
+                error = " ",
+                warn = " ",
+                info = " ",
+                debug = " ",
+                trace = " ",
+            },
         },
         picker = {
             backend = "snacks",
@@ -97,14 +105,14 @@ return {
                 -- When using a function, the `items` argument are the default keymaps.
                 ---@type snacks.dashboard.Item[]
                 keys = {
-                    { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
-                    { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-                    { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
-                    { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
-                    { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
-                    { icon = " ", key = "s", desc = "Restore Session", section = "session" },
-                    { icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
-                    { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+                    { icon = " ", key = "f", desc = "[f]ind file", action = ":lua Snacks.dashboard.pick('files')" },
+                    { icon = " ", key = "n", desc = "[n]ew file", action = ":ene | startinsert" },
+                    { icon = " ", key = "g", desc = "[grep] text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+                    { icon = " ", key = "r", desc = "[r]ecent files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+                    { icon = " ", key = "c", desc = "[c]onfig", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
+                    { icon = " ", key = "s", desc = "restore [s]ession", section = "session" },
+                    { icon = "󰒲 ", key = "L", desc = "[L]azy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
+                    { icon = " ", key = "q", desc = "[q]uit", action = ":qa" },
                 },
                 -- Used by the `header` section
                 header = [[
@@ -185,7 +193,6 @@ return {
             refresh = 50, -- refresh at most every 50ms
         },
         input = { enabled = true },
-        notifier = { enabled = true },
         quickfile = { enabled = true },
         --scroll = { enabled = true },
         indent = {

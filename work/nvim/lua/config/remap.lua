@@ -26,9 +26,6 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 -- unbind the holy hell that is capital Q
 vim.keymap.set("n", "Q", "<nop>")
 
--- lsp format
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
-
 -- quick fix naviagtation
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
