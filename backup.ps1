@@ -21,6 +21,10 @@ if ($Backup) {
     Copy-Item -Path "$env:USERPROFILE\.wezterm.lua" -Destination ".\work\.wezterm.lua" -Recurse -Force
     if ($Verbose) { Write-Host "Backed up wezterm config to .\work\" }
 
+    Copy-Item -Path "~/Solutions/powershell/PowerShell/Microsoft.PowerShell_profile.ps1" -Destination ".\work\Microsoft.PowerShell_profile.ps1" -Recurse -Force
+    Copy-Item -Path "~/Solutions/powershell/PowerShell/ZoxideInit.ps1" -Destination ".\work\Microsoft.PowerShell_profile.ps1" -Recurse -Force
+    if ($Verbose) { Write-Host "Backed up PowerShell profile to .\work\" }
+
     Write-Host "Backed up Windows work configs (.glzr, nvim)"
 }
 
