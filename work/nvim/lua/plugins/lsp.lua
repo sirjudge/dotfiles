@@ -41,25 +41,6 @@ return {
     
         -- example using `opts` for defining servers
         config = function()
-            -- Setup LSP progress notifications
-            vim.api.nvim_create_autocmd('LspProgress', {
-                callback = function(ev)
-                    local client = vim.lsp.get_client_by_id(ev.data.client_id)
-                    local value = ev.data.params.value
-                    if not client or type(value) ~= 'table' then
-                        return
-                    end
-                    local message = value.message
-                    if message then
-                        local notification = string.format("%s: %s", client.name, message)
-                        if value.percentage then
-                            notification = string.format("%s (%.0f%%)", notification, value.percentage)
-                        end
-                        Snacks.notify(notification, { title = "LSP Progress", level = vim.log.levels.INFO })
-                    end
-                end
-            })
-
             vim.lsp.handlers["window/logMessage"] = function(_, result, ctx)
                 local client = vim.lsp.get_client_by_id(ctx.client_id)
                 local name = client and client.name or "LSP"
@@ -72,7 +53,17 @@ return {
                 local level = level_map[result.type] or vim.log.levels.INFO
                 local message = result.message or ""
                 if message ~= "" then
-                    Snacks.notify(string.format("%s: %s", name, message), { title = "LSP Log", level = level })
+                    if level == vim.log.levels.INFO then
+                        return
+                    end
+                    if name == "omnisharp" then
+                        if message:find("LspServerOutputFilter", 1, true)
+                            or message:find("o#/msbuildprojectdiagnostics", 1, true)
+                            or message:find("Tried to send request or notification before initialization was completed", 1, true) then
+                            return
+                        end
+                    end
+                    vim.notify(string.format("%s: %s", name, message), level, { title = "LSP Log" })
                 end
             end
 
@@ -133,7 +124,7 @@ return {
                     "--loglevel",
                     "Warning"
                 },
-                enable_roslyn_analyzers = true,
+                enable_roslyn_analyzers = false,
                 enable_import_completion = true,
                 organize_imports_on_format = false,
                 enable_decompilation_support = true,
@@ -142,9 +133,17 @@ return {
                     FormattingOptions = {
                         EnableEditorConfigSupport = true
                     },
-                    MsBuild = {},
+                    MsBuild = {
+                        LoadProjectsOnDemand = true,
+                        EnablePackageAutoRestore = false
+                    },
                     RenameOptions = {},
-                    RoslynExtensionsOptions = {},
+                    RoslynExtensionsOptions = {
+                        analyzeOpenDocumentsOnly = true,
+                        enableAnalyzersSupport = false,
+                        documentAnalysisTimeoutMs = 20000,
+                        diagnosticWorkersThreadCount = 4
+                    },
                     Sdk = {
                         IncludePrereleases = true
                     }
