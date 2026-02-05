@@ -12,6 +12,8 @@ if (-not $Backup -and -not $Insert) {
 }
 
 if ($Backup) {
+    rm -r ./work
+
     Copy-Item -Path "$env:USERPROFILE\.config\nvim" -Destination ".\work\nvim" -Recurse -Force
     if ($Verbose) { Write-Host "Backed up nvim config to .\work\" }
 

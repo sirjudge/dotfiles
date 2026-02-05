@@ -22,23 +22,16 @@ return {
             },
             fuzzy = { implementation = "prefer_rust_with_warning" },
             sources = {
-                -- default = { 'lsp', 'path', 'snippets', 'buffer' },
-                default = { 'lsp', 'path', 'buffer'}, -- , 'easy-dotnet'},
-                providers = {
-                    -- ["easy-dotnet"] = {
-                    --     name = "easy-dotnet",
-                    --     enabled = true,
-                    --     module = "easy-dotnet.completion.blink",
-                    --     score_offset = 10000,
-                    --     async = true,
-                    -- },
-                }
+                default = { 'lsp', 'path', 'buffer'},
             },
         },
         opts_extend = {
             "sources.completion.enabled_provides"
         },
         completion = {
+            accept = { 
+                auto_brackets = { enabled = true }
+            },
             ghost_text = {
                 enabled = true
             },
@@ -59,6 +52,7 @@ return {
             },
         },
         signature = { 
+            enabled = true,
             window = {
                 border = 'single' 
             } 

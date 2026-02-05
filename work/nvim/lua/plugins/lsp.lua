@@ -13,8 +13,6 @@ return {
         cmd = 'LspInfo',
         dependencies = {
             { 'saghen/blink.cmp' },
-            -- Don't need java for now, keep it out
-            -- { 'nvim-java/nvim-java' },  
             { 'Hoffs/omnisharp-extended-lsp.nvim' }, 
         },
         opts = {
@@ -33,40 +31,40 @@ return {
                         desc = "Goto Definition"
                     },
                 },
-                enable_roslyn_analyzers = true,
                 organize_imports_on_format = true,
                 enable_import_completion = true, 
             }
         },
-    
+
         -- example using `opts` for defining servers
         config = function()
-            vim.lsp.handlers["window/logMessage"] = function(_, result, ctx)
-                local client = vim.lsp.get_client_by_id(ctx.client_id)
-                local name = client and client.name or "LSP"
-                local level_map = {
-                    [1] = vim.log.levels.ERROR,
-                    [2] = vim.log.levels.WARN,
-                    [3] = vim.log.levels.INFO,
-                    [4] = vim.log.levels.DEBUG,
-                }
-                local level = level_map[result.type] or vim.log.levels.INFO
-                local message = result.message or ""
-                if message ~= "" then
-                    if level == vim.log.levels.INFO then
-                        return
-                    end
-                    if name == "omnisharp" then
-                        if message:find("LspServerOutputFilter", 1, true)
-                            or message:find("o#/msbuildprojectdiagnostics", 1, true)
-                            or message:find("Tried to send request or notification before initialization was completed", 1, true) then
-                            return
-                        end
-                    end
-                    vim.notify(string.format("%s: %s", name, message), level, { title = "LSP Log" })
-                end
-            end
-
+            -- local util = require("lspconfig.util")
+            -- vim.lsp.handlers["window/logMessage"] = function(_, result, ctx)
+            --     local client = vim.lsp.get_client_by_id(ctx.client_id)
+            --     local name = client and client.name or "LSP"
+            --     local level_map = {
+            --         [1] = vim.log.levels.ERROR,
+            --         [2] = vim.log.levels.WARN,
+            --         [3] = vim.log.levels.INFO,
+            --         [4] = vim.log.levels.DEBUG,
+            --     }
+            --     local level = level_map[result.type] or vim.log.levels.INFO
+            --     local message = result.message or ""
+            --     if message ~= "" then
+            --         if level == vim.log.levels.INFO then
+            --             return
+            --         end
+            --         if name == "omnisharp" then
+            --             if message:find("LspServerOutputFilter", 1, true)
+            --                 or message:find("o#/msbuildprojectdiagnostics", 1, true)
+            --                 or message:find("Tried to send request or notification before initialization was completed", 1, true) then
+            --                 return
+            --             end
+            --         end
+            --         vim.notify(string.format("%s: %s", name, message), level, { title = "LSP Log" })
+            --     end
+            -- end
+            --
             local capabilities = require('blink.cmp').get_lsp_capabilities()
 
             vim.lsp.config('jdtls',
@@ -89,6 +87,7 @@ return {
             vim.lsp.config('angularls',
             {
                 cmd = cmd,
+                capabilities = capabilities,
                 filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx", "htmlangular" },
                 root_markers = { "angular.json", "nx.json" },
             })
@@ -96,6 +95,7 @@ return {
 
             vim.lsp.config('ts_ls',
             {
+                capabilities = capabilities,
                 init_options = {
                     plugins = {
                         {
@@ -114,59 +114,42 @@ return {
             vim.lsp.enable('ts_ls')
 
             vim.lsp.config('omnisharp', {
+                capabilities = capabilities,
                 cmd = {
-                    "C:\\Users\\NicoJudge\\tools\\omnisharp\\OmniSharp.exe",
+                    "C:\\Users\\NicoJudge\\.dotnet\\dotnet.exe",
+                    "C:\\Users\\NicoJudge\\tools\\omnisharp\\OmniSharp.dll",
                     "--languageserver",
                     "--hostPID",
                     tostring(vim.fn.getpid()),
-                    "--encoding",
-                    "utf-8",
-                    "--loglevel",
-                    "Warning"
                 },
+                cmd_env = {
+                    DOTNET_ROOT = "C:\\Users\\NicoJudge\\.dotnet",
+                    DOTNET_MSBUILD_SDK_RESOLVER_CLI_DIR = "C:\\Users\\NicoJudge\\.dotnet",
+                    DOTNET_MULTILEVEL_LOOKUP = "0",
+                    --MSBuildSDKsPath = "C:\\Users\\NicoJudge\\.dotnet\\sdk\\9.0.310\\Sdks",
+                    MSBuildSDKsPath = "C:\\Users\\NicoJudge\\.dotnet\\sdk\\10.0.102\\Sdks",
+                    PATH = "C:\\Users\\NicoJudge\\.dotnet;" .. vim.env.PATH,
+                },
+                capabilities = capabilities,
                 enable_roslyn_analyzers = false,
-                enable_import_completion = true,
                 organize_imports_on_format = false,
                 enable_decompilation_support = true,
+                on_attach = function(client, bufnr)
+                    client.server_capabilities.semanticTokensProvider = nil
+                end,
                 filetypes = { 'cs', 'vb', 'csproj', 'sln', 'slnx', 'props', 'csx', 'targets', 'tproj', 'slngen', 'fproj' },
                 settings = {
-                    FormattingOptions = {
-                        EnableEditorConfigSupport = true
+                    omnisharp = {
+                        useModernNet = true,
                     },
                     MsBuild = {
-                        LoadProjectsOnDemand = true,
-                        EnablePackageAutoRestore = false
+                        LoadProjectsOnDemand = false,
+                        EnablePackageAutoRestore = true,
                     },
-                    RenameOptions = {},
                     RoslynExtensionsOptions = {
-                        analyzeOpenDocumentsOnly = true,
                         enableAnalyzersSupport = false,
-                        documentAnalysisTimeoutMs = 20000,
-                        diagnosticWorkersThreadCount = 4
-                    },
-                    Sdk = {
-                        IncludePrereleases = true
-                    }
-                },
-                -- RoslynExtensionsOptions = {
-                --     documentAnalysisTimeoutMs = 30000,
-                --     enableAnalyzersSupport = true,
-                --     diagnosticWorkersThreadCount = 8,
-                --     inlayHintsOptions = {
-                --         enableForParameters = true,
-                --         forLiteralParameters =  true,
-                --         forIndexerParameters = true,
-                --         forObjectCreationParameters = true,
-                --         forOtherParameters = true,
-                --         suppressForParametersThatDifferOnlyBySuffix = false,
-                --         suppressForParametersThatMatchMethodIntent = false,
-                --         suppressForParametersThatMatchArgumentName = false,
-                --         enableForTypes = true,
-                --         forImplicitVariableTypes= true,
-                --         forLambdaParameterTypes = true,
-                --         forImplicitObjectCreation = true
-                --     }
-                -- }
+                    },             },
+
             })
             vim.lsp.enable('omnisharp')
         end
