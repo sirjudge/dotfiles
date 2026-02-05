@@ -38,40 +38,39 @@ return {
 
         -- example using `opts` for defining servers
         config = function()
-            -- local util = require("lspconfig.util")
-            -- vim.lsp.handlers["window/logMessage"] = function(_, result, ctx)
-            --     local client = vim.lsp.get_client_by_id(ctx.client_id)
-            --     local name = client and client.name or "LSP"
-            --     local level_map = {
-            --         [1] = vim.log.levels.ERROR,
-            --         [2] = vim.log.levels.WARN,
-            --         [3] = vim.log.levels.INFO,
-            --         [4] = vim.log.levels.DEBUG,
-            --     }
-            --     local level = level_map[result.type] or vim.log.levels.INFO
-            --     local message = result.message or ""
-            --     if message ~= "" then
-            --         if level == vim.log.levels.INFO then
-            --             return
-            --         end
-            --         if name == "omnisharp" then
-            --             if message:find("LspServerOutputFilter", 1, true)
-            --                 or message:find("o#/msbuildprojectdiagnostics", 1, true)
-            --                 or message:find("Tried to send request or notification before initialization was completed", 1, true) then
-            --                 return
-            --             end
-            --         end
-            --         vim.notify(string.format("%s: %s", name, message), level, { title = "LSP Log" })
-            --     end
-            -- end
-            --
+            local util = require("lspconfig.util")
+            vim.lsp.handlers["window/logMessage"] = function(_, result, ctx)
+                local client = vim.lsp.get_client_by_id(ctx.client_id)
+                local name = client and client.name or "LSP"
+                local level_map = {
+                    [1] = vim.log.levels.ERROR,
+                    [2] = vim.log.levels.WARN,
+                    [3] = vim.log.levels.INFO,
+                    [4] = vim.log.levels.DEBUG,
+                }
+                local level = level_map[result.type] or vim.log.levels.INFO
+                local message = result.message or ""
+                if message ~= "" then
+                    if level == vim.log.levels.INFO then
+                        return
+                    end
+                    if name == "omnisharp" then
+                        if message:find("LspServerOutputFilter", 1, true)
+                            or message:find("o#/msbuildprojectdiagnostics", 1, true)
+                            or message:find("Tried to send request or notification before initialization was completed", 1, true) then
+                            return
+                        end
+                    end
+                    vim.notify(string.format("%s: %s", name, message), level, { title = "LSP Log" })
+                end
+            end
             local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-            vim.lsp.config('jdtls',
-            {
-                capabilities = capabilities,
-            })
-            vim.lsp.enable('jdtls')
+            -- vim.lsp.config('jdtls',
+            -- {
+            --     capabilities = capabilities,
+            -- })
+            -- vim.lsp.enable('jdtls')
 
             vim.lsp.config('lua-ls',
             {
@@ -126,13 +125,12 @@ return {
                     DOTNET_ROOT = "C:\\Users\\NicoJudge\\.dotnet",
                     DOTNET_MSBUILD_SDK_RESOLVER_CLI_DIR = "C:\\Users\\NicoJudge\\.dotnet",
                     DOTNET_MULTILEVEL_LOOKUP = "0",
-                    --MSBuildSDKsPath = "C:\\Users\\NicoJudge\\.dotnet\\sdk\\9.0.310\\Sdks",
                     MSBuildSDKsPath = "C:\\Users\\NicoJudge\\.dotnet\\sdk\\10.0.102\\Sdks",
                     PATH = "C:\\Users\\NicoJudge\\.dotnet;" .. vim.env.PATH,
                 },
                 capabilities = capabilities,
-                enable_roslyn_analyzers = false,
-                organize_imports_on_format = false,
+                enable_roslyn_analyzers = true,
+                organize_imports_on_format = true,
                 enable_decompilation_support = true,
                 on_attach = function(client, bufnr)
                     client.server_capabilities.semanticTokensProvider = nil
@@ -143,13 +141,13 @@ return {
                         useModernNet = true,
                     },
                     MsBuild = {
-                        LoadProjectsOnDemand = false,
+                        LoadProjectsOnDemand = true,
                         EnablePackageAutoRestore = true,
                     },
                     RoslynExtensionsOptions = {
-                        enableAnalyzersSupport = false,
-                    },             },
-
+                        enableAnalyzersSupport = true,
+                    }, 
+                },
             })
             vim.lsp.enable('omnisharp')
         end
