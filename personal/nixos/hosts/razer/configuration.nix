@@ -8,13 +8,14 @@
       ./gpu.nix
       ./terminal.nix
       ./users.nix
-      ./docker.nix
+      ./virtualization.nix
       ./audio.nix
       ./bluetooth.nix
       ./vpn.nix
       ./hyprland.nix
       inputs.ssbm-nix.overlay 
       ./discord.nix
+      ./dotnet.nix
   ];
 
   nixpkgs.overlays = [ inputs.rust-overlay.overlays.default];
@@ -31,14 +32,11 @@
     drivers = [ pkgs.cnijfilter2 ];
   };
 
-
-
   # Set up dolphin udev rules to get controller working
   services.udev.packages = [ pkgs.dolphin-emu ];
 
   # built slippi and hyprcursor
   environment.systemPackages = [
-    # inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
     inputs.zen-browser.packages.${pkgs.system}.default
     pkgs.slippi-launcher 
   ];
@@ -67,7 +65,6 @@
 
   # keyboard 
   hardware.keyboard.zsa.enable = true;
-
 
   # Trying to fix controller bluetooth bs. 
   hardware.xone.enable = true;
@@ -110,7 +107,6 @@
     layout = "us";
   };
 
-
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
@@ -124,9 +120,6 @@
     # get electron on wayland
     NIXOS_OZONE_WL = "1";
 
-    # Dotnet stuff
-    # DOTNET_ROOT = "/nix/store/3sq3xhyww1189623wf083rz58yki8fj3-system-path/bin/dotnet";
-    DOTNET_ROOT = "${pkgs.dotnet-sdk}/share/dotnet/";
 
     # Ensure XDG paths and variables are set
     XDG_CACHE_HOME  = "$HOME/.cache";
@@ -135,24 +128,11 @@
     XDG_STATE_HOME  = "$HOME/.local/state";
    
     # GPU driver nonsense
-    # Use the following to idenntify card
-    #AQ_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";		
     AQ_DRM_DEVICES = "/dev/dri/card0:/dev/dri/card1";		
     LIBVA_DRIVER_NAME="nvidia";
     WLR_DRM_NO_MODIFIERS="1";
     GBM_BACKEND="nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME="nvidia";
-
-    # Wayland specifications for other random nonsense
-    #XDG_CURRENT_DESKTOP="Hyprland";
-    #XDG_SESSION_TYPE="wayland";
-    #XDG_SESSION_DESKTOP="Hyprland";
-    # GDK_BACKEND="wayland,x11,*";
-    #QT_QPA_PLATFORM="wayland;xcb";
-    # SDL_VIDEODRIVER="wayland";
- 
-    # Screenshot
-    # HYPRSHOT_DIR="/home/nico/Pictures/Screenshots";
   };
 
   services.seatd.enable = true;

@@ -169,13 +169,8 @@ let rustToolchain = pkgs.rust-bin.stable.latest.default.override {
     poppler_utils
     calibre
     fontforge
-  
-    # Godot and dotnet/mono
-    godot_4
-    godot_4-mono
-    godot-mono
-    dotnetCorePackages.sdk_9_0_1xx-bin
-    dotnetCorePackages.sdk_8_0_3xx-bin
+
+    # 3d modeling and such 
     blender
 
     # Database

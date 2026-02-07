@@ -56,12 +56,15 @@
       fastfetch
       netcoredbg
 
-      # IDES/AI 
+      # IDES/LSP
       jetbrains.datagrip
       jetbrains.rust-rover
       jetbrains.idea-ultimate
       jetbrains.rider
-      zed-editor
+      opencode
+      angular-language-server
+      luajitPackages.lua-lsp
+      typescript-language-server
 
       # Pokemon themeing
       pokemonsay

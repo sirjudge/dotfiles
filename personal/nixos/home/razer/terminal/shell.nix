@@ -66,11 +66,10 @@
       source ~/.config/zsh/rose-pine-zsh/rose-pine-zsh.zsh
       colorize_zsh rose-pine
 
-
-      
       # Load .net tool path
       export PATH="$PATH:/home/nico/.dotnet/tools"
-
+      
+      # Node stuff 
       export PATH="$HOME/.npm-global/bin:$PATH"
     '';
 
