@@ -38,7 +38,6 @@ vim.opt.undofile = true
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
-
 -- misc settings for better experience
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"

@@ -67,6 +67,17 @@ return {
         },
 
         config = function()
+
+            vim.lsp.handlers["window/showMessage"] = function(_, result, ctx)
+                local client = vim.lsp.get_client_by_id(ctx.client_id)
+                local level = ({ "ERROR", "WARN", "INFO", "LOG" })[result.type] or "INFO"
+                Snacks.notify(result.message, { 
+                    title = client and client.name or "LSP",
+                    level = vim.log.levels[level]
+                })
+            end
+
+
             vim.lsp.handlers["window/logMessage"] = function(_, result, ctx)
                 local client = vim.lsp.get_client_by_id(ctx.client_id)
                 local name = client and client.name or "LSP"
@@ -80,15 +91,13 @@ return {
                 local message = result.message or ""
                 if message ~= "" then
                     if level == vim.log.levels.INFO then
-                        return
+                        if message:find("Policy watcher not available", 1, true) then
+                            return
+                        end
                     end
-                    if message:find("Policy watcher not available", 1, true) then
-                        return
-                    end
-                    vim.notify(string.format("%s: %s", name, message), level, { title = "LSP Log" })
+                    Snacks.notify(message, { title = name, level = level })
                 end
             end
-            
             local capabilities = require('blink.cmp').get_lsp_capabilities()
 
             vim.lsp.config['lua_ls'] = {
@@ -138,6 +147,16 @@ return {
                 },
                 filetypes = { 'cs' },
                 root_markers = { '*.sln', '*.csproj', 'Directory.Build.props', '.git' },
+                handlers = {
+                    ["window/showMessage"] = function(_, result, ctx)
+                        local client = vim.lsp.get_client_by_id(ctx.client_id)
+                        local level = ({ "ERROR", "WARN", "INFO", "LOG" })[result.type] or "INFO"
+                        Snacks.notify(result.message, { 
+                            title = client and client.name or "LSP",
+                            level = vim.log.levels[level]
+                        })
+                    end,
+                },
             }
             vim.lsp.enable('csharp_ls')
         end
