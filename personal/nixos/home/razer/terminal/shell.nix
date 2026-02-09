@@ -3,7 +3,7 @@
   home.packages = with pkgs; [
     pkgs.oh-my-zsh
   ];
-  
+
   # starship
   home.sessionVariables.STARSHIP_CACHE = "${config.xdg.cacheHome}/starship";
 
@@ -55,7 +55,7 @@
 # shellInit = ''
     initContent = ''
       # Set oh my zsh to auto update every 1 day
-      zstyle ':omz:update' mode auto      
+      zstyle ':omz:update' mode auto
       zstyle ':omz:update' frequency 1
 
       # set tmux to launch on zsh startup
@@ -68,8 +68,8 @@
 
       # Load .net tool path
       export PATH="$PATH:/home/nico/.dotnet/tools"
-      
-      # Node stuff 
+
+      # Node stuff
       export PATH="$HOME/.npm-global/bin:$PATH"
     '';
 
@@ -101,7 +101,6 @@
       pgrep="pgrep -l";
       grep="grep -i --color=auto";
       egrep="egrep --color=auto";
-      ip="ip addr";
 
      # Tmux
       tmuxNew="tmux new -s";
@@ -123,7 +122,7 @@
       editTerminalSettings="nvim /etc/nixos/terminal.nix";
       listAliases="cat ~/.zshrc | grep 'alias'";
 
-      # logout 
+      # logout
       lo="wlogout --protocol layer-shell";
 
       # directory shortcuts
