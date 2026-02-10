@@ -1,4 +1,4 @@
--- turn on relative line numbers
+-- turn on line and relative line numbers
 vim.wo.relativenumber = true
 vim.wo.number = true
 
@@ -45,9 +45,11 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
 
--- set zsh as terminal
-vim.g.terminal_emulator='zsh'
-vim.api.nvim_set_var('terminal_emulator','zsh')
+-- set terminal emulator based on OS
+local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
+local terminal_emulator = is_windows and "powershell" or "zsh"
+vim.g.terminal_emulator = terminal_emulator
+vim.api.nvim_set_var("terminal_emulator", terminal_emulator)
 
 -- enable better color support
 vim.o.termguicolors = true

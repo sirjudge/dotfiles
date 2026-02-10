@@ -34,6 +34,15 @@ return {
         { "pglo", function() Snacks.picker.lsp_outgoing_calls() end, desc = "C[a]lls Outgoing" },
         { "<leader>pss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
         { "<leader>psS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
+        -- LazyGit
+        { 
+            "<leader>lg", 
+            function() 
+                --local lazygit_path = vim.fn.exepath("lazygit")
+                vim.env.PATH = vim.env.PATH .. ";C:\\Users\\NicoJudge\\tools\\lazygit"
+                Snacks.lazygit() 
+            end, desc = "Lazygit Open" 
+        },
     },
     ---@type snacks.Config
     opts = {
@@ -53,6 +62,39 @@ return {
                 debug = " ",
                 trace = " ",
             },
+        },
+        lazygit = {
+            enabled = true,
+            -- automatically configure lazygit to use the current colorscheme
+            -- and integrate edit with the current neovim instance
+            configure = true,
+            -- extra configuration for lazygit that will be merged with the default
+            -- snacks does NOT have a full yaml parser, so if you need `"test"` to appear with the quotes
+            -- you need to double quote it: `"\"test\""`
+            config = {
+                os = { editPreset = "nvim-remote" },
+                gui = {
+                    -- set to an empty string "" to disable icons
+                    nerdFontsVersion = "3",
+                },
+            },
+            --theme_path = svim.fs.normalize(vim.fn.stdpath("cache") .. "/lazygit-theme.yml"),
+            -- Theme for lazygit
+            theme = {
+                [241]                      = { fg = "Special" },
+                activeBorderColor          = { fg = "MatchParen", bold = true },
+                cherryPickedCommitBgColor  = { fg = "Identifier" },
+                cherryPickedCommitFgColor  = { fg = "Function" },
+                defaultFgColor             = { fg = "Normal" },
+                inactiveBorderColor        = { fg = "FloatBorder" },
+                optionsTextColor           = { fg = "Function" },
+                searchingActiveBorderColor = { fg = "MatchParen", bold = true },
+                selectedLineBgColor        = { bg = "Visual" }, -- set to `default` to have no background colour
+                unstagedChangesColor       = { fg = "DiagnosticError" },
+            },
+            win = {
+                style = "lazygit",
+            }
         },
         picker = {
             backend = "snacks",
@@ -183,7 +225,7 @@ return {
         },
         input = { enabled = true },
         quickfile = { enabled = true },
-        --scroll = { enabled = true },
+        scroll = { enabled = true },
         indent = {
             priority = 1,
             enabled = true, -- enable indent guides
