@@ -6,7 +6,6 @@ return {
         config = function()
             require('copilot').setup({
                 auth_provider_url = "https://ntracts-inc.ghe.com/",
-                trace_lsp = false,
                 panel = {
                     enabled = true,
                     auto_refresh = false,
@@ -17,7 +16,7 @@ return {
                         refresh = "gr",
                         open = "<M-CR>" },
                     layout = {
-                        position = "bottom", 
+                        position = "bottom", -- | top | left | right
                         ratio = 0.4
                     },
                 },
@@ -44,20 +43,9 @@ return {
                     hgcommit = false,
                     svn = false,
                     cvs = false,
-                    cs = true,
-                    lua = true,
-                    javascript = true, -- allow specific filetype
-                    typescript = true, -- allow specific filetype
-                    sh = function ()
-                        if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), '^%.env.*') then
-                            -- disable for .env files
-                            return false
-                        end
-                        return true
-                    end,
                     ["."] = false,
                 },
-                copilot_node_command = { 'node', '--no-warnings' },
+                copilot_node_command = { 'node', '--no-warnings' }, -- Node.js version must be > 18.x
                 server_opts_overrides = {},
             })
         end

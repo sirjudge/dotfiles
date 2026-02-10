@@ -30,8 +30,4 @@ return{
         'echasnovski/mini.starter',
         version = false
     },
-    {
-        'echasnovski/mini.sessions',
-        version = false,
-    },
 }

@@ -2,14 +2,6 @@ return {
     { 
         'joeveiga/ng.nvim',
         config = function()
-
-            local is_windows = vim.fn.has("win32") == 1
-            if is_windows then
-                local dotnet_root = vim.fn.expand("$USERPROFILE") .. "\\.dotnet"
-                vim.env.DOTNET_ROOT = dotnet_root
-                vim.env.DOTNET_ROOT_X64 = dotnet_root
-                vim.env.PATH = dotnet_root .. ";" .. dotnet_root .. "\\tools;" .. (vim.env.PATH or "")
-            end
             local ng = require("ng")
             vim.keymap.set("n", "<leader>at", ng.goto_template_for_component, { noremap = true, silent = true, desc="Go to Angular Component Template" })
             vim.keymap.set("n", "<leader>ac", ng.goto_component_with_template_file, { noremap = true, silent = true, desc="go to component with template file" })
@@ -73,30 +65,29 @@ return {
                 enable_import_completion = true, 
             }
         },
+
         config = function()
-            -- Note: Need to come back and figure out why this exists
+
             vim.lsp.handlers["window/showMessage"] = function(_, result, ctx)
                 local client = vim.lsp.get_client_by_id(ctx.client_id)
-                local name = client and client.name or "LSP"
-                if name == "copilot" then
-                    return
-                end
-                local level = ({ "ERROR", "WARN", "INFO", "LOG" })[result.type] or "UNKOWN"
-                if message ~= "" then
-                    Snacks.notify(result.message, { 
+                local level = ({ "ERROR", "WARN", "INFO", "LOG" })[result.type] or "INFO"
+                Snacks.notify(result.message, { 
                     title = client and client.name or "LSP",
                     level = vim.log.levels[level]
                 })
-                end
             end
+
 
             vim.lsp.handlers["window/logMessage"] = function(_, result, ctx)
                 local client = vim.lsp.get_client_by_id(ctx.client_id)
                 local name = client and client.name or "LSP"
-                if name == "copilot" then
-                    return
-                end
-                local level = ({ "ERROR", "WARN", "INFO", "LOG" })[result.type] or "UNKOWN"
+                local level_map = {
+                    [1] = vim.log.levels.ERROR,
+                    [2] = vim.log.levels.WARN,
+                    [3] = vim.log.levels.INFO,
+                    [4] = vim.log.levels.DEBUG,
+                }
+                local level = level_map[result.type] or vim.log.levels.INFO
                 local message = result.message or ""
                 if message ~= "" then
                     if level == vim.log.levels.INFO then
@@ -128,8 +119,8 @@ return {
                 root_markers = { "angular.json", "nx.json" },
             }
             vim.lsp.enable('angularls')
-            vim.lsp.config['ts_ls'] = {
 
+            vim.lsp.config['ts_ls'] = {
                 capabilities = capabilities,
                 init_options = {
                     plugins = {
@@ -148,23 +139,24 @@ return {
             }
             vim.lsp.enable('ts_ls')
 
-            local csharp_cmd_env = nil
-            if not is_windows then
-                csharp_cmd_env = {
-                    DOTNET_ROOT = "/nix/store/vbbna5qax4agd3mf2cv94zn9j1kjapr0-dotnet-combined/share/dotnet",
-                }
-            end
-
             vim.lsp.config['csharp_ls'] = {
                 capabilities = capabilities,
-                cmd = { 
-                    "csharp-ls",
-                    "--loglevel",
-                    "warning"
+                cmd = { "csharp-ls" },
+                cmd_env = {
+                    DOTNET_ROOT = "/nix/store/vbbna5qax4agd3mf2cv94zn9j1kjapr0-dotnet-combined/share/dotnet",
                 },
-                cmd_env = csharp_cmd_env,
                 filetypes = { 'cs' },
                 root_markers = { '*.sln', '*.csproj', 'Directory.Build.props', '.git' },
+                handlers = {
+                    ["window/showMessage"] = function(_, result, ctx)
+                        local client = vim.lsp.get_client_by_id(ctx.client_id)
+                        local level = ({ "ERROR", "WARN", "INFO", "LOG" })[result.type] or "INFO"
+                        Snacks.notify(result.message, { 
+                            title = client and client.name or "LSP",
+                            level = vim.log.levels[level]
+                        })
+                    end,
+                },
             }
             vim.lsp.enable('csharp_ls')
         end
