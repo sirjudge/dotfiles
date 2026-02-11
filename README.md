@@ -1,18 +1,23 @@
 # Dotfiles
 ## Overview
 Back up of work and personal configuration files with a simple bash script to back up or restore files
+### Work:
+Windows 11 Powershell based CLI environment built to run .net core and azure related tasks. Contains a Microsoft powershell profile script in addition to using wezterm terminal.
+### Peronsal:
+NixOs ZSH based CLI environment built to run .NET and Rust with the use of repo based shell.nix and flake.nix files
 
 ## Dependencies
 ### Personal
-- (NixOs)[https://nixos.org/]
+- [NixOs](https://github.com/NixOS/nixpkgs)
+- [Ghostty Terminal](https://github.com/ghostty-org/ghostty) 
 ### Work
-- [powerline](https://github.com/powerline/powerline)
-- [kitty](https://github.com/kovidgoyal/kitty)
-- [tmux](https://github.com/tmux/tmux/wiki)
-- [alacritty](https://alacritty.org/)
+- [Wezterm](https://github.com/wezterm/wezterm)
+- [Powershell](https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows?view=powershell-7.5)
 
 ### Shared
-- [neovim](https://neovim.io/)
+- [neovim](https://github.com/neovim/neovim)
+- [OpenCode](https://github.com/anomalyco/opencode/)
+- [lazyGit](https://github.com/jesseduffield/lazygit)
 
 ## Setup and runtime Shell commands
 Make script executable
