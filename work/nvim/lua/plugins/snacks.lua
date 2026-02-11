@@ -223,7 +223,30 @@ return {
             },
             refresh = 50, -- refresh at most every 50ms
         },
-        input = { enabled = true },
+        input = { 
+            backdrop = false,
+            position = "float",
+            border = true,
+            title_pos = "center",
+            height = 1,
+            width = 60,
+            relative = "editor",
+            noautocmd = true,
+            row = 2,
+            wo = {
+                winhighlight = "NormalFloat:SnacksInputNormal,FloatBorder:SnacksInputBorder,FloatTitle:SnacksInputTitle",
+                cursorline = false,
+            },
+            bo = {
+                filetype = "snacks_input",
+                buftype = "prompt",
+            },
+            --- buffer local variables
+            b = {
+                completion = false, -- disable blink completions in input
+            },
+
+        },
         quickfile = { enabled = true },
         scroll = { enabled = true },
         indent = {

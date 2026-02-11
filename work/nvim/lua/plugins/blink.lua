@@ -20,7 +20,9 @@ return {
                 preset = 'default',
             },
             appearance = {
-                use_nvim_cmp_as_default = true,
+                --todo: this is what it was previously set to
+                -- use_nvim_cmp_as_default = true,
+                use_nvim_cmp_as_default = false,
                 nerd_font_variant = 'mono'
             },
             fuzzy = { implementation = "prefer_rust_with_warning" },
@@ -35,6 +37,11 @@ return {
             menu = {
                 draw = {
                     components = {
+                        label = {
+                            "label",
+                            "label_description",
+                            gap = 1,
+                        },
                         kind_icon = {
                             text = function(ctx)
                                 if ctx.source_name ~= "Path" then
@@ -79,18 +86,18 @@ return {
                 },
                 documentation = {
                     auto_show = true,
-                    auto_show_delay_ms = 500,
+                    auto_show_delay_ms = 300,
                     window = { 
                         border = 'single' 
                     }
                 },
             },
         },
-        signature = { 
+        signature = {
             enabled = true,
             window = {
-                border = 'single' 
-            } 
+                border = "rounded",
+            },
         },
     }
 }

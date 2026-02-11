@@ -2,7 +2,6 @@ return {
     { 
         'joeveiga/ng.nvim',
         config = function()
-
             local is_windows = vim.fn.has("win32") == 1
             if is_windows then
                 local dotnet_root = vim.fn.expand("$USERPROFILE") .. "\\.dotnet"
@@ -11,6 +10,7 @@ return {
                 vim.env.PATH = dotnet_root .. ";" .. dotnet_root .. "\\tools;" .. (vim.env.PATH or "")
             end
             local ng = require("ng")
+            vim.keymap.set("n", "<leader>a", "", { desc = "angular" })
             vim.keymap.set("n", "<leader>at", ng.goto_template_for_component, { noremap = true, silent = true, desc="Go to Angular Component Template" })
             vim.keymap.set("n", "<leader>ac", ng.goto_component_with_template_file, { noremap = true, silent = true, desc="go to component with template file" })
             vim.keymap.set("n", "<leader>aT", ng.get_template_tcb, { noremap = true, silent = true, desc="get angular template" })
@@ -23,57 +23,74 @@ return {
         dependencies = {
             { 'saghen/blink.cmp' },
         },
+        keys =  {
+            {
+                "gd",
+                function()
+                    vim.lsp.buf.definition()
+                end,
+                desc = "Goto Definition"
+            },
+            {
+                "<leader>gr",
+                function()
+                    vim.lsp.buf.references()
+                end,
+                desc = "Goto References"
+            },
+            {
+                "<leader>gi",
+                function()
+                    vim.lsp.buf.implementation()
+                end,
+                desc = "lsp implementation"
+            },
+            {
+                "<leader>lh",
+                function()
+                    vim.lsp.buf.hover()
+                end,
+                desc = "LSP hover"
+            },
+            {
+                "<leader>lca",
+                function()
+                    vim.lsp.buf.code_action()
+                end,
+                desc = "lsp code action"
+            },
+            {
+                "<leader>lf",
+                function()
+                    vim.lsp.buf.format({async = true})
+                end,
+                desc = "lsp format"
+            },
+        },
         opts = {
             servers = {
-                keys = {
-                    {
-                        "gd",
-                        function()
-                            vim.lsp.buf.definition()
-                        end,
-                        desc = "Goto Definition"
-                    },
-                    {
-                        "gr",
-                        function()
-                            vim.lsp.buf.references()
-                        end,
-                        desc = "Goto References"
-                    },
-                    {
-                        "gi",
-                        function()
-                            vim.lsp.buf.implmentation()
-                        end,
-                        desc = "Goto Implementation"
-                    },
-                    {
-                        "k",
-                        function()
-                            vim.lsp.buf.hover()
-                        end,
-                        desc = "hover"
-                    },
-                    {
-                        "<leader>ca",
-                        function()
-                            vim.lsp.buf.code_action()
-                        end,
-                        desc = "lsp code action"
-                    },
-                    {
-                        "<leader>f",
-                        function()
-                            vim.lsp.buf.format({async = true})
-                        end,
-                        desc = "lsp code action"
-                    },
-                },
                 organize_imports_on_format = true,
                 enable_import_completion = true, 
             }
         },
         config = function()
+            local float_border = "rounded"
+            local float_opts = {
+                border = float_border,
+                max_width = 80,
+                max_height = 20,
+                focusable = false,
+            }
+            vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, float_opts)
+            vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, float_opts)
+            vim.diagnostic.config({
+                float = {
+                    border = float_border,
+                    source = "if_many",
+                    header = "",
+                    prefix = " ",
+                },
+            })
             -- Note: Need to come back and figure out why this exists
             vim.lsp.handlers["window/showMessage"] = function(_, result, ctx)
                 local client = vim.lsp.get_client_by_id(ctx.client_id)
@@ -120,7 +137,12 @@ return {
             local project_library_path = "C:\\Users\\NicoJudge\\solutions"
             local global_node_modules = "C:\\Users\\NicoJudge\\AppData\\Roaming\\npm\\node_modules"
             local cmd = {"ngserver", "--stdio", "--tsProbeLocations", project_library_path .. "," .. global_node_modules, "--ngProbeLocations", project_library_path .. "," .. global_node_modules}
-            
+
+            vim.lsp.config['harper-ls'] = {
+                cmd = cmd,
+                capabilities = capabilities,
+            }
+
             vim.lsp.config['angularls'] = {
                 cmd = cmd,
                 capabilities = capabilities,
@@ -128,6 +150,7 @@ return {
                 root_markers = { "angular.json", "nx.json" },
             }
             vim.lsp.enable('angularls')
+
             vim.lsp.config['ts_ls'] = {
 
                 capabilities = capabilities,

@@ -5,8 +5,15 @@ return {
         dependencies = 'nvim-tree/nvim-web-devicons',
         event = { "BufReadPre", "BufNewFile" },
         keys = {
+            { "<leader>b", desc = "bufferline" },
+            { "<leader>bc", desc = "bufferline close tabs" },
             { "<leader>bn", "<cmd>bnext<cr>", desc = "buffer next" },
             { "<leader>bp", "<cmd>bprevious<cr>", desc = "buffer previous" },
+            {"<leader>bl", desc = "bufferline tabs"},
+            {"<leader>blc", desc = "bufferline tabs"},
+            { "<leader>blcr", "<cmd>BufferLineCloseRight<cr>", desc = "bufferline close right"},
+            { "<leader>blcl", "<cmd>BufferLineCloseLeft<cr>", desc = "bufferline close left"},
+            { "<leader>blp", "<cmd>BufferLinePick<cr>", desc = "bufferline pick"},
         },
         config = function()
             local bufferline = require('bufferline')
@@ -29,6 +36,14 @@ return {
                     close_icon = ' ',
                     left_trunc_marker = ' ',
                     right_trunc_marker = ' ',
+                    offsets = {
+                        {
+                            filetype = "NvimTree",
+                            text = "File Explorer",
+                            highlight = "Directory",
+                            separator = true -- use a "true" to enable the default, or set your own character
+                        }
+                    },
                     --- name_formatter can be used to change the buffer's label in the bufferline.
                     --- Please note some names can/will break the
                     --- bufferline so use this at your discretion knowing that it has

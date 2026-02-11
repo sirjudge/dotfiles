@@ -10,6 +10,7 @@ return {
                 }
             })
 
+            vim.keymap.set("n", "<leader>h", "", { desc = "Harpoon" })
             vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end, { desc = "Add file to Harpoon" })
             vim.keymap.set("n", "<leader>he", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Toggle Harpoon quick menu" })
             vim.keymap.set("n", "<leader>h1", function() harpoon:list():select(1) end, {desc = "Go to Harpoon file 1"})
