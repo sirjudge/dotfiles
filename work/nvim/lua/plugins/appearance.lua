@@ -35,7 +35,11 @@ return {
             },
         },
         keys = {
-            { '<leader>ct', '<cmd>CamouflageToggle<cr>', desc = 'Toggle Camouflage' },
+            { 
+                '<leader>ct',
+                '<cmd>CamouflageToggle<cr>',
+                desc = 'Toggle Camouflage' 
+            },
         },
     },
 }

@@ -1,4 +1,4 @@
-return{
+return {
     {
         'echasnovski/mini.comment',
         version = '*',
@@ -30,8 +30,38 @@ return{
         'echasnovski/mini.starter',
         version = false
     },
-    {
-        'echasnovski/mini.sessions',
-        version = false,
-    },
+    -- {
+    --     'echasnovski/mini.sessions',
+    --     version = false,
+    --     keys = {
+    --         {
+    --             "<leader>sn",
+    --             desc = "New session"
+    --         },
+    --         {
+    --             "<leader>ss",
+    --             function()
+    --                 require('mini.sessions').write()
+    --             end,
+    --             desc = "Save Session"
+    --         },
+    --         {
+    --             "<leader>sd",
+    --             function()
+    --                 require('mini.sessions').delete()
+    --             end,
+    --             desc = "Delete Session"
+    --         },
+    --
+    --     },
+    --     opts = {
+    --         autoread = true,
+    --         autowrite = true,
+    --         directory = vim.fn.expand("~/.vim/sessions/"),
+    --         file = 'Session.vim',
+    --     },
+    --     config = function()
+    --         require('mini.sessions').setup()
+    --     end
+    -- },
 }

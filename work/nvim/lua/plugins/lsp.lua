@@ -1,5 +1,5 @@
 return {
-    { 
+    {
         'joeveiga/ng.nvim',
         config = function()
             local is_windows = vim.fn.has("win32") == 1
@@ -11,9 +11,12 @@ return {
             end
             local ng = require("ng")
             vim.keymap.set("n", "<leader>a", "", { desc = "angular" })
-            vim.keymap.set("n", "<leader>at", ng.goto_template_for_component, { noremap = true, silent = true, desc="Go to Angular Component Template" })
-            vim.keymap.set("n", "<leader>ac", ng.goto_component_with_template_file, { noremap = true, silent = true, desc="go to component with template file" })
-            vim.keymap.set("n", "<leader>aT", ng.get_template_tcb, { noremap = true, silent = true, desc="get angular template" })
+            vim.keymap.set("n", "<leader>at", ng.goto_template_for_component,
+                { noremap = true, silent = true, desc = "Go to Angular Component Template" })
+            vim.keymap.set("n", "<leader>ac", ng.goto_component_with_template_file,
+                { noremap = true, silent = true, desc = "go to component with template file" })
+            vim.keymap.set("n", "<leader>aT", ng.get_template_tcb,
+                { noremap = true, silent = true, desc = "get angular template" })
         end
     },
     {
@@ -23,7 +26,7 @@ return {
         dependencies = {
             { 'saghen/blink.cmp' },
         },
-        keys =  {
+        keys = {
             {
                 "gd",
                 function()
@@ -62,7 +65,7 @@ return {
             {
                 "<leader>lf",
                 function()
-                    vim.lsp.buf.format({async = true})
+                    vim.lsp.buf.format({ async = true })
                 end,
                 desc = "lsp format"
             },
@@ -70,7 +73,7 @@ return {
         opts = {
             servers = {
                 organize_imports_on_format = true,
-                enable_import_completion = true, 
+                enable_import_completion = true,
             }
         },
         config = function()
@@ -100,10 +103,10 @@ return {
                 end
                 local level = ({ "ERROR", "WARN", "INFO", "LOG" })[result.type] or "UNKOWN"
                 if message ~= "" then
-                    Snacks.notify(result.message, { 
-                    title = client and client.name or "LSP",
-                    level = vim.log.levels[level]
-                })
+                    Snacks.notify(result.message, {
+                        title = client and client.name or "LSP",
+                        level = vim.log.levels[level]
+                    })
                 end
             end
 
@@ -136,7 +139,8 @@ return {
 
             local project_library_path = "C:\\Users\\NicoJudge\\solutions"
             local global_node_modules = "C:\\Users\\NicoJudge\\AppData\\Roaming\\npm\\node_modules"
-            local cmd = {"ngserver", "--stdio", "--tsProbeLocations", project_library_path .. "," .. global_node_modules, "--ngProbeLocations", project_library_path .. "," .. global_node_modules}
+            local cmd = { "ngserver", "--stdio", "--tsProbeLocations", project_library_path .. "," .. global_node_modules,
+                "--ngProbeLocations", project_library_path .. "," .. global_node_modules }
 
             vim.lsp.config['harper-ls'] = {
                 cmd = cmd,
@@ -159,7 +163,7 @@ return {
                         {
                             name = "@vue/typescript-plugin",
                             location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
-                            languages = {"javascript", "typescript", "vue"},
+                            languages = { "javascript", "typescript", "vue" },
                         },
                     },
                 },
@@ -180,7 +184,7 @@ return {
 
             vim.lsp.config['csharp_ls'] = {
                 capabilities = capabilities,
-                cmd = { 
+                cmd = {
                     "csharp-ls",
                     "--loglevel",
                     "warning"

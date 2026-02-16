@@ -2,8 +2,9 @@ return {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     keys = {
-        { "<leader>st", function() Snacks.picker.todo_comments() end, desc = "Todo" },
-        { "<leader>sT", function () Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Todo/Fix/Fixme" },
+        { "<leader>tt", function() Snacks.picker.todo_comments() end, desc = "Todo" },
+        { "<leader>tb", function() Snacks.picker.todo_comments({keywords = { "BUG" }}) end, desc = "Todo" },
+        { "<leader>ta", function () Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME", "NOTE","WARNING","OPTIMIZE" } }) end, desc = "Todo/Fix/Fixme" },
     },
     opts = {
         {

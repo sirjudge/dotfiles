@@ -1,10 +1,18 @@
 return {
     -- colorschemes
     {
-        'rose-pine/neovim',
+        "lettertwo/laserwave.nvim",
+        lazy = false,
+        priority = 1000,
         config = function()
-            vim.cmd.colorscheme('rose-pine-main')
+            vim.cmd.colorscheme('laserwave-hi_c')
         end
+    },   
+    {
+        'rose-pine/neovim',
+        -- config = function()
+        --     vim.cmd.colorscheme('rose-pine-main')
+        -- end
     },
     {
         "folke/tokyonight.nvim",

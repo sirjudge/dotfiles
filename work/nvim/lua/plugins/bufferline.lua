@@ -5,12 +5,9 @@ return {
         dependencies = 'nvim-tree/nvim-web-devicons',
         event = { "BufReadPre", "BufNewFile" },
         keys = {
-            { "<leader>b", desc = "bufferline" },
-            { "<leader>bc", desc = "bufferline close tabs" },
             { "<leader>bn", "<cmd>bnext<cr>", desc = "buffer next" },
             { "<leader>bp", "<cmd>bprevious<cr>", desc = "buffer previous" },
-            {"<leader>bl", desc = "bufferline tabs"},
-            {"<leader>blc", desc = "bufferline tabs"},
+            { "<leader>bd", "<cmd>bdelete<cr>", desc = "buffer delete" },
             { "<leader>blcr", "<cmd>BufferLineCloseRight<cr>", desc = "bufferline close right"},
             { "<leader>blcl", "<cmd>BufferLineCloseLeft<cr>", desc = "bufferline close left"},
             { "<leader>blp", "<cmd>BufferLinePick<cr>", desc = "bufferline pick"},
