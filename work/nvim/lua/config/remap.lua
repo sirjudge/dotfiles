@@ -13,8 +13,10 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
+--TODO: shift + P does this same thing. This currently conflicts with 
+-- my snacks.picker()
 --when pasting over something else don't put the highlted something else in the register
-vim.keymap.set("x", "<leader>p", [["_dP]])
+-- vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- when in normal visual mode, leader + y copies into system clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
