@@ -14,8 +14,9 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 --TODO: shift + P does this same thing. This currently conflicts with 
--- my snacks.picker()
---when pasting over something else don't put the highlted something else in the register
+-- my snacks.picker() - 2/16/2026
+
+-- when pasting over something else don't put the highlted something else in the register
 -- vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- when in normal visual mode, leader + y copies into system clipboard
@@ -36,11 +37,15 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 -- TODO: Conflicts with session keybinds which I use more than this.
 -- This functionality is replaced with <leader>rn to rename using LSP magic
+-- 2/16/2026
+
 -- replace the currently highlited word
 -- vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- TODO:Need to eventually add a check for if I'm on windows or linux
 -- and use tmux vs wezterm accordingly
+-- 2/16/2026
+
 -- remap tmux things
 vim.keymap.set("n", "<C-h>", "<cmd>lua require('tmux').move_left()<CR>")
 vim.keymap.set("n", "<C-j>", "<cmd>lua require('tmux').move_bottom()<CR>")

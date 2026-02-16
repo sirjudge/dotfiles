@@ -2,8 +2,8 @@ return {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     keys = {
-        { "<leader>tt", function() Snacks.picker.todo_comments() end, desc = "Todo" },
-        { "<leader>tb", function() Snacks.picker.todo_comments({keywords = { "BUG" }}) end, desc = "Todo" },
+        { "<leader>tt", function() Snacks.picker.todo_comments() end, desc = "List all configured todos" },
+        { "<leader>tb", function() Snacks.picker.todo_comments({keywords = { "BUG" }}) end, desc = "list Bugs" },
         { "<leader>ta", function () Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME", "NOTE","WARNING","OPTIMIZE" } }) end, desc = "Todo/Fix/Fixme" },
     },
     opts = {
@@ -16,6 +16,8 @@ return {
                     icon = " ", -- icon used for the sign, and in search results
                     color = "error", -- can be a hex color, or a named color (see below)
                     alt = { "FIXME", "BUG", "FIXIT", "ISSUE"}, -- a set of other keywords that all map to this FIX keywords
+                    -- Note: Currently using custom signage so this is not 
+                    -- required and could probably be removed. - 2/16/2026
                     -- signs = false, -- configure signs for some keywords individually
                 },
                 TODO = { icon = " ", color = "info" },

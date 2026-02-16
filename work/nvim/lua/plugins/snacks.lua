@@ -2,13 +2,13 @@ return {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
-    -- Unused
+    -- Unused but keeping in in case I want to re-add
     -- { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
     -- { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
     -- { "<leader>pfg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
     -- { "<leader>psw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
     keys = {
-        -- Searching
+        -- snacks.picker Searching
         { "<leader>pf", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
         { "<leader>pg", function() Snacks.picker.grep() end, desc = "Grep" },
         { "<leader>pe", function() Snacks.explorer() end, desc = "File Explorer" },
@@ -22,7 +22,7 @@ return {
         { "<leader>psi", function() Snacks.picker.icons() end, desc = "Icons" },
         { "<leader>psj", function() Snacks.picker.jumps() end, desc = "Jumps" },
         { "<leader>psk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
-        -- LSP
+        -- snacks.picker LSP
         { "<leader>pld", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
         { "<leader>plD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
         { "<leader>plr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
@@ -241,11 +241,18 @@ return {
             },
             --- buffer local variables
             b = {
-                completion = false, -- disable blink completions in input
+                completion = true, -- disable blink completions in input
             },
 
         },
-        quickfile = { enabled = true },
+        quickfile = {
+            enabled = true,
+            exclude = {
+                "latex",
+                "markdown",
+            }
+
+        },
         scroll = { enabled = true },
         indent = {
             priority = 1,
