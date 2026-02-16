@@ -25,7 +25,7 @@ return {
             },
             window = {
                 position = "left",
-                width = 30,
+                width = 20,
                 mapping_options = {
                     noremap = true,
                     nowait = true,
@@ -99,7 +99,6 @@ return {
                 }
             },
         })
-
-        vim.api.nvim_set_keymap('n', '<leader>no', ':Neotree<CR>', { noremap = true, silent = true })
+        vim.api.nvim_set_keymap('n', '<leader>n', ':Neotree<CR>', { noremap = true, silent = true })
     end
 }

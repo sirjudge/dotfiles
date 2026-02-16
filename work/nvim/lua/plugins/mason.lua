@@ -12,6 +12,7 @@ return {
                 "shfmt",
                 'csharpier',
                 'netcoredbg',
+                'js-debug-adapter',
                 'gopls',
                 'lua-language-server',
                 'bash-language-server',
