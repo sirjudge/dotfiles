@@ -7,8 +7,11 @@ return {
     opts = {},
     config = function()
         require('render-markdown').setup({
-            completions = { blink = { enabled = true } },
-            latex = { enabled = true }, -- or 'katex'
-            html = {enabled = false },
+            completions = {
+                blink = { enabled = true }
+            },
+            -- latex = { enabled = false }, 
+            html = { enabled = false },
+            yaml = { enabled = false },
         })    end
 }

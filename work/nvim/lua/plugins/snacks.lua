@@ -136,7 +136,6 @@ return {
                 keys = {
                     { icon = " ", key = "f", desc = "[f]ind file", action = ":lua Snacks.dashboard.pick('files')" },
                     { icon = " ", key = "n", desc = "[n]ew file", action = ":ene | startinsert" },
-                    { icon = " ", key = "g", desc = "[grep] text", action = ":lua Snacks.dashboard.pick('live_grep')" },
                     { icon = " ", key = "r", desc = "[r]ecent files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
                     { icon = " ", key = "c", desc = "[c]onfig", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
                     { icon = " ", key = "s", desc = "restore [s]ession", section = "session" },

@@ -47,8 +47,11 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 -- 2/16/2026
 
 -- remap tmux things
-vim.keymap.set("n", "<C-h>", "<cmd>lua require('tmux').move_left()<CR>")
-vim.keymap.set("n", "<C-j>", "<cmd>lua require('tmux').move_bottom()<CR>")
-vim.keymap.set("n", "<C-k>", "<cmd>lua require('tmux').move_top()<CR>")
-vim.keymap.set("n", "<C-l>", "<cmd>lua require('tmux').move_right()<CR>")
-vim.keymap.set("n", "<C-\\>", "<cmd>lua require('tmux').toggle_zoom()<CR>")
+if vim.fn.executable("tmux") == 1 then
+    vim.keymap.set("n", "<C-h>", "<cmd>lua require('tmux').move_left()<CR>")
+    vim.keymap.set("n", "<C-j>", "<cmd>lua require('tmux').move_bottom()<CR>")
+    vim.keymap.set("n", "<C-k>", "<cmd>lua require('tmux').move_top()<CR>")
+    vim.keymap.set("n", "<C-l>", "<cmd>lua require('tmux').move_right()<CR>")
+    vim.keymap.set("n", "<C-\\>", "<cmd>lua require('tmux').toggle_zoom()<CR>")
+end
+    

@@ -2,21 +2,25 @@ return {
     {
         'joeveiga/ng.nvim',
         config = function()
-            local is_windows = vim.fn.has("win32") == 1
-            if is_windows then
-                local dotnet_root = vim.fn.expand("$USERPROFILE") .. "\\.dotnet"
-                vim.env.DOTNET_ROOT = dotnet_root
-                vim.env.DOTNET_ROOT_X64 = dotnet_root
-                vim.env.PATH = dotnet_root .. ";" .. dotnet_root .. "\\tools;" .. (vim.env.PATH or "")
-            end
             local ng = require("ng")
-            vim.keymap.set("n", "<leader>a", "", { desc = "angular" })
-            vim.keymap.set("n", "<leader>at", ng.goto_template_for_component,
-                { noremap = true, silent = true, desc = "Go to Angular Component Template" })
-            vim.keymap.set("n", "<leader>ac", ng.goto_component_with_template_file,
-                { noremap = true, silent = true, desc = "go to component with template file" })
-            vim.keymap.set("n", "<leader>aT", ng.get_template_tcb,
-                { noremap = true, silent = true, desc = "get angular template" })
+            vim.keymap.set(
+                "n",
+                "<leader>at",
+                ng.goto_template_for_component,
+                { noremap = true, silent = true, desc = "Go to Angular Component Template" }
+            )
+            vim.keymap.set(
+                "n",
+                "<leader>ac",
+                ng.goto_component_with_template_file,
+                { noremap = true, silent = true, desc = "go to component with template file" }
+            )
+            vim.keymap.set(
+                "n",
+                "<leader>aT",
+                ng.get_template_tcb,
+                { noremap = true, silent = true, desc = "get angular template" }
+            )
         end
     },
     {
@@ -77,22 +81,42 @@ return {
             }
         },
         config = function()
-            local float_border = "rounded"
-            local float_opts = {
-                border = float_border,
-                max_width = 80,
-                max_height = 20,
-                focusable = false,
+            -- Check if we're on windows then explicitly set dotnet tooling
+            -- paths
+            local is_windows = vim.fn.has("win32") == 1
+            if is_windows then
+                local dotnet_root = vim.fn.expand("$USERPROFILE") .. "\\.dotnet"
+                vim.env.DOTNET_ROOT = dotnet_root
+                vim.env.DOTNET_ROOT_X64 = dotnet_root
+                vim.env.PATH = dotnet_root .. ";" .. dotnet_root .. "\\tools;" .. (vim.env.PATH or "")
+            end
+
+            local float_border_opts = {
+                border = "single",
+                winhighlight = "Normal:BlinkCmpMenu,NormalFloat:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder",
             }
+
+            local float_opts = vim.tbl_deep_extend("force", {}, float_border_opts, {
+                max_width = 80,
+                max_height = 30,
+                focusable = true,
+            })
+
+            local orig_open_floating_preview = vim.lsp.util.open_floating_preview
+            vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
+                opts = opts or {}
+                opts.border = opts.border or float_border_opts.border
+                opts.winhighlight = opts.winhighlight or float_border_opts.winhighlight
+                return orig_open_floating_preview(contents, syntax, opts, ...)
+            end
+
             vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, float_opts)
             vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, float_opts)
+            vim.lsp.buf.signature_help = function()
+                require("blink.cmp.signature.trigger").show()
+            end
             vim.diagnostic.config({
-                float = {
-                    border = float_border,
-                    source = "if_many",
-                    header = "",
-                    prefix = " ",
-                },
+                float = float_opts,
             })
             -- Note: Need to come back and figure out why this exists
             vim.lsp.handlers["window/showMessage"] = function(_, result, ctx)
@@ -137,15 +161,12 @@ return {
             }
             vim.lsp.enable('lua_ls')
 
+            --TODO: Need to come back and add a check for if windows/linux
+            -- and set this accordingly
             local project_library_path = "C:\\Users\\NicoJudge\\solutions"
             local global_node_modules = "C:\\Users\\NicoJudge\\AppData\\Roaming\\npm\\node_modules"
             local cmd = { "ngserver", "--stdio", "--tsProbeLocations", project_library_path .. "," .. global_node_modules,
                 "--ngProbeLocations", project_library_path .. "," .. global_node_modules }
-
-            vim.lsp.config['harper-ls'] = {
-                cmd = cmd,
-                capabilities = capabilities,
-            }
 
             vim.lsp.config['angularls'] = {
                 cmd = cmd,
@@ -154,6 +175,10 @@ return {
                 root_markers = { "angular.json", "nx.json" },
             }
             vim.lsp.enable('angularls')
+
+            vim.lsp.config['harper-ls'] = {
+                capabilities = capabilities,
+            }
 
             vim.lsp.config['ts_ls'] = {
 

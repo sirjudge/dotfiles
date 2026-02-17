@@ -64,13 +64,13 @@ return {
 
         vim.keymap.set(
             { "n", "x" },
-            "<leader>oar",
+            "<leader>ora",
             function() return require("opencode").operator("@this ") end,
             { desc = "Add range to opencode", expr = true }
         )
         vim.keymap.set(
             "n",
-            "<leader>oal",
+            "<leader>ola",
             function() return require("opencode").operator("@this ") .. "_" end,
             { desc = "Add line to opencode", expr = true }
         )
