@@ -10,7 +10,7 @@ return {
     keys = {
         -- snacks.picker Searching
         { "<leader>pf", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
-        { "<leader>pg", function() Snacks.picker.grep() end, desc = "Grep" },
+        { "<leader>pG", function() Snacks.picker.grep() end, desc = "Grep" },
         { "<leader>pe", function() Snacks.explorer() end, desc = "File Explorer" },
         { "<leader>pb", function() Snacks.picker.buffers() end, desc = "Buffers" },
         { "<leader>pc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
@@ -23,27 +23,60 @@ return {
         { "<leader>psj", function() Snacks.picker.jumps() end, desc = "Jumps" },
         { "<leader>psk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
         -- snacks.picker LSP
-        { "<leader>pld", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
-        { "<leader>plD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
-        { "<leader>plr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
-        { "<leader>plI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
-        { "<leader>plt", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
-        { "<leader>pli", function() Snacks.picker.lsp_incoming_calls() end, desc = "C[a]lls Incoming" },
-        { "<leader>plo", function() Snacks.picker.lsp_outgoing_calls() end, desc = "C[a]lls Outgoing" },
-        { "<leader>pls", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
-        { "<leader>plS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
+        { "<leader>pgd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
+        { "<leader>pgD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
+        { "<leader>pgR", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
+        { "<leader>pgI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
+        { "<leader>pgt", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
+        { "<leader>pgi", function() Snacks.picker.lsp_incoming_calls() end, desc = "C[a]lls Incoming" },
+        { "<leader>pgo", function() Snacks.picker.lsp_outgoing_calls() end, desc = "C[a]lls Outgoing" },
+        { "<leader>pgs", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
+        { "<leader>pgS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
         -- LazyGit
         { 
             "<leader>lg", 
             function() 
-                --local lazygit_path = vim.fn.exepath("lazygit")
                 vim.env.PATH = vim.env.PATH .. ";C:\\Users\\NicoJudge\\tools\\lazygit"
                 Snacks.lazygit() 
             end, desc = "Lazygit Open" 
         },
+        -- zen
+        {
+            "<leader>z", function() Snacks.Zen() end, desc = "Zen Toggle",
+        }
     },
     ---@type snacks.Config
     opts = {
+        zen = {
+            enabled = true,
+            toggles = {
+                dim = true,
+                git_signs = false,
+                mini_diff_signs = false,
+                diagnostics = false,
+                inlay_hints = false,
+            },
+            center = true,
+            show = {
+                statusline = false,
+                tabline = false,
+            },
+            win = { 
+                enter = true,
+                fixbuf = true,
+                minimal = false,
+                width = 120,
+                height = 0,
+                backdrop = { transparent = true, blend = 10 },
+                keys = { q = false },
+                zindex = 40,
+                wo = {
+                    winhighlight = "NormalFloat:Normal",
+                },
+                w = {
+                    snacks_main = true,
+                },            },
+        },
         animate = {
             enabled = true,
             fps = 60,
