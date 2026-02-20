@@ -81,8 +81,7 @@ return {
             }
         },
         config = function()
-            -- Check if we're on windows then explicitly set dotnet tooling
-            -- paths
+            -- Check if we're on windows then explicitly set dotnet paths
             local is_windows = vim.fn.has("win32") == 1
             if is_windows then
                 local dotnet_root = vim.fn.expand("$USERPROFILE") .. "\\.dotnet"
@@ -118,38 +117,55 @@ return {
             vim.diagnostic.config({
                 float = float_opts,
             })
+
+            local function should_suppress_lsp_message(name, message, result_type)
+                if name == "copilot" then
+                    return true
+                end
+
+                if not message or message == "" then
+                    return true
+                end
+
+                if result_type == vim.lsp.protocol.MessageType.Info then
+                    if message:find("Policy watcher not available", 1, true)
+                        or message:find("DotnetCliHelper", 1, true)
+                        or message:find("Using dotnet executable configured on the PATH", 1, true)
+                        or message:find("[Program] Language server initialized", 1, true)
+                        or message:find("[LanguageServerProjectLoader]", 1, true)
+                        or message:find("Restoring", 1, true)
+                    then
+                        return true
+                    end
+                end
+
+                return false
+            end
+
             -- Note: Need to come back and figure out why this exists
             vim.lsp.handlers["window/showMessage"] = function(_, result, ctx)
                 local client = vim.lsp.get_client_by_id(ctx.client_id)
                 local name = client and client.name or "LSP"
-                if name == "copilot" then
+                local message = result and result.message or ""
+                if should_suppress_lsp_message(name, message, result and result.type) then
                     return
                 end
                 local level = ({ "ERROR", "WARN", "INFO", "LOG" })[result.type] or "UNKOWN"
-                if message ~= "" then
-                    Snacks.notify(result.message, {
-                        title = client and client.name or "LSP",
-                        level = vim.log.levels[level]
-                    })
-                end
+                Snacks.notify(message, {
+                    title = client and client.name or "LSP",
+                    level = vim.log.levels[level]
+                })
             end
 
             vim.lsp.handlers["window/logMessage"] = function(_, result, ctx)
                 local client = vim.lsp.get_client_by_id(ctx.client_id)
                 local name = client and client.name or "LSP"
-                if name == "copilot" then
+                local message = result and result.message or ""
+                if should_suppress_lsp_message(name, message, result and result.type) then
                     return
                 end
                 local level = ({ "ERROR", "WARN", "INFO", "LOG" })[result.type] or "UNKOWN"
-                local message = result.message or ""
-                if message ~= "" then
-                    if level == vim.log.levels.INFO then
-                        if message:find("Policy watcher not available", 1, true) then
-                            return
-                        end
-                    end
-                    Snacks.notify(message, { title = name, level = level })
-                end
+                Snacks.notify(message, { title = name, level = vim.log.levels[level] })
             end
             local capabilities = require('blink.cmp').get_lsp_capabilities()
 
@@ -200,25 +216,25 @@ return {
             }
             vim.lsp.enable('ts_ls')
 
-            local csharp_cmd_env = nil
-            if not is_windows then
-                csharp_cmd_env = {
-                    DOTNET_ROOT = "/nix/store/vbbna5qax4agd3mf2cv94zn9j1kjapr0-dotnet-combined/share/dotnet",
-                }
-            end
-
-            vim.lsp.config['csharp_ls'] = {
-                capabilities = capabilities,
-                cmd = {
-                    "csharp-ls",
-                    "--loglevel",
-                    "warning"
-                },
-                cmd_env = csharp_cmd_env,
-                filetypes = { 'cs' },
-                root_markers = { '*.sln', '*.csproj', 'Directory.Build.props', '.git' },
-            }
-            vim.lsp.enable('csharp_ls')
+            -- local csharp_cmd_env = nil
+            -- if not is_windows then
+            --     csharp_cmd_env = {
+            --         DOTNET_ROOT = "/nix/store/vbbna5qax4agd3mf2cv94zn9j1kjapr0-dotnet-combined/share/dotnet",
+            --     }
+            -- end
+            --
+            -- vim.lsp.config['csharp_ls'] = {
+            --     capabilities = capabilities,
+            --     cmd = {
+            --         "csharp-ls",
+            --         "--loglevel",
+            --         "warning"
+            --     },
+            --     cmd_env = csharp_cmd_env,
+            --     filetypes = { 'cs' },
+            --     root_markers = { '*.sln', '*.csproj', 'Directory.Build.props', '.git' },
+            -- }
+            -- vim.lsp.enable('csharp_ls')
         end
     }
 }
