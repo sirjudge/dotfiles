@@ -1,0 +1,263 @@
+return {
+    {
+        'joeveiga/ng.nvim',
+        config = function()
+            local ng = require("ng")
+            vim.keymap.set(
+                "n",
+                "<leader>at",
+                ng.goto_template_for_component,
+                { noremap = true, silent = true, desc = "Go to Angular Component Template" }
+            )
+            vim.keymap.set(
+                "n",
+                "<leader>ac",
+                ng.goto_component_with_template_file,
+                { noremap = true, silent = true, desc = "go to component with template file" }
+            )
+            vim.keymap.set(
+                "n",
+                "<leader>aT",
+                ng.get_template_tcb,
+                { noremap = true, silent = true, desc = "get angular template" }
+            )
+        end
+    },
+    {
+        'neovim/nvim-lspconfig',
+        event = { 'BufReadPre', 'BufNewFile' },
+        cmd = 'LspInfo',
+        dependencies = {
+            { 'saghen/blink.cmp' },
+        },
+        keys = {
+            {
+                "gd",
+                function()
+                    vim.lsp.buf.definition()
+                end,
+                desc = "Goto Definition"
+            },
+            {
+                "<leader>gr",
+                function()
+                    vim.lsp.buf.references()
+                end,
+                desc = "Goto References"
+            },
+            {
+                "<leader>gi",
+                function()
+                    vim.lsp.buf.implementation()
+                end,
+                desc = "lsp implementation"
+            },
+            {
+                "<leader>lh",
+                function()
+                    vim.lsp.buf.hover()
+                end,
+                desc = "LSP hover"
+            },
+            {
+                "<leader>lca",
+                function()
+                    vim.lsp.buf.code_action()
+                end,
+                desc = "lsp code action"
+            },
+            {
+                "<leader>lf",
+                function()
+                    vim.lsp.buf.format({ async = true })
+                end,
+                desc = "lsp format"
+            },
+            {
+                "<leader>llc",
+                function()
+                    local lsplogpath = vim.fn.stdpath("state") .. "/lsp.log"
+                    print(lsplogpath)
+                    if io.close(io.open(lsplogpath, "w+b") ) == false
+                    then
+                        vim.notify("Clearning LSP Log failed.", vim.log.levels.WARN)
+                    end
+                end
+            }
+        },
+        opts = {
+            servers = {
+                organize_imports_on_format = true,
+                enable_import_completion = true,
+            }
+        },
+        config = function()
+            vim.diagnostic.config({
+                float = float_opts,
+                underline = true,
+                update_in_insert = false,
+                virtual_text = {
+                    spacing = 4,
+                    source = "if_many",
+                    prefix = "●",
+                },
+                codelens = {
+                    enabled = true
+                },
+                severity_sort = true,
+            })
+
+            -- Check if we're on windows then explicitly set dotnet paths
+            local is_windows = vim.fn.has("win32") == 1
+            if is_windows then
+                local dotnet_root = vim.fn.expand("$USERPROFILE") .. "\\.dotnet"
+                vim.env.DOTNET_ROOT = dotnet_root
+                vim.env.DOTNET_ROOT_X64 = dotnet_root
+                vim.env.PATH = dotnet_root .. ";" .. dotnet_root .. "\\tools;" .. (vim.env.PATH or "")
+            end
+
+            local float_border_opts = {
+                border = "single",
+                winhighlight = "Normal:BlinkCmpMenu,NormalFloat:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder",
+            }
+
+            local float_opts = vim.tbl_deep_extend("force", {}, float_border_opts, {
+                max_width = 80,
+                max_height = 30,
+                focusable = true,
+            })
+
+            local orig_open_floating_preview = vim.lsp.util.open_floating_preview
+            vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
+                opts = opts or {}
+                opts.border = opts.border or float_border_opts.border
+                opts.winhighlight = opts.winhighlight or float_border_opts.winhighlight
+                return orig_open_floating_preview(contents, syntax, opts, ...)
+            end
+
+            vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, float_opts)
+            vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, float_opts)
+            vim.lsp.buf.signature_help = function()
+                require("blink.cmp.signature.trigger").show()
+            end
+
+            local function should_suppress_lsp_message(name, message, result_type)
+                if name == "copilot" then
+                    return true
+                end
+
+                if not message or message == "" then
+                    return true
+                end
+
+                if result_type == vim.lsp.protocol.MessageType.Info then
+                    if message:find("Policy watcher not available", 1, true)
+                        or message:find("DotnetCliHelper", 1, true)
+                        or message:find("Using dotnet executable configured on the PATH", 1, true)
+                        or message:find("[Program] Language server initialized", 1, true)
+                        or message:find("[LanguageServerProjectLoader]", 1, true)
+                        or message:find("Restoring", 1, true)
+                    then
+                        return true
+                    end
+                end
+
+                return false
+            end
+
+            -- Note: Need to come back and figure out why this exists
+            vim.lsp.handlers["window/showMessage"] = function(_, result, ctx)
+                local client = vim.lsp.get_client_by_id(ctx.client_id)
+                local name = client and client.name or "LSP"
+                local message = result and result.message or ""
+                if should_suppress_lsp_message(name, message, result and result.type) then
+                    return
+                end
+                local level = ({ "ERROR", "WARN", "INFO", "LOG" })[result.type] or "UNKOWN"
+                Snacks.notify(message, {
+                    title = client and client.name or "LSP",
+                    level = vim.log.levels[level]
+                })
+            end
+
+            vim.lsp.handlers["window/logMessage"] = function(_, result, ctx)
+                local client = vim.lsp.get_client_by_id(ctx.client_id)
+                local name = client and client.name or "LSP"
+                local message = result and result.message or ""
+                if should_suppress_lsp_message(name, message, result and result.type) then
+                    return
+                end
+                local level = ({ "ERROR", "WARN", "INFO", "LOG" })[result.type] or "UNKOWN"
+                Snacks.notify(message, { title = name, level = vim.log.levels[level] })
+            end
+            local capabilities = require('blink.cmp').get_lsp_capabilities()
+
+            vim.lsp.config['lua_ls'] = {
+                cmd = { "lua-language-server" },
+                capabilities = capabilities,
+                filetypes = { "lua" },
+                root_markers = { '.git', '.luarc.json', '.luarc.jsonc', '.luacheckrc', 'stylua.toml', 'selene.toml' },
+            }
+            vim.lsp.enable('lua_ls')
+
+            --TODO: Need to come back and add a check for if windows/linux
+            -- and set this accordingly
+            local project_library_path = "C:\\Users\\NicoJudge\\solutions"
+            local global_node_modules = "C:\\Users\\NicoJudge\\AppData\\Roaming\\npm\\node_modules"
+            local cmd = { "ngserver", "--stdio", "--tsProbeLocations", project_library_path .. "," .. global_node_modules,
+                "--ngProbeLocations", project_library_path .. "," .. global_node_modules }
+
+            vim.lsp.config['angularls'] = {
+                cmd = cmd,
+                capabilities = capabilities,
+                filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx", "htmlangular" },
+                root_markers = { "angular.json", "nx.json" },
+            }
+            vim.lsp.enable('angularls')
+
+            vim.lsp.config['harper-ls'] = {
+                capabilities = capabilities,
+            }
+
+            vim.lsp.config['ts_ls'] = {
+
+                capabilities = capabilities,
+                init_options = {
+                    plugins = {
+                        {
+                            name = "@vue/typescript-plugin",
+                            location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
+                            languages = { "javascript", "typescript", "vue" },
+                        },
+                    },
+                },
+                filetypes = {
+                    "javascript",
+                    "typescript",
+                    "vue",
+                }
+            }
+            vim.lsp.enable('ts_ls')
+
+            -- local csharp_cmd_env = nil
+            -- if not is_windows then
+            --     csharp_cmd_env = {
+            --         DOTNET_ROOT = "/nix/store/vbbna5qax4agd3mf2cv94zn9j1kjapr0-dotnet-combined/share/dotnet",
+            --     }
+            -- end
+            --
+            -- vim.lsp.config['csharp_ls'] = {
+            --     capabilities = capabilities,
+            --     cmd = {
+            --         "csharp-ls",
+            --         "--loglevel",
+            --         "warning"
+            --     },
+            --     cmd_env = csharp_cmd_env,
+            --     filetypes = { 'cs' },
+            --     root_markers = { '*.sln', '*.csproj', 'Directory.Build.props', '.git' },
+            -- }
+            -- vim.lsp.enable('csharp_ls')
+        end
+    }
+}
