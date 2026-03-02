@@ -12,9 +12,10 @@ if (-not $Backup -and -not $Insert) {
 }
 
 if ($Backup) {
-    rm -r ./work
+    if (Test-Path ./work) { Remove-Item -Recurse -Force ./work }
+    New-Item -ItemType Directory -Path ".\work\nvim" -Force | Out-Null
 
-    Copy-Item -Path "$env:USERPROFILE\.config\nvim" -Destination ".\work\nvim" -Recurse -Force
+    Copy-Item -Path "$env:USERPROFILE\.config\nvim\*" -Destination ".\work\nvim" -Recurse -Force
     if ($Verbose) { Write-Host "Backed up nvim config to .\work\" }
 
     Copy-Item -Path "$env:USERPROFILE\.glzr" -Destination ".\work\.glzr\" -Recurse -Force

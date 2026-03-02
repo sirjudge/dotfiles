@@ -27,7 +27,7 @@ return {
     -- create description for <leader>q for dotnet related commands
     { "<leader>q", mode = "n", desc = "dotnet" },
     { "<leader>qr", "<cmd>lua require('easy-dotnet').run()<CR>", desc = "run" },
-    { "<leader>qd", "<cmd>lua require('easy-dotnet').debug()<CR>", desc = "debug" },
+    { "<leader>qd", "<cmd>lua require('easy-dotnet').debug_profile_default()<CR>", desc = "debug (profile)" },
     { "<leader>qt", "<cmd>lua require('easy-dotnet').test()<CR>", desc = "test" },
     { "<leader>qc", "<cmd>lua require('easy-dotnet').clean()<CR>", desc = "clean" },
     { "<leader>qb", "<cmd>lua require('easy-dotnet').build()<CR>", desc = "build" },
@@ -39,10 +39,12 @@ return {
     { "<leader>qpa", "<cmd>lua require('easy-dotnet').add_package()<CR>", desc = "add package" },
     { "<leader>qpr", "<cmd>lua require('easy-dotnet').add_package()<CR>", desc = "remove package" },
     { "<leader>qpa", "<cmd>lua require('easy-dotnet').add_package()<CR>", desc = "add package" },
-    { "<leader>ql", 
-    function()
-        vim.lsp.codelens.run()
-    end, desc = "CodeLens" },
+    { "<leader>ql",
+        function()
+            vim.lsp.codelens.run()
+        end,
+        desc = "CodeLens"
+    },
     -- { "vim.keymap.set("n", "<leader>cl", vim.lsp.codelens.run, { desc = "Run CodeLens" })
   },
   config = function()
@@ -88,6 +90,7 @@ return {
             },
         },
       },
+      -- https://github.com/GustavEikaas/easy-dotnet.nvim/blob/main/docs/debugging.md
       debugger = {
         -- Path to custom coreclr DAP adapter
         -- easy-dotnet-server falls back to its own netcoredbg binary if bin_path is nil
@@ -132,11 +135,21 @@ return {
       terminal = function(path, action, args)
         args = args or ""
         local commands = {
-          run = function() return string.format("dotnet run --project %s %s", path, args) end,
-          test = function() return string.format("dotnet test %s %s", path, args) end,
-          restore = function() return string.format("dotnet restore %s %s", path, args) end,
-          build = function() return string.format("dotnet build %s %s", path, args) end,
-          watch = function() return string.format("dotnet watch --project %s %s", path, args) end,
+          run = function()
+              return string.format("dotnet run --project %s %s", path, args)
+          end,
+          test = function()
+              return string.format("dotnet test %s %s", path, args)
+          end,
+          restore = function()
+              return string.format("dotnet restore %s %s", path, args)
+          end,
+          build = function()
+              return string.format("dotnet build %s %s", path, args)
+          end,
+          watch = function()
+              return string.format("dotnet watch --project %s %s", path, args)
+          end,
         }
         local command = commands[action]()
         if require("easy-dotnet.extensions").isWindows() == true then command = command .. "\r" end
@@ -150,28 +163,20 @@ return {
           type = "block_scoped",
           enabled = true,
           use_clipboard_json = {
-            behavior = "prompt", --'auto' | 'prompt' | 'never',
-            register = "+", -- which register to check
+              --'auto' | 'prompt' | 'never',
+            behavior = "prompt",
+            -- which register to check
+            register = "+",
           },
       },
       server = {
           ---@type nil | "Off" | "Critical" | "Error" | "Warning" | "Information" | "Verbose" | "All"
           log_level = "Warning",
       },
-      picker = "snacks", -- "telescope" | "fzf" | "snacks" | "basic"
+      -- "telescope" | "fzf" | "snacks" | "basic"
+      picker = "snacks",
       background_scanning = true,
       notifications = nil,
-      -- notifications = {
-      --   --Set this to false if you have configured lualine to avoid double logging
-      --   handler = function(start_event)
-      --     local spinner = require("easy-dotnet.ui-modules.spinner").new()
-      --     spinner:start_spinner(start_event.job.name)
-      --     ---@param finished_event JobEvent
-      --     return function(finished_event)
-      --       spinner:stop_spinner(finished_event.result.msg, finished_event.result.level)
-      --     end
-      --   end,
-      -- },
       diagnostics = {
         default_severity = "warning",
         setqflist = true,

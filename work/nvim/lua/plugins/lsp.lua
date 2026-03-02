@@ -73,6 +73,17 @@ return {
                 end,
                 desc = "lsp format"
             },
+            {
+                "<leader>llc",
+                function()
+                    local lsplogpath = vim.fn.stdpath("state") .. "/lsp.log"
+                    print(lsplogpath)
+                    if io.close(io.open(lsplogpath, "w+b") ) == false
+                    then
+                        vim.notify("Clearning LSP Log failed.", vim.log.levels.WARN)
+                    end
+                end
+            }
         },
         opts = {
             servers = {
@@ -81,6 +92,21 @@ return {
             }
         },
         config = function()
+            vim.diagnostic.config({
+                float = float_opts,
+                underline = true,
+                update_in_insert = false,
+                virtual_text = {
+                    spacing = 4,
+                    source = "if_many",
+                    prefix = "●",
+                },
+                codelens = {
+                    enabled = true
+                },
+                severity_sort = true,
+            })
+
             -- Check if we're on windows then explicitly set dotnet paths
             local is_windows = vim.fn.has("win32") == 1
             if is_windows then
@@ -114,9 +140,6 @@ return {
             vim.lsp.buf.signature_help = function()
                 require("blink.cmp.signature.trigger").show()
             end
-            vim.diagnostic.config({
-                float = float_opts,
-            })
 
             local function should_suppress_lsp_message(name, message, result_type)
                 if name == "copilot" then
