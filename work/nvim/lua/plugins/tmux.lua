@@ -1,8 +1,9 @@
 return {
     {
         "aserowy/tmux.nvim",
-        config = function() 
-            require("tmux").setup() 
+        event = "VeryLazy",
+        config = function()
+            require("tmux").setup()
         end
     }
 }

@@ -25,7 +25,7 @@ return {
 			java = { "astyle", "google-java-format" },
 			bash = { "beautysh" },
 			rust = { "rustfmt", lsp_format = "fallback" },
-            csharp = { "csharpier" },
+			csharp = { "csharpier" },
 			-- Use the "*" filetype to run formatters on all filetypes.
 			["*"] = { "codespell" },
 			-- Use the "_" filetype to run formatters on filetypes that don't
