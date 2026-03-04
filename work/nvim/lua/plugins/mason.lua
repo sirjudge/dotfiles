@@ -17,7 +17,9 @@ return {
                 'lua-language-server',
                 'bash-language-server',
                 'typescript-language-server',
-                'html-lsp'
+                'html-lsp',
+                'netcoredbg',
+                'codelldb'
             },
         },
         config = function(_, opts)

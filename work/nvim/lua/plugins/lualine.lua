@@ -3,9 +3,6 @@ return {
     event = "VeryLazy",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
-		local job_indicator = {
-			require("easy-dotnet.ui-modules.jobs").lualine,
-		}
 		require("lualine").setup({
 			options = {
 				icons_enabled = true,
@@ -26,7 +23,7 @@ return {
 				},
 			},
 			sections = {
-				lualine_a = { "mode", job_indicator },
+				lualine_a = { "mode" },
 				lualine_b = { "branch", "diff", "diagnostics" },
 				lualine_c = { "filename" },
 				lualine_x = { "encoding", "fileformat", "filetype" },

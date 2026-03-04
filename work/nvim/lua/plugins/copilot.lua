@@ -2,7 +2,11 @@ return {
     {
         "zbirenbaum/copilot.lua",
         cmd = "Copilot",
-        event = "InsertEnter",
+        keys = {
+            { "<leader>cp", "<cmd>Copilot panel<CR>", desc = "Copilot Panel" },
+            { "<leader>ct", "<cmd>Copilot toggle<CR>", desc = "Copilot Toggle" },
+            { "<leader>cs", "<cmd>Copilot suggestion toggle_auto_trigger<CR>", desc = "Toggle Copilot Auto Trigger" },
+        },
         config = function()
             require('copilot').setup({
                 auth_provider_url = "https://ntracts-inc.ghe.com/",

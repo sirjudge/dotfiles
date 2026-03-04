@@ -5,7 +5,6 @@ return {
 		"mfussenegger/nvim-dap",
 		"folke/snacks.nvim",
 	},
-	ft = { "cs", "fsharp", "vb", "csproj", "sln", "cshtml" },
 	keys = {
 		--TODO: These mappings are default but I don't want that I'm building my own
 		-- mappings = {
@@ -26,7 +25,6 @@ return {
 		--   refresh_testrunner = { lhs = "<C-r>", desc = "refresh testrunner" }
 		-- },
 		-- create description for <leader>q for dotnet related commands
-		{ "<leader>q", mode = "n", desc = "dotnet" },
 		{ "<leader>qr", "<cmd>lua require('easy-dotnet').run()<CR>", desc = "run" },
 		{ "<leader>qd", "<cmd>lua require('easy-dotnet').debug_profile_default()<CR>", desc = "debug (profile)" },
 		{ "<leader>qt", "<cmd>lua require('easy-dotnet').test()<CR>", desc = "test" },
@@ -47,7 +45,6 @@ return {
 			end,
 			desc = "CodeLens",
 		},
-		-- { "vim.keymap.set("n", "<leader>cl", vim.lsp.codelens.run, { desc = "Run CodeLens" })
 	},
 	config = function()
 		local default_log_handler = vim.lsp.handlers["window/logMessage"]
@@ -80,7 +77,7 @@ return {
 		dotnet.setup({
 			lsp = {
 				enabled = true, -- Enable builtin roslyn lsp
-				preload_roslyn = true, -- Start loading roslyn before any buffer is opened
+				preload_roslyn = false, -- Only start roslyn when a .cs buffer is opened
 				roslynator_enabled = true, -- Automatically enable roslynator analyzer
 				easy_dotnet_analyzer_enabled = true, -- Enable roslyn analyzer from easy-dotnet-server
 				auto_refresh_codelens = true,

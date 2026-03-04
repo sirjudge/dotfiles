@@ -92,21 +92,6 @@ return {
             }
         },
         config = function()
-            vim.diagnostic.config({
-                float = float_opts,
-                underline = true,
-                update_in_insert = false,
-                virtual_text = {
-                    spacing = 4,
-                    source = "if_many",
-                    prefix = "●",
-                },
-                codelens = {
-                    enabled = true
-                },
-                severity_sort = true,
-            })
-
             -- Check if we're on windows then explicitly set dotnet paths
             local is_windows = vim.fn.has("win32") == 1
             if is_windows then
@@ -125,6 +110,21 @@ return {
                 max_width = 80,
                 max_height = 30,
                 focusable = true,
+            })
+
+            vim.diagnostic.config({
+                float = float_opts,
+                underline = true,
+                update_in_insert = false,
+                virtual_text = {
+                    spacing = 4,
+                    source = "if_many",
+                    prefix = "●",
+                },
+                codelens = {
+                    enabled = true
+                },
+                severity_sort = true,
             })
 
             local orig_open_floating_preview = vim.lsp.util.open_floating_preview
@@ -238,26 +238,6 @@ return {
                 }
             }
             vim.lsp.enable('ts_ls')
-
-            -- local csharp_cmd_env = nil
-            -- if not is_windows then
-            --     csharp_cmd_env = {
-            --         DOTNET_ROOT = "/nix/store/vbbna5qax4agd3mf2cv94zn9j1kjapr0-dotnet-combined/share/dotnet",
-            --     }
-            -- end
-            --
-            -- vim.lsp.config['csharp_ls'] = {
-            --     capabilities = capabilities,
-            --     cmd = {
-            --         "csharp-ls",
-            --         "--loglevel",
-            --         "warning"
-            --     },
-            --     cmd_env = csharp_cmd_env,
-            --     filetypes = { 'cs' },
-            --     root_markers = { '*.sln', '*.csproj', 'Directory.Build.props', '.git' },
-            -- }
-            -- vim.lsp.enable('csharp_ls')
         end
     }
 }

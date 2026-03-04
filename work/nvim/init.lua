@@ -15,7 +15,6 @@ vim.g.loaded_gzip = 1
 
 
 
-require("config")
 
 if vim.fn.has("win32") == 1 then
     vim.opt.shell = "pwsh"
@@ -32,3 +31,5 @@ vim.api.nvim_create_autocmd('FileType', {
       vim.treesitter.start()
   end,
 })
+
+require("config")
