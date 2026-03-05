@@ -1,6 +1,6 @@
 return {
 	"stevearc/conform.nvim",
-	-- event = { "BufWritePre" },
+	event = { "BufWritePre" },
 	cmd = { "ConformInfo" },
 	keys = {
 		{
@@ -26,10 +26,7 @@ return {
 			bash = { "beautysh" },
 			rust = { "rustfmt", lsp_format = "fallback" },
             csharp = { "csharpier" },
-			-- Use the "*" filetype to run formatters on all filetypes.
 			["*"] = { "codespell" },
-			-- Use the "_" filetype to run formatters on filetypes that don't
-			-- have other formatters configured.
 			["_"] = { "trim_whitespace" },
 		},
 		-- Set default options
@@ -53,7 +50,6 @@ return {
 		},
 	},
 	init = function()
-		-- If you want the formatexpr, here is the place to set it
 		vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 	end,
 }

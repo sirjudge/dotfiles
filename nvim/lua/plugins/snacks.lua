@@ -34,12 +34,12 @@ return {
         { "<leader>pgs", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
         { "<leader>pgS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
         -- LazyGit
-        { 
-            "<leader>lg", 
-            function() 
+        {
+            "<leader>lg",
+            function()
                 vim.env.PATH = vim.env.PATH .. ";C:\\Users\\NicoJudge\\tools\\lazygit"
-                Snacks.lazygit() 
-            end, desc = "Lazygit Open" 
+                Snacks.lazygit()
+            end, desc = "Lazygit Open"
         },
         -- zen
         {
@@ -62,7 +62,7 @@ return {
                 statusline = false,
                 tabline = false,
             },
-            win = { 
+            win = {
                 enter = true,
                 fixbuf = true,
                 minimal = false,
@@ -110,7 +110,6 @@ return {
                     nerdFontsVersion = "3",
                 },
             },
-            --theme_path = svim.fs.normalize(vim.fn.stdpath("cache") .. "/lazygit-theme.yml"),
             -- Theme for lazygit
             theme = {
                 [241]                      = { fg = "Special" },
@@ -294,17 +293,6 @@ return {
             only_scope = false, -- only show indent guides of the scope
             only_current = false, -- only show indent guides in the current window
             hl = "SnacksIndent", ---@type string|string[] hl groups for indent guides
-            -- can be a list of hl groups to cycle through
-            hl = {
-                    "SnacksIndent1",
-                    "SnacksIndent2",
-                    "SnacksIndent3",
-                    "SnacksIndent4",
-                    "SnacksIndent5",
-                    "SnacksIndent6",
-                    "SnacksIndent7",
-                    "SnacksIndent8",
-                },
-            },
         },
-    }
+    },
+}

@@ -60,29 +60,31 @@ return {
                 desc = "LSP hover"
             },
             {
-                "<leader>lca",
+                "<leader>la",
                 function()
                     vim.lsp.buf.code_action()
                 end,
                 desc = "lsp code action"
             },
             {
-                "<leader>lf",
+                "<leader>lr",
                 function()
-                    vim.lsp.buf.format({ async = true })
+                    vim.lsp.buf.rename()
                 end,
-                desc = "lsp format"
+                desc = "lsp rename"
             },
             {
-                "<leader>llc",
+                "<leader>lc",
                 function()
                     local lsplogpath = vim.fn.stdpath("state") .. "/lsp.log"
                     print(lsplogpath)
-                    if io.close(io.open(lsplogpath, "w+b") ) == false
+                    if io.close(io.open(lsplogpath, "w+b")) == false
                     then
                         vim.notify("Clearning LSP Log failed.", vim.log.levels.WARN)
                     end
-                end
+                end,
+                desc = "LSP Log Clean"
+
             }
         },
         opts = {
@@ -92,6 +94,17 @@ return {
             }
         },
         config = function()
+            local float_border_opts = {
+                border = "single",
+                winhighlight = "Normal:BlinkCmpMenu,NormalFloat:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder",
+            }
+
+            local float_opts = vim.tbl_deep_extend("force", {}, float_border_opts, {
+                max_width = 80,
+                max_height = 30,
+                focusable = true,
+            })
+
             vim.diagnostic.config({
                 float = float_opts,
                 underline = true,
@@ -116,16 +129,6 @@ return {
                 vim.env.PATH = dotnet_root .. ";" .. dotnet_root .. "\\tools;" .. (vim.env.PATH or "")
             end
 
-            local float_border_opts = {
-                border = "single",
-                winhighlight = "Normal:BlinkCmpMenu,NormalFloat:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder",
-            }
-
-            local float_opts = vim.tbl_deep_extend("force", {}, float_border_opts, {
-                max_width = 80,
-                max_height = 30,
-                focusable = true,
-            })
 
             local orig_open_floating_preview = vim.lsp.util.open_floating_preview
             vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
@@ -150,6 +153,20 @@ return {
                     return true
                 end
 
+                if result_type == vim.lsp.protocol.MessageType.Info and message
+                    and message:find("DotnetCliHelper", 1, true)
+                    and message:find("Using dotnet executable configured on the PATH", 1, true)
+                    and message:find("Restoring Canonical.cs", 1, true)
+                then
+                    return
+                end
+                -- remove noise from code lens warnings
+                if result_type == vim.lsp.protocol.MessageType.Warning and message
+                    and message:find("Canonical.csproj has unresolved dependencies", 1, true)
+                then
+                    return
+                end
+
                 if result_type == vim.lsp.protocol.MessageType.Info then
                     if message:find("Policy watcher not available", 1, true)
                         or message:find("DotnetCliHelper", 1, true)
@@ -161,7 +178,6 @@ return {
                         return true
                     end
                 end
-
                 return false
             end
 
@@ -238,26 +254,6 @@ return {
                 }
             }
             vim.lsp.enable('ts_ls')
-
-            -- local csharp_cmd_env = nil
-            -- if not is_windows then
-            --     csharp_cmd_env = {
-            --         DOTNET_ROOT = "/nix/store/vbbna5qax4agd3mf2cv94zn9j1kjapr0-dotnet-combined/share/dotnet",
-            --     }
-            -- end
-            --
-            -- vim.lsp.config['csharp_ls'] = {
-            --     capabilities = capabilities,
-            --     cmd = {
-            --         "csharp-ls",
-            --         "--loglevel",
-            --         "warning"
-            --     },
-            --     cmd_env = csharp_cmd_env,
-            --     filetypes = { 'cs' },
-            --     root_markers = { '*.sln', '*.csproj', 'Directory.Build.props', '.git' },
-            -- }
-            -- vim.lsp.enable('csharp_ls')
         end
-    }
+    },
 }

@@ -50,21 +50,6 @@ return {
   config = function()
     local default_log_handler = vim.lsp.handlers["window/logMessage"]
     vim.lsp.handlers["window/logMessage"] = function(err, result, ctx, config)
-      -- remove noise from info messages
-      if result and result.type == vim.lsp.protocol.MessageType.Info and result.message
-        and result.message:find("DotnetCliHelper", 1, true)
-        and result.message:find("Using dotnet executable configured on the PATH", 1, true)
-        and result.message:find("Restoring Canonical.cs",1,true)
-      then
-        return
-      end
-      -- remove noise from code lens warnings
-      if result and result.type == vim.lsp.protocol.MessageType.Warning and result.message
-        and result.message:find("Canonical.csproj has unresolved dependencies", 1, true)
-      then
-        return
-      end
-
       return default_log_handler(err, result, ctx, config)
     end
 
