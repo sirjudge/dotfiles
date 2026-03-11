@@ -25,6 +25,7 @@ return {
 		--   refresh_testrunner = { lhs = "<C-r>", desc = "refresh testrunner" }
 		-- },
 		-- create description for <leader>q for dotnet related commands
+        { "<leader>q", nil, desc = "load dotnet" },
 		{ "<leader>qr", "<cmd>lua require('easy-dotnet').run()<CR>", desc = "run" },
 		{ "<leader>qd", "<cmd>lua require('easy-dotnet').debug_profile_default()<CR>", desc = "debug (profile)" },
 		{ "<leader>qt", "<cmd>lua require('easy-dotnet').test()<CR>", desc = "test" },
@@ -166,9 +167,9 @@ return {
 			csproj_mappings = true,
 			fsproj_mappings = true,
 			auto_bootstrap_namespace = {
-				--block_scoped, file_scoped
-				type = "block_scoped",
-				enabled = true,
+                enabled = true,
+                --block_scoped, file_scoped
+				type = "file_scoped",
 				use_clipboard_json = {
 					--'auto' | 'prompt' | 'never',
 					behavior = "prompt",

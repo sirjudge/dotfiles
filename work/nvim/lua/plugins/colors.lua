@@ -1,59 +1,93 @@
 return {
-    -- colorschemes
-    {
-        "lettertwo/laserwave.nvim",
-        lazy = false,
-        priority = 1000,
-    },
-    {
-        'rose-pine/neovim',
-    },
-    {
-        "folke/tokyonight.nvim",
-        lazy = false,
-        priority = 1000,
-        opts = {},
-    },
-    {
-        "catppuccin/nvim",
-        name = "catppuccin",
-    },
-    {
-        "nyoom-engineering/oxocarbon.nvim",
-    },
-    {
-        "folke/tokyonight.nvim",
-        lazy = false,
-        priority = 1000,
-        opts = {},
-    },
-    {
-        "nyoom-engineering/oxocarbon.nvim",
-    },
-    {
-        "comfysage/cuddlefish.nvim",
-        config = function()
-            require('cuddlefish').setup({
-                theme = {
-                    accent = 'pink',
-                },
-                editor = {
-                    transparent_background = false,
-                },
-                style = {
-                    tabline = { 'reverse' },
-                    search = { 'italic', 'reverse' },
-                    incsearch = { 'italic', 'reverse' },
-                    types = { 'italic' },
-                    keyword = { 'italic' },
-                    comment = { 'italic' },
+	{
+		"lettertwo/laserwave.nvim",
+		lazy = false,
+		priority = 1000,
+	},
+	{
+		"rose-pine/neovim",
+	},
+	{
+		"folke/tokyonight.nvim",
+		lazy = false,
+		priority = 1000,
+	},
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		opts = {
+			integrations = {
+				aerial = true,
+				alpha = true,
+				cmp = true,
+				dashboard = true,
+				flash = true,
+				fzf = true,
+				grug_far = true,
+				gitsigns = true,
+				headlines = true,
+				illuminate = true,
+				indent_blankline = { enabled = true },
+				leap = true,
+				lsp_trouble = true,
+				mason = true,
+				mini = true,
+				navic = { enabled = true, custom_bg = "lualine" },
+				neotest = true,
+				neotree = true,
+				noice = true,
+				notify = true,
+				snacks = true,
+				telescope = true,
+				treesitter_context = true,
+				which_key = true,
+			},
+		},
+	},
+	{
+		"nyoom-engineering/oxocarbon.nvim",
+	},
+	{
+		"folke/tokyonight.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {},
+	},
+	{
+		"nyoom-engineering/oxocarbon.nvim",
+	},
+	{
+		"comfysage/cuddlefish.nvim",
+		config = function()
+			require("cuddlefish").setup({
+				theme = {
+					accent = "pink",
+				},
+				editor = {
+					transparent_background = false,
+				},
+				style = {
+					tabline = { "reverse" },
+					search = { "italic", "reverse" },
+					incsearch = { "italic", "reverse" },
+					types = { "italic" },
+					keyword = { "italic" },
+					comment = { "italic" },
+				},
+                lsp_styles = {
+                    underlines = {
+                        errors = { "undercurl" },
+                        hints = { "undercurl" },
+                        warnings = { "undercurl" },
+                        information = { "undercurl" },
+                    },
                 },
                 overrides = function(colors)
-                    return {}
-                end,
-            })
+					return {}
+				end,
+			})
 
-            vim.cmd.colorscheme [[cuddlefish]]
-        end
-    }
+            vim.cmd([[colorscheme cuddlefish]])
+		end,
+	},
 }

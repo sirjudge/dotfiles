@@ -131,8 +131,8 @@ return {
 				layouts = {
 					{
 						elements = {
-							{ id = "easy-dotnet_cpu", size = 0.5 }, -- CPU usage panel (50% of layout)
-							{ id = "easy-dotnet_mem", size = 0.5 }, -- Memory usage panel (50% of layout)
+							{ id = "easy-dotnet_cpu", size = 0.20 },
+							{ id = "easy-dotnet_mem", size = 0.20 },
 						},
 						size = 25, -- Width of the sidebar
 						position = "right",
@@ -326,6 +326,16 @@ return {
 			}
 
 			dap.adapters["pwa-chrome"] = {
+				type = "server",
+				host = "localhost",
+				port = "${port}",
+				executable = {
+					command = "node",
+					args = { js_debug_server, "${port}" },
+				},
+			}
+
+			dap.adapters["chrome"] = {
 				type = "server",
 				host = "localhost",
 				port = "${port}",

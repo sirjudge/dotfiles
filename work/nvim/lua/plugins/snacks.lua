@@ -2,19 +2,12 @@ return {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
-    -- Unused but keeping in in case I want to re-add
-    -- { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
-    -- { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
-    -- { "<leader>pfg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
-    -- { "<leader>psw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
     keys = {
         { "<leader>pf", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
         { "<leader>pG", function() Snacks.picker.grep() end, desc = "Grep" },
         { "<leader>pe", function() Snacks.explorer() end, desc = "File Explorer" },
         { "<leader>pb", function() Snacks.picker.buffers() end, desc = "Buffers" },
-        -- { "<leader>pc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
-
-        { "<leader>pc", function() Snacks.picker.colorscheme() end, desc = "Colorscheme" },
+        { "<leader>pc", function() Snacks.picker.colorschemes() end, desc = "Colorscheme" },
         { "<leader>pp", function() Snacks.picker.projects() end, desc = "Projects" },
         { "<leader>pr", function() Snacks.picker.recent() end, desc = "Recent" },
         { "<leader>psd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },

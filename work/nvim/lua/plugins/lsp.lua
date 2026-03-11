@@ -182,13 +182,13 @@ return {
 
 			vim.lsp.handlers["window/logMessage"] = function(_, result, ctx)
 				local client = vim.lsp.get_client_by_id(ctx.client_id)
-				local name = client and client.name or "LSP"
+				local client_name = client and client.name or "LSP"
 				local message = result and result.message or ""
-				if should_suppress_lsp_message(name, message, result and result.type) then
+				if should_suppress_lsp_message(client_name, message, result and result.type) then
 					return
 				end
 				local level = ({ "ERROR", "WARN", "INFO", "LOG" })[result.type] or "UNKOWN"
-				Snacks.notify(message, { title = name, level = vim.log.levels[level] })
+				Snacks.notify(message, { title = client_name, level = vim.log.levels[level] })
 			end
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
@@ -224,6 +224,18 @@ return {
 			vim.lsp.config["harper-ls"] = {
 				capabilities = capabilities,
 			}
+            vim.lsp.enable("harper-ls")
+
+            vim.lsp.config["powershell_es"] = {
+                capabilities = capabilities,
+                cmd = {
+                    'pwsh',
+                    '-NoLogo',
+                    '-NoProfile',
+                    '-Command', vim.fn.stdpath "data" .. "/mason/packages/powershell-editor-services", 
+                }
+            }
+            vim.lsp.enable("powershell_es")
 
 			vim.lsp.config["ts_ls"] = {
 
@@ -245,5 +257,23 @@ return {
 			}
 			vim.lsp.enable("ts_ls")
 		end,
+	},
+	{
+		"nvimdev/lspsaga.nvim",
+		config = function()
+			require("lspsaga").setup({
+				breadcrumbs = {
+					enable = true,
+					separator = ">",
+					show_file = true,
+					folder_level = 1,
+					color_mode = true,
+				},
+			})
+		end,
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter", -- optional
+			"nvim-tree/nvim-web-devicons", -- optional
+		},
 	},
 }
