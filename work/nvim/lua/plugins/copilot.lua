@@ -12,7 +12,7 @@ return {
                 auth_provider_url = "https://ntracts-inc.ghe.com/",
                 trace_lsp = false,
                 panel = {
-                    enabled = true,
+                    enabled = false,
                     auto_refresh = false,
                     keymap = {
                         jump_prev = "[[",
@@ -26,7 +26,7 @@ return {
                     },
                 },
                 suggestion = {
-                    enabled = true,
+                    enabled = false,
                     auto_trigger = true,
                     hide_during_completion = true,
                     debounce = 75,

@@ -40,7 +40,7 @@ return {
 		{ "<leader>qpr", "<cmd>lua require('easy-dotnet').add_package()<CR>", desc = "remove package" },
 		{ "<leader>qpa", "<cmd>lua require('easy-dotnet').add_package()<CR>", desc = "add package" },
 		{
-			"<leader>ql",
+			"<leader>qc",
 			function()
 				vim.lsp.codelens.run()
 			end,
@@ -81,7 +81,7 @@ return {
 				preload_roslyn = false, -- Only start roslyn when a .cs buffer is opened
 				roslynator_enabled = true, -- Automatically enable roslynator analyzer
 				easy_dotnet_analyzer_enabled = true, -- Enable roslyn analyzer from easy-dotnet-server
-				auto_refresh_codelens = true,
+				auto_refresh_codelens = false,
 				analyzer_assemblies = {}, -- Any additional roslyn analyzers you might use like SonarAnalyzer.CSharp
 				config = {
 					["csharp|inlay_hints"] = {
@@ -137,6 +137,31 @@ return {
 					prefix = "sln", -- "sln" | "none"
 				},
 			},
+			csproj_mappings = true,
+			fsproj_mappings = true,
+			auto_bootstrap_namespace = {
+                enabled = true,
+                --block_scoped, file_scoped
+				type = "file_scoped",
+				use_clipboard_json = {
+					--'auto' | 'prompt' | 'never',
+					behavior = "prompt",
+					-- which register to check
+					register = "+",
+				},
+			},
+			server = {
+				---@type nil | "Off" | "Critical" | "Error" | "Warning" | "Information" | "Verbose" | "All"
+				log_level = "Warning",
+			},
+			-- "telescope" | "fzf" | "snacks" | "basic"
+			picker = "snacks",
+			background_scanning = true,
+			notifications = nil,
+			diagnostics = {
+				default_severity = "warning",
+				setqflist = true,
+			},
 			---@param action "test" | "restore" | "build" | "run"
 			terminal = function(path, action, args)
 				args = args or ""
@@ -164,31 +189,6 @@ return {
 				vim.cmd("vsplit")
 				vim.cmd("term " .. command)
 			end,
-			csproj_mappings = true,
-			fsproj_mappings = true,
-			auto_bootstrap_namespace = {
-                enabled = true,
-                --block_scoped, file_scoped
-				type = "file_scoped",
-				use_clipboard_json = {
-					--'auto' | 'prompt' | 'never',
-					behavior = "prompt",
-					-- which register to check
-					register = "+",
-				},
-			},
-			server = {
-				---@type nil | "Off" | "Critical" | "Error" | "Warning" | "Information" | "Verbose" | "All"
-				log_level = "Warning",
-			},
-			-- "telescope" | "fzf" | "snacks" | "basic"
-			picker = "snacks",
-			background_scanning = true,
-			notifications = nil,
-			diagnostics = {
-				default_severity = "warning",
-				setqflist = true,
-			},
 		})
 	end,
 }

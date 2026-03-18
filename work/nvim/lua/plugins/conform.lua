@@ -37,10 +37,15 @@ return {
 			lsp_format = "fallback",
 		},
 		-- Set up format-on-save
-		format_on_save = {
-			lsp_format = "fallback",
-			timeout_ms = 500,
-		},
+		format_on_save = function(bufnr)
+			if vim.bo[bufnr].filetype == "cs" then
+				return false
+			end
+			return {
+				lsp_format = "fallback",
+				timeout_ms = 500,
+			}
+		end,
 		-- Set the log level. Use `:ConformInfo` to see the location of the log file.
 		log_level = vim.log.levels.ERROR,
 		-- Conform will notify you when a formatter errors

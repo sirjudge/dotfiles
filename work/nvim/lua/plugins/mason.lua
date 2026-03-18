@@ -19,7 +19,8 @@ return {
                 'typescript-language-server',
                 'html-lsp',
                 'netcoredbg',
-                'codelldb'
+                'codelldb',
+                'harper-ls'
             },
         },
         config = function(_, opts)

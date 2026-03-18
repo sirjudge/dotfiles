@@ -5,6 +5,11 @@
       "pack": "notth4tcold.mei",
       "widget": "style",
       "preset": "default"
+    },
+    {
+      "pack": "thearturca.bar-rose-pine",
+      "widget": "bar-glazewm",
+      "preset": "default"
     }
   ]
 }

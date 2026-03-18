@@ -221,10 +221,12 @@ return {
 			}
 			vim.lsp.enable("angularls")
 
-			vim.lsp.config["harper-ls"] = {
+			vim.lsp.config["harper_ls"] = {
+				cmd = { "harper-ls", "--stdio" },
 				capabilities = capabilities,
+				filetypes = { "markdown", "text", "gitcommit" },
 			}
-            vim.lsp.enable("harper-ls")
+            vim.lsp.enable("harper_ls")
 
             vim.lsp.config["powershell_es"] = {
                 capabilities = capabilities,
