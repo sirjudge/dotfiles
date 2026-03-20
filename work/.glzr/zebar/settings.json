@@ -2,11 +2,6 @@
   "$schema": "https://github.com/glzr-io/zebar/raw/v3.1.1/resources/settings-schema.json",
   "startupConfigs": [
     {
-      "pack": "notth4tcold.mei",
-      "widget": "style",
-      "preset": "default"
-    },
-    {
       "pack": "thearturca.bar-rose-pine",
       "widget": "bar-glazewm",
       "preset": "default"

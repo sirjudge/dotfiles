@@ -45,7 +45,6 @@ return {
         end,
         desc = "CodeLens"
     },
-    -- { "vim.keymap.set("n", "<leader>cl", vim.lsp.codelens.run, { desc = "Run CodeLens" })
   },
   config = function()
     local default_log_handler = vim.lsp.handlers["window/logMessage"]
