@@ -3,9 +3,9 @@ return {
         "zbirenbaum/copilot.lua",
         cmd = "Copilot",
         keys = {
-            { "<leader>cp", "<cmd>Copilot panel<CR>", desc = "Copilot Panel" },
-            { "<leader>ct", "<cmd>Copilot toggle<CR>", desc = "Copilot Toggle" },
-            { "<leader>cs", "<cmd>Copilot suggestion toggle_auto_trigger<CR>", desc = "Toggle Copilot Auto Trigger" },
+            { "<leader>cpp", "<cmd>Copilot panel<CR>", desc = "Copilot Panel" },
+            { "<leader>cpt", "<cmd>Copilot toggle<CR>", desc = "Copilot Toggle" },
+            { "<leader>cps", "<cmd>Copilot suggestion toggle_auto_trigger<CR>", desc = "Toggle Copilot Auto Trigger" },
         },
         config = function()
             require('copilot').setup({
