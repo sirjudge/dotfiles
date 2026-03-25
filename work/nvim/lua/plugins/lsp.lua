@@ -202,8 +202,15 @@ return {
 
 			--TODO: Need to come back and add a check for if windows/linux
 			-- and set this accordingly
-			local project_library_path = "C:\\Users\\NicoJudge\\solutions"
-			local global_node_modules = "C:\\Users\\NicoJudge\\AppData\\Roaming\\npm\\node_modules"
+			local project_library_path = ""
+			local global_node_modules = ""
+			if vim.fn.has("win32") == 1 then
+				global_node_modules = "C:\\Users\\NicoJudge\\AppData\\Roaming\\npm\\node_modules"
+				project_library_path = "C:\\Users\\NicoJudge\\solutions"
+			else
+				global_node_modules = "~\\.npm\\node_modules"
+				project_library_path = "~\\Solutions"
+			end
 			local cmd = {
 				"ngserver",
 				"--stdio",
@@ -226,18 +233,19 @@ return {
 				capabilities = capabilities,
 				filetypes = { "markdown", "text", "gitcommit" },
 			}
-            vim.lsp.enable("harper_ls")
+			vim.lsp.enable("harper_ls")
 
-            vim.lsp.config["powershell_es"] = {
-                capabilities = capabilities,
-                cmd = {
-                    'pwsh',
-                    '-NoLogo',
-                    '-NoProfile',
-                    '-Command', vim.fn.stdpath "data" .. "/mason/packages/powershell-editor-services", 
-                }
-            }
-            vim.lsp.enable("powershell_es")
+			vim.lsp.config["powershell_es"] = {
+				capabilities = capabilities,
+				cmd = {
+					"pwsh",
+					"-NoLogo",
+					"-NoProfile",
+					"-Command",
+					vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services",
+				},
+			}
+			vim.lsp.enable("powershell_es")
 
 			vim.lsp.config["ts_ls"] = {
 
