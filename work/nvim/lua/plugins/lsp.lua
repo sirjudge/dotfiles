@@ -235,18 +235,6 @@ return {
 			}
 			vim.lsp.enable("harper_ls")
 
-			vim.lsp.config["powershell_es"] = {
-				capabilities = capabilities,
-				cmd = {
-					"pwsh",
-					"-NoLogo",
-					"-NoProfile",
-					"-Command",
-					vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services",
-				},
-			}
-			vim.lsp.enable("powershell_es")
-
 			vim.lsp.config["ts_ls"] = {
 
 				capabilities = capabilities,
