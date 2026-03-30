@@ -1,5 +1,6 @@
 return {
 	"GustavEikaas/easy-dotnet.nvim",
+    event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"mfussenegger/nvim-dap",

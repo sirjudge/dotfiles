@@ -1,11 +1,18 @@
+--  blink.cmp  EPERM: operation not permitted: C:/Users/NicoJudge/AppData/Local/nvim-data/lazy/blink.cmp/target/release/libblink_
+-- cmp_fuzzy.dll.tmp -> C:/Users/NicoJudge/AppData/Local/nvim-data/lazy/blink.cmp/target/release/libblink_cmp_fuzzy.dll
+-- Press ENTER or type command to continue
+--  blink.cmp  Falling back to Lua implementation due to error while downloading pre-built binary, set fuzzy.implementation to  "
+-- prefer_rust"  or  "lua"  to disable this warning. See :messages for details.
+-- Press ENTER or type command to continue
 return {
     {
-        'onsails/lspkind.nvim'
+        'onsails/lspkind.nvim',
+		event = { "BufReadPre", "BufNewFile" },
     },
     {
         'saghen/blink.compat',
+		event = { "BufReadPre", "BufNewFile" },
         version = '*',
-        lazy = true,
         opts = {},
     },
     {

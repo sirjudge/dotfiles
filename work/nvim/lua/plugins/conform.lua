@@ -21,8 +21,7 @@ return {
 		formatters_by_ft = {
 			lua = { "stylua" },
 			python = { "isort", "black" },
-			javascript = { "prettierd", "prettier", stop_after_first = true },
-			java = { "astyle", "google-java-format" },
+			javascript = { "prettier","eslint",stop_after_first = false },
 			bash = { "beautysh" },
 			rust = { "rustfmt", lsp_format = "fallback" },
 			csharp = { "csharpier" },

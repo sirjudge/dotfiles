@@ -1,6 +1,7 @@
 return {
     {
         'echasnovski/mini.comment',
+        event = "VeryLazy",
         version = '*',
         opts = {
             -- Module mappings. Use `''` (empty string) to disable one.
@@ -24,7 +25,8 @@ return {
     },
     {
         'echasnovski/mini.pairs',
-        version = false
+        event = "VeryLazy",
+        version = false,
     },
     {
         'echasnovski/mini.starter',

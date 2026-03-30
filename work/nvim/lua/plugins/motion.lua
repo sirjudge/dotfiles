@@ -1,6 +1,6 @@
 return {
 	"tris203/precognition.nvim",
-    event = "VeryLazy",
+    event = { "BufReadPre", "BufNewFile" },
 	opts = {
 		startVisible = true,
 		showBlankVirtLine = true,

@@ -1,6 +1,7 @@
 return {
 	{
 		"joeveiga/ng.nvim",
+		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			local ngNvim = require("ng")
 			vim.keymap.set(
@@ -235,25 +236,27 @@ return {
 			}
 			vim.lsp.enable("harper_ls")
 
-			vim.lsp.config["ts_ls"] = {
-
-				capabilities = capabilities,
-				init_options = {
-					plugins = {
-						{
-							name = "@vue/typescript-plugin",
-							location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
-							languages = { "javascript", "typescript", "vue" },
-						},
-					},
-				},
-				filetypes = {
-					"javascript",
-					"typescript",
-					"vue",
-				},
-			}
-			vim.lsp.enable("ts_ls")
+			--NOTE: Removed this in place of tyscript-tools.nvim which should
+			-- in theory be better class support than this slower tsls
+			-- 	vim.lsp.config["ts_ls"] = {
+			--
+			-- 		capabilities = capabilities,
+			-- 		init_options = {
+			-- 			plugins = {
+			-- 				{
+			-- 					name = "@vue/typescript-plugin",
+			-- 					location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
+			-- 					languages = { "javascript", "typescript", "vue" },
+			-- 				},
+			-- 			},
+			-- 		},
+			-- 		filetypes = {
+			-- 			"javascript",
+			-- 			"typescript",
+			-- 			"vue",
+			-- 		},
+			-- 	}
+			-- 	vim.lsp.enable("ts_ls")
 		end,
 	},
 	{
