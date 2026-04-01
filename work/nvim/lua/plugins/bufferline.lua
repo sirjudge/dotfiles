@@ -8,8 +8,8 @@ return {
             { "<leader>bn", "<cmd>bnext<cr>", desc = "buffer next" },
             { "<leader>bp", "<cmd>bprevious<cr>", desc = "buffer previous" },
             { "<leader>bd", "<cmd>bdelete<cr>", desc = "buffer delete" },
-            { "<leader>blcr", "<cmd>BufferLineCloseRight<cr>", desc = "bufferline close right"},
-            { "<leader>blcl", "<cmd>BufferLineCloseLeft<cr>", desc = "bufferline close left"},
+            { "<leader>bcr", "<cmd>BufferLineCloseRight<cr>", desc = "bufferline close right"},
+            { "<leader>bcl", "<cmd>BufferLineCloseLeft<cr>", desc = "bufferline close left"},
             { "<leader>blp", "<cmd>BufferLinePick<cr>", desc = "bufferline pick"},
         },
         config = function()
@@ -26,7 +26,7 @@ return {
                     middle_mouse_command = nil,          -- can be a string | function, | false see "Mouse actions"
                     indicator = {
                         icon = '▎', -- this should be omitted if indicator style is not 'icon'
-                        style = 'icon'-- icon | 'underline' | 'none',
+                        style = 'underline'-- icon | 'underline' | 'none',
                     },
                     buffer_close_icon = '󰅖',
                     modified_icon = '● ',
@@ -62,9 +62,9 @@ return {
                     diagnostics_update_in_insert = false, -- only applies to coc
                     diagnostics_update_on_event = true, -- use nvim's diagnostic handler
                     -- The diagnostics indicator can be set to nil to keep the buffer name highlight but delete the highlighting
-                    diagnostics_indicator = function(count, level, diagnostics_dict, context)
-                        return "("..count..")"
-                    end,
+                    -- diagnostics_indicator = function(count, level, diagnostics_dict, context)
+                    --     return "("..count..")"
+                    -- end,
                     show_buffer_icons = true,-- true | false, -- disable filetype icons for buffers
                     show_buffer_close_icons = true, --true | false,
                     show_close_icon = true, --true | false,
@@ -73,7 +73,7 @@ return {
                     duplicates_across_groups = false, -- whether to consider duplicate paths in different groups as duplicates
                     persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
                     move_wraps_at_ends = false, -- whether or not the move command "wraps" at the first or last position
-                    -- separator_style ="thin", --"slant" | "slope" | "thick" | "thin" | { 'any', 'any' },
+                    separator_style ="thick", --"slant" | "slope" | "thick" | "thin" | { 'any', 'any' },
                     -- enforce_regular_tabs = true,--false | true,
                     -- always_show_bufferline = true,--true | false,
                     -- auto_toggle_bufferline = true, --true | false,

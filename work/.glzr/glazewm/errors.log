@@ -1,0 +1,2 @@
+[2m2026-03-31T18:01:37.244340Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m window_rules[0]: invalid type: string "commands ['set-floating'] match", expected struct WindowRuleConfig at line 154 column 5
+[2m2026-03-31T18:02:05.930709Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m window_rules[0]: invalid type: string "commands ['set-floating'] match", expected struct WindowRuleConfig at line 154 column 5
