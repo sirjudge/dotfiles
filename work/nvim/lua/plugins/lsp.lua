@@ -61,13 +61,6 @@ return {
 				desc = "LSP hover",
 			},
 			{
-				"<leader>lca",
-				function()
-					vim.lsp.buf.code_action()
-				end,
-				desc = "lsp code action",
-			},
-			{
 				"<leader>lr",
 				function()
 					vim.lsp.buf.rename()
@@ -201,8 +194,6 @@ return {
 			}
 			vim.lsp.enable("lua_ls")
 
-			--TODO: Need to come back and add a check for if windows/linux
-			-- and set this accordingly
 			local project_library_path = ""
 			local global_node_modules = ""
 			if vim.fn.has("win32") == 1 then
@@ -212,19 +203,18 @@ return {
 				global_node_modules = "~\\.npm\\node_modules"
 				project_library_path = "~\\Solutions"
 			end
-			local cmd = {
-				"ngserver",
-				"--stdio",
-				"--tsProbeLocations",
-				project_library_path .. "," .. global_node_modules,
-				"--ngProbeLocations",
-				project_library_path .. "," .. global_node_modules,
-			}
 
 			vim.lsp.config["angularls"] = {
-				cmd = cmd,
+				cmd = {
+                    "ngserver",
+                    "--stdio",
+                    "--tsProbeLocations",
+                    project_library_path .. "," .. global_node_modules,
+                    "--ngProbeLocations",
+                    project_library_path .. "," .. global_node_modules,
+                },
 				capabilities = capabilities,
-				filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx", "htmlangular" },
+				filetypes = { "typescript", "html", "typescriptreact", "htmlangular" },
 				root_markers = { "angular.json", "nx.json" },
 			}
 			vim.lsp.enable("angularls")
@@ -235,46 +225,40 @@ return {
 				filetypes = { "markdown", "text", "gitcommit" },
 			}
 			vim.lsp.enable("harper_ls")
-
-			--NOTE: Removed this in place of tyscript-tools.nvim which should
-			-- in theory be better class support than this slower tsls
-			-- 	vim.lsp.config["ts_ls"] = {
-			--
-			-- 		capabilities = capabilities,
-			-- 		init_options = {
-			-- 			plugins = {
-			-- 				{
-			-- 					name = "@vue/typescript-plugin",
-			-- 					location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
-			-- 					languages = { "javascript", "typescript", "vue" },
-			-- 				},
-			-- 			},
-			-- 		},
-			-- 		filetypes = {
-			-- 			"javascript",
-			-- 			"typescript",
-			-- 			"vue",
-			-- 		},
-			-- 	}
-			-- 	vim.lsp.enable("ts_ls")
 		end,
 	},
 	{
 		"nvimdev/lspsaga.nvim",
-		config = function()
-			require("lspsaga").setup({
-				breadcrumbs = {
-					enable = true,
-					separator = ">",
-					show_file = true,
-					folder_level = 1,
-					color_mode = true,
-				},
-			})
-		end,
+        keys = {
+			{
+				"<leader>lc",
+                "<cmd>Lspsaga code_action<CR>",
+				desc = "lsp code action",
+			},
+        },
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter", -- optional
 			"nvim-tree/nvim-web-devicons", -- optional
 		},
+        opts = {
+            breadcrumbs = {
+                enable = true,
+                separator = ">",
+                show_file = true,
+                folder_level = 1,
+                color_mode = true,
+            },
+            lightbulb = {
+                enable = false
+            },
+            ui = {
+                border = 'single',
+                title = true,
+            },
+            beacon = {
+                enable = true,
+                frequency = 7
+            }
+        },
 	},
 }

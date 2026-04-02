@@ -129,7 +129,7 @@ workspaces:
     display_name: '2:'
     bind_to_monitor: 1
   - name: '3'
-    display_name: '3:'
+    display_name: '3:'
     bind_to_monitor: 1
   - name: '4'
     display_name: '4:󰲸'
@@ -141,7 +141,7 @@ workspaces:
     display_name: '6:󰍡'
     bind_to_monitor: 0
   - name: '7'
-    display_name: '7:'
+    display_name: '7:'
     bind_to_monitor: 0
   - name: '8'
     display_name: '8:󰅏'

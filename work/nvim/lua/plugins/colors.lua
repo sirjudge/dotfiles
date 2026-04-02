@@ -6,6 +6,8 @@ return {
 	},
 	{
 		"rose-pine/neovim",
+		lazy = false,
+		priority = 1000,
 	},
 	{
 		"folke/tokyonight.nvim",
@@ -45,19 +47,19 @@ return {
 		},
 	},
 	{
-		"nyoom-engineering/oxocarbon.nvim",
-	},
-	{
 		"folke/tokyonight.nvim",
 		lazy = false,
 		priority = 1000,
-		opts = {},
 	},
 	{
 		"nyoom-engineering/oxocarbon.nvim",
+		lazy = false,
+		priority = 1000,
 	},
 	{
 		"comfysage/cuddlefish.nvim",
+		lazy = false,
+		priority = 1000,
 		config = function()
 			require("cuddlefish").setup({
 				theme = {
@@ -87,7 +89,6 @@ return {
 				end,
 			})
 
-            vim.cmd([[colorscheme cuddlefish]])
 		end,
 	},
 }

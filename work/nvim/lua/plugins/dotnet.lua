@@ -49,6 +49,19 @@ return {
 		},
 	},
 	config = function()
+		-- Workaround for Roslyn LSP bug: Neovim can send semanticTokens/range
+		-- requests with an end line equal to the line count, causing
+		-- ArgumentOutOfRangeException in Roslyn's SemanticTokensHelpers.
+		-- Disabling semantic tokens here is safe — treesitter handles highlighting.
+		vim.api.nvim_create_autocmd("LspAttach", {
+			callback = function(args)
+				local client = vim.lsp.get_client_by_id(args.data.client_id)
+				if client and client.name == "easy_dotnet" then
+					client.server_capabilities.semanticTokensProvider = nil
+				end
+			end,
+		})
+
 		local default_log_handler = vim.lsp.handlers["window/logMessage"]
 		vim.lsp.handlers["window/logMessage"] = function(err, result, ctx, config)
 			-- remove noise from info messages
@@ -142,12 +155,9 @@ return {
 			fsproj_mappings = true,
 			auto_bootstrap_namespace = {
                 enabled = true,
-                --block_scoped, file_scoped
 				type = "file_scoped",
 				use_clipboard_json = {
-					--'auto' | 'prompt' | 'never',
 					behavior = "prompt",
-					-- which register to check
 					register = "+",
 				},
 			},
@@ -155,7 +165,6 @@ return {
 				---@type nil | "Off" | "Critical" | "Error" | "Warning" | "Information" | "Verbose" | "All"
 				log_level = "Warning",
 			},
-			-- "telescope" | "fzf" | "snacks" | "basic"
 			picker = "snacks",
 			background_scanning = true,
 			notifications = nil,

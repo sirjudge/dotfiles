@@ -35,6 +35,7 @@ require("lazy").setup({
 		-- colorscheme = { "slate" }
 		-- colorscheme = { "rose-pine-moon" }
 		-- colorscheme = { "cuddlefish" }
+		-- colorscheme = { "laserwave" }
 	},
 	-- automatically check for plugin updates
 	checker = { enabled = true, notify = false },

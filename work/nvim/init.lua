@@ -29,3 +29,5 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 require("config")
+
+vim.cmd([[colorscheme laserwave]])
