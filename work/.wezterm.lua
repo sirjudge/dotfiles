@@ -85,5 +85,32 @@ bar.apply_to_config(config,
     }
 })
 
+-- Startup layout: 3 tabs with preset pane splits and working directories
+wezterm.on('gui-startup', function(cmd)
+    local home = wezterm.home_dir
+    local v3api = home .. '/solutions/v3.api'
+    local ui    = home .. '/solutions/UI'
+    local auth  = home .. '/solutions/Authorization'
+
+    -- Tab 1: single pane at v3.api
+    local tab1, pane1, window = wezterm.mux.spawn_window(cmd or { cwd = v3api })
+    pane1:send_text('')
+
+    -- Tab 2: single pane at UI
+    local tab2, pane2 = window:spawn_tab { cwd = ui }
+
+    -- Tab 3: 3 columns
+    local tab3, col1 = window:spawn_tab { cwd = v3api }
+    -- Split col1 to the right → col2 (Authorization)
+    local col2 = col1:split { direction = 'Right', cwd = auth }
+    -- Split col2 to the right → col3-top (UI)
+    local col3_top = col2:split { direction = 'Right', cwd = ui }
+    -- Split col3-top downward → col3-bottom (UI)
+    local col3_bot = col3_top:split { direction = 'Bottom', cwd = ui }
+
+    -- Start on Tab 1
+    tab1:activate()
+end)
+
 -- Finally, return the configuration to wezterm.:
 return config

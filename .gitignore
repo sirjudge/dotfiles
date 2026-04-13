@@ -5,9 +5,13 @@
 node_modules/
 */node_modules/
 
-# ignore any build directories
+# ignore any build, bin, or obj from plugin generation
 build/
 */build/
+bin/
+*/bin/
+obj/
+*/obj/
 
 # also ignore any possible .idea or .vscode directories in case they accidentally get added
 .idea/
@@ -24,3 +28,5 @@ build/
 
 # make sure we don't capture undo trees
 *.undo
+
+*error.log*
