@@ -93,20 +93,25 @@ wezterm.on('gui-startup', function(cmd)
     local auth  = home .. '/solutions/Authorization'
 
     -- Tab 1: single pane at v3.api
-    local tab1, pane1, window = wezterm.mux.spawn_window(cmd or { cwd = v3api })
-    pane1:send_text('')
+    local tab1, pane1, window = wezterm.mux.spawn_window { cwd = v3api, workspace = 'API' }
+    pane1:send_text('nvim')
 
     -- Tab 2: single pane at UI
-    local tab2, pane2 = window:spawn_tab { cwd = ui }
+    local tab2, pane2 = window:spawn_tab { cwd = ui, workspace = 'UI' }
+    pane2:send_text('nvim')
+
 
     -- Tab 3: 3 columns
-    local tab3, col1 = window:spawn_tab { cwd = v3api }
+    local tab3, col1 = window:spawn_tab { cwd = v3api, workspace = { 'Terminal' } }
     -- Split col1 to the right → col2 (Authorization)
     local col2 = col1:split { direction = 'Right', cwd = auth }
+    col2:send_text('runApi')
     -- Split col2 to the right → col3-top (UI)
     local col3_top = col2:split { direction = 'Right', cwd = ui }
+    col3_top:send_text('npm run start')
     -- Split col3-top downward → col3-bottom (UI)
     local col3_bot = col3_top:split { direction = 'Bottom', cwd = ui }
+    col3_bot:send_text('npm run serve-tools')
 
     -- Start on Tab 1
     tab1:activate()
