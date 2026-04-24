@@ -1,26 +1,29 @@
 return {
-  'nvim-treesitter/nvim-treesitter',
-  lazy = false,
-  build = ':TSUpdate',
-  config = function()
-      require'nvim-treesitter'.install {
-          'rust',
-          'javascript',
-          'angular',
-          'c_sharp',
-          'dockerfile',
-          'editorconfig',
-          'zsh',
-          'xml',
-          'typescript',
-          'yaml',
-          'powershell'
-      }
+    'nvim-treesitter/nvim-treesitter',
+    lazy = false,
+    build = ':TSUpdate',
+    config = function()
+        require'nvim-treesitter'.install {
+            'rust',
+            'javascript',
+            'angular',
+            'c_sharp',
+            'dockerfile',
+            'editorconfig',
+            'zsh',
+            'xml',
+            'typescript',
+            'yaml',
+            'powershell'
+        }
 
-      require'nvim-treesitter'.setup {
-          -- Directory to install parsers and queries to (prepended to `runtimepath` to have priority)
-          install_dir = vim.fn.stdpath('data') .. '/site'
-      }
-
-  end
+        vim.api.nvim_create_autocmd("FileType", {
+            pattern = { "<filetype>" },
+            callback = function()
+                vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+                vim.wo[0][0].foldmethod = "expr"
+                vim.treesitter.start()
+            end,
+        })
+    end
 }

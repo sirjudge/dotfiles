@@ -20,8 +20,7 @@ return {
 		-- Define your formatters
 		formatters_by_ft = {
 			lua = { "stylua" },
-			python = { "isort", "black" },
-			javascript = { "prettier","eslint",stop_after_first = false },
+			javascript = { "prettier", "eslint", stop_after_first = false },
 			bash = { "beautysh" },
 			rust = { "rustfmt", lsp_format = "fallback" },
 			csharp = { "csharpier" },

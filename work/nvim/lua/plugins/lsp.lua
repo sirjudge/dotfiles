@@ -1,30 +1,5 @@
 return {
 	{
-		"joeveiga/ng.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			local ngNvim = require("ng")
-			vim.keymap.set(
-				"n",
-				"<leader>at",
-				ngNvim.goto_template_for_component,
-				{ noremap = true, silent = true, desc = "Go to Angular Component Template" }
-			)
-			vim.keymap.set(
-				"n",
-				"<leader>ac",
-				ngNvim.goto_component_with_template_file,
-				{ noremap = true, silent = true, desc = "go to component with template file" }
-			)
-			vim.keymap.set(
-				"n",
-				"<leader>aT",
-				ngNvim.get_template_tcb,
-				{ noremap = true, silent = true, desc = "get angular template" }
-			)
-		end,
-	},
-	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 		cmd = "LspInfo",
@@ -206,13 +181,13 @@ return {
 
 			vim.lsp.config["angularls"] = {
 				cmd = {
-                    "ngserver",
-                    "--stdio",
-                    "--tsProbeLocations",
-                    project_library_path .. "," .. global_node_modules,
-                    "--ngProbeLocations",
-                    project_library_path .. "," .. global_node_modules,
-                },
+					"ngserver",
+					"--stdio",
+					"--tsProbeLocations",
+					project_library_path .. "," .. global_node_modules,
+					"--ngProbeLocations",
+					project_library_path .. "," .. global_node_modules,
+				},
 				capabilities = capabilities,
 				filetypes = { "typescript", "html", "typescriptreact", "htmlangular" },
 				root_markers = { "angular.json", "nx.json" },
@@ -229,36 +204,36 @@ return {
 	},
 	{
 		"nvimdev/lspsaga.nvim",
-        keys = {
+		keys = {
 			{
 				"<leader>lc",
-                "<cmd>Lspsaga code_action<CR>",
+				"<cmd>Lspsaga code_action<CR>",
 				desc = "lsp code action",
 			},
-        },
+		},
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter", -- optional
 			"nvim-tree/nvim-web-devicons", -- optional
 		},
-        opts = {
-            breadcrumbs = {
-                enable = true,
-                separator = ">",
-                show_file = true,
-                folder_level = 1,
-                color_mode = true,
-            },
-            lightbulb = {
-                enable = false
-            },
-            ui = {
-                border = 'single',
-                title = true,
-            },
-            beacon = {
-                enable = true,
-                frequency = 7
-            }
-        },
+		opts = {
+			breadcrumbs = {
+				enable = true,
+				separator = ">",
+				show_file = true,
+				folder_level = 1,
+				color_mode = true,
+			},
+			lightbulb = {
+				enable = false,
+			},
+			ui = {
+				border = "single",
+				title = true,
+			},
+			beacon = {
+				enable = true,
+				frequency = 7,
+			},
+		},
 	},
 }

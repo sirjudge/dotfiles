@@ -176,15 +176,16 @@ return {
 			}
 
 			dap.configurations.javascript = js_configs
-			dap.configurations.javascriptreact = js_configs
-			dap.configurations.typescriptreact = js_configs
 			dap.configurations.typescript = js_configs
+			--TODO: Don't think I need this
+			-- dap.configurations.javascriptreact = js_configs
+			-- dap.configurations.typescriptreact = js_configs
 
 			local dapui = require("dapui")
 			dapui.setup({
 				layouts = {
-					-- {
 					-- TODO: Need to figure out how to add these only when ft = C# or something
+					-- {
 					-- elements = {
 					-- 	{ id = "easy-dotnet_cpu", size = 0.20 },
 					-- 	{ id = "easy-dotnet_mem", size = 0.20 },
@@ -201,10 +202,9 @@ return {
 					},
 					{
 						elements = {
-							{ id = "scopes", size = 0.25 }, -- Scopes panel (25% of layout)
-							{ id = "breakpoints", size = 0.25 }, -- Breakpoints panel (25% of layout)
-							--{ id = "stacks", size = 0.25 }, -- Call stacks panel (25% of layout)
-							{ id = "watches", size = 0.25 }, -- Watches panel (25% of layout)
+							{ id = "scopes", size = 0.33 },
+							{ id = "breakpoints", size = 0.33 },
+							{ id = "watches", size = 0.33 },
 						},
 						size = 30, -- Width of the sidebar
 						position = "left",
