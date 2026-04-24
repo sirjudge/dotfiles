@@ -51,6 +51,7 @@ return {
 						vim.notify("Clearning LSP Log failed.", vim.log.levels.WARN)
 					end
 				end,
+                desc = "delete lsp log",
 			},
 		},
 		opts = {
@@ -122,10 +123,8 @@ return {
 					if
 						message:find("Policy watcher not available", 1, true)
 						or message:find("DotnetCliHelper", 1, true)
-						or message:find("Using dotnet executable configured on the PATH", 1, true)
 						or message:find("[Program] Language server initialized", 1, true)
 						or message:find("[LanguageServerProjectLoader]", 1, true)
-						or message:find("Restoring", 1, true)
 					then
 						return true
 					end
