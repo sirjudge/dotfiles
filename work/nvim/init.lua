@@ -19,6 +19,15 @@ if vim.fn.has("win32") == 1 then
 	vim.opt.shellxquote = ""
 end
 
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { '<filetype>' },
+  callback = function() 
+      vim.treesitter.start() 
+      vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+      vim.wo[0][0].foldmethod = 'expr'
+  end,
+})
+
 require("config")
 
-vim.cmd([[colorscheme laserwave]])
+vim.cmd([[colorscheme lavender]])

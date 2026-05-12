@@ -1,4 +1,19 @@
 return {
+    {
+        "yonatanperel/lake-dweller.nvim",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            require("lake-dweller").setup({
+                variant = "lake-dweller", -- "lake-dweller", "pond-dweller", or "ocean-dweller"
+            })
+        end,
+    },
+	{
+		"Abstract-IDE/Abstract-cs",
+		lazy = false,
+		priority = 1000,
+	},
 	{
 		"lettertwo/laserwave.nvim",
 		lazy = false,
@@ -46,6 +61,20 @@ return {
 			},
 		},
 	},
+    {
+        "uhs-robert/oasis.nvim",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            require("oasis").setup()      -- (see Configuration below for all customization options)
+        end
+    },
+    {
+        url = "https://codeberg.org/jthvai/lavender.nvim",
+        branch = "stable", -- versioned tags + docs updates from main
+        lazy = false,
+        priority = 1000,
+    },
 	{
 		"folke/tokyonight.nvim",
 		lazy = false,
