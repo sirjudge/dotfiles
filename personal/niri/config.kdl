@@ -1,0 +1,28 @@
+
+include "input.kdl"
+include "appearance.kdl"
+include "monitors.kdl"
+include "workspace.kdl"
+include "initialize.kdl"
+
+prefer-no-csd
+
+cursor {
+    hide-after-inactive-ms 300000
+}
+
+screenshot-path "~/Pictures/screenshots/%Y-%m-%d_%H-%M-%S.png"
+
+hotkey-overlay {
+    skip-at-startup
+    hide-not-bound
+}
+
+debug {
+    render-drm-device "/dev/dri/card2"
+}
+
+include "dms/colors.kdl"
+include "dms/layout.kdl"
+include "dms/alttab.kdl"
+include "dms/binds.kdl"

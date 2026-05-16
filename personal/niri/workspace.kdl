@@ -1,0 +1,30 @@
+workspace "1" {
+    open-on-output "BOE 0x0804 Unknown"
+}
+workspace "2" {
+    open-on-output "LG Electronics LG HDR WFHD 0x00095326"
+}
+workspace "3" {
+    open-on-output "LG Electronics LG HDR WFHD 0x00095326"
+}
+workspace "4" {
+    open-on-output "LG Electronics LG HDR WFHD 0x00095326"
+}
+workspace "5" {
+    open-on-output "LG Electronics LG HDR WFHD 0x00095326"
+}
+workspace "6" {
+    open-on-output "LG Electronics LG HDR WFHD 0x00095260"
+}
+workspace "7" {
+    open-on-output "LG Electronics LG HDR WFHD 0x00095260"
+}
+workspace "8" {
+    open-on-output "LG Electronics LG HDR WFHD 0x00095260"
+}
+workspace "9" {
+    open-on-output "LG Electronics LG HDR WFHD 0x00095260"
+}
+workspace "10" {
+    open-on-output "LG Electronics LG HDR WFHD 0x00095326"
+}

@@ -18,6 +18,8 @@ if [ "$backup" = true ]; then
     cp -r /etc/nixos ./personal/
     cp -r ~/.config/nixpkgs ./personal/
     cp -r ~/.config/ghostty ./
+    cp -r ~/.config/niri ./
+    cp -r ~/.config/quickshell ./
 fi
 if [ "$insert" = true ]; then
     # shared configs
