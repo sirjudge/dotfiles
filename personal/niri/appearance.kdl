@@ -1,0 +1,93 @@
+layout {
+    background-color "transparent"
+
+    gaps 6
+
+    center-focused-column "never"
+
+    struts {
+        left 2
+        right 2
+        top 2
+        bottom 2
+    }
+
+    focus-ring {
+        off
+    }
+
+    border {
+        on
+        width 1
+        active-color "#585b70"
+        inactive-color "#2a2b36"
+    }
+
+    shadow {
+        on
+        softness 18
+        spread 3
+        offset x=0 y=6
+        color "#00000040"
+    }
+}
+
+animations {
+    workspace-switch {
+        spring damping-ratio=0.9 stiffness=900 epsilon=0.0001
+    }
+
+    horizontal-view-movement {
+        spring damping-ratio=0.9 stiffness=800 epsilon=0.0001
+    }
+
+    window-movement {
+        spring damping-ratio=0.9 stiffness=850 epsilon=0.0001
+    }
+
+    window-resize {
+        spring damping-ratio=0.9 stiffness=850 epsilon=0.0001
+    }
+
+    window-open {
+        duration-ms 180
+        curve "ease-out-expo"
+    }
+
+    window-close {
+        duration-ms 160
+        curve "ease-out-cubic"
+    }
+}
+
+blur {
+    passes 3
+    offset 3
+    noise 0.02
+    saturation 1.25
+}
+
+
+window-rule {
+    geometry-corner-radius 3
+    clip-to-geometry true
+    draw-border-with-background false
+}
+
+window-rule {
+    match title="Zen Browser"
+    match title="Ghostty"
+    match app-id=r#"(?i)^(sublime_text|vscodium|codium)$"#
+    match app-id=r#"(?i)^thunar$"#
+    opacity 1.0
+    background-effect {
+        blur false
+        xray false
+        saturation 1.25
+    }
+}
+
+layer-rule {
+    match namespace="^quickshell$"
+    place-within-backdrop true
+}

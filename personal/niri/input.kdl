@@ -1,0 +1,95 @@
+input {
+    keyboard {
+        xkb {
+            layout "us"
+            options "caps:escape,fkeys:basic_13-24"
+        }
+    }
+
+    touchpad {
+        tap
+    }
+}
+
+binds {
+    Mod+Shift+Slash { show-hotkey-overlay; }
+    F24 { spawn "wofi" "--show" "drun"; }
+    Mod+R { spawn "wofi" "--show" "drun"; }
+    Mod+D { spawn "~/.config/scripts/quickshell-on-active-monitor.sh" "launcher"; }
+    Mod+W { spawn "~/.config/scripts/quickshell-on-active-monitor.sh" "wallpaper"; }
+    Mod+Shift+W { spawn "~/.config/scripts/random-wallpaper.sh"; }
+    Mod+A { spawn "~/.config/scripts/quickshell-on-active-monitor.sh" "dashboard"; }
+    Mod+M { spawn "~/.config/scripts/quickshell-on-active-monitor.sh" "music"; }
+
+    Mod+Q { spawn "ghostty"; }
+    Mod+Shift+Return { spawn "ghostty" "--class=scratchterm"; }
+    Mod+E { spawn "thunar"; }
+    Mod+C { close-window; }
+    Mod+Space { toggle-window-floating; }
+    Mod+L allow-inhibiting=false { spawn "hyprlock"; }
+    Mod+F { fullscreen-window; }
+
+    Mod+Left { focus-column-left; }
+    Mod+Down { focus-window-down; }
+    Mod+Up { focus-window-up; }
+    Mod+Right { focus-column-right; }
+
+    Mod+Shift+Left { move-column-left; }
+    Mod+Shift+Down { move-window-down; }
+    Mod+Shift+Up { move-window-up; }
+    Mod+Shift+Right { move-column-right; }
+
+    Mod+Ctrl+Left { set-column-width "-5%"; }
+    Mod+Ctrl+Right { set-column-width "+5%"; }
+    Mod+Ctrl+Up { set-window-height "-5%"; }
+    Mod+Ctrl+Down { set-window-height "+5%"; }
+
+    Mod+Tab { focus-window-down-or-top; }
+    Mod+Shift+Tab { focus-window-up-or-bottom; }
+
+    Mod+1 { focus-workspace "1"; }
+    Mod+2 { focus-workspace "2"; }
+    Mod+3 { focus-workspace "3"; }
+    Mod+4 { focus-workspace "4"; }
+    Mod+5 { focus-workspace "5"; }
+    Mod+6 { focus-workspace "6"; }
+    Mod+7 { focus-workspace "7"; }
+    Mod+8 { focus-workspace "8"; }
+    Mod+9 { focus-workspace "9"; }
+    Mod+0 { focus-workspace "10"; }
+
+    Mod+Shift+1 { move-window-to-workspace "1"; }
+    Mod+Shift+2 { move-window-to-workspace "2"; }
+    Mod+Shift+3 { move-window-to-workspace "3"; }
+    Mod+Shift+4 { move-window-to-workspace "4"; }
+    Mod+Shift+5 { move-window-to-workspace "5"; }
+    Mod+Shift+6 { move-window-to-workspace "6"; }
+    Mod+Shift+7 { move-window-to-workspace "7"; }
+    Mod+Shift+8 { move-window-to-workspace "8"; }
+    Mod+Shift+9 { move-window-to-workspace "9"; }
+    Mod+Shift+0 { move-window-to-workspace "10"; }
+
+    Mod+P { maximize-column; }
+    Mod+J { toggle-column-tabbed-display; }
+
+    Mod+N { spawn "swaync-client" "-t" "-sw"; }
+    Mod+Shift+N { spawn "swaync-client" "-C"; }
+
+    Mod+S { spawn-sh "grimblast copysave area \"$HOME/Pictures/screenshots/area/$(date +'%F-%T.png')\""; }
+
+    Mod+Menu { spawn "~/.config/scripts/define.sh"; }
+
+    Mod+F1 allow-when-locked=true { spawn "amixer" "set" "Master" "toggle"; }
+    Mod+F2 allow-when-locked=true { spawn "amixer" "set" "Master" "1%-"; }
+    Mod+F3 allow-when-locked=true { spawn "amixer" "set" "Master" "1%+"; }
+    XF86AudioMute allow-when-locked=true { spawn "amixer" "set" "Master" "toggle"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "amixer" "set" "Master" "1%-"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "amixer" "set" "Master" "1%+"; }
+
+    Print { screenshot; }
+    Ctrl+Print { screenshot-screen; }
+    Alt+Print { screenshot-window; }
+
+    Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+    Ctrl+Alt+Delete { quit; }
+}

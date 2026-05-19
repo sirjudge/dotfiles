@@ -1,0 +1,10 @@
+spawn-at-startup "swaync"
+spawn-sh-at-startup "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP && systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+spawn-at-startup "mpd-mpris"
+spawn-at-startup "kdeconnect-indicator"
+
+environment {
+    XDG_SESSION_TYPE "wayland"
+    GBM_BACKEND "nvidia-drm"
+    __GLX_VENDOR_LIBRARY_NAME "nvidia"
+}
