@@ -30,4 +30,6 @@ vim.api.nvim_create_autocmd('FileType', {
 
 require("config")
 
+vim.opt.termguicolors = true
 vim.cmd([[colorscheme lavender]])
+-- vim.cmd("colorscheme PinkyPop")
