@@ -99,6 +99,12 @@ return {
 			local dap = require("dap")
 			local mason_path = vim.fn.stdpath("data") .. "/mason"
 
+            dap.defaults.fallback.external_terminal = {
+                command = "wt",
+                args = { "-w", "0", "nt", "--" },
+            }
+
+
 			dap.adapters["pwa-chrome"] = {
 				type = "server",
 				host = "127.0.0.1",

@@ -14,7 +14,9 @@ return {
             'xml',
             'typescript',
             'yaml',
-            'powershell'
+            'powershell',
+            'sql',
+            'json',
         }
 
     end

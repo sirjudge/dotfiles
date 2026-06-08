@@ -69,11 +69,32 @@ return {
 			return default_log_handler(err, result, ctx, config)
 		end
 
+		-- easy-dotnet injects EasyDotnet.StartupHook.dll (a Release build) into every
+		-- debugged process. With justMyCode=true (the netcoredbg default) the debugger
+		-- warns about every Release assembly it encounters, producing noise. Patching
+		-- all registered C# configs to justMyCode=false suppresses that at the source.
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = { "cs", "fsharp" },
+			once = true,
+			callback = function()
+				vim.schedule(function()
+					local dap = require("dap")
+					for _, ft_configs in pairs({ dap.configurations.cs, dap.configurations.fsharp }) do
+						if ft_configs then
+							for _, config in ipairs(ft_configs) do
+								config.justMyCode = false
+							end
+						end
+					end
+				end)
+			end,
+		})
+
 		local dotnet = require("easy-dotnet")
 		dotnet.setup({
 			lsp = {
 				enabled = true, -- Enable builtin roslyn lsp
-				preload_roslyn = false, -- Only start roslyn when a .cs buffer is opened
+				preload_roslyn = true, -- Only start roslyn when a .cs buffer is opened
 				roslynator_enabled = true, -- Automatically enable roslynator analyzer
 				easy_dotnet_analyzer_enabled = true, -- Enable roslyn analyzer from easy-dotnet-server
 				auto_refresh_codelens = false,
@@ -96,6 +117,7 @@ return {
 				-- Path to custom coreclr DAP adapter
 				-- easy-dotnet-server falls back to its own netcoredbg binary if bin_path is nil
 				bin_path = nil,
+                console = "integratedTerminal",
 				apply_value_converters = true,
 				auto_register_dap = true,
 				mappings = {
@@ -104,6 +126,7 @@ return {
 			},
 			---@type TestRunnerOptions
 			test_runner = {
+                neotest_integration = true,
 				---@type "split" | "vsplit" | "float" | "buf"
 				viewmode = "float",
 				---@type number|nil
@@ -124,6 +147,24 @@ return {
 					dir = "",
 					package = "",
 				},
+                mappings = {
+                    run_test_from_buffer = { lhs = "<leader>r", desc = "run test from buffer" },
+                    run_all_tests_from_buffer = { lhs = "<leader>t", desc = "Run all tests in file" },
+                    get_build_errors = { lhs = "<leader>e", desc = "get build errors" },
+                    peek_stack_trace_from_buffer = { lhs = "<leader>p", desc = "peek stack trace from buffer" },
+                    debug_test_from_buffer = { lhs = "<leader>d", desc = "run test from buffer" },
+                    debug_test = { lhs = "<leader>d", desc = "debug test" },
+                    go_to_file = { lhs = "g", desc = "go to file" },
+                    run_all = { lhs = "<leader>R", desc = "run all tests" },
+                    run = { lhs = "<leader>r", desc = "run test" },
+                    peek_stacktrace = { lhs = "<leader>p", desc = "peek stacktrace of failed test" },
+                    expand = { lhs = "o", desc = "expand" },
+                    expand_node = { lhs = "E", desc = "expand node" },
+                    collapse_all = { lhs = "W", desc = "collapse all" },
+                    close = { lhs = "q", desc = "close testrunner" },
+                    refresh_testrunner = { lhs = "<C-r>", desc = "refresh testrunner" },
+                    cancel = { lhs = "<C-c>", desc = "cancel in-flight operation" },
+                },
 				--- Optional table of extra args e.g "--blame crash"
 				additional_args = {},
 			},

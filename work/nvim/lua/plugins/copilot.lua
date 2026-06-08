@@ -3,7 +3,7 @@ return {
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
 		keys = {
-			{ "<leader>cpp", "<cmd>Copilot panel<CR>", desc = "Copilot Panel" },
+			{ "<leader>cpp", "<cmd>Copilot panel open<CR>", desc = "Copilot Panel" },
 			{ "<leader>cpt", "<cmd>Copilot toggle<CR>", desc = "Copilot Toggle" },
 			{ "<leader>cps", "<cmd>Copilot suggestion toggle_auto_trigger<CR>", desc = "Toggle Copilot Auto Trigger" },
 		},
