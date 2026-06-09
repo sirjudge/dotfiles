@@ -21,7 +21,7 @@ config.keys = {
         key = '1',
         mods = 'CTRL',
         action = act.SwitchToWorkspace {
-            name = 'editor'
+            name = 'Editor'
         }
 
     },
@@ -29,7 +29,14 @@ config.keys = {
         key = '2',
         mods = 'CTRL',
         action = act.SwitchToWorkspace {
-            name = 'terminal'
+            name = 'Terminal'
+        }
+    },
+    {
+        key = '3',
+        mods = 'CTRL',
+        action = act.SwitchToWorkspace {
+            name = 'Scratch'
         }
     }
 }
@@ -111,12 +118,12 @@ wezterm.on("gui-startup", function(cmd)
 	local auth = home .. "/solutions/Authorization"
 
 	-- Window 1 has UI and API tabs
-	local _, _, window = wezterm.mux.spawn_window({ cwd = api, workspace = "editor", args = { "nvim" } })
+	local _, _, window = wezterm.mux.spawn_window({ cwd = api, workspace = "Editor", args = { "nvim" } })
 
 	local _, _ = window:spawn_tab({ cwd = ui, args = { "nvim" } })
 
 	-- window 2 has terminal stuff
-	local termTab, termPane, termWindow = wezterm.mux.spawn_window({ cwd = api, workspace = "terminal" })
+	local termTab, termPane, termWindow = wezterm.mux.spawn_window({ cwd = api, workspace = "Terminal" })
 	termPane:send_text("runApi")
 
 	local authPane = termPane:split({
@@ -133,7 +140,9 @@ wezterm.on("gui-startup", function(cmd)
 		cwd = ui,
 	})
 	implPane:send_text("npm run serve-tools")
+
+     
+	local scratchTab, scratchPane, scratchWindow = wezterm.mux.spawn_window({ cwd = "~/", workspace = "Scratch" })
 end)
 
--- Finally, return the configuration to wezterm.:
 return config
