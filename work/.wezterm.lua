@@ -12,34 +12,68 @@ config.window_frame = theme.window_frame()
 
 config.default_prog = { "pwsh.exe" }
 
--- rebind to use tmux bindings
-config.leader = { key = "b", mods = "CTRL" }
-
 local act = wezterm.action
+config.disable_default_key_bindings = true;
+config.leader = { key = "b", mods = "CTRL" }
 config.keys = {
     {
-        key = '1',
-        mods = 'CTRL',
+        key = '!',
+        mods = 'CTRL|SHIFT',
         action = act.SwitchToWorkspace {
             name = 'Editor'
         }
 
     },
     {
-        key = '2',
-        mods = 'CTRL',
+        key = '@',
+        mods = 'CTRL|SHIFT',
         action = act.SwitchToWorkspace {
             name = 'Terminal'
         }
     },
     {
-        key = '3',
-        mods = 'CTRL',
+        key = '#',
+        mods = 'CTRL|SHIFT',
         action = act.SwitchToWorkspace {
             name = 'Scratch'
         }
-    }
+    },
+
+    -- Clipboard
+    { key = 'c', mods = 'CTRL|SHIFT', action = act.CopyTo('Clipboard') },
+    { key = 'v', mods = 'CTRL|SHIFT', action = act.PasteFrom('Clipboard') },
+
+    -- Font size
+    { key = '=', mods = 'CTRL', action = act.IncreaseFontSize },
+    { key = '-', mods = 'CTRL', action = act.DecreaseFontSize },
+    { key = '0', mods = 'CTRL', action = act.ResetFontSize },
+
+    -- Scroll
+    { key = 'PageUp', mods = 'SHIFT', action = act.ScrollByPage(-1) },
+    { key = 'PageDown', mods = 'SHIFT', action = act.ScrollByPage(1) },
+
+    -- Search
+    { key = 'f', mods = 'CTRL|SHIFT', action = act.Search({ CaseSensitiveString = '' }) },
+
+    -- Utilities
+    { key = 'r', mods = 'CTRL|SHIFT', action = act.ReloadConfiguration },
+    { key = 'l', mods = 'CTRL|SHIFT', action = act.ShowDebugOverlay },
+    { key = 'p', mods = 'CTRL|SHIFT', action = act.ActivateCommandPalette },
+    { key = 'u', mods = 'CTRL|SHIFT', action = act.CharSelect },
+    { key = 'k', mods = 'CTRL|SHIFT', action = act.ClearScrollback('ScrollbackOnly') },
+
+    -- Fullscreen
+    { key = 'Enter', mods = 'ALT', action = act.ToggleFullScreen },
 }
+
+for i = 1, 8 do
+  -- CTRL+SHIFT + number to activate that tab
+  table.insert(config.keys, {
+    key = tostring(i),
+    mods = 'CTRL',
+    action = act.ActivateTab(i - 1),
+  })
+end
 
 -- Apply wezterm.tmux plugin with optional configuration
 require("plugins.wez-tmux.plugin").apply_to_config(config, {
