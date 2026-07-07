@@ -1,3 +1,7 @@
+-- TODO: This file is commented out with .bak because it overlaps with new claude code
+-- ai integration commands which I'm kinda low key missing
+-- I think I use these less and they seem to also be broken and/or angular lsp
+-- is broken. Haven't figured out which tbh 
 return {
 	"joeveiga/ng.nvim",
 	event = { "BufReadPre", "BufNewFile" },

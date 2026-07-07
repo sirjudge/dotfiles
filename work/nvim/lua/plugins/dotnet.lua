@@ -1,6 +1,7 @@
 return {
 	"GustavEikaas/easy-dotnet.nvim",
-	event = { "BufReadPre", "BufNewFile" },
+	ft = { "cs", "fsharp", "vb", "cshtml", "razor", "xaml" },
+	cmd = { "Dotnet" },
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"mfussenegger/nvim-dap",
@@ -94,7 +95,7 @@ return {
 		dotnet.setup({
 			lsp = {
 				enabled = true, -- Enable builtin roslyn lsp
-				preload_roslyn = true, -- Only start roslyn when a .cs buffer is opened
+				preload_roslyn = false, -- Only start roslyn when a .cs buffer is opened
 				roslynator_enabled = true, -- Automatically enable roslynator analyzer
 				easy_dotnet_analyzer_enabled = true, -- Enable roslyn analyzer from easy-dotnet-server
 				auto_refresh_codelens = false,

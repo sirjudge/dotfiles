@@ -152,12 +152,22 @@ wezterm.on("gui-startup", function(cmd)
 	local auth = home .. "/solutions/Authorization"
 
 	-- Window 1 has UI and API tabs
-	local _, _, window = wezterm.mux.spawn_window({ cwd = api, workspace = "Editor", args = { "nvim" } })
+	local _, _, window = wezterm.mux.spawn_window({ 
+        cwd = api,
+        workspace = "Editor",
+        args = { "nvim" },
+    })
 
-	local _, _ = window:spawn_tab({ cwd = ui, args = { "nvim" } })
+	local _, _ = window:spawn_tab({
+        cwd = ui,
+        args = { "nvim" },
+    })
 
 	-- window 2 has terminal stuff
-	local termTab, termPane, termWindow = wezterm.mux.spawn_window({ cwd = api, workspace = "Terminal" })
+	local termTab, termPane, termWindow = wezterm.mux.spawn_window({
+        cwd = api,
+        workspace = "Terminal" ,
+    })
 	termPane:send_text("runApi")
 
 	local authPane = termPane:split({

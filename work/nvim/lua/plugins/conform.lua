@@ -1,6 +1,5 @@
 return {
 	"stevearc/conform.nvim",
-	-- event = { "BufWritePre" },
 	cmd = { "ConformInfo" },
 	keys = {
 		{
@@ -24,6 +23,7 @@ return {
 			bash = { "beautysh" },
 			rust = { "rustfmt", lsp_format = "fallback" },
 			csharp = { "csharpier" },
+			cs = { "csharpier" },
 			-- Use the "*" filetype to run formatters on all filetypes.
 			["*"] = { "codespell" },
 			-- Use the "_" filetype to run formatters on filetypes that don't
@@ -36,15 +36,17 @@ return {
 		},
 		-- Set up format-on-save
 		format_on_save = function(bufnr)
+			local slow_ft = { cs = true }
 			return {
 				lsp_format = "fallback",
-				timeout_ms = 500,
+				timeout_ms = 5000,
 			}
 		end,
 		-- Set the log level. Use `:ConformInfo` to see the location of the log file.
 		log_level = vim.log.levels.ERROR,
 		-- Conform will notify you when a formatter errors
 		notify_on_error = true,
+        notify_no_formatters = true,
 		-- Customize formatters
 		formatters = {
 			shfmt = {
