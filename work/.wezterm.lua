@@ -155,12 +155,10 @@ wezterm.on("gui-startup", function(cmd)
 	local _, _, window = wezterm.mux.spawn_window({ 
         cwd = api,
         workspace = "Editor",
-        args = { "nvim" },
     })
 
 	local _, _ = window:spawn_tab({
-        cwd = ui,
-        args = { "nvim" },
+        cwd = ui
     })
 
 	-- window 2 has terminal stuff

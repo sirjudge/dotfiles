@@ -6,6 +6,15 @@ return {
 			require("smoothcursor").setup()
 		end,
 	},
+    -- highlight hex codes
+    {
+        "brenoprata10/nvim-highlight-colors",
+        config = function ()
+            require('nvim-highlight-colors').setup({})
+        end
+    },
+    -- hide/show env variables, mask on by default
+    -- no exposing my keys
 	{
 		"zeybek/camouflage.nvim",
 		event = { "BufReadPre", "BufNewFile" },

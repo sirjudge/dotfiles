@@ -2,9 +2,12 @@ return {
   "folke/which-key.nvim",
   event = "VeryLazy",
   opts = {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
+    spec = {
+      { "<leader>j", group = "JetBrains" },
+      { "<leader>q", group = "Dotnet" },
+      { "<leader>p", group = "Picker" },
+      { "<leader>l", group = "lsp" },
+    },
   },
   keys = {
     {
