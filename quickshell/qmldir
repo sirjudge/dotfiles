@@ -1,2 +1,7 @@
-singleton ColorOptions 1.0 ConfigurationOptions/Colors.qml
-singleton ConfigOptions 1.0 ConfigurationOptions/ConfigOptions.qml
+singleton config 1.0 ConfigurationOptions/Config.qml
+Theme 1.0 ConfigurationOptions/Theme.qml
+PolledProcess 1.0 components/PolledProcess.qml
+ColumnToolTip 1.0 components/ColumnToolTip.qml
+ShellText 1.0 components/ShellText.qml
+Icon 1.0 components/Icon.qml
+NetworkTooltip 1.0 modules/barWidgets/NetworkTooltip.qml

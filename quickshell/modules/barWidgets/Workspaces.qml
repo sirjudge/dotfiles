@@ -3,23 +3,32 @@ import Quickshell.Hyprland
 import QtQuick
 import "../../ConfigurationOptions"
 
-// Background-less workspace switcher; sits directly on the island surface.
 Row {
     id: workspacesRoot
-    property var workspaceIds: [1, 2, 3, 4]
+    // property var filteredWorkspaces: Hyprland.workspaces.values.find(
+    //     w => 
+    //     (wsIdMatches = w.id === modelData) &&
+    //     (monitorIdMatches =  w.monitor.id === 1)
+    // )
+    // property var workspaceIds: [1, 2, 3, 4, 5,6,7,8,9]
+    property HyprlandMonitor topLevelMonitor: Hyprland.monitorFor(workspacesRoot)
 
-    spacing: Colors.spacingMedium
+    property var workspaces: Hyprland.workspaces.values.filter(
+        w => topLevelMonitor.id === w.monitor.id
+    );
+
+    spacing: Theme.spacingMedium
 
     Repeater {
-        model: workspacesRoot.workspaceIds
+        model: workspacesRoot.workspaces
 
-        // A small filled dot for inactive workspaces; the focused one stretches
-        // into a pill. Same color structure as the previous numeric labels.
         Item {
             id: workspaceItem
-            required property int modelData
-            property var ws: Hyprland.workspaces.values.find(w => w.id === modelData)
-            property bool isActive: Hyprland.monitors.values.some(m => m.activeWorkspace?.id === modelData)
+            required property HyprlandWorkspace modelData
+            
+            property bool isActive: Hyprland.monitors.values.some(
+                m => m.activeWorkspace?.id === modelData.id
+            )
 
             readonly property int dotSize: 12
             // Taller invisible hit area than the dot itself so the click target is
@@ -34,15 +43,19 @@ Row {
                 id: indicator
                 anchors.centerIn: parent
                 height: workspaceItem.dotSize
-                // Focused workspace becomes an elongated pill; others stay round.
-                width: workspaceItem.isActive ? workspaceItem.dotSize * 3 : workspaceItem.dotSize
+                width: workspaceItem.isActive ? workspaceItem.dotSize * 2 : workspaceItem.dotSize
                 radius: height / 2
-                color: workspaceItem.isActive ? Colors.rosePineFoam : Colors.rosePinePine
+                color: workspaceItem.isActive ? Theme.rosePineFoam : Theme.rosePinePine
                 Behavior on width {
                     NumberAnimation {
                         duration: 150
                         easing.type: Easing.OutCubic
                     }
+                }
+                Text { 
+                    anchors.centerIn: parent
+                    id: workspaceNumber
+                    text:workspaceItem.modelData.id
                 }
             }
 
@@ -52,7 +65,7 @@ Row {
                 // Hyprland 0.55.x evaluates dispatch strings as Lua, so the legacy
                 // "workspace N" syntax fails; focus the workspace via the Lua
                 // dispatcher hl.dsp.focus({ workspace = N }).
-                onClicked: Hyprland.dispatch("hl.dsp.focus({ workspace = " + workspaceItem.modelData + " })")
+                onClicked: Hyprland.dispatch("hl.dsp.focus({ workspace = " + workspaceItem.modelData.id + " })")
             }
         }
     }

@@ -4,6 +4,8 @@ import Quickshell.Io
 import Quickshell.Hyprland
 import "../"
 import "barWidgets" as Widgets
+import "../ConfigurationOptions"
+import "../components"
 
 ShellRoot {
     Variants {
@@ -17,7 +19,7 @@ ShellRoot {
           property string fontFamily: "JetBrainsMono Nerd Font"
           property int fontSize: 14
 
-          color: ColorOptions.rosePineBase
+          color: Theme.rosePineBase
 
           anchors {
             top: true
@@ -28,11 +30,29 @@ ShellRoot {
           implicitHeight: 30
 
           Widgets.TimeDisplay {
-            anchors.centerIn: parent
-            color: ColorOptions.rosePineText
+              anchors.centerIn: parent
+              color: Theme.rosePineText
           }
 
-          Widgets.Workspaces {}
+          Row {
+              Widgets.Workspaces {}
+          }
+
+          Row {
+              id: metricsRow
+              anchors {
+                  right: parent.right
+                  verticalCenter: parent.verticalCenter
+              }
+              spacing: 10
+              Widgets.Network {}
+              Divider {
+                  width: 10
+                  color: Theme.colorForeground
+              }
+              Widgets.MemoryUsage {}
+              Widgets.CpuUsage {}
+          }
       }
     }
 }

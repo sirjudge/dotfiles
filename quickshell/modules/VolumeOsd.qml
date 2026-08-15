@@ -66,12 +66,12 @@ Scope {
 					}
 
                     //TODO: this broken need to fix
-					IconImage {
-						implicitSize: 30
-						source: Quickshell.iconPath("audio-volume-high-symbolic")
-					}
+					// IconImage {
+					// 	implicitSize: 30
+					// 	source: Quickshell.iconPath("audio-volume-high-symbolic")
+					// }
 
-					Rectangle {
+                    Rectangle {
 						// Stretches to fill all left-over space
 						Layout.fillWidth: true
 

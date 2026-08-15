@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//home/nico/.cache/yay/quickshell-git/**)",
+      "Bash(find / -path \"*/quickshell*/src/wm/hyprland*\")",
+      "Bash(grep -B2 -A15 \"\\\\\"HyprlandMonitor\\\\\"\\\\|\\\\\"HyprlandWorkspace\\\\\"\\\\|\\\\\"Hyprland\\\\\"$\")",
+      "Read(//usr/lib/qt6/qml/Quickshell/Hyprland/_Ipc/**)",
+      "Read(//usr/lib/qt6/qml/Quickshell/_Window/**)"
+    ]
+  }
+}
