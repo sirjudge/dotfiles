@@ -35,7 +35,7 @@ ShellRoot {
           }
 
           Row {
-              Widgets.Workspaces {}
+              Widgets.Workspaces { screen: root.screen }
           }
 
           Row {

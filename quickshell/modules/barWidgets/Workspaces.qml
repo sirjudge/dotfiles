@@ -1,20 +1,15 @@
 pragma ComponentBehavior: Bound
+import Quickshell
 import Quickshell.Hyprland
 import QtQuick
 import "../../ConfigurationOptions"
 
 Row {
     id: workspacesRoot
-    // property var filteredWorkspaces: Hyprland.workspaces.values.find(
-    //     w => 
-    //     (wsIdMatches = w.id === modelData) &&
-    //     (monitorIdMatches =  w.monitor.id === 1)
-    // )
-    // property var workspaceIds: [1, 2, 3, 4, 5,6,7,8,9]
-    property HyprlandMonitor topLevelMonitor: Hyprland.monitorFor(workspacesRoot)
-
+    required property ShellScreen screen
+    property HyprlandMonitor topLevelMonitor: Hyprland.monitorFor(workspacesRoot.screen)
     property var workspaces: Hyprland.workspaces.values.filter(
-        w => topLevelMonitor.id === w.monitor.id
+        w => topLevelMonitor.id === w.monitor?.id
     );
 
     spacing: Theme.spacingMedium
