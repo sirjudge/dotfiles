@@ -1,0 +1,2 @@
+singleton ColorOptions 1.0 ConfigurationOptions/Colors.qml
+singleton ConfigOptions 1.0 ConfigurationOptions/ConfigOptions.qml
