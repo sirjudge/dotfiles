@@ -25,10 +25,10 @@ Row {
                 m => m.activeWorkspace?.id === modelData.id
             )
 
-            readonly property int dotSize: 12
+            readonly property int dotSize: 20
             // Taller invisible hit area than the dot itself so the click target is
             // easier to land on without enlarging the visual indicator.
-            readonly property int hitHeight: 16
+            readonly property int hitHeight: 25
 
             width: indicator.width
             height: hitHeight

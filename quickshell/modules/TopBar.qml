@@ -17,8 +17,9 @@ ShellRoot {
           id: root
 
           property string fontFamily: "JetBrainsMono Nerd Font"
-          property int fontSize: 14
+          property int fontSize: 20
 
+          implicitHeight: 30
           color: Theme.rosePineBase
 
           anchors {
@@ -27,7 +28,6 @@ ShellRoot {
             right: true
           }
      
-          implicitHeight: 30
 
           Widgets.TimeDisplay {
               anchors.centerIn: parent
@@ -35,7 +35,9 @@ ShellRoot {
           }
 
           Row {
-              Widgets.Workspaces { screen: root.screen }
+              Widgets.Workspaces {
+                  screen: root.screen 
+              }
           }
 
           Row {
