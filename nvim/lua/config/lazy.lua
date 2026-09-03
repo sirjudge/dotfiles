@@ -36,4 +36,7 @@ require("lazy").setup({
     },
     -- automatically check for plugin updates
     checker = { enabled = true, notify = false },
+    -- luarocks is broken under scoop on Windows (bad arg quoting in the
+    -- lua/luajit wrappers breaks version detection). No plugin here needs rocks.
+    rocks = { enabled = false },
 })

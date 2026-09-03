@@ -1,8 +1,8 @@
 return {
-	{
-		"neovim/nvim-lspconfig",
-		event = { "BufReadPre", "BufNewFile" },
-		cmd = "LspInfo",
+    {
+        "neovim/nvim-lspconfig",
+        event = { "BufReadPre", "BufNewFile" },
+        cmd = "LspInfo",
 		dependencies = {
 			{ "saghen/blink.cmp" },
 		},
@@ -234,5 +234,86 @@ return {
 				frequency = 7,
 			},
 		},
+        --TODO: Think this is causing me an issue
+    -- config = function()
+            -- require('lspsaga').setup({
+            --     lightbulb = { ignore = { clients = { 'dev-tools' } } }
+            -- })
+        -- end
 	},
+    -- {
+    --     'yarospace/dev-tools.nvim',
+    --     dependencies = { 
+    --         "nvim-treesitter/nvim-treesitter", -- code manipulation in buffer, required
+    --         {
+    --             "folke/snacks.nvim", -- optional
+    --             opts = {
+    --                 picker = { enabled = true }, -- actions picker
+    --                 terminal = { enabled = true }, -- terminal for running spec actions
+    --             },
+    --         },
+    --         {
+    --             "ThePrimeagen/refactoring.nvim", -- refactoring library, optional
+    --             dependencies = { "nvim-lua/plenary.nvim" },
+    --         },
+    --     },
+    --
+    --     opts = {
+    --         ---@type Action[]|fun():Action[]
+    --         actions = {},
+    --
+    --         filetypes = { -- filetypes for which to attach the LSP
+    --             include = {}, -- {} to include all, except for special buftypes, e.g. nofile|help|terminal|prompt
+    --             exclude = {},
+    --         },
+    --
+    --         builtin_actions = {
+    --             include = {}, -- filetype/group/name of actions to include or {} to include all
+    --             exclude = {}, -- filetype/group/name of actions to exclude or "true" to exclude all
+    --         },
+    --
+    --         action_opts = { -- override options for actions
+    --             {
+    --                 group = "Debugging",
+    --                 name = "Log vars under cursor",
+    --                 opts = {
+    --                     keymap = nil, ---@type Keymap action keymap spec, e.g. 
+    --                     -- { 
+    --                         --   global = "<leader>dl" | { "<leader>dl", mode = { "n", "x" } }, 
+    --                         --   picker = "<M-l>",
+    --                         --   hide = true,  -- hide the action from the picker
+    --                         -- }
+    --                     },
+    --                 },
+    --             },
+    --
+    --             ui = {
+    --                 override = true, -- override vim.ui.select, requires `snacks.nvim` to be included in dependencies or installed separately
+    --                 group_actions = true, -- group actions by group
+    --             },
+    --         }
+    --     },
+        {
+        'sontungexpt/better-diagnostic-virtual-text',
+        event = { "BufReadPre", "BufNewFile" },
+        config = function()
+            local default_options = {
+                ui = {
+                    -- wrap the line after this length to avoid the virtual text is too long
+                    wrap_line_after = false,
+                    -- the number of spaces kept on the left side of the virtual text, make sure it enough to custom for each line
+                    left_kept_space = 3,
+                    -- the number of spaces kept on the right side of the virtual text, make sure it enough to custom for each line
+                    right_kept_space = 3,
+                    arrow = "  ",
+                    up_arrow = "  ",
+                    down_arrow = "  ",
+                    above = false, -- the virtual text will be displayed above the line
+                },
+                priority = 2003, -- the priority of virtual text
+                inline = false,
+            }
+            require('better-diagnostic-virtual-text').setup(default_options)
+        end
+    },
 }

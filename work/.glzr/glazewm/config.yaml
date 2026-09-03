@@ -124,31 +124,31 @@ window_behavior:
 workspaces:
   - name: '1'
     display_name: '1:󰅏'
-    bind_to_monitor: 2
+    bind_to_monitor: 0
   - name: '2'
     display_name: '2:'
-    bind_to_monitor: 1
+    bind_to_monitor: 0
   - name: '3'
     display_name: '3:'
-    bind_to_monitor: 1
+    bind_to_monitor: 0
   - name: '4'
     display_name: '4:󰲸'
-    bind_to_monitor: 1
+    bind_to_monitor: 0
   - name: '5'
     display_name: '5:󰅏'
-    bind_to_monitor: 1
+    bind_to_monitor: 0
   - name: '6'
     display_name: '6:󰍡'
-    bind_to_monitor: 0
+    bind_to_monitor: 1
   - name: '7'
     display_name: '7:'
-    bind_to_monitor: 0
+    bind_to_monitor: 1
   - name: '8'
     display_name: '8:󰅏'
-    bind_to_monitor: 0
+    bind_to_monitor: 1
   - name: '9'
     display_name: '9:󰅏'
-    bind_to_monitor: 0
+    bind_to_monitor: 1
 
 window_rules:
   - commands: ['set-floating']
