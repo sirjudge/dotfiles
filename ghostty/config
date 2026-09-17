@@ -1,8 +1,8 @@
-theme=rose-pine-moon
+theme = rose-pine-moon
 cursor-click-to-move=true
 background-blur=true
 background-opacity=0.75
-window-decoration=client
+window-decoration=none
 window-theme=ghostty
 focus-follows-mouse=false
 clipboard-trim-trailing-spaces=true
@@ -15,3 +15,5 @@ maximize=true
 link-url=true
 working-directory=~/solutions/
 auto-update=check
+font-family = "JetBrainsMono Nerd Font"
+title = " "
