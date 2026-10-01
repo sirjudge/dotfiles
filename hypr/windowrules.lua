@@ -44,24 +44,6 @@ hl.window_rule({
     float = true,
 })
 
--- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
--- "Smart gaps" / "No gaps when only"
--- uncomment all if you wish to use that.
--- hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
--- hl.workspace_rule({ workspace = "f[1]",   gaps_out = 0, gaps_in = 0 })
--- hl.window_rule({
---     name  = "no-gaps-wtv1",
---     match = { float = false, workspace = "w[tv1]" },
---     border_size = 0,
---     rounding    = 0,
--- })
--- hl.window_rule({
---     name  = "no-gaps-f1",
---     match = { float = false, workspace = "f[1]" },
---     border_size = 0,
---     rounding    = 0,
--- })
-
 --Random rules from online people
 -- Disable blur for xwayland context menus
 hl.window_rule({match = {class = "^()$", title = "^()$" },                   no_blur = true })
@@ -105,3 +87,16 @@ hl.window_rule({match = {class = "^(steam_app).*" }, immediate = true})
 
 -- No shadow for tiled windows
 hl.window_rule({match = {float = 0 }, no_shadow = true})
+
+hl.window_rule({
+  name = "VintageStoryNoRendering",
+  match = {
+    title = "Vintagestory"
+  },
+  no_shadow = true,
+  immediate = true,
+  no_blue = true,
+  no_decoartions = true,
+  no_anim = true,
+  no_shadow = true,
+})

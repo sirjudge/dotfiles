@@ -12,6 +12,7 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("mpd-mpris")
   hl.exec_cmd("kdeconnect-indicator")
   hl.exec_cmd("swaync")
+  hl.exec_cmd("quickshell")
   hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
   hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
   hl.exec_cmd("gnome-keyring-daemon --start --components=secrets")
@@ -26,14 +27,15 @@ hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
 
 -- GPU and Wayland
-hl.env("__GL_VRR_ALLOWED", "1")
 hl.env("__GL_GSYNC_ALLOWED", "1")
+hl.env("__GL_VRR_ALLOWED", "1")
 hl.env("LIBVA_DRIVER_NAME", "nvidia")
 hl.env("XDG_SESSION_TYPE", "wayland")
 hl.env("GBM_BACKEND", "nvidia-drm")
 hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
 hl.env("NVD_BACKEND", "direct")
 hl.env("AQ_FORCE_LINEAR_BLIT", "0")
+hl.env("QT_QPA_PLATFORMTHEME", "kde **.**")
 
 -- # Prefer the RTX 2060 as Hyprland's primary DRM device while still allowing the
 -- # Intel iGPU for the internal eDP panel on this Optimus laptop. Use the stable

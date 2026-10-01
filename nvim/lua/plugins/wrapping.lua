@@ -1,5 +1,6 @@
 return {
 	"andrewferrier/wrapping.nvim",
+	event = "VeryLazy",
 	config = function()
 		require("wrapping").setup({
 			auto_set_mode_filetype_allowlist = {

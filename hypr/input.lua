@@ -73,6 +73,7 @@ hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
 
 -- local closeWindowBind = 
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
@@ -98,8 +99,9 @@ for i = 1, 10 do
 end
 
 -- Example special workspace (scratchpad)
-hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+-- TODO: Don't think I need this anymore it conflicts with my quickshell and screenshot
+-- hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
+-- hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
@@ -132,7 +134,6 @@ hl.bind(mainMod .. " + S",  hl.dsp.exec_cmd("grimblast copysave area $HOME\"/Pic
 -- bind = $mod, C, killactive
 -- bind = $mod, space, togglefloating
 -- bind = $mod, L, exec, hyprlock
--- bind = $mod, F, fullscreen
 --
 
 -- input {

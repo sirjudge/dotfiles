@@ -2,12 +2,9 @@ return {
     "Shatur/neovim-session-manager",
     version = false,
     keys = {
-        { "<leader>ss", "<cmd>SessionManager load_session<cr>", desc = "Load session" },
-        { "<leader>sd", "<cmd>SessionManager load_current_dir_session<cr>", desc = "Load session for current dir" },
-        { "<leader>sl", "<cmd>SessionManager load_last_session<cr>", desc = "Load last session" },
         { "<leader>ss", "<cmd>SessionManager save_current_session<cr>", desc = "Save session" },
+        { "<leader>sd", "<cmd>SessionManager load_current_dir_session<cr>", desc = "Load session for current dir" },
         { "<leader>sc", "<cmd>SessionManager available_commands<cr>", desc = "Session Commands" },
-
     },
     config = function()
         local Path = require('plenary.path')

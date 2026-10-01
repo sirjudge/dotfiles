@@ -53,3 +53,7 @@ vim.api.nvim_set_var("terminal_emulator", terminal_emulator)
 
 -- enable better color support
 vim.o.termguicolors = true
+
+-- consistent EOL behavior across Linux/Windows
+vim.opt.fileformats = "unix,dos"
+vim.opt.fixendofline = false

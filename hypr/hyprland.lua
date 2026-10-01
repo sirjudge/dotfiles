@@ -11,27 +11,27 @@ require("input")
 -- require("windowrules")
 --require("security")
 
--- hl.config({
---     misc = {
---         disable_hyprland_logo = true,
---     --     disable_splash_rendering = true,
---     --     vrr = 0,
---     --     mouse_move_enables_dpms = true,
---     --     key_press_enables_dpms = true,
---     --     animate_manual_resizes = true,
---     --     animate_mouse_windowdragging = true,
---     --     enable_swallow = false,
---     --     swallow_regex = "(ghostty|Ghostty|kitty|Kitty|allacritty|Alacritty)",
---     --     on_focus_under_fullscreen = 2,
---     --     allow_session_lock_restore = true,
---     --     session_lock_xray = true,
---     --     initial_workspace_tracking = false,
---     --     focus_on_activate = true
---     },
---      binds = {
---         scroll_event_delay = 0,
---         hide_special_on_workspace_change = true
---     },
+hl.config({
+    misc = {
+        disable_hyprland_logo = true,
+        disable_splash_rendering = true,
+        vrr = 0,
+        mouse_move_enables_dpms = false,
+        key_press_enables_dpms = false,
+        animate_manual_resizes = true,
+        animate_mouse_windowdragging = true,
+    --     enable_swallow = false,
+    --     swallow_regex = "(ghostty|Ghostty|kitty|Kitty|allacritty|Alacritty)",
+    --     on_focus_under_fullscreen = 2,
+    --     allow_session_lock_restore = true,
+    --     session_lock_xray = true,
+    --     initial_workspace_tracking = false,
+    --     focus_on_activate = true
+    },
+    --  binds = {
+    --     scroll_event_delay = 0,
+    --     hide_special_on_workspace_change = true
+    -- },
 --
 --     cursor = {
 --         zoom_factor = 1,
@@ -40,7 +40,7 @@ require("input")
 --         hotspot_padding = 1
 --     },
 --
---     xwayland = {
---         force_zero_scaling = true
---     }
--- })
+    xwayland = {
+        force_zero_scaling = true
+    }
+})
