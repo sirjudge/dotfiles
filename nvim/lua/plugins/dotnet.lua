@@ -44,7 +44,15 @@ return {
 			end,
 		})
 
-		local default_log_handler = vim.lsp.handlers["window/logMessage"]
+        local default_log_handler = vim.lsp.handlers["window/logMessage"]
+        -- don't need to display messages from diagnostic because will be on my screen as lsp errors
+        vim.lsp.handlers["textDocument/diagnostic"] =  function (err, result, ctx, config)
+			if
+				result and result.message
+			then
+				return
+            end
+        end
 		vim.lsp.handlers["window/logMessage"] = function(err, result, ctx, config)
 			-- remove noise from info messages
 			if
@@ -54,6 +62,8 @@ return {
 				and result.message:find("DotnetCliHelper", 1, true)
 				and result.message:find("Using dotnet executable configured on the PATH", 1, true)
 				and result.message:find("Restoring Canonical.cs", 1, true)
+                and result.message:find("Completed (re)load", 1, true)
+                and result.message:find("Microsoft.CodeAnalysis.MSBuild.BuildHostProcessManager", 1, true)
 			then
 				return
 			end
@@ -98,8 +108,20 @@ return {
 				preload_roslyn = false, -- Only start roslyn when a .cs buffer is opened
 				roslynator_enabled = true, -- Automatically enable roslynator analyzer
 				easy_dotnet_analyzer_enabled = true, -- Enable roslyn analyzer from easy-dotnet-server
-				auto_refresh_codelens = false,
-				analyzer_assemblies = {}, -- Any additional roslyn analyzers you might use like SonarAnalyzer.CSharp
+                enhanced_rename = false, -- auto rename file when renaming class
+                create_type_from_usage = false, -- code action for creating class from unresolved symbol in a separate file
+                restart_roslyn_on_branch_change = false, -- Restart Roslyn when Git HEAD changes
+                auto_refresh_codelens = true,
+                suggest_updates = true, -- Periodically suggest roslyn-language-server updates
+                analyzer_assemblies = {}, -- Any additional roslyn analyzers you might use like SonarAnalyzer.CSharp
+                razor = {
+                    enabled = true,
+                    html = {
+                        enabled = true,
+                        cmd = nil, -- Auto-detect project node_modules/.bin/vscode-html-language-server, then PATH
+                        request_timeout = 5000,
+                    },
+                },
 				config = {
 					["csharp|inlay_hints"] = {
 						csharp_enable_inlay_hints_for_implicit_object_creation = true,
@@ -113,6 +135,9 @@ return {
 					},
 				},
 			},
+            projx_lsp = {
+                enabled = true
+            },
 			-- https://github.com/GustavEikaas/easy-dotnet.nvim/blob/main/docs/debugging.md
 			debugger = {
 				-- Path to custom coreclr DAP adapter
@@ -190,10 +215,12 @@ return {
 			},
 			picker = "snacks",
 			background_scanning = true,
-			notifications = nil,
+			notifications = false,
 			diagnostics = {
-				default_severity = "warning",
-				setqflist = true,
+				default_severity = "error",
+                --TODO: I had this to false but default config says set to false
+				-- setqflist = true,
+				setqflist = false,
 			},
 			---@param action "test" | "restore" | "build" | "run"
 			terminal = function(path, action, args)
