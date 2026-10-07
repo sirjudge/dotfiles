@@ -1,0 +1,13 @@
+format = "$directory$character"
+add_newline = true
+
+
+[directory]
+format = "[$path]($style) "
+style = "blue"
+truncation_length = 0
+home_symbol = ""
+
+[character]
+success_symbol = "[](bold white)"
+error_symbol = "[](bold red)"

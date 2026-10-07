@@ -67,25 +67,47 @@ blur {
     saturation 1.25
 }
 
-
 window-rule {
     geometry-corner-radius 3
     clip-to-geometry true
     draw-border-with-background false
 }
-
+    
+// disable blurs and shadows 
 window-rule {
     match title="Zen Browser"
     match title="Ghostty"
-    match app-id=r#"(?i)^(sublime_text|vscodium|codium)$"#
-    match app-id=r#"(?i)^thunar$"#
+    match app-id=r#"(?i)^(sublime_text|vscodium|codium|thunar)$"#
+
     opacity 1.0
+
     background-effect {
         blur false
         xray false
         saturation 1.25
     }
 }
+
+// Disable things for games because full screen be hard
+// window-rule {
+//     match app-id="steam_app_1284210"
+//
+//     open-fullscreen false
+//     open-focused false
+//
+//     opacity 1.0
+//
+//     background-effect {
+//         blur false
+//         xray false
+//         saturation 1.25
+//     }
+//
+//     clip-to-geometry false
+//     draw-border-with-background false
+//     geometry-corner-radius 0 0 0 0
+//     tiled-state true
+// }
 
 layer-rule {
     match namespace="^quickshell$"
