@@ -54,19 +54,11 @@ hl.gesture({
         hl.dispatch(hl.dsp.global("quickshell:overviewWorkspacesToggle"))
     end
 })
--- Example per-device config
--- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
--- hl.device({
---     name        = "epic-mouse-v1",
---     sensitivity = -0.5,
--- })
-
 
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 local terminal = "ghostty"
 local fileManager = "dolphin"
-local menu = "fuzzel"
-
+local menu = "fuzzel --use-bold --counter --fuzzy-min-length=5 --letter-spacing=2"
 
 -- Quick launch
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
@@ -92,16 +84,12 @@ hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
+-- ( 0 key maps to 10 )
 for i = 1, 10 do
-    local key = i % 10 -- 10 maps to key 0
+    local key = i % 10 
     hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
     hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
 end
-
--- Example special workspace (scratchpad)
--- TODO: Don't think I need this anymore it conflicts with my quickshell and screenshot
--- hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
--- hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
@@ -119,7 +107,7 @@ hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_S
 hl.bind("XF86MonBrightnessUp",  hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"),                  { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"),                  { locked = true, repeating = true })
 
--- Requires playerctl
+-- rebind media key values
 hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("playerctl next"),       { locked = true })
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
@@ -127,80 +115,3 @@ hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = tr
 
 -- screenshot
 hl.bind(mainMod .. " + S",  hl.dsp.exec_cmd("grimblast copysave area $HOME\"/Pictures/screenshots/area/\"$(date +'%F-%T.png'); hyprctl dispatch submap reset"))
--- binde = $mod, S, exec, 
-
--- bind = $mod, R, exec, $menu
--- bind = $mod, Q, exec, ghostty
--- bind = $mod, C, killactive
--- bind = $mod, space, togglefloating
--- bind = $mod, L, exec, hyprlock
---
-
--- input {
---     kb_layout = us
---         follow_mouse = 0
---         kb_options = caps:escape
---         kb_options = fkeys:basic_13-24
---         touchpad {
---             natural_scroll = false
---                 tap-to-click = true
---         }
--- }
---
--- # Quickshell
--- bind = $mod, D, exec, ~/.config/scripts/quickshell-on-active-monitor.sh launcher 
--- bind = $mod, W, exec, ~/.config/scripts/quickshell-on-active-monitor.sh wallpaper 
--- bind = $mod SHIFT, W, exec, ~/.config/scripts/random-wallpaper.sh 
--- bind = $mod, A, exec, ~/.config/scripts/quickshell-on-active-monitor.sh dashboard 
--- bind = $mod, M, exec, ~/.config/scripts/quickshell-on-active-monitor.sh music
---
--- # bind = $mainMod, Q, exec, $terminal
--- # bind = $mainMod, C, killactive,
--- # bind = $mainMod, M, exec, command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit
--- # bind = $mainMod, E, exec, $fileManager
--- # bind = $mainMod, V, togglefloating,
--- # bind = $mainMod, R, exec, $menu
---
--- bind = $mod, Left, movefocus, l
--- bind = $mod, Down, movefocus, d
--- bind = $mod, Up, movefocus, u
--- bind = $mod, Right, movefocus, r
---
--- bind = $mod , 1, workspace, 1
--- bind = $mod, 2, workspace, 2
--- bind = $mod, 3, workspace, 3
--- bind = $mod, 4, workspace, 4
--- bind = $mod, 5, workspace, 5
--- bind = $mod, 6, workspace, 6
--- bind = $mod, 7, workspace, 7
--- bind = $mod, 8, workspace, 8
--- bind = $mod, 9, workspace, 9
--- bind = $mod, 0, workspace, 0
---
--- bind = $mod SHIFT, 1, movetoworkspace, 1
--- bind = $mod SHIFT, 2, movetoworkspace, 2
--- bind = $mod SHIFT, 3, movetoworkspace, 3
--- bind = $mod SHIFT, 4, movetoworkspace, 4
--- bind = $mod SHIFT, 5, movetoworkspace, 5
--- bind = $mod SHIFT, 6, movetoworkspace, 6
--- bind = $mod SHIFT, 7, movetoworkspace, 7
--- bind = $mod SHIFT, 8, movetoworkspace, 8
--- bind = $mod SHIFT, 9, movetoworkspace, 9
--- bind = $mod SHIFT, 0, movetoworkspace, 0
---
--- bind = $mod, P, pseudo
--- # bind = $mod, J, togglesplit
---
--- bind = $mod, N, exec, swaync-client -t -sw
--- bind = $mod SHIFT, N, exec, swaync-client -C
---
--- bind = $mod, escape, submap, reset
---
--- bind = $mod, Menu, exec, ~/.config/scripts/define.sh
---
--- binde = $mod, F1, exec, amixer set Master toggle
--- binde = $mod, F2, exec, amixer set Master 1%-
--- binde = $mod, F3, exec, amixer set Master 1%+
--- binde = $mod, XF86AudioMute, exec, amixer set Master toggle
--- binde = $mod, XF86AudioLowerVolume, exec, amixer set Master 1%-
--- binde = $mod, XF86AudioRaiseVolume, exec, amixer set Master 1%+

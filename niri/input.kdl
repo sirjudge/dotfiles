@@ -13,22 +13,17 @@ input {
 
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
-   
     F24 { spawn "wofi" "--show" "drun"; }
     Mod+R { spawn "wofi" "--show" "drun"; }
-
-    Mod+X { spawn "swayprop | xargs -0 notify-send swayprop"; }
-
-
-    // Mod+D { spawn "~/.config/scripts/quickshell-on-active-monitor.sh" "launcher"; }
-    // Mod+W { spawn "~/.config/scripts/quickshell-on-active-monitor.sh" "wallpaper"; }
-    // Mod+Shift+W { spawn "~/.config/scripts/random-wallpaper.sh"; }
-    // Mod+A { spawn "~/.config/scripts/quickshell-on-active-monitor.sh" "dashboard"; }
-    // Mod+M { spawn "~/.config/scripts/quickshell-on-active-monitor.sh" "music"; }
+    Mod+D { spawn "~/.config/scripts/quickshell-on-active-monitor.sh" "launcher"; }
+    Mod+W { spawn "~/.config/scripts/quickshell-on-active-monitor.sh" "wallpaper"; }
+    Mod+Shift+W { spawn "~/.config/scripts/random-wallpaper.sh"; }
+    Mod+A { spawn "~/.config/scripts/quickshell-on-active-monitor.sh" "dashboard"; }
+    Mod+M { spawn "~/.config/scripts/quickshell-on-active-monitor.sh" "music"; }
 
     Mod+Q { spawn "ghostty"; }
+    Mod+Shift+Return { spawn "ghostty" "--class=scratchterm"; }
     Mod+E { spawn "thunar"; }
-
     Mod+C { close-window; }
     Mod+Space { toggle-window-floating; }
     Mod+L allow-inhibiting=false { spawn "hyprlock"; }

@@ -1,8 +1,9 @@
-include "initialize.kdl"
+
 include "input.kdl"
 include "appearance.kdl"
-// include "monitors.kdl"
+include "monitors.kdl"
 include "workspace.kdl"
+include "initialize.kdl"
 
 prefer-no-csd
 
@@ -18,14 +19,10 @@ hotkey-overlay {
 }
 
 debug {
-    render-drm-device "/dev/dri/renderD129"
+    render-drm-device "/dev/dri/card2"
 }
 
 include "dms/colors.kdl"
 include "dms/layout.kdl"
 include "dms/alttab.kdl"
 include "dms/binds.kdl"
-include "dms/cursor.kdl"
-include "dms/outputs.kdl"
-
-include "dms/windowrules.kdl"

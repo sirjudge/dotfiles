@@ -6,13 +6,13 @@ output "BOE 0x0804 Unknown" {
 }
 
 output "LG Electronics LG HDR WFHD 0x00095260" {
-    mode "2560x1080@59.978"
+    mode "2560x1080@74.991"
     position x=1920 y=0
     scale 1
 }
 
 output "LG Electronics LG HDR WFHD 0x00095326" {
-    mode "2560x1080@59.978"
+    mode "2560x1080@74.991"
     position x=1920 y=1080
     scale 1
 }

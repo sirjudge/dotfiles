@@ -17,6 +17,7 @@ if [ "$backup" = true ]; then
     cp -r ~/.config/niri ./
     cp -r ~/.config/hypr ./
     cp -r ~/.config/quickshell ./
+    cp -r ~/config/scripts ./
 fi
 if [ "$insert" = true ]; then
     # shared configs
